@@ -1,0 +1,62 @@
+---
+import { nav, site } from '../data/site';
+const current = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="utility">
+    <div class="container utility-inner">
+      <span>501(c)(3) nonprofit recovery housing in Pittsburgh</span>
+      <a href={site.phoneHref}>Call {site.phone}</a>
+    </div>
+  </div>
+  <div class="nav-wrap">
+    <div class="container nav-inner">
+      <a class="wordmark" href="/" aria-label="New Beginnings home">
+        <span>New Beginnings</span>
+        <small>Transitional Living Foundation</small>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav"><span>Menu</span></button>
+      <nav id="site-nav" aria-label="Primary navigation">
+        {nav.map((item) => <a href={item.href} aria-current={current.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        <a class="nav-cta" href="/contact/#inquiry">Ask about housing</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<script>
+  const button = document.querySelector('.menu-button');
+  const nav = document.querySelector('#site-nav');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('is-open', !open);
+  });
+</script>
+<style>
+  .site-header { position: sticky; z-index: 100; top: 0; box-shadow: 0 1px 0 rgba(16,44,60,.12); }
+  .utility { color: var(--white); background: var(--navy-950); font-size: .86rem; }
+  .utility-inner { display: flex; min-height: 2.25rem; align-items: center; justify-content: space-between; gap: 1rem; }
+  .utility a { color: var(--white); font-weight: 700; }
+  .nav-wrap { background: rgba(255,255,255,.98); }
+  .nav-inner { display: flex; min-height: 5rem; align-items: center; justify-content: space-between; gap: 2rem; }
+  .wordmark { display: grid; color: var(--navy-950); line-height: 1; text-decoration: none; }
+  .wordmark span { font-size: 1.45rem; font-weight: 780; letter-spacing: -.025em; }
+  .wordmark small { margin-top: .3rem; color: var(--slate-600); font-size: .71rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
+  nav { display: flex; align-items: center; gap: clamp(.75rem, 1.4vw, 1.45rem); }
+  nav > a { color: var(--navy-950); font-size: .93rem; font-weight: 650; text-decoration: none; }
+  nav > a[aria-current='page'] { color: var(--teal-700); }
+  nav .nav-cta { padding: .75rem 1rem; border-radius: var(--radius); background: var(--teal-700); color: var(--white); }
+  .menu-button { display: none; border: 0; background: transparent; color: var(--navy-950); font-weight: 750; }
+  @media (max-width: 980px) {
+    .menu-button { display: block; }
+    nav { position: absolute; inset: 7.25rem 0 auto; display: none; padding: 1rem; border-top: 1px solid var(--slate-200); background: var(--white); box-shadow: var(--shadow); }
+    nav.is-open { display: grid; }
+    nav > a { padding: .75rem; }
+  }
+  @media (max-width: 520px) {
+    .utility-inner span { display: none; }
+    .utility-inner { justify-content: flex-end; }
+    .wordmark span { font-size: 1.2rem; }
+    .wordmark small { font-size: .62rem; }
+  }
+</style>

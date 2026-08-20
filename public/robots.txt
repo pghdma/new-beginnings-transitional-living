@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://newbeginningspgh.org/sitemap-index.xml

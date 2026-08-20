@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+INFRASTRUCTURE.md
+CLAUDE.md

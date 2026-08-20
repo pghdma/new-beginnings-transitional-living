@@ -1,0 +1,23 @@
+{
+  "name": "new-beginnings-transitional-living",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "predeploy-check": "node scripts/predeploy-check.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource-variable/source-sans-3": "^5.2.9",
+    "astro": "^5.13.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.32.0"
+  }
+}

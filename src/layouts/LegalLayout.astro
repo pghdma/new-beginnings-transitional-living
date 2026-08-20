@@ -1,0 +1,5 @@
+---
+import MainLayout from './MainLayout.astro'; interface Props { title: string; intro: string; } const { title, intro } = Astro.props;
+---
+<MainLayout title={title}><header class="legal-head"><div class="container"><p class="eyebrow">Website information</p><h1>{title}</h1><p class="lead">{intro}</p></div></header><article class="container legal"><slot /></article></MainLayout>
+<style>.legal-head { padding-block: 4rem; background: var(--sky-50); }.legal-head .container { display: grid; gap: 1.25rem; }.legal-head h1 { font-size: clamp(2.8rem,5vw,4.8rem); }.legal { max-width: 50rem; padding-block: 4rem 6rem; }.legal :global(h2) { margin-top: 2.5rem; font-size: 1.8rem; }.legal :global(h3) { margin-top: 1.75rem; font-size: 1.3rem; }.legal :global(p), .legal :global(ul) { margin-top: 1rem; }</style>

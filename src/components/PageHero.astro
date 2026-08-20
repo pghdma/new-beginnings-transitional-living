@@ -1,0 +1,24 @@
+---
+interface Props { eyebrow?: string; title: string; intro: string; image?: string; imageAlt?: string; compact?: boolean; }
+const { eyebrow = 'New Beginnings', title, intro, image = '/images/hero-community.jpg', imageAlt = '', compact = false } = Astro.props;
+---
+<section class:list={['page-hero', { compact }]}>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lead">{intro}</p>
+      <div class="actions"><a class="button" href="/contact/#inquiry">Ask about housing</a><a class="button button--outline" href="tel:+14126280403">Call 412-628-0403</a></div>
+    </div>
+    <img src={image} alt={imageAlt} width="900" height="700" loading="eager" />
+  </div>
+</section>
+<style>
+  .page-hero { padding-block: clamp(3rem, 6vw, 6rem); background: var(--sky-50); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .hero-copy { display: grid; gap: 1.5rem; }
+  h1 { font-size: clamp(3rem, 5.6vw, 5.5rem); }
+  img { width: 100%; height: clamp(25rem, 48vw, 37rem); object-fit: cover; box-shadow: 1.2rem 1.2rem 0 var(--sky-100); }
+  .compact img { height: clamp(20rem, 38vw, 30rem); }
+  @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; } img { height: 22rem; } }
+</style>
