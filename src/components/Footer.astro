@@ -28,7 +28,10 @@ import { nav, site } from '../data/site';
       <p>Exact residence locations are shared privately during the intake process.</p>
     </div>
   </div>
-  <div class="container copyright">© {new Date().getFullYear()} New Beginnings Transitional Living Foundation. All rights reserved.</div>
+  <div class="container copyright">
+    <span>© {new Date().getFullYear()} New Beginnings Transitional Living Foundation. All rights reserved.</span>
+    <a href="https://pghdma.com" rel="external">Site by PGHDMA</a>
+  </div>
 </footer>
 <style>
   footer { padding-top: 4rem; color: var(--white); background: var(--navy-950); }
@@ -42,7 +45,8 @@ import { nav, site } from '../data/site';
   a { color: var(--white); }
   .phone { display: inline-block; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 750; }
   .footer-grid > div:last-child p { color: var(--slate-300); font-size: .92rem; }
-  .copyright { margin-top: 3rem; padding-block: 1.5rem; border-top: 1px solid rgba(255,255,255,.18); color: var(--slate-300); font-size: .84rem; }
+  .copyright { display: flex; margin-top: 3rem; padding-block: 1.5rem; border-top: 1px solid rgba(255,255,255,.18); color: var(--slate-300); font-size: .84rem; justify-content: space-between; gap: 1rem; }
+  .copyright a { color: var(--slate-300); }
   @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; } .brand { grid-column: 1 / -1; } }
-  @media (max-width: 460px) { .footer-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 460px) { .footer-grid { grid-template-columns: 1fr; } .copyright { display: grid; } }
 </style>
