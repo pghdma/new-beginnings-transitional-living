@@ -1,0 +1,28 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  name: string;
+  label?: string;
+  small?: boolean;
+}
+
+const { name, label, small = false } = Astro.props;
+---
+<span class:list={['icon-badge', { small }]} aria-hidden={label ? undefined : 'true'} aria-label={label}>
+  <Icon name={`lucide:${name}`} />
+</span>
+<style>
+  .icon-badge {
+    display: inline-grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    place-items: center;
+    color: var(--teal-700);
+    background: var(--sky-100);
+  }
+  .icon-badge :global(svg) { width: 1.65rem; height: 1.65rem; stroke-width: 1.8; }
+  .icon-badge.small { width: 2rem; height: 2rem; }
+  .icon-badge.small :global(svg) { width: 1.05rem; height: 1.05rem; stroke-width: 2; }
+</style>
