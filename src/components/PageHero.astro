@@ -1,24 +1,28 @@
 ---
-interface Props { eyebrow?: string; title: string; intro: string; image?: string; imageAlt?: string; compact?: boolean; }
-const { eyebrow = 'New Beginnings', title, intro, image = '/images/hero-community.jpg', imageAlt = '', compact = false } = Astro.props;
+interface Props { eyebrow?: string; title: string; intro: string; image?: string; imageAlt?: string; compact?: boolean; plain?: boolean; actions?: boolean; }
+const { eyebrow = 'New Beginnings', title, intro, image = '/images/hero-community.jpg', imageAlt = '', compact = false, plain = false, actions = true } = Astro.props;
 ---
-<section class:list={['page-hero', { compact }]}>
+<section class:list={['page-hero', { compact, plain }]}>
   <div class="container hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
       <p class="lead">{intro}</p>
-      <div class="actions"><a class="button" href="/contact/#inquiry">Ask about housing</a><a class="button button--outline" href="tel:+14126280403">Call 412-628-0403</a></div>
+      {actions && <div class="actions"><a class="button" href="/contact/#inquiry">Ask about housing</a><a class="button button--outline" href="tel:+14126280403">Call 412-628-0403</a></div>}
     </div>
-    <img src={image} alt={imageAlt} width="900" height="700" loading="eager" />
+    {!plain && <img src={image} alt={imageAlt} width="900" height="700" loading="eager" />}
   </div>
 </section>
 <style>
-  .page-hero { padding-block: clamp(3rem, 6vw, 6rem); background: var(--sky-50); overflow: hidden; }
+  .page-hero { position: relative; padding-block: clamp(var(--space-7), 6vw, var(--space-9)); background: linear-gradient(135deg, var(--sky-50), var(--canvas)); overflow: hidden; }
+  .page-hero::before { position: absolute; width: var(--decor-circle); height: var(--decor-circle); border: 1px solid var(--sky-100); border-radius: 50%; content: ''; top: calc(var(--decor-circle) / -2); left: calc(var(--decor-circle) / -3); }
   .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .hero-copy { display: grid; gap: 1.5rem; }
+  .hero-copy { position: relative; display: grid; gap: var(--space-5); }
+  .hero-copy::before { width: var(--space-8); height: 3px; background: var(--teal-700); content: ''; order: -1; }
   h1 { font-size: clamp(3rem, 5.6vw, 5.5rem); }
-  img { width: 100%; height: clamp(25rem, 48vw, 37rem); object-fit: cover; box-shadow: 1.2rem 1.2rem 0 var(--sky-100); }
+  img { width: 100%; height: clamp(25rem, 48vw, 37rem); border-radius: var(--radius); object-fit: cover; box-shadow: var(--space-5) var(--space-5) 0 var(--sky-100); }
   .compact img { height: clamp(20rem, 38vw, 30rem); }
-  @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; } img { height: 22rem; } }
+  .plain .hero-grid { grid-template-columns: minmax(0, 52rem); }
+  .plain .hero-copy { max-width: 52rem; }
+  @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; } img { height: var(--hero-image-mobile); } }
 </style>

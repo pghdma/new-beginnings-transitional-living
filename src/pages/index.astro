@@ -2,6 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import IconBadge from '../components/IconBadge.astro';
+import SectionHead from '../components/SectionHead.astro';
 import { site } from '../data/site';
 ---
 <MainLayout title={site.shortName}>
@@ -26,7 +27,7 @@ import { site } from '../data/site';
   </section>
 
   <section class="section section--tint">
-    <div class="container"><div class="section-head"><p class="eyebrow">Find your path</p><h2>Start where you are.</h2></div>
+    <div class="container"><SectionHead eyebrow="Find your path" title="Start where you are." />
       <div class="grid-3 paths">
         <article class="card"><IconBadge name="house" /><span>01</span><h3>I need housing</h3><p>Learn about our recovery residences, the intake process, and how to begin.</p><a class="text-link" href="/admissions/">Admissions information</a></article>
         <article class="card"><IconBadge name="user-round-check" /><span>02</span><h3>I am helping someone</h3><p>Find clear information for families, providers, case managers, and referral partners.</p><a class="text-link" href="/referrals/">Make a referral</a></article>
@@ -53,14 +54,18 @@ import { site } from '../data/site';
   .hero-content .eyebrow { color: #9ed7d2; }
   .trust { border-bottom: 1px solid var(--slate-200); background: var(--paper); }
   .trust-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .trust span { display: flex; padding: 1.15rem 1rem; border-left: 1px solid var(--slate-200); align-items: center; justify-content: center; gap: .7rem; font-size: .92rem; font-weight: 700; text-align: left; }
+  .trust span { display: flex; padding: var(--space-5) var(--space-4); border-left: 1px solid var(--slate-200); align-items: center; justify-content: center; gap: var(--space-3); font-size: .92rem; font-weight: 700; text-align: left; }
   .trust span:last-child { border-right: 1px solid var(--slate-200); }
-  .intro h2 { max-width: 15ch; margin-top: 1rem; }
-  .intro > div:last-child { display: grid; gap: 1.25rem; }
+  .intro { position: relative; }
+  .intro::before { position: absolute; width: 1px; background: var(--slate-200); content: ''; inset: 0 auto 0 42%; }
+  .intro h2 { max-width: 15ch; margin-top: var(--space-4); }
+  .intro > div:last-child { display: grid; gap: var(--space-5); }
+  .paths article { display: flex; min-height: var(--feature-card-min); flex-direction: column; }
+  .paths article .text-link { margin-top: auto; padding-top: var(--space-5); }
   .paths article span { color: var(--blue-600); font-size: .8rem; font-weight: 750; letter-spacing: .12em; }
   .housing-split img { width: 100%; height: 38rem; object-fit: cover; }
-  .housing-copy { display: grid; gap: 1.25rem; }
+  .housing-copy { display: grid; gap: var(--space-5); }
   .section--navy .eyebrow { color: #9ed7d2; }
   .section--navy .button { margin-top: 1.5rem; }
-  @media (max-width: 760px) { .trust-inner { grid-template-columns: 1fr 1fr; } .housing-split img { height: 24rem; } }
+  @media (max-width: 760px) { .trust-inner { grid-template-columns: 1fr 1fr; } .intro::before { display: none; } .paths article { min-height: 0; } .housing-split img { height: 24rem; } }
 </style>
