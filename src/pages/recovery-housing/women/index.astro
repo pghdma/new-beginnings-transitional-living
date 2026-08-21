@@ -1,0 +1,60 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+---
+<MainLayout title="Women’s Recovery Housing" description="Recovery housing for adult women in Pittsburgh, built around privacy, consistency, and peer community.">
+  <PageHero eyebrow="Women’s recovery housing" title="Safety, structure, and a community of recovery." intro="A substance-free shared residence where adult women can strengthen routines, relationships, and independence." image="/images/womens-community.jpg" imageAlt="Women talking together in a bright community room" actions />
+
+  <section class="section opening">
+    <div class="container opening-grid">
+      <div class="opening-title"><p class="eyebrow">A dependable environment</p><h2>Space for daily recovery to take hold.</h2></div>
+      <div class="opening-copy"><p class="lead">Recovery housing can provide consistency during a season of change, without asking residents to step away from the responsibilities and relationships of ordinary life.</p><p>New Beginnings provides shared housing for adult women committed to substance-free living. The environment is peer-driven and recovery-focused, while treatment and other clinical services remain with independent licensed providers.</p></div>
+      <aside><span>Serving women in</span><strong>Brighton Heights</strong><small>and the greater Pittsburgh area</small></aside>
+    </div>
+  </section>
+
+  <section class="principles section--navy">
+    <div class="container principles-inner">
+      <div class="principles-head"><p class="eyebrow">What supports the home</p><h2>Dignity is practical.</h2><p>It shows up in privacy, consistency, shared responsibility, and the way people treat one another.</p></div>
+      <ol>
+        <li><span>01</span><div><h3>Privacy</h3><p>Resident safety guides how locations and personal information are shared.</p></div></li>
+        <li><span>02</span><div><h3>Shared recovery</h3><p>Peer connection turns individual effort into a more dependable community.</p></div></li>
+        <li><span>03</span><div><h3>Daily structure</h3><p>Consistent expectations support the routines that make greater independence possible.</p></div></li>
+        <li><span>04</span><div><h3>Connection to care</h3><p>Residents remain connected to appropriate outside treatment and recovery resources.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section inquiry-note">
+    <div class="container note-grid">
+      <div><p class="eyebrow">Beginning privately</p><h2>You do not need to tell your whole story online.</h2></div>
+      <div><p class="lead">The first step is a general conversation about what you are looking for.</p><p>New Beginnings will explain the current admissions process and share exact location information privately when appropriate. Please do not use the public form for treatment records, diagnoses, medication details, criminal-history information, or other sensitive information.</p><a class="text-link" href="/admissions/">See the admissions process</a></div>
+    </div>
+  </section>
+
+  <CtaBand title="Ask about women’s recovery housing." label="Begin with admissions" />
+</MainLayout>
+
+<style>
+  .opening-grid { display: grid; grid-template-columns: .8fr 1.05fr .55fr; gap: clamp(var(--space-6), 5vw, var(--space-8)); align-items: start; }
+  .opening-title, .opening-copy { display: grid; gap: var(--space-4); }
+  .opening-copy { max-width: var(--measure); }
+  .opening aside { display: grid; padding-block: var(--space-5); border-block: 1px solid var(--slate-300); gap: var(--space-2); }
+  .opening aside span { color: var(--teal-700); font-size: .75rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+  .opening aside strong { color: var(--navy-900); font-size: 1.3rem; }
+  .opening aside small { color: var(--slate-600); font-size: .9rem; }
+  .principles { padding-block: var(--section-standard); }
+  .principles-inner { display: grid; grid-template-columns: .75fr 1.25fr; gap: var(--gap-columns); }
+  .principles-head { display: grid; align-content: start; gap: var(--space-4); }
+  .principles-head > p:last-child { max-width: 28rem; color: var(--sky-200); }
+  .principles ol { margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.25); list-style: none; }
+  .principles li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-5); border-bottom: 1px solid rgba(255,255,255,.25); }
+  .principles li span { color: #9ed7d2; font-weight: 750; }
+  .principles li div { display: grid; gap: var(--space-2); }
+  .principles li p { color: var(--sky-200); }
+  .note-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: var(--gap-columns); }
+  .note-grid > div { display: grid; align-content: start; gap: var(--space-4); }
+  @media (max-width: 900px) { .opening-grid { grid-template-columns: 1fr 1fr; } .opening aside { grid-column: 1 / -1; grid-template-columns: auto auto 1fr; align-items: baseline; gap: var(--space-4); } .principles-inner, .note-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .opening-grid { grid-template-columns: 1fr; } .opening aside { grid-column: auto; grid-template-columns: 1fr; gap: var(--space-2); } }
+</style>

@@ -10,10 +10,26 @@ export const site = {
 };
 
 export const nav = [
-  { label: 'Recovery Housing', href: '/recovery-housing/' },
+  {
+    label: 'About',
+    href: '/about/',
+    children: [
+      { label: 'About New Beginnings', href: '/about/' },
+      { label: 'Board of Directors', href: '/about/board/' },
+      { label: 'Credentials & Transparency', href: '/about/transparency/' }
+    ]
+  },
+  {
+    label: 'Recovery Housing',
+    href: '/recovery-housing/',
+    children: [
+      { label: 'Recovery Housing Overview', href: '/recovery-housing/' },
+      { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/' },
+      { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/' }
+    ]
+  },
   { label: 'Admissions', href: '/admissions/' },
-  { label: 'Referrals', href: '/referrals/' },
-  { label: 'About', href: '/about/' },
+  { label: 'For Professionals', href: '/referrals/' },
   { label: 'Support Us', href: '/support-us/' },
   { label: 'Contact', href: '/contact/' }
-];
+] as const;

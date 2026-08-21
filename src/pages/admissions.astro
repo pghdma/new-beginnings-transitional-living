@@ -2,13 +2,77 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/InquiryForm.astro';
-import IconBadge from '../components/IconBadge.astro';
 import SectionHead from '../components/SectionHead.astro';
+import { site } from '../data/site';
 ---
-<MainLayout title="Admissions">
-  <PageHero eyebrow="Admissions" title="The first step is a conversation." intro="Call or send a general inquiry. We will learn what you are looking for and explain the next appropriate step." image="/images/admissions.jpg" imageAlt="A notebook and cup on a clean table in a quiet room" />
-  <section class="section"><div class="container"><SectionHead eyebrow="How to begin" title="A clear, private starting point." intro="You do not need to send your full history through the website. Start with your name, contact information, and whether you are calling for yourself, a loved one, or a client." /><ol class="steps grid-3"><li class="card"><IconBadge name="phone" /><span>01</span><h3>Reach out</h3><p>Call 412-628-0403 or send the short inquiry form below.</p></li><li class="card"><IconBadge name="messages-square" /><span>02</span><h3>Talk with us</h3><p>We will discuss your general needs and explain the current intake process.</p></li><li class="card"><IconBadge name="clipboard-check" /><span>03</span><h3>Review next steps</h3><p>If a New Beginnings residence may be appropriate, exact location and required information are shared privately.</p></li></ol></div></section>
-  <section class="section section--tint"><div class="container grid-2"><div><p class="eyebrow">Before you submit</p><h2>Protect your private information.</h2></div><div><p class="lead">The website form is only for an initial inquiry.</p><p>Do not include diagnoses, medication information, treatment records, criminal-history details, Social Security numbers, or other sensitive information. Those details should only be discussed through an appropriate private intake process.</p><p>If you are experiencing a medical emergency, call 911. If you or someone else is in emotional distress or at risk of suicide, call or text 988.</p></div></div></section>
-  <InquiryForm title="Begin a housing inquiry" />
+<MainLayout title="Admissions" description="Learn how to begin a private recovery-housing inquiry with New Beginnings in Pittsburgh.">
+  <PageHero variant="editorial" eyebrow="Admissions" title="The first step is a conversation." intro="You do not need to prepare your whole history or share sensitive details online. Start with a general inquiry and we will explain the current process." image="/images/admissions.jpg" imageAlt="A notebook and cup on a clean table in a quiet room" fact={`Prefer to begin by phone? Call ${site.phone}.`} />
+
+  <section class="section process-section">
+    <div class="container">
+      <SectionHead eyebrow="How to begin" title="A clear, private starting point." intro="The exact process can vary with current circumstances, but every inquiry begins with the same three stages." />
+      <ol class="process">
+        <li><span class="process-num">01</span><div><h3>Reach out</h3><p>Call {site.phone} or send the short housing inquiry form below.</p></div></li>
+        <li><span class="process-num">02</span><div><h3>Have a general conversation</h3><p>We will learn what you are looking for and discuss general fit and current availability.</p></div></li>
+        <li><span class="process-num">03</span><div><h3>Receive private next steps</h3><p>If a New Beginnings residence may be appropriate, required information and exact location details are shared privately.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tint prepare">
+    <div class="container prepare-grid">
+      <article>
+        <p class="eyebrow">Helpful for the first contact</p>
+        <h2>Keep it simple.</h2>
+        <ul>
+          <li>Your name and best way to reach you</li>
+          <li>Whether you are asking for yourself, a loved one, or a client</li>
+          <li>Whether you are looking for men’s or women’s housing</li>
+          <li>Any general timing question you want to discuss</li>
+        </ul>
+      </article>
+      <article class="sensitive">
+        <p class="eyebrow">Do not submit online</p>
+        <h2>Protect private information.</h2>
+        <ul>
+          <li>Diagnoses, medication details, or treatment records</li>
+          <li>Criminal-history or court documents</li>
+          <li>Social Security numbers or financial-account information</li>
+          <li>Any other sensitive personal record</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section questions">
+    <div class="container questions-grid">
+      <header><p class="eyebrow">Before you reach out</p><h2>What the website can and cannot tell you.</h2></header>
+      <div class="question-list">
+        <details open><summary>Does sending the form guarantee admission?</summary><p>No. A website inquiry begins a conversation. It does not guarantee admission, availability, or placement in a particular residence.</p></details>
+        <details><summary>Will I receive a house address online?</summary><p>No. For resident privacy and safety, exact locations are shared privately only when appropriate during the intake process.</p></details>
+        <details><summary>Can a family member or professional contact you?</summary><p>Yes. Families and support people may begin with a general inquiry. Treatment providers, case managers, and other professionals can also use the dedicated <a href="/referrals/">referral page</a>.</p></details>
+        <details><summary>Is this form monitored for emergencies?</summary><p>No. Call 911 for a medical emergency. Call or text 988 for the Suicide & Crisis Lifeline.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <InquiryForm context="housing" title="Begin a housing inquiry" intro="Share only enough information for us to contact you. We will discuss anything more detailed through an appropriate private process." />
 </MainLayout>
-<style>.steps { padding: 0; list-style: none; }.steps span { color: var(--blue-600); font-size: .8rem; font-weight: 750; letter-spacing: .12em; }</style>
+
+<style>
+  .prepare-grid { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--slate-300); }
+  .prepare article { padding: var(--space-6) var(--space-7) var(--space-6) 0; }
+  .prepare article + article { padding-right: 0; padding-left: var(--space-7); border-left: 1px solid var(--slate-300); }
+  .prepare article h2 { margin-top: var(--space-3); font-size: clamp(1.9rem, 3vw, 2.7rem); }
+  .prepare ul { display: grid; margin-top: var(--space-5); padding: 0; list-style: none; gap: var(--space-3); }
+  .prepare li { position: relative; padding-left: var(--space-5); }
+  .prepare li::before { position: absolute; left: 0; color: var(--teal-700); content: '✓'; font-weight: 750; }
+  .prepare .sensitive li::before { content: '—'; }
+  .questions-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: var(--gap-columns); }
+  .questions header { display: grid; align-content: start; gap: var(--space-4); }
+  .question-list { border-top: 1px solid var(--slate-300); }
+  details { padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); }
+  summary { color: var(--navy-900); cursor: pointer; font-size: 1.15rem; font-weight: 700; }
+  details p { max-width: var(--measure); margin-top: var(--space-3); }
+  @media (max-width: 760px) { .prepare-grid, .questions-grid { grid-template-columns: 1fr; } .prepare article, .prepare article + article { padding: var(--space-5) 0; border-left: 0; } .prepare article + article { border-top: 1px solid var(--slate-300); } }
+</style>

@@ -1,14 +1,176 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import InquiryForm from '../components/InquiryForm.astro';
-import IconBadge from '../components/IconBadge.astro';
-import SectionHead from '../components/SectionHead.astro';
+import { susanRua } from '../data/leadership';
+
+const commitments = [
+  {
+    title: 'Dignity',
+    copy: 'People in recovery deserve to be treated as adults, neighbors, and whole human beings.',
+  },
+  {
+    title: 'Accountability',
+    copy: 'Clear expectations and shared responsibility help protect the stability of each home.',
+  },
+  {
+    title: 'Community',
+    copy: 'Peer connection and outside partnerships help recovery extend beyond the walls of a residence.',
+  },
+];
 ---
-<MainLayout title="About">
-  <PageHero eyebrow="About us" title="Recovery housing with a practical purpose." intro="New Beginnings exists to give adults in recovery a stable place to strengthen the routines, skills, and connections that support lasting change." image="/images/pittsburgh.jpg" imageAlt="The Pittsburgh skyline and rivers" />
-  <section class="section"><div class="container grid-2"><div><p class="eyebrow">Our mission</p><h2>Housing, support, and a foundation for independence.</h2></div><div><p class="lead">New Beginnings Transitional Living Foundation provides transitional sober housing in a supportive, peer-driven environment.</p><p>Residents work on establishing a solid foundation of recovery, developing positive life skills, and staying connected to independent licensed drug, alcohol, and mental-health providers.</p><p>The organization was established in Pittsburgh and is led by Susan Rua, a licensed professional counselor who has specialized in substance use and recovery since 1999.</p></div></div></section>
-  <section class="section section--tint"><div class="container"><SectionHead eyebrow="Our commitments" title="What guides the work" /><div class="grid-3"><article class="card"><IconBadge name="heart" /><h3>Dignity</h3><p>People in recovery deserve to be treated as adults, neighbors, and whole human beings.</p></article><article class="card"><IconBadge name="scale" /><h3>Accountability</h3><p>Stable homes depend on clear expectations, shared responsibility, and consistent follow-through.</p></article><article class="card"><IconBadge name="network" /><h3>Community</h3><p>Peer connection and strong outside partnerships help recovery extend beyond the walls of a house.</p></article></div><div class="board-link"><a class="button button--outline" href="/board/">Meet the board</a></div></div></section>
-  <InquiryForm />
+
+<MainLayout
+  title="About"
+  description="Learn about the mission, leadership, nonprofit governance, and recovery-housing purpose of New Beginnings Transitional Living Foundation."
+>
+  <PageHero
+    eyebrow="About New Beginnings"
+    title="Recovery housing with a practical purpose."
+    intro="New Beginnings gives adults in recovery a stable place to strengthen the routines, skills, and connections that support lasting change."
+    image="/images/pittsburgh.jpg"
+    imageAlt="The Pittsburgh skyline and rivers"
+  />
+
+  <section class="section mission">
+    <div class="container mission__grid">
+      <div>
+        <p class="eyebrow">Our mission</p>
+        <h2>Housing, support, and a foundation for independence.</h2>
+      </div>
+      <div class="mission__copy">
+        <p class="lead">
+          New Beginnings Transitional Living Foundation provides transitional sober housing
+          in a supportive, peer-driven environment.
+        </p>
+        <p>
+          Residents work on establishing a solid foundation of recovery, developing positive
+          life skills, and staying connected to independent licensed drug, alcohol, and
+          mental-health providers.
+        </p>
+        <p>
+          Founded in Pittsburgh in 2016, the organization has grown around a practical idea:
+          recovery housing is not clinical treatment, but it can be the stable daily
+          environment where routines, responsibilities, relationships, and individual goals
+          continue to take shape.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint commitments">
+    <div class="container commitments__grid">
+      <header>
+        <p class="eyebrow">What guides the work</p>
+        <h2>Three commitments, carried into daily life.</h2>
+      </header>
+      <ol>
+        {commitments.map((commitment) => (
+          <li>
+            <div>
+              <h3>{commitment.title}</h3>
+              <p>{commitment.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {susanRua && (
+    <section class="section founder">
+      <div class="container founder__grid">
+        <div class="founder__identity">
+          <p class="eyebrow">President and founder</p>
+          <h2>{susanRua.name}</h2>
+          {susanRua.credentials && <p>{susanRua.credentials.join(' · ')}</p>}
+        </div>
+        <div class="founder__copy">
+          {susanRua.summary && <p class="lead">{susanRua.summary}</p>}
+          <p>
+            Her background connects professional counseling, nursing, and the practical work
+            of operating sober-living homes. That perspective informs an organization built
+            around stable housing, clear expectations, and connection to recovery support.
+          </p>
+          <a class="founder-link" href="/about/susan-rua/">
+            Meet Susan Rua
+            <Icon name="lucide:arrow-right" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="governance-band">
+    <div class="container governance-band__grid">
+      <div>
+        <p class="eyebrow">Nonprofit governance</p>
+        <h2>Accountability extends beyond the homes.</h2>
+      </div>
+      <div>
+        <p class="lead">
+          A volunteer Board of Directors provides stewardship and oversight of the New
+          Beginnings mission and its nonprofit responsibilities.
+        </p>
+        <div class="governance-band__links">
+          <a href="/about/board/">
+            Board and governance
+            <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+          </a>
+          <a href="/about/transparency/">
+            Credentials and public records
+            <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-cta">
+    <div class="container about-cta__inner">
+      <div>
+        <p class="eyebrow">Learn about our homes</p>
+        <h2>See how recovery housing supports daily stability.</h2>
+      </div>
+      <a class="button" href="/recovery-housing/">Explore recovery housing</a>
+    </div>
+  </section>
 </MainLayout>
-<style>.board-link { margin-top: var(--space-7); }</style>
+
+<style>
+  .mission__grid, .founder__grid, .governance-band__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .mission__grid > div:first-child, .founder__identity, .governance-band__grid > div:first-child { display: grid; gap: var(--space-4); }
+  .mission__copy, .founder__copy { max-width: var(--measure); }
+  .mission__copy p + p, .founder__copy p + p { margin-top: var(--space-5); }
+
+  .commitments__grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .commitments header { display: grid; gap: var(--space-4); }
+  .commitments ol { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .commitments li { padding-block: var(--space-6); border-bottom: 1px solid var(--slate-300); }
+  .commitments li h3 { margin-bottom: var(--space-2); }
+
+  .founder { border-top: 1px solid var(--slate-200); }
+  .founder__identity > p:last-child { color: var(--teal-700); font-size: .9rem; font-weight: 750; letter-spacing: .1em; }
+  .founder-link { display: inline-flex; margin-top: var(--space-6); align-items: center; gap: var(--space-2); font-weight: 700; }
+  .founder-link :global(svg) { width: 1rem; }
+
+  .governance-band { padding-block: clamp(var(--space-8), 7vw, var(--space-9)); color: var(--white); background: var(--navy-950); }
+  .governance-band h2 { color: var(--white); }
+  .governance-band .eyebrow { color: #9ed7d2; }
+  .governance-band .lead { color: var(--sky-100); }
+  .governance-band__links { display: grid; margin-top: var(--space-6); border-top: 1px solid rgba(255,255,255,.25); }
+  .governance-band__links a { display: flex; padding-block: var(--space-4); border-bottom: 1px solid rgba(255,255,255,.25); align-items: center; justify-content: space-between; gap: var(--space-4); color: var(--white); font-weight: 700; text-decoration: none; }
+  .governance-band__links a:hover { color: #9ed7d2; }
+  .governance-band__links :global(svg) { width: 1.1rem; }
+
+  .about-cta { padding-block: var(--space-8); background: var(--paper); }
+  .about-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-7); }
+  .about-cta__inner > div { display: grid; gap: var(--space-3); }
+  .about-cta h2 { max-width: 20ch; font-size: clamp(2rem, 3.5vw, 3rem); }
+
+  @media (max-width: 760px) {
+    .mission__grid, .commitments__grid, .founder__grid, .governance-band__grid { grid-template-columns: 1fr; }
+    .about-cta__inner { display: grid; }
+    .about-cta .button { justify-self: start; }
+  }
+</style>

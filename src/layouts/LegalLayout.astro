@@ -1,5 +1,344 @@
 ---
-import MainLayout from './MainLayout.astro'; import PageHero from '../components/PageHero.astro'; interface Props { title: string; intro: string; } const { title, intro } = Astro.props;
+import MainLayout from './MainLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+interface Section {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  intro: string;
+  description?: string;
+  updated: string;
+  sections: Section[];
+}
+
+const { title, intro, description = intro, updated, sections } = Astro.props;
 ---
-<MainLayout title={title}><PageHero eyebrow="Website information" title={title} intro={intro} plain actions={false} compact /><article class="container legal"><slot /></article></MainLayout>
-<style>.legal { max-width: 50rem; padding-block: var(--space-8) var(--space-9); }.legal :global(h2) { margin-top: var(--space-7); font-size: 1.8rem; }.legal :global(h3) { margin-top: var(--space-6); font-size: 1.3rem; }.legal :global(p), .legal :global(ul) { margin-top: var(--space-4); }</style>
+
+<MainLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Website information"
+    title={title}
+    intro={intro}
+    plain
+    actions={false}
+    compact
+  />
+
+  <section class="legal-body">
+    <div class="container legal-layout">
+      <aside class="legal-toc-wrap">
+        <nav class="legal-toc" aria-label="On this page">
+          <p class="legal-toc-heading">On this page</p>
+          <ol class="legal-toc-list">
+            {
+              sections.map((section, index) => (
+                <li>
+                  <a
+                    class="legal-toc-link"
+                    href={`#${section.id}`}
+                    data-section={section.id}
+                  >
+                    <span class="legal-toc-num">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span>{section.title}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+      </aside>
+
+      <article class="legal-content">
+        <p class="legal-updated">Last reviewed: {updated}</p>
+        <slot />
+      </article>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .legal-body {
+    padding-block: var(--space-7) var(--space-9);
+    background: var(--canvas);
+  }
+
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 14.5rem minmax(0, 1fr);
+    gap: clamp(var(--space-6), 6vw, var(--space-9));
+    align-items: start;
+  }
+
+  .legal-toc {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .legal-toc-heading,
+  .legal-updated {
+    margin: 0;
+    color: var(--teal-700);
+    font-size: .76rem;
+    font-weight: 750;
+    letter-spacing: .14em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .legal-toc-heading {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-3);
+  }
+
+  .legal-toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal-toc-link {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+    padding: .65rem 0 .65rem var(--space-3);
+    border-left: 2px solid transparent;
+    color: var(--slate-600);
+    font-size: .9rem;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease;
+  }
+
+  .legal-toc-link:hover {
+    color: var(--navy-900);
+  }
+
+  .legal-toc-link.is-active {
+    border-left-color: var(--teal-700);
+    color: var(--navy-900);
+    font-weight: 700;
+  }
+
+  .legal-toc-num {
+    color: var(--slate-600);
+    font-size: .72rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 750;
+    letter-spacing: .08em;
+  }
+
+  .legal-toc-link.is-active .legal-toc-num {
+    color: var(--teal-700);
+  }
+
+  .legal-content {
+    width: 100%;
+    max-width: 70ch;
+  }
+
+  .legal-updated {
+    margin-bottom: var(--space-5);
+  }
+
+  .legal-content :global(.legal-intro) {
+    margin: 0 0 var(--space-4);
+    color: var(--navy-900);
+    font-size: clamp(1.15rem, 2vw, 1.3rem);
+    line-height: 1.6;
+  }
+
+  .legal-content :global(.legal-entity) {
+    margin: 0 0 var(--space-7);
+    color: var(--slate-600);
+    font-size: .94rem;
+    font-style: italic;
+  }
+
+  .legal-content :global(.legal-section) {
+    padding-top: var(--space-7);
+    margin-top: var(--space-7);
+    border-top: 1px solid var(--slate-300);
+    scroll-margin-top: 7rem;
+  }
+
+  .legal-content :global(.legal-section:first-of-type) {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: 0;
+  }
+
+  .legal-content :global(.legal-section > h2) {
+    margin: 0 0 var(--space-4);
+    font-size: clamp(1.55rem, 3vw, 2rem);
+    letter-spacing: -.015em;
+    line-height: 1.2;
+  }
+
+  .legal-content :global(.legal-section > h2)::before {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--teal-700);
+    content: attr(data-label);
+    font-family: var(--font-body);
+    font-size: .75rem;
+    font-weight: 750;
+    letter-spacing: .14em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .legal-content :global(h3) {
+    margin: var(--space-5) 0 var(--space-3);
+    font-size: 1.22rem;
+    letter-spacing: -.01em;
+    line-height: 1.25;
+  }
+
+  .legal-content :global(p) {
+    margin: 0 0 var(--space-4);
+    line-height: 1.75;
+  }
+
+  .legal-content :global(ul) {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-5);
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal-content :global(li) {
+    position: relative;
+    padding-left: var(--space-5);
+    line-height: 1.7;
+  }
+
+  .legal-content :global(li)::before {
+    position: absolute;
+    top: .72em;
+    left: 0;
+    width: var(--space-3);
+    height: 2px;
+    background: var(--teal-700);
+    content: '';
+  }
+
+  .legal-content :global(a) {
+    font-weight: 650;
+  }
+
+  .legal-content :global(strong) {
+    color: var(--navy-900);
+  }
+
+  .legal-content :global(.legal-callout) {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-4) var(--space-6);
+    align-items: baseline;
+    padding-block: var(--space-5);
+    margin: var(--space-5) 0;
+    border-block: 1px solid var(--slate-300);
+  }
+
+  .legal-content :global(.legal-callout-label) {
+    margin: 0;
+    color: var(--teal-700);
+    font-size: .76rem;
+    font-weight: 750;
+    letter-spacing: .14em;
+    line-height: 1.25;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .legal-content :global(.legal-callout-body p:last-child),
+  .legal-content :global(.legal-contact p:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 900px) {
+    .legal-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+
+    .legal-toc-wrap {
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--slate-300);
+    }
+
+    .legal-toc {
+      position: static;
+    }
+
+    .legal-toc-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px var(--space-5);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .legal-body {
+      padding-block: var(--space-7) var(--space-8);
+    }
+
+    .legal-toc-list {
+      grid-template-columns: 1fr;
+    }
+
+    .legal-content :global(.legal-callout) {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+</style>
+
+<script>
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.legal-toc-link'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('.legal-section'));
+
+  if (links.length && sections.length) {
+    const offset = 128;
+    const setActive = () => {
+      let current = sections[0]?.id ?? '';
+
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset + 20) current = section.id;
+      }
+
+      for (const link of links) {
+        link.classList.toggle('is-active', link.dataset.section === current);
+      }
+    };
+
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        const target = document.getElementById(link.dataset.section ?? '');
+        if (!target) return;
+
+        event.preventDefault();
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({
+          top: target.getBoundingClientRect().top + window.scrollY - offset,
+          behavior: reducedMotion ? 'auto' : 'smooth',
+        });
+        history.replaceState(null, '', `#${target.id}`);
+      });
+    }
+  }
+</script>

@@ -1,5 +1,52 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro'; import PageHero from '../components/PageHero.astro'; import InquiryForm from '../components/InquiryForm.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import IconBadge from '../components/IconBadge.astro';
+import { site } from '../data/site';
 ---
-<MainLayout title="Support Our Work"><PageHero eyebrow="Support New Beginnings" title="Help make stable recovery housing possible." intro="Community support strengthens the homes, daily structure, and practical opportunities that help residents move forward." image="/images/support.jpg" imageAlt="Volunteers organizing household supplies on a table" />
-<section class="section"><div class="container grid-2"><div><p class="eyebrow">A Pittsburgh nonprofit</p><h2>Invest in a foundation for recovery.</h2></div><div><p class="lead">New Beginnings Transitional Living Foundation is a tax-exempt 501(c)(3) public charity.</p><p>Our EIN is 81-2901849. Contributions are tax-deductible to the extent permitted by law.</p><p>Online giving is being prepared. To discuss a financial contribution, in-kind support, or community partnership now, call 412-628-0403 or use the form below.</p><a class="text-link" href="/transparency/">Review nonprofit credentials and filings</a></div></div></section><InquiryForm title="Talk with us about supporting the work" intro="Tell us how you would like to help or partner with New Beginnings." /></MainLayout>
+<MainLayout title="Support Our Work" description="Support nonprofit recovery housing for adult men and women in Pittsburgh-area communities.">
+  <PageHero variant="editorial" eyebrow="Support New Beginnings" title="Help make stable recovery housing possible." intro="Community support strengthens the homes, practical resources, and recovery-focused environment that help residents keep moving forward." image="/images/support.jpg" imageAlt="Volunteers organizing household supplies on a table" />
+
+  <section class="section support-intro">
+    <div class="container intro-grid">
+      <div><p class="eyebrow">A Pittsburgh nonprofit</p><h2>Support that reaches daily life.</h2></div>
+      <div><p class="lead">New Beginnings Transitional Living Foundation is a tax-exempt 501(c)(3) public charity serving adults in recovery.</p><p>Stable housing depends on ordinary, practical resources as well as long-term community relationships. Individuals, organizations, and local partners can begin by talking with us about where their support may be useful.</p><p>Contributions are tax-deductible to the extent permitted by law. EIN {site.ein}.</p></div>
+    </div>
+  </section>
+
+  <section class="section section--tint ways">
+    <div class="container">
+      <div class="ways-head"><p class="eyebrow">Ways to help</p><h2>Start with the kind of support you have in mind.</h2></div>
+      <div class="ways-grid">
+        <article><IconBadge name="hand-coins" /><span>Financial support</span><h3>Contribute to the mission.</h3><p>Contact New Beginnings to discuss the current way to make a financial contribution and receive appropriate documentation.</p></article>
+        <article><IconBadge name="package-open" /><span>In-kind support</span><h3>Help meet practical needs.</h3><p>Household needs change. Check with the organization before collecting or delivering supplies so the support matches a current need.</p></article>
+        <article><IconBadge name="network" /><span>Community partnership</span><h3>Connect resources and opportunity.</h3><p>Businesses, nonprofits, faith communities, and civic organizations can explore responsible ways to strengthen recovery housing.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stewardship">
+    <div class="container stewardship-grid">
+      <div><p class="eyebrow">Accountability</p><h2>Review the organization before you give.</h2><p class="lead">Public nonprofit records and independent recovery-housing credentials are available for supporters who want to understand the organization.</p></div>
+      <ul class="document-list">
+        <li><div><strong>501(c)(3) status and public filings</strong><p>Review New Beginnings’ tax-exempt status, EIN, and available Form 990 filings.</p></div><a class="text-link" href="/about/transparency/">View records</a></li>
+        <li><div><strong>Recovery-housing credentials</strong><p>Learn about DDAP licensing and the organization’s WestPARR listing.</p></div><a class="text-link" href="/about/transparency/">View credentials</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand eyebrow="Support and partnerships" title="Talk with us about helping." text="Online giving is not yet offered through this website. Call or send a general message to discuss a contribution, supplies, or a community partnership." href="/contact/" label="Contact New Beginnings" />
+</MainLayout>
+
+<style>
+  .intro-grid, .stewardship-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--gap-columns); }
+  .intro-grid > div, .stewardship-grid > div { display: grid; align-content: start; gap: var(--space-4); }
+  .intro-grid > div:last-child { max-width: var(--measure); }
+  .ways-head { display: grid; max-width: 52rem; margin-bottom: var(--space-6); gap: var(--space-3); }
+  .ways-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--slate-300); }
+  .ways article { display: grid; min-height: 22rem; padding: var(--space-6); align-content: start; gap: var(--space-4); }
+  .ways article + article { border-left: 1px solid var(--slate-300); }
+  .ways article > span { color: var(--teal-700); font-size: .76rem; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }
+  @media (max-width: 800px) { .intro-grid, .stewardship-grid, .ways-grid { grid-template-columns: 1fr; } .ways article { min-height: 0; padding-inline: 0; } .ways article + article { border-top: 1px solid var(--slate-300); border-left: 0; } }
+</style>

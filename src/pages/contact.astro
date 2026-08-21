@@ -1,6 +1,15 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro'; import PageHero from '../components/PageHero.astro'; import InquiryForm from '../components/InquiryForm.astro'; import { site } from '../data/site';
+import MainLayout from '../layouts/MainLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import InquiryForm from '../components/InquiryForm.astro';
 ---
-<MainLayout title="Contact"><PageHero eyebrow="Contact" title="Reach New Beginnings." intro="Whether you are looking for housing, helping someone else, or exploring a partnership, start with a call or general inquiry." image="/images/contact.jpg" imageAlt="A phone and notebook on an uncluttered desk" compact />
-<section class="section"><div class="container grid-2"><div><p class="eyebrow">Call us</p><h2><a href={site.phoneHref}>{site.phone}</a></h2><p class="lead">This is the primary public number for housing, referrals, and organizational questions.</p></div><div><h3>Residence privacy</h3><p>We do not publish recovery-house street addresses. Exact locations are shared privately when appropriate during intake.</p><h3>Urgent help</h3><p>New Beginnings is not an emergency service. Call 911 for a medical emergency. Call or text 988 for the Suicide & Crisis Lifeline.</p></div></div></section><InquiryForm title="Send a general inquiry" /></MainLayout>
-<style>h2 a { color: var(--navy-950); } .grid-2 > div:last-child { display: grid; gap: 1rem; }</style>
+<MainLayout title="Contact" description="Contact New Beginnings about recovery housing, professional referrals, partnerships, or the organization.">
+  <PageHero variant="compact" eyebrow="Contact New Beginnings" title="Reach the right conversation." intro="Housing, referrals, organizational questions, and community support can all begin here." fact="This website is not monitored for emergencies or crisis support." />
+
+  <InquiryForm context="contact" title="Send a general inquiry" intro="Choose the reason for your message and tell us how to reach you. Keep medical, treatment, legal, and other sensitive details out of the public form.">
+    <div slot="aside" class="inquiry-aside">
+      <div><h3>Residence privacy</h3><p>We do not publish recovery-house street addresses. Exact locations are shared privately when appropriate during intake.</p></div>
+      <div><h3>Urgent help</h3><p>Call 911 for a medical emergency. Call or text 988 for the Suicide & Crisis Lifeline.</p></div>
+    </div>
+  </InquiryForm>
+</MainLayout>

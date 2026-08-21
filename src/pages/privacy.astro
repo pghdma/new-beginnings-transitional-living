@@ -1,4 +1,212 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
+
+const sections = [
+  { id: 'scope', title: 'Scope of this policy' },
+  { id: 'information', title: 'Information you provide' },
+  { id: 'sensitive', title: 'Sensitive information' },
+  { id: 'technical', title: 'Hosting and technical data' },
+  { id: 'use', title: 'How information may be used' },
+  { id: 'sharing', title: 'When information may be shared' },
+  { id: 'security', title: 'Security and retention' },
+  { id: 'residences', title: 'Residence privacy' },
+  { id: 'choices', title: 'Your choices' },
+  { id: 'links', title: 'Other websites' },
+  { id: 'changes', title: 'Changes to this policy' },
+  { id: 'contact', title: 'Contact us' },
+];
 ---
-<LegalLayout title="Privacy Policy" intro="How this website handles general inquiries and protects sensitive information."><h2>Information you provide</h2><p>When you contact New Beginnings through this website, we may receive your name, email address, phone number, reason for contacting us, and message.</p><h2>Do not send sensitive information</h2><p>The public contact form is not intended for medical records, diagnoses, medication information, treatment histories, criminal-history details, Social Security numbers, financial-account information, or other sensitive personal information.</p><h2>How information is used</h2><p>Information submitted through the website is used to respond to inquiries, discuss housing or referral needs, and communicate about donations or partnerships. We do not sell personal information.</p><h2>Residence privacy</h2><p>New Beginnings does not publish individual recovery-residence addresses on this website. Exact locations may be shared privately when appropriate during intake.</p><h2>Contact</h2><p>Questions about this policy may be directed to 412-628-0403.</p></LegalLayout>
+
+<LegalLayout
+  title="Privacy Policy"
+  intro="How information connected with this public website is handled, and what should never be submitted through a general inquiry form."
+  description="Privacy information for visitors to the New Beginnings Transitional Living Foundation website."
+  updated="August 21, 2026"
+  sections={sections}
+>
+  <p class="legal-intro">
+    New Beginnings Transitional Living Foundation respects the privacy of prospective
+    residents, current residents, families, referral partners, donors, and other visitors.
+    This policy explains the limited role of this public website and how information connected
+    with it may be handled.
+  </p>
+  <p class="legal-entity">
+    New Beginnings Transitional Living Foundation ("New Beginnings," "we," "us," or "our")
+  </p>
+
+  <section class="legal-section" id="scope">
+    <h2 data-label="Section 01">Scope of this policy</h2>
+    <p>
+      This policy applies to newbeginningspgh.org and to information you choose to provide
+      through a public website form or another contact method identified on the site. It does
+      not describe every record New Beginnings may maintain in connection with housing,
+      nonprofit operations, employment, volunteering, or a professional referral.
+    </p>
+    <p>
+      New Beginnings provides recovery housing. It is not a clinical treatment provider, and
+      the public website is not a patient portal, treatment-record system, secure intake
+      system, or emergency communication service.
+    </p>
+  </section>
+
+  <section class="legal-section" id="information">
+    <h2 data-label="Section 02">Information you provide</h2>
+    <p>The public inquiry form may ask for information such as:</p>
+    <ul>
+      <li>Your first and last name</li>
+      <li>Your email address and telephone number</li>
+      <li>Whether you are contacting us for yourself, a loved one, a client, or another reason</li>
+      <li>A short message explaining how New Beginnings may be able to help</li>
+    </ul>
+    <p>
+      You may also provide information when you telephone New Beginnings. Please share only
+      what is reasonably necessary for a general availability, referral, donation, or
+      partnership conversation. More detailed information, when appropriate, should be shared
+      through the private process New Beginnings identifies for you.
+    </p>
+  </section>
+
+  <section class="legal-section" id="sensitive">
+    <h2 data-label="Section 03">Sensitive information</h2>
+    <aside class="legal-callout" role="note">
+      <p class="legal-callout-label">Please protect your information</p>
+      <div class="legal-callout-body">
+        <p>
+          <strong>Do not submit sensitive information through a general website form.</strong>
+          Begin with basic contact information and a general description of what you need.
+        </p>
+      </div>
+    </aside>
+    <p>Do not place any of the following in a public inquiry:</p>
+    <ul>
+      <li>Medical records, diagnoses, medication information, or treatment histories</li>
+      <li>Detailed substance-use, mental-health, or clinical information</li>
+      <li>Criminal-history records, court documents, or supervision records</li>
+      <li>Social Security numbers, government identification numbers, or passwords</li>
+      <li>Bank, credit-card, insurance, income, or other financial-account information</li>
+      <li>The exact address of a New Beginnings residence or another resident's private information</li>
+    </ul>
+    <p>
+      A website inquiry does not create a confidential clinical relationship. If more
+      information is needed, New Beginnings will explain an appropriate next step.
+    </p>
+  </section>
+
+  <section class="legal-section" id="technical">
+    <h2 data-label="Section 04">Hosting and technical data</h2>
+    <p>
+      This website is hosted through Cloudflare. Like other hosting and security providers,
+      Cloudflare may process technical connection and security information when a visitor
+      requests a page. That processing is governed in part by Cloudflare's own terms and
+      privacy materials.
+    </p>
+    <p>
+      Website technology can change. We do not make a broader promise here about a particular
+      analytics product, cookie, or form-delivery service unless that practice has been
+      confirmed and described in a current version of this policy.
+    </p>
+  </section>
+
+  <section class="legal-section" id="use">
+    <h2 data-label="Section 05">How information may be used</h2>
+    <p>Information you choose to provide may be used to:</p>
+    <ul>
+      <li>Respond to a general question or return your call</li>
+      <li>Discuss general housing fit, current availability, and the next step in an intake</li>
+      <li>Communicate with a family member, referral partner, donor, or community organization</li>
+      <li>Protect the website and organization from spam, misuse, or security threats</li>
+      <li>Maintain records reasonably connected with nonprofit operations or legal obligations</li>
+    </ul>
+    <p>
+      Information collected later through a separate housing, referral, employment, or other
+      operational process may be governed by additional notices and procedures.
+    </p>
+  </section>
+
+  <section class="legal-section" id="sharing">
+    <h2 data-label="Section 06">When information may be shared</h2>
+    <p>
+      Information may be available to people who need it to respond to an inquiry or operate
+      the organization. It may also be processed by service providers that support the public
+      website, such as the site's hosting and security provider.
+    </p>
+    <p>
+      New Beginnings may disclose information when required by applicable law or a valid legal
+      process, or when reasonably necessary to address fraud, misuse, security, or an immediate
+      safety concern. This policy does not authorize visitors to submit confidential records
+      through the public website.
+    </p>
+  </section>
+
+  <section class="legal-section" id="security">
+    <h2 data-label="Section 07">Security and retention</h2>
+    <p>
+      New Beginnings takes reasonable steps appropriate to the public nature of this website.
+      No website, email, telephone system, or method of electronic transmission can be
+      guaranteed completely secure. Limiting a website inquiry to basic contact information is
+      an important part of protecting your privacy.
+    </p>
+    <p>
+      Website inquiry information may be kept for as long as reasonably needed to respond,
+      maintain appropriate organizational records, resolve a concern, or meet a legal
+      obligation. Retention may vary according to the nature of the communication.
+    </p>
+  </section>
+
+  <section class="legal-section" id="residences">
+    <h2 data-label="Section 08">Residence privacy</h2>
+    <p>
+      New Beginnings does not publish individual recovery-residence addresses or identifying
+      exterior information on this website. Neighborhood-level information allows people to
+      understand the general service area while respecting the privacy and safety of residents.
+    </p>
+    <p>
+      Exact location information may be shared privately when appropriate during the intake or
+      referral process. Visitors should not use this website to request, disclose, or circulate
+      another person's residence information.
+    </p>
+  </section>
+
+  <section class="legal-section" id="choices">
+    <h2 data-label="Section 09">Your choices</h2>
+    <p>
+      You may choose not to use a website form and may call New Beginnings instead. You may
+      also contact us to ask a reasonable question about information you previously submitted,
+      or to request a correction or deletion. A request may be limited when information must be
+      retained for a legitimate operational or legal reason, and identity verification may be
+      required before a request is completed.
+    </p>
+  </section>
+
+  <section class="legal-section" id="links">
+    <h2 data-label="Section 10">Other websites</h2>
+    <p>
+      This site may link to government agencies, licensing information, recovery resources,
+      nonprofit records, social services, or other organizations. New Beginnings does not
+      control the privacy or security practices of those websites. Review their policies before
+      providing information to them.
+    </p>
+  </section>
+
+  <section class="legal-section" id="changes">
+    <h2 data-label="Section 11">Changes to this policy</h2>
+    <p>
+      This policy may be updated as the website, organizational practices, or applicable
+      requirements change. The review date at the top of the page identifies the current
+      published version. Material website-practice changes should be reflected here before or
+      when they take effect.
+    </p>
+  </section>
+
+  <section class="legal-section" id="contact">
+    <h2 data-label="Section 12">Contact us</h2>
+    <p>
+      For a question about this website privacy policy, call New Beginnings. Do not include
+      sensitive personal information in a general privacy inquiry.
+    </p>
+    <div class="legal-contact">
+      <p><strong>New Beginnings Transitional Living Foundation</strong></p>
+      <p>Phone: <a href="tel:+14126280403">412-628-0403</a></p>
+    </div>
+  </section>
+</LegalLayout>

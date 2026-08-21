@@ -1,5 +1,63 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro'; import PageHero from '../components/PageHero.astro'; import InquiryForm from '../components/InquiryForm.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import FactRail from '../components/FactRail.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { site } from '../data/site';
 ---
-<MainLayout title="Professional Referrals"><PageHero eyebrow="For professionals" title="A dependable recovery-housing referral partner." intro="Clear communication for treatment providers, case managers, discharge planners, courts, and community organizations." image="/images/referrals.jpg" imageAlt="Two professionals reviewing information together at a table" />
-<section class="section"><div class="container grid-2"><div><p class="eyebrow">Referral partners</p><h2>Start with a general availability conversation.</h2></div><div><p class="lead">New Beginnings provides nonprofit recovery housing for adult men and women in Pittsburgh-area communities.</p><p>Our network includes Pennsylvania DDAP-licensed residences and homes inspected through WestPARR. We work alongside independent treatment and community providers rather than presenting recovery housing as clinical treatment.</p><ul class="rule-list"><li><strong>Call first</strong>Contact us at 412-628-0403 to discuss general fit and availability.</li><li><strong>Protect client information</strong>Do not send treatment records or sensitive client details through the public form.</li><li><strong>Receive current instructions</strong>Required documents and exact location information are provided privately.</li></ul></div></div></section><InquiryForm title="Start a referral conversation" intro="Tell us who you represent and how to reach you. Please do not send client records or sensitive information through this form." /></MainLayout>
+<MainLayout title="Professional Referrals" description="Recovery-housing referral information for treatment providers, case managers, courts, and community partners.">
+  <PageHero variant="editorial" eyebrow="For professionals" title="A clear recovery-housing referral conversation." intro="Information for treatment providers, case managers, discharge planners, courts, and community organizations helping an adult explore recovery housing." image="/images/referrals.jpg" imageAlt="Two professionals reviewing information together at a table" fact={`Discuss general fit and current availability at ${site.phone}.`} />
+
+  <FactRail items={[
+    { icon: 'users-round', label: 'Adult men and women' },
+    { icon: 'map-pin', label: 'Pittsburgh-area communities' },
+    { icon: 'badge-check', label: 'DDAP-licensed residences' },
+    { icon: 'shield-check', label: 'WestPARR inspected' },
+  ]} />
+
+  <section class="section scope">
+    <div class="container scope-grid">
+      <header><p class="eyebrow">A defined role</p><h2>Recovery housing works alongside care.</h2><p class="lead">New Beginnings provides a stable, substance-free shared living environment. It does not replace clinical treatment, emergency shelter, or crisis services.</p></header>
+      <div class="scope-list">
+        <div><span>New Beginnings provides</span><h3>Recovery-focused housing</h3><p>Peer community, shared expectations, daily stability, and connection to the broader recovery network.</p></div>
+        <div><span>Independent providers provide</span><h3>Clinical treatment and care</h3><p>Counseling, medical care, medication management, and other licensed professional services.</p></div>
+        <div><span>Emergency systems provide</span><h3>Crisis and urgent support</h3><p>Call 911 for an emergency or call or text 988 for the Suicide & Crisis Lifeline.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint workflow">
+    <div class="container">
+      <SectionHead eyebrow="Referral workflow" title="Begin with availability, not records." intro="A general conversation comes before the exchange of any detailed information." />
+      <ol class="process">
+        <li><span class="process-num">01</span><div><h3>Contact New Beginnings</h3><p>Call {site.phone} or use the professional inquiry form for a general availability conversation.</p></div></li>
+        <li><span class="process-num">02</span><div><h3>Discuss general fit</h3><p>Share only the minimum information needed to understand what kind of housing is being explored.</p></div></li>
+        <li><span class="process-num">03</span><div><h3>Receive current instructions</h3><p>If the conversation moves forward, required records and exact location information are requested through an appropriate private process.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section information">
+    <div class="container information-grid">
+      <div class="information-title"><p class="eyebrow">Information handling</p><h2>Do not attach or paste client records here.</h2></div>
+      <div class="information-copy"><p class="lead">The public form is designed to establish contact with a referral source, not to receive a clinical or legal record.</p><ul class="rule-list"><li><strong>Appropriate for the first message</strong>Your name, organization, role, contact information, and a general description of the housing inquiry.</li><li><strong>Keep out of the public form</strong>Treatment records, diagnoses, medication lists, criminal-history documents, Social Security numbers, or other sensitive client information.</li><li><strong>Wait for private instructions</strong>New Beginnings will explain what is needed and how to share it if the referral moves forward.</li></ul></div>
+    </div>
+  </section>
+
+  <InquiryForm context="referral" title="Start a professional referral conversation" intro="Tell us who you represent and how to reach you. Please do not send client records or sensitive information through this form." />
+</MainLayout>
+
+<style>
+  .scope-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: var(--gap-columns); }
+  .scope header { display: grid; align-content: start; gap: var(--space-4); }
+  .scope-list { border-top: 1px solid var(--slate-300); }
+  .scope-list > div { padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); }
+  .scope-list span { color: var(--teal-700); font-size: .76rem; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }
+  .scope-list h3 { margin-top: var(--space-2); }
+  .scope-list p { max-width: 44rem; margin-top: var(--space-2); }
+  .information-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--gap-columns); }
+  .information-title { display: grid; align-content: start; gap: var(--space-4); }
+  .information-copy { display: grid; gap: var(--space-5); }
+  @media (max-width: 800px) { .scope-grid, .information-grid { grid-template-columns: 1fr; } }
+</style>

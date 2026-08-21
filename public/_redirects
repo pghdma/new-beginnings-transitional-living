@@ -1,0 +1,8 @@
+/board /about/board/ 301
+/board/* /about/board/:splat 301
+/mens-housing /recovery-housing/men/ 301
+/mens-housing/* /recovery-housing/men/:splat 301
+/womens-housing /recovery-housing/women/ 301
+/womens-housing/* /recovery-housing/women/:splat 301
+/transparency /about/transparency/ 301
+/transparency/* /about/transparency/:splat 301

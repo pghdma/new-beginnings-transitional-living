@@ -1,31 +1,52 @@
 ---
-import { nav, site } from '../data/site';
+import { site } from '../data/site';
 ---
 <footer>
-  <div class="container footer-grid">
+  <div class="container footer-intro">
     <div class="brand">
       <strong>New Beginnings</strong>
       <p>Structured recovery housing for men and women in Pittsburgh.</p>
       <p class="nonprofit">501(c)(3) nonprofit organization<br />EIN {site.ein}</p>
     </div>
+    <div class="contact">
+      <p class="label">Call New Beginnings</p>
+      <a class="phone" href={site.phoneHref}>{site.phone}</a>
+      <p>Exact residence locations are shared privately during the intake process.</p>
+    </div>
+  </div>
+  <div class="container footer-links">
     <div>
-      <h2>Explore</h2>
-      <ul>{nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+      <h2>About</h2>
+      <ul>
+        <li><a href="/about/">About New Beginnings</a></li>
+        <li><a href="/about/board/">Board of Directors</a></li>
+        <li><a href="/about/transparency/">Credentials &amp; Transparency</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Housing</h2>
+      <ul>
+        <li><a href="/recovery-housing/">Recovery Housing</a></li>
+        <li><a href="/recovery-housing/men/">Men’s Recovery Housing</a></li>
+        <li><a href="/recovery-housing/women/">Women’s Recovery Housing</a></li>
+        <li><a href="/admissions/">Admissions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Connect</h2>
+      <ul>
+        <li><a href="/referrals/">Professional Referrals</a></li>
+        <li><a href="/support-us/">Support Our Work</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
     </div>
     <div>
       <h2>Information</h2>
       <ul>
-        <li><a href="/board/">Board</a></li>
-        <li><a href="/transparency/">Transparency</a></li>
         <li><a href="/privacy/">Privacy</a></li>
         <li><a href="/accessibility/">Accessibility</a></li>
         <li><a href="/terms/">Terms</a></li>
       </ul>
-    </div>
-    <div>
-      <h2>Get in touch</h2>
-      <a class="phone" href={site.phoneHref}>{site.phone}</a>
-      <p>Exact residence locations are shared privately during the intake process.</p>
     </div>
   </div>
   <div class="container copyright">
@@ -35,18 +56,28 @@ import { nav, site } from '../data/site';
 </footer>
 <style>
   footer { flex: 0 0 auto; padding-top: var(--space-8); color: var(--white); background: var(--navy-950); }
-  .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: var(--space-7); }
+  .footer-intro { display: grid; padding-bottom: var(--space-7); grid-template-columns: 1.4fr 1fr; gap: var(--space-8); border-bottom: 1px solid rgba(255,255,255,.18); }
+  .footer-links { display: grid; padding-top: var(--space-7); grid-template-columns: repeat(4, 1fr); gap: var(--space-7); }
   .brand strong { font-size: 1.6rem; }
   .brand p { max-width: 24rem; margin-top: 1rem; color: var(--slate-300); }
   .brand .nonprofit { font-size: .9rem; }
+  .contact { justify-self: end; max-width: 21rem; }
+  .contact .label { margin: 0 0 .45rem; color: var(--slate-300); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .contact > p:last-child { color: var(--slate-300); font-size: .92rem; }
   h2 { margin-bottom: 1rem; color: var(--white); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
   ul { margin: 0; padding: 0; list-style: none; }
   li + li { margin-top: .55rem; }
   a { color: var(--white); }
   .phone { display: inline-block; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 750; }
-  .footer-grid > div:last-child p { color: var(--slate-300); font-size: .92rem; }
   .copyright { display: flex; margin-top: var(--space-7); padding-block: var(--space-5); border-top: 1px solid rgba(255,255,255,.18); color: var(--slate-300); font-size: .84rem; justify-content: space-between; gap: var(--space-4); }
   .copyright a { color: var(--slate-300); }
-  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; } .brand { grid-column: 1 / -1; } }
-  @media (max-width: 460px) { .footer-grid { grid-template-columns: 1fr; } .copyright { display: grid; } }
+  @media (max-width: 840px) { .footer-links { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .footer-intro { grid-template-columns: 1fr; gap: var(--space-6); } .contact { justify-self: start; } }
+  @media (max-width: 520px) {
+    footer { padding-top: var(--space-7); }
+    .footer-intro { padding-bottom: var(--space-5); }
+    .footer-links { padding-top: var(--space-5); gap: var(--space-6) var(--space-4); }
+    .footer-links a { font-size: .92rem; }
+    .copyright { display: grid; margin-top: var(--space-6); }
+  }
 </style>

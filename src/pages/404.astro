@@ -2,7 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import PageHero from '../components/PageHero.astro';
 ---
-<MainLayout title="Page Not Found">
+<MainLayout title="Page Not Found" noindex>
   <PageHero eyebrow="404" title="That page was not found." intro="The address may have changed, or the page may no longer exist." plain actions={false} compact />
   <section class="section section--compact"><div class="container narrow"><div class="actions"><a class="button" href="/">Return home</a><a class="button button--outline" href="/contact/">Contact us</a></div></div></section>
 </MainLayout>

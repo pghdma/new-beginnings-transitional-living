@@ -1,0 +1,120 @@
+---
+import { Icon } from 'astro-icon/components';
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { publishedBoardMembers, type LeadershipProfile } from '../../../data/leadership';
+
+export function getStaticPaths() {
+  return publishedBoardMembers.map((person) => ({
+    params: { slug: person.slug },
+    props: { person },
+  }));
+}
+
+interface Props {
+  person: LeadershipProfile;
+}
+
+const { person } = Astro.props;
+---
+
+<MainLayout
+  title={`${person.name}, ${person.role}`}
+  description={person.summary ?? `${person.name} serves on the Board of Directors of New Beginnings Transitional Living Foundation.`}
+>
+  <section class="profile-hero">
+    <div class="container profile-hero__inner">
+      <a class="back-link" href="/about/board/">
+        <Icon name="lucide:arrow-left" aria-hidden="true" />
+        Board of Directors
+      </a>
+      <p class="eyebrow">Volunteer leadership</p>
+      <h1>{person.name}</h1>
+      <p class="role">{person.role}</p>
+      {person.summary && <p class="lead">{person.summary}</p>}
+    </div>
+  </section>
+
+  <section class="section profile-body">
+    <div class="container profile-grid">
+      <div class="profile-label">
+        <p class="eyebrow">Board service</p>
+        <h2>Stewardship of the mission.</h2>
+      </div>
+      <div class="profile-content">
+        <p class="lead">
+          {person.name} serves on the Board of Directors of New Beginnings Transitional
+          Living Foundation.
+        </p>
+        {person.biography?.map((paragraph) => <p>{paragraph}</p>)}
+
+        {person.credentials && person.credentials.length > 0 && (
+          <section class="profile-detail" aria-labelledby="credentials-heading">
+            <h3 id="credentials-heading">Credentials</h3>
+            <ul>
+              {person.credentials.map((credential) => <li>{credential}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {person.education && person.education.length > 0 && (
+          <section class="profile-detail" aria-labelledby="education-heading">
+            <h3 id="education-heading">Education</h3>
+            <ul>
+              {person.education.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {person.experience && person.experience.length > 0 && (
+          <section class="profile-detail" aria-labelledby="experience-heading">
+            <h3 id="experience-heading">Experience</h3>
+            <ul>
+              {person.experience.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-footer">
+    <div class="container profile-footer__inner">
+      <div>
+        <p class="eyebrow">Organization information</p>
+        <h2>Review New Beginnings’ public credentials.</h2>
+      </div>
+      <a class="button button--light" href="/about/transparency/">View transparency information</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .profile-hero { padding-block: clamp(var(--space-8), 9vw, 8rem); background: var(--sky-50); border-bottom: 1px solid var(--slate-200); }
+  .profile-hero__inner { display: grid; gap: var(--space-4); }
+  .profile-hero h1 { max-width: 14ch; }
+  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-6); align-items: center; gap: var(--space-2); font-weight: 700; text-decoration: none; }
+  .back-link :global(svg) { width: 1rem; }
+  .role { color: var(--teal-700); font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 700; }
+  .profile-hero .lead { margin-top: var(--space-3); }
+
+  .profile-grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .profile-label { display: grid; gap: var(--space-4); }
+  .profile-content { max-width: var(--measure); }
+  .profile-content > p + p { margin-top: var(--space-5); }
+  .profile-detail { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); }
+  .profile-detail h3 { margin-bottom: var(--space-4); }
+  .profile-detail ul { display: grid; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+  .profile-detail li { position: relative; padding-left: var(--space-5); }
+  .profile-detail li::before { position: absolute; top: .72em; left: 0; width: .5rem; height: 2px; background: var(--teal-700); content: ''; }
+
+  .profile-footer { padding-block: var(--space-8); color: var(--white); background: var(--navy-950); }
+  .profile-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-7); }
+  .profile-footer h2 { max-width: 18ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(2rem, 3.5vw, 3rem); }
+  .profile-footer .eyebrow { color: #9ed7d2; }
+
+  @media (max-width: 760px) {
+    .profile-grid { grid-template-columns: 1fr; }
+    .profile-footer__inner { display: grid; }
+    .profile-footer .button { justify-self: start; }
+  }
+</style>

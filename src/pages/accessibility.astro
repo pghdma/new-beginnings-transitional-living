@@ -1,4 +1,158 @@
 ---
 import LegalLayout from '../layouts/LegalLayout.astro';
+
+const sections = [
+  { id: 'commitment', title: 'Our commitment' },
+  { id: 'approach', title: 'Our accessibility approach' },
+  { id: 'features', title: 'Features included on the site' },
+  { id: 'compatibility', title: 'Browsers and assistive technology' },
+  { id: 'limitations', title: 'Limitations and third-party content' },
+  { id: 'alternative', title: 'Information in another format' },
+  { id: 'feedback', title: 'Report an accessibility barrier' },
+  { id: 'ongoing', title: 'Ongoing improvement' },
+];
 ---
-<LegalLayout title="Accessibility Statement" intro="New Beginnings is committed to providing an accessible website for people of all abilities."><h2>Our commitment</h2><p>We aim to follow the Web Content Accessibility Guidelines, including semantic structure, keyboard access, visible focus indicators, readable contrast, alternative text, and support for reduced motion.</p><h2>Need assistance?</h2><p>If you have difficulty using this website or need information in another format, call 412-628-0403. Please describe the page or feature involved and the type of assistance you need.</p><h2>Ongoing improvement</h2><p>Accessibility is an ongoing responsibility. We review the website as content and technology change and welcome specific feedback that helps us improve access.</p></LegalLayout>
+
+<LegalLayout
+  title="Accessibility Statement"
+  intro="Our commitment to making New Beginnings website information usable by people with disabilities and available through another channel when needed."
+  description="Accessibility information and contact options for the New Beginnings Transitional Living Foundation website."
+  updated="August 21, 2026"
+  sections={sections}
+>
+  <p class="legal-intro">
+    New Beginnings Transitional Living Foundation wants people seeking recovery housing,
+    families, referral partners, donors, and community members to be able to understand and use
+    this website. Accessibility is part of providing clear, respectful public information.
+  </p>
+  <p class="legal-entity">
+    New Beginnings Transitional Living Foundation ("New Beginnings," "we," "us," or "our")
+  </p>
+
+  <section class="legal-section" id="commitment">
+    <h2 data-label="Section 01">Our commitment</h2>
+    <p>
+      We are committed to improving access to website content and core tasks for people with
+      visual, auditory, motor, cognitive, speech, and other disabilities. We also recognize that
+      no single website experience works equally well for every person or every assistive
+      technology.
+    </p>
+    <p>
+      If the website creates a barrier, you do not have to rely on it. Call New Beginnings at
+      <a href="tel:+14126280403">412-628-0403</a> and ask for the information or assistance you
+      need.
+    </p>
+  </section>
+
+  <section class="legal-section" id="approach">
+    <h2 data-label="Section 02">Our accessibility approach</h2>
+    <p>
+      The Web Content Accessibility Guidelines published by the World Wide Web Consortium are
+      used as a practical reference when designing and reviewing the site. They address common
+      needs such as perceivable content, keyboard operation, understandable interactions, and
+      compatibility with assistive technology.
+    </p>
+    <p>
+      This statement describes an ongoing effort, not a certification that every page, device,
+      browser, document, or third-party resource meets a particular conformance level at all
+      times.
+    </p>
+  </section>
+
+  <section class="legal-section" id="features">
+    <h2 data-label="Section 03">Features included on the site</h2>
+    <p>The website is designed to support accessibility through features that include:</p>
+    <ul>
+      <li>Semantic page landmarks, headings, lists, links, labels, and buttons</li>
+      <li>A skip link that allows keyboard users to move directly to the main content</li>
+      <li>Visible keyboard focus indicators and keyboard-operable navigation</li>
+      <li>Readable type, responsive layouts, and color contrast intended to support legibility</li>
+      <li>Text alternatives for meaningful images and empty alternatives for decorative images</li>
+      <li>Form labels, instructions, and status messages that do not rely on color alone</li>
+      <li>Support for a visitor's reduced-motion preference</li>
+      <li>Page titles, descriptive links, and a consistent navigation structure</li>
+    </ul>
+    <p>
+      Residence addresses are intentionally not published for resident privacy. This is a
+      content-safety decision, not an accessibility restriction. Call us for appropriate
+      location information during the intake or referral process.
+    </p>
+  </section>
+
+  <section class="legal-section" id="compatibility">
+    <h2 data-label="Section 04">Browsers and assistive technology</h2>
+    <p>
+      The site is intended to work with current versions of widely used browsers and common
+      assistive technologies. Results can vary based on browser version, operating system,
+      screen size, personal settings, extensions, and the assistive technology being used.
+    </p>
+    <p>
+      Keeping a browser and assistive technology current can improve compatibility. Increasing
+      browser zoom, using built-in text-size controls, enabling high-contrast settings, or
+      reducing motion may also make the site easier to use.
+    </p>
+  </section>
+
+  <section class="legal-section" id="limitations">
+    <h2 data-label="Section 05">Limitations and third-party content</h2>
+    <p>
+      Some links may lead to government agencies, nonprofit records, licensing resources,
+      crisis services, or other websites that New Beginnings does not control. Accessibility
+      on those sites is the responsibility of their respective operators.
+    </p>
+    <p>
+      Older documents, files supplied by another organization, or newly added content may need
+      additional remediation. If you encounter content that is difficult to read, navigate, or
+      understand, please tell us rather than assuming the information is unavailable.
+    </p>
+  </section>
+
+  <section class="legal-section" id="alternative">
+    <h2 data-label="Section 06">Information in another format</h2>
+    <p>
+      If you cannot access website information, call
+      <a href="tel:+14126280403">412-628-0403</a>. Tell us which page, document, or subject you
+      need and what format or communication method would be helpful. We will work with you to
+      provide the same core information through a reasonable alternative when possible.
+    </p>
+    <aside class="legal-callout" role="note">
+      <p class="legal-callout-label">Housing information</p>
+      <div class="legal-callout-body">
+        <p>
+          You may complete the first step toward housing by telephone. The website is not the
+          only way to ask about availability, admissions, or a professional referral.
+        </p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="legal-section" id="feedback">
+    <h2 data-label="Section 07">Report an accessibility barrier</h2>
+    <p>When reporting a problem, it is helpful to tell us:</p>
+    <ul>
+      <li>The page address or name of the page where the problem occurred</li>
+      <li>The task you were trying to complete</li>
+      <li>The browser, device, or assistive technology you were using, if known</li>
+      <li>The best way to contact you about the issue</li>
+    </ul>
+    <p>
+      Do not include medical, treatment, criminal-history, Social Security, financial, or other
+      sensitive details in an accessibility report. Call
+      <a href="tel:+14126280403">412-628-0403</a> to report the barrier or request assistance.
+    </p>
+  </section>
+
+  <section class="legal-section" id="ongoing">
+    <h2 data-label="Section 08">Ongoing improvement</h2>
+    <p>
+      Accessibility requires continued attention as content and technology change. New
+      Beginnings intends to review core navigation, forms, contrast, keyboard access, responsive
+      behavior, image descriptions, and new documents as the site evolves. Specific feedback
+      helps us identify practical improvements and prioritize barriers that affect real visitors.
+    </p>
+    <div class="legal-contact">
+      <p><strong>New Beginnings Transitional Living Foundation</strong></p>
+      <p>Accessibility assistance: <a href="tel:+14126280403">412-628-0403</a></p>
+    </div>
+  </section>
+</LegalLayout>
