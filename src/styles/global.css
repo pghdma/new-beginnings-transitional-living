@@ -53,7 +53,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 7rem; background: var(--navy-950); }
 body { margin: 0; color: var(--slate-700); background: var(--canvas); font-family: var(--font-body); font-size: 1.075rem; line-height: 1.65; overflow-x: clip; }
 img { display: block; max-width: 100%; }
-a { color: var(--blue-700); text-underline-offset: .18em; }
+a { color: var(--blue-700); text-decoration: none; text-underline-offset: .18em; }
 a:hover { color: var(--teal-800); }
 button, input, select, textarea { font: inherit; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
@@ -90,7 +90,7 @@ ul, ol { margin-block: 0; }
 .button--ghost { min-height: auto; padding: .4rem 0; border: 0; background: transparent; color: var(--navy-950); }
 .button--ghost:hover { background: transparent; color: var(--teal-800); }
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
-.text-link { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 700; }
+.text-link { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 700; text-decoration: none; }
 .text-link::after { content: '\2192'; transition: transform .15s ease; }
 .text-link:hover::after { transform: translateX(.2rem); }
 .grid-2 { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: var(--gap-columns); align-items: start; }
@@ -101,7 +101,7 @@ ul, ol { margin-block: 0; }
 .editorial-title h2 { max-width: 15ch; }
 .editorial-copy { display: grid; gap: var(--space-5); max-width: var(--measure); }
 .editorial-copy p + p { margin-top: 0; }
-.card { position: relative; display: flex; height: 100%; padding: var(--space-6); border: 1px solid var(--slate-200); border-top: 3px solid var(--blue-700); background: var(--paper); box-shadow: var(--shadow-raised); flex-direction: column; }
+.card { position: relative; display: flex; height: 100%; padding: var(--space-6); border: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow-raised); flex-direction: column; }
 .card > * + * { margin-top: var(--space-4); }
 .card .text-link { margin-top: auto; padding-top: var(--space-5); }
 .rule-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--slate-300); }
