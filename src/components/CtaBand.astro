@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { site } from '../data/site';
 interface Props {
   eyebrow?: string;
@@ -11,7 +12,7 @@ interface Props {
 const {
   eyebrow = 'Take the next step',
   title = 'Looking for recovery housing?',
-  text = 'Start with a private, general conversation. We will explain the current process and what happens next.',
+  text = 'Start with a private, general conversation. Staff can explain the current process and what may happen next.',
   href = '/admissions/',
   label = 'Admissions information',
   phone = true,
@@ -19,19 +20,27 @@ const {
 ---
 <section class="cta-band">
   <div class="container cta-band__inner">
-    <div>
+    <div class="cta-band__copy">
       <p class="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
       <p>{text}</p>
     </div>
     <div class="actions">
-      <a class="button button--light" href={href}>{label}</a>
-      {phone && <a class="phone" href={site.phoneHref}>Call {site.phone}</a>}
+      <a class="button button--light" href={href}>{label}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      {phone && <a class="button button--phone" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
     </div>
   </div>
 </section>
 <style>
+  .cta-band { position: relative; overflow: hidden; }
   .cta-band .eyebrow { margin-bottom: var(--space-3); color: #9ed7d2; }
-  .phone { color: var(--white); font-weight: 750; }
-  @media (max-width: 520px) { .actions { align-items: flex-start; flex-direction: column; } }
+  .cta-band__copy, .actions { position: relative; z-index: 1; }
+  .button { gap: .65rem; }
+  .button :global(svg) { width: 1.05rem; height: 1.05rem; }
+  .button--phone { border-color: rgba(255,255,255,.7); color: var(--white); background: transparent; }
+  .button--phone:hover { color: var(--navy-950); background: var(--white); }
+  @media (max-width: 520px) {
+    .actions { display: grid; align-items: stretch; }
+    .button { width: 100%; }
+  }
 </style>

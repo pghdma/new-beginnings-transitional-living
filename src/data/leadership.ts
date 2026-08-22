@@ -31,7 +31,7 @@ export const organizationalLeadership: LeadershipProfile[] = [
     biography: [
       'Susan Rua is a professional counselor who has specialized in substance use and recovery since 1999. Her work has included counseling, nursing, and more than a decade owning and directing sober-living homes.',
       'That combination of clinical knowledge and day-to-day housing experience helped shape New Beginnings: stable homes, clear expectations, peer connection, and respect for each resident as an adult building a life in recovery.',
-      'New Beginnings is a separate nonprofit recovery-housing organization. Residents remain connected to independent treatment providers and community recovery resources as appropriate to their individual needs.',
+      'New Beginnings is a separate nonprofit recovery-housing organization. Residents can remain connected to independent treatment providers and community recovery resources as appropriate to their individual needs.',
     ],
     credentials: ['CADC', 'MSPC', 'LPC'],
     education: [
@@ -46,8 +46,8 @@ export const organizationalLeadership: LeadershipProfile[] = [
   },
 ];
 
-// Board records belong here only after the organization confirms each person's
-// current service, title, public biography, and permission to publish.
+// The published roster follows the current direction provided for this site.
+// Biographical details belong here only after they are cleared for public use.
 export const boardMembers: LeadershipProfile[] = [
   {
     slug: 'theresa-rem-canofari',
@@ -65,8 +65,8 @@ export const publishedOrganizationalLeadership = organizationalLeadership.filter
 
 export const publishedBoardMembers = boardMembers.filter((person) => person.published);
 
-// The organization confirmed Susan Rua and Theresa Rem-Canofari as current board
-// members. A former member identified by the client is intentionally excluded.
+// Susan Rua and Theresa Rem-Canofari are the current public roster supplied for
+// this site. A former member identified by the client is intentionally excluded.
 export const currentBoardMembers = [
   ...publishedOrganizationalLeadership,
   ...publishedBoardMembers,

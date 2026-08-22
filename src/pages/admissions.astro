@@ -1,78 +1,196 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/InquiryForm.astro';
-import SectionHead from '../components/SectionHead.astro';
 import { site } from '../data/site';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Make a general inquiry',
+    copy: 'Call New Beginnings or use the short form below. You do not need to tell your whole story in the first message.',
+  },
+  {
+    number: '02',
+    title: 'Talk about fit and availability',
+    copy: 'Staff can ask a few general questions, hear what kind of housing you are looking for, and discuss current availability.',
+  },
+  {
+    number: '03',
+    title: 'Receive private next steps',
+    copy: 'If a New Beginnings residence may be appropriate, staff can explain the next part of the process and provide location details privately when appropriate.',
+  },
+];
 ---
+
 <MainLayout title="Admissions" description="Learn how to begin a private recovery-housing inquiry with New Beginnings in Pittsburgh.">
-  <PageHero variant="editorial" eyebrow="Admissions" title="The first step is a conversation." intro="You do not need to prepare your whole history or share sensitive details online. Start with a general inquiry and we will explain the current process." image="/images/admissions.jpg" imageAlt="A notebook and cup on a clean table in a quiet room" fact={`Prefer to begin by phone? Call ${site.phone}.`} />
+  <PageHero
+    variant="image"
+    eyebrow="Admissions"
+    title="Begin with a private conversation."
+    intro="You do not need to prepare your whole history or share sensitive information online. Start with a general inquiry so staff can explain the current process."
+    image="/images/front-door.webp"
+    imageAlt="A teal front door at the entrance to a home"
+    fact="An inquiry begins a conversation. It does not guarantee admission, availability, or placement in a particular residence."
+  />
 
-  <section class="section process-section">
-    <div class="container">
-      <SectionHead eyebrow="How to begin" title="A clear, private starting point." intro="The exact process can vary with current circumstances, but every inquiry begins with the same three stages." />
-      <ol class="process">
-        <li><span class="process-num">01</span><div><h3>Reach out</h3><p>Call {site.phone} or send the short housing inquiry form below.</p></div></li>
-        <li><span class="process-num">02</span><div><h3>Have a general conversation</h3><p>We will learn what you are looking for and discuss general fit and current availability.</p></div></li>
-        <li><span class="process-num">03</span><div><h3>Receive private next steps</h3><p>If a New Beginnings residence may be appropriate, required information and exact location details are shared privately.</p></div></li>
-      </ol>
-    </div>
-  </section>
+  <section class="admissions-start" aria-labelledby="start-title">
+    <div class="container start-layout">
+      <aside class="phone-first">
+        <p class="eyebrow">The simplest first step</p>
+        <h2 id="start-title">Call New Beginnings.</h2>
+        <a class="phone-number" href={site.phoneHref}>
+          <Icon name="lucide:phone" aria-hidden="true" />
+          <span>{site.phone}</span>
+        </a>
+        <p>Use the number above to begin a general housing conversation. Exact residence locations and sensitive details are handled privately.</p>
+      </aside>
 
-  <section class="section section--tint prepare">
-    <div class="container prepare-grid">
-      <article>
-        <p class="eyebrow">Helpful for the first contact</p>
-        <h2>Keep it simple.</h2>
-        <ul>
-          <li>Your name and best way to reach you</li>
-          <li>Whether you are asking for yourself, a loved one, or a client</li>
-          <li>Whether you are looking for men’s or women’s housing</li>
-          <li>Any general timing question you want to discuss</li>
-        </ul>
-      </article>
-      <article class="sensitive">
-        <p class="eyebrow">Do not submit online</p>
-        <h2>Protect private information.</h2>
-        <ul>
-          <li>Diagnoses, medication details, or treatment records</li>
-          <li>Criminal-history or court documents</li>
-          <li>Social Security numbers or financial-account information</li>
-          <li>Any other sensitive personal record</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="section questions">
-    <div class="container questions-grid">
-      <header><p class="eyebrow">Before you reach out</p><h2>What the website can and cannot tell you.</h2></header>
-      <div class="question-list">
-        <details open><summary>Does sending the form guarantee admission?</summary><p>No. A website inquiry begins a conversation. It does not guarantee admission, availability, or placement in a particular residence.</p></details>
-        <details><summary>Will I receive a house address online?</summary><p>No. For resident privacy and safety, exact locations are shared privately only when appropriate during the intake process.</p></details>
-        <details><summary>Can a family member or professional contact you?</summary><p>Yes. Families and support people may begin with a general inquiry. Treatment providers, case managers, and other professionals can also use the dedicated <a href="/referrals/">referral page</a>.</p></details>
-        <details><summary>Is this form monitored for emergencies?</summary><p>No. Call 911 for a medical emergency. Call or text 988 for the Suicide & Crisis Lifeline.</p></details>
+      <div class="start-process">
+        <p class="eyebrow">What happens next</p>
+        <ol>
+          {steps.map((step) => (
+            <li>
+              <span class="step-number">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.copy}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   </section>
 
-  <InquiryForm context="housing" title="Begin a housing inquiry" intro="Share only enough information for us to contact you. We will discuss anything more detailed through an appropriate private process." />
+  <section class="section preparation" aria-labelledby="prepare-title">
+    <div class="container preparation-layout">
+      <header class="preparation-intro">
+        <p class="eyebrow">Prepare for first contact</p>
+        <h2 id="prepare-title">A few basics are enough.</h2>
+        <p class="lead">The first conversation is for orientation—not for exchanging a complete personal, medical, or legal record.</p>
+      </header>
+
+      <div class="preparation-details">
+        <div class="appropriate-details">
+          <h3>Helpful to share</h3>
+          <ul>
+            <li>Your name and the best way to reach you</li>
+            <li>Whether you are asking for yourself, a loved one, or a client</li>
+            <li>Whether you are looking for men’s or women’s housing</li>
+            <li>Any general timing question you want to discuss</li>
+          </ul>
+        </div>
+        <aside class="privacy-details">
+          <Icon name="lucide:lock-keyhole" aria-hidden="true" />
+          <div>
+            <h3>Keep sensitive records out of the public form.</h3>
+            <p>Do not submit diagnoses, medication information, treatment or court records, Social Security numbers, financial-account information, or other private documents.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <InquiryForm
+    context="housing"
+    title="Send a housing inquiry"
+    intro="Share only enough information for us to contact you. We will discuss anything more detailed through an appropriate private process."
+  >
+    <div slot="aside" class="inquiry-aside">
+      <div>
+        <h3>Prefer the phone?</h3>
+        <p>Calling is the most direct way to ask about current availability.</p>
+      </div>
+      <div>
+        <h3>Residence privacy</h3>
+        <p>Street addresses are not published on this website. Exact locations are shared privately when appropriate.</p>
+      </div>
+    </div>
+  </InquiryForm>
+
+  <section class="section admissions-faq" aria-labelledby="faq-title">
+    <div class="container faq-layout">
+      <header>
+        <p class="eyebrow">Common questions</p>
+        <h2 id="faq-title">Before you reach out.</h2>
+        <p>If you have a question not covered here, begin with a call or a general message.</p>
+      </header>
+      <div class="faq-list">
+        <details open>
+          <summary>Does an inquiry guarantee admission?</summary>
+          <p>No. An inquiry starts a conversation. It does not guarantee admission, availability, or placement in a particular residence.</p>
+        </details>
+        <details>
+          <summary>Will I receive a house address online?</summary>
+          <p>No. For resident privacy and safety, exact locations are shared privately only when appropriate during the intake process.</p>
+        </details>
+        <details>
+          <summary>Can a family member or professional contact you?</summary>
+          <p>Yes. Families and support people may begin with a general inquiry. Treatment providers, case managers, and other professionals can also use the dedicated <a href="/referrals/">professional referral page</a>.</p>
+        </details>
+        <details>
+          <summary>Is this website monitored for emergencies?</summary>
+          <p>No. Call 911 for a medical emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 </MainLayout>
 
 <style>
-  .prepare-grid { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--slate-300); }
-  .prepare article { padding: var(--space-6) var(--space-7) var(--space-6) 0; }
-  .prepare article + article { padding-right: 0; padding-left: var(--space-7); border-left: 1px solid var(--slate-300); }
-  .prepare article h2 { margin-top: var(--space-3); font-size: clamp(1.9rem, 3vw, 2.7rem); }
-  .prepare ul { display: grid; margin-top: var(--space-5); padding: 0; list-style: none; gap: var(--space-3); }
-  .prepare li { position: relative; padding-left: var(--space-5); }
-  .prepare li::before { position: absolute; left: 0; color: var(--teal-700); content: '✓'; font-weight: 750; }
-  .prepare .sensitive li::before { content: '—'; }
-  .questions-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: var(--gap-columns); }
-  .questions header { display: grid; align-content: start; gap: var(--space-4); }
-  .question-list { border-top: 1px solid var(--slate-300); }
+  .admissions-start { padding-block: var(--section-standard); background: var(--paper); }
+  .start-layout { display: grid; grid-template-columns: minmax(18rem, .74fr) minmax(0, 1.26fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .phone-first { padding: clamp(2.25rem, 5vw, 3.5rem); color: var(--white); background: var(--navy-950); box-shadow: var(--shadow-raised); }
+  .phone-first .eyebrow { color: #a6ddd8; }
+  .phone-first h2 { max-width: 10ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(2rem, 3.6vw, 3.15rem); }
+  .phone-first > p:last-child { max-width: 29rem; margin-top: var(--space-6); color: var(--sky-100); }
+  .phone-number { display: inline-flex; margin-top: var(--space-6); align-items: center; gap: var(--space-3); color: var(--white); font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 600; line-height: 1.15; }
+  .phone-number:hover { color: #b9e5e1; }
+  .phone-number :global(svg) { width: 1.55rem; height: 1.55rem; color: #9ed7d2; stroke-width: 1.7; }
+  .start-process > .eyebrow { margin-bottom: var(--space-4); }
+  .start-process ol { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .start-process li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
+  .step-number { padding-top: .2rem; color: var(--teal-700); font-size: .86rem; font-weight: 650; letter-spacing: .08em; }
+  .start-process h3 { font-size: 1.3rem; }
+  .start-process p { max-width: 42rem; margin-top: var(--space-2); color: var(--slate-600); line-height: 1.55; }
+
+  .preparation { background: var(--sky-50); }
+  .preparation-layout { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .preparation-intro { display: grid; gap: var(--space-4); }
+  .preparation-intro h2 { max-width: 11ch; }
+  .preparation-details { display: grid; gap: var(--space-6); }
+  .appropriate-details { padding-block: var(--space-2) var(--space-6); border-bottom: 1px solid var(--slate-300); }
+  .appropriate-details ul { display: grid; margin-top: var(--space-5); padding: 0; gap: var(--space-3); list-style: none; }
+  .appropriate-details li { position: relative; padding-left: 1.85rem; }
+  .appropriate-details li::before { position: absolute; top: .05rem; left: 0; color: var(--teal-700); content: '✓'; font-weight: 650; }
+  .privacy-details { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); }
+  .privacy-details :global(svg) { width: 1.9rem; height: 1.9rem; color: var(--teal-700); stroke-width: 1.55; }
+  .privacy-details h3 { max-width: 25rem; }
+  .privacy-details p { max-width: 42rem; margin-top: var(--space-3); color: var(--slate-600); }
+
+  .admissions-faq { background: var(--paper); }
+  .faq-layout { display: grid; grid-template-columns: minmax(0, .68fr) minmax(0, 1.32fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .faq-layout > header { display: grid; gap: var(--space-4); }
+  .faq-layout > header h2 { max-width: 10ch; }
+  .faq-layout > header > p:last-child { max-width: 28rem; color: var(--slate-600); }
+  .faq-list { border-top: 1px solid var(--slate-300); }
   details { padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); }
-  summary { color: var(--navy-900); cursor: pointer; font-size: 1.15rem; font-weight: 700; }
-  details p { max-width: var(--measure); margin-top: var(--space-3); }
-  @media (max-width: 760px) { .prepare-grid, .questions-grid { grid-template-columns: 1fr; } .prepare article, .prepare article + article { padding: var(--space-5) 0; border-left: 0; } .prepare article + article { border-top: 1px solid var(--slate-300); } }
+  summary { color: var(--navy-900); cursor: pointer; font-size: 1.15rem; font-weight: 600; line-height: 1.35; }
+  details p { max-width: 46rem; margin-top: var(--space-3); color: var(--slate-600); }
+
+  @media (max-width: 800px) {
+    .start-layout,
+    .preparation-layout,
+    .faq-layout { grid-template-columns: 1fr; gap: var(--space-7); }
+    .phone-first { max-width: 38rem; }
+  }
+
+  @media (max-width: 520px) {
+    .phone-first { padding: var(--space-6) var(--space-5); }
+    .phone-number { font-size: 1.55rem; }
+    .start-process li { grid-template-columns: 2.35rem minmax(0, 1fr); gap: var(--space-3); }
+    .preparation-details { gap: var(--space-5); }
+  }
 </style>

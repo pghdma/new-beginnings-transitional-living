@@ -1,15 +1,158 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/InquiryForm.astro';
----
-<MainLayout title="Contact" description="Contact New Beginnings about recovery housing, professional referrals, partnerships, or the organization.">
-  <PageHero variant="compact" eyebrow="Contact New Beginnings" title="Reach the right conversation." intro="Housing, referrals, organizational questions, and community support can all begin here." fact="This website is not monitored for emergencies or crisis support." />
+import { site } from '../data/site';
 
-  <InquiryForm context="contact" title="Send a general inquiry" intro="Choose the reason for your message and tell us how to reach you. Keep medical, treatment, legal, and other sensitive details out of the public form.">
+const routes = [
+  {
+    label: 'Housing availability',
+    copy: 'For yourself, a loved one, or someone you support.',
+    href: '/admissions/',
+    action: 'Review admissions',
+  },
+  {
+    label: 'Professional referral',
+    copy: 'For providers, case managers, discharge planners, courts, and community partners.',
+    href: '/referrals/',
+    action: 'Referral information',
+  },
+  {
+    label: 'Support or partnership',
+    copy: 'For contributions, practical support, and community partnerships.',
+    href: '/support-us/',
+    action: 'Ways to support',
+  },
+  {
+    label: 'Organization questions',
+    copy: 'For governance, credentials, licensing, or public-record questions.',
+    href: '/about/transparency/',
+    action: 'Review public information',
+  },
+];
+---
+
+<MainLayout title="Contact" description="Contact New Beginnings about recovery housing, professional referrals, partnerships, or the organization.">
+  <PageHero
+    variant="image"
+    eyebrow="Contact New Beginnings"
+    title="Call or send a general message."
+    intro="Housing questions, professional referrals, community support, and organizational questions can all begin here."
+    image="/images/front-door.webp"
+    imageAlt="A teal front door at the entrance to a home"
+    fact="This website and phone line are not emergency or crisis services."
+  />
+
+  <section class="section contact-directory" aria-labelledby="contact-start-title">
+    <div class="container directory-layout">
+      <aside class="phone-lead">
+        <p class="eyebrow">Call New Beginnings</p>
+        <h2 id="contact-start-title">The clearest place to start.</h2>
+        <a href={site.phoneHref}>
+          <Icon name="lucide:phone" aria-hidden="true" />
+          <span>{site.phone}</span>
+        </a>
+        <p>Use this number for a general conversation. Keep medical, legal, treatment, and other sensitive details for an appropriate private process.</p>
+      </aside>
+
+      <div class="routing-list">
+        <p class="eyebrow">Choose the right route</p>
+        <ul>
+          {routes.map((route) => (
+            <li>
+              <div><h3>{route.label}</h3><p>{route.copy}</p></div>
+              <a href={route.href}>{route.action}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-area" aria-labelledby="service-area-title">
+    <figure>
+      <img src="/images/pittsburgh.jpg" alt="The Pittsburgh skyline viewed across the rivers" width="1880" height="1253" loading="lazy" />
+    </figure>
+    <div class="service-area-copy">
+      <p class="eyebrow">Service area</p>
+      <h2 id="service-area-title">Pittsburgh and surrounding Allegheny County communities.</h2>
+      <p>Neighborhood-level information helps prospective residents and referral partners understand the general service area without publishing someone’s home address.</p>
+      <dl>
+        <div>
+          <dt><Icon name="lucide:map-pin" aria-hidden="true" />Examples in public records</dt>
+          <dd>{site.neighborhoods.join(' · ')}. Additional homes serve other Pittsburgh-area communities.</dd>
+        </div>
+        <div>
+          <dt><Icon name="lucide:lock-keyhole" aria-hidden="true" />Residence privacy</dt>
+          <dd>Exact locations are shared privately when appropriate during the intake process.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <InquiryForm
+    context="contact"
+    title="Send a general inquiry"
+    intro="Choose the reason for your message and tell us how to reach you. Keep medical, treatment, legal, and other sensitive details out of the public form."
+  >
     <div slot="aside" class="inquiry-aside">
-      <div><h3>Residence privacy</h3><p>We do not publish recovery-house street addresses. Exact locations are shared privately when appropriate during intake.</p></div>
-      <div><h3>Urgent help</h3><p>Call 911 for a medical emergency. Call or text 988 for the Suicide & Crisis Lifeline.</p></div>
+      <div>
+        <h3>Residence privacy</h3>
+        <p>Recovery-house street addresses are not published. Exact locations are shared privately when appropriate.</p>
+      </div>
+      <div>
+        <h3>Urgent help</h3>
+        <p>Call 911 for a medical emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p>
+      </div>
     </div>
   </InquiryForm>
 </MainLayout>
+
+<style>
+  .contact-directory { background: var(--paper); }
+  .directory-layout { display: grid; grid-template-columns: minmax(18rem, .74fr) minmax(0, 1.26fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .phone-lead { padding: clamp(2.3rem, 5vw, 3.75rem); color: var(--white); background: var(--teal-800); box-shadow: var(--shadow-raised); }
+  .phone-lead .eyebrow { color: #b9e5e1; }
+  .phone-lead h2 { max-width: 10ch; margin-top: var(--space-4); color: var(--white); }
+  .phone-lead > a { display: inline-flex; margin-top: var(--space-6); align-items: center; gap: var(--space-3); color: var(--white); font-size: clamp(1.55rem, 3vw, 2.2rem); font-weight: 600; line-height: 1.1; }
+  .phone-lead > a:hover { color: #d7eeeb; }
+  .phone-lead > a :global(svg) { width: 1.55rem; height: 1.55rem; stroke-width: 1.65; }
+  .phone-lead > p:last-child { max-width: 31rem; margin-top: var(--space-6); color: #e5f1f0; }
+  .routing-list > .eyebrow { margin-bottom: var(--space-4); }
+  .routing-list ul { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .routing-list li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-5); align-items: center; }
+  .routing-list h3 { font-size: 1.25rem; }
+  .routing-list p { max-width: 34rem; margin-top: var(--space-2); color: var(--slate-600); line-height: 1.5; }
+  .routing-list a { display: inline-flex; align-items: center; gap: .55rem; font-weight: 650; white-space: nowrap; }
+  .routing-list a :global(svg) { width: 1rem; height: 1rem; }
+
+  .service-area { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: stretch; background: var(--sky-50); }
+  .service-area figure { min-height: 37rem; margin: 0; overflow: hidden; }
+  .service-area figure img { width: 100%; height: 100%; object-fit: cover; object-position: 47% center; filter: saturate(.82) contrast(.98); }
+  .service-area-copy { display: flex; max-width: 43rem; padding: var(--section-standard) clamp(2.5rem, 6vw, 6rem); flex-direction: column; justify-content: center; }
+  .service-area-copy h2 { max-width: 13ch; margin-top: var(--space-4); font-size: clamp(2rem, 3.6vw, 3.25rem); }
+  .service-area-copy > p:not(.eyebrow) { max-width: 36rem; margin-top: var(--space-5); }
+  .service-area-copy dl { margin: var(--space-7) 0 0; border-top: 1px solid var(--slate-300); }
+  .service-area-copy dl > div { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); }
+  .service-area-copy dt { display: flex; align-items: center; gap: var(--space-2); color: var(--navy-900); font-size: .82rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+  .service-area-copy dt :global(svg) { width: 1.1rem; height: 1.1rem; color: var(--teal-700); }
+  .service-area-copy dd { margin: var(--space-2) 0 0; color: var(--slate-700); }
+
+  @media (max-width: 820px) {
+    .directory-layout,
+    .service-area { grid-template-columns: 1fr; }
+    .directory-layout { gap: var(--space-7); }
+    .phone-lead { max-width: 39rem; }
+    .service-area figure { height: clamp(20rem, 62vw, 29rem); min-height: 0; }
+    .service-area-copy { max-width: none; padding: var(--section-standard) var(--gutter); }
+  }
+
+  @media (max-width: 600px) {
+    .phone-lead { padding: var(--space-6) var(--space-5); }
+    .phone-lead > a { font-size: 1.55rem; }
+    .routing-list li { grid-template-columns: 1fr; gap: var(--space-3); }
+    .routing-list a { white-space: normal; }
+    .service-area figure { order: -1; }
+  }
+</style>

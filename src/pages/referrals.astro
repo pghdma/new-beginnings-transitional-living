@@ -1,63 +1,195 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/InquiryForm.astro';
-import FactRail from '../components/FactRail.astro';
-import SectionHead from '../components/SectionHead.astro';
 import { site } from '../data/site';
+
+const workflow = [
+  {
+    number: '01',
+    title: 'Confirm current availability',
+    copy: 'Call or send a professional inquiry before preparing records or making placement assumptions.',
+  },
+  {
+    number: '02',
+    title: 'Discuss the housing request',
+    copy: 'Identify your organization and role, then share only the general context needed for an initial fit conversation.',
+  },
+  {
+    number: '03',
+    title: 'Follow private instructions',
+    copy: 'If the conversation moves forward, staff can explain what is needed and how to share it appropriately.',
+  },
+];
 ---
+
 <MainLayout title="Professional Referrals" description="Recovery-housing referral information for treatment providers, case managers, courts, and community partners.">
-  <PageHero variant="editorial" eyebrow="For professionals" title="A clear recovery-housing referral conversation." intro="Information for treatment providers, case managers, discharge planners, courts, and community organizations helping an adult explore recovery housing." image="/images/referrals.jpg" imageAlt="Two professionals reviewing information together at a table" fact={`Discuss general fit and current availability at ${site.phone}.`} />
+  <PageHero
+    variant="editorial"
+    eyebrow="For professionals"
+    title="Coordinate a recovery-housing conversation."
+    intro="Information for treatment providers, case managers, discharge planners, courts, and community organizations helping an adult explore recovery housing."
+    image="/images/house-kitchen.webp"
+    imageAlt="A kitchen and dining table in a welcoming home"
+    fact={`Current availability can change. Begin with a direct conversation at ${site.phone}.`}
+  />
 
-  <FactRail items={[
-    { icon: 'users-round', label: 'Adult men and women' },
-    { icon: 'map-pin', label: 'Pittsburgh-area communities' },
-    { icon: 'badge-check', label: 'DDAP-licensed residences' },
-    { icon: 'shield-check', label: 'WestPARR inspected' },
-  ]} />
+  <section class="section professional-entry" aria-labelledby="role-title">
+    <div class="container professional-layout">
+      <header class="role-intro">
+        <p class="eyebrow">A defined role</p>
+        <h2 id="role-title">Housing that works alongside care.</h2>
+        <p class="lead">New Beginnings provides recovery-focused shared housing. Clinical treatment, emergency shelter, and crisis support remain separate services.</p>
+        <a class="availability-call" href={site.phoneHref}>
+          <Icon name="lucide:phone" aria-hidden="true" />
+          <span><small>Discuss availability</small>{site.phone}</span>
+        </a>
+      </header>
 
-  <section class="section scope">
-    <div class="container scope-grid">
-      <header><p class="eyebrow">A defined role</p><h2>Recovery housing works alongside care.</h2><p class="lead">New Beginnings provides a stable, substance-free shared living environment. It does not replace clinical treatment, emergency shelter, or crisis services.</p></header>
-      <div class="scope-list">
-        <div><span>New Beginnings provides</span><h3>Recovery-focused housing</h3><p>Peer community, shared expectations, daily stability, and connection to the broader recovery network.</p></div>
-        <div><span>Independent providers provide</span><h3>Clinical treatment and care</h3><p>Counseling, medical care, medication management, and other licensed professional services.</p></div>
-        <div><span>Emergency systems provide</span><h3>Crisis and urgent support</h3><p>Call 911 for an emergency or call or text 988 for the Suicide & Crisis Lifeline.</p></div>
-      </div>
+      <dl class="scope-ledger">
+        <div>
+          <dt>New Beginnings provides</dt>
+          <dd>
+            <h3>Recovery-focused housing</h3>
+            <p>A substance-free shared environment, peer community, household expectations, and support for daily stability.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Independent providers provide</dt>
+          <dd>
+            <h3>Clinical treatment and care</h3>
+            <p>Counseling, medical care, medication management, and other licensed professional services.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Emergency systems provide</dt>
+          <dd>
+            <h3>Crisis and urgent support</h3>
+            <p>Call 911 for an emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p>
+          </dd>
+        </div>
+      </dl>
     </div>
   </section>
 
-  <section class="section section--tint workflow">
-    <div class="container">
-      <SectionHead eyebrow="Referral workflow" title="Begin with availability, not records." intro="A general conversation comes before the exchange of any detailed information." />
-      <ol class="process">
-        <li><span class="process-num">01</span><div><h3>Contact New Beginnings</h3><p>Call {site.phone} or use the professional inquiry form for a general availability conversation.</p></div></li>
-        <li><span class="process-num">02</span><div><h3>Discuss general fit</h3><p>Share only the minimum information needed to understand what kind of housing is being explored.</p></div></li>
-        <li><span class="process-num">03</span><div><h3>Receive current instructions</h3><p>If the conversation moves forward, required records and exact location information are requested through an appropriate private process.</p></div></li>
+  <section class="referral-workflow" aria-labelledby="workflow-title">
+    <div class="container workflow-layout">
+      <header>
+        <p class="eyebrow">Referral workflow</p>
+        <h2 id="workflow-title">Start with availability—not records.</h2>
+        <p>A general conversation comes before any request for detailed information.</p>
+      </header>
+      <ol>
+        {workflow.map((step) => (
+          <li>
+            <span>{step.number}</span>
+            <div><h3>{step.title}</h3><p>{step.copy}</p></div>
+          </li>
+        ))}
       </ol>
     </div>
   </section>
 
-  <section class="section information">
-    <div class="container information-grid">
-      <div class="information-title"><p class="eyebrow">Information handling</p><h2>Do not attach or paste client records here.</h2></div>
-      <div class="information-copy"><p class="lead">The public form is designed to establish contact with a referral source, not to receive a clinical or legal record.</p><ul class="rule-list"><li><strong>Appropriate for the first message</strong>Your name, organization, role, contact information, and a general description of the housing inquiry.</li><li><strong>Keep out of the public form</strong>Treatment records, diagnoses, medication lists, criminal-history documents, Social Security numbers, or other sensitive client information.</li><li><strong>Wait for private instructions</strong>New Beginnings will explain what is needed and how to share it if the referral moves forward.</li></ul></div>
+  <section class="section records-section" aria-labelledby="records-title">
+    <div class="container records-layout">
+      <header>
+        <p class="eyebrow">Information handling</p>
+        <h2 id="records-title">Keep client records out of the public form.</h2>
+      </header>
+      <div class="records-copy">
+        <p class="lead">The form establishes contact with a referral source. It is not a portal for clinical, legal, or identifying records.</p>
+        <ul>
+          <li>
+            <strong>Appropriate for the first message</strong>
+            <span>Your name, organization, role, preferred contact method, and a general description of the housing inquiry.</span>
+          </li>
+          <li>
+            <strong>Do not submit here</strong>
+            <span>Treatment records, diagnoses, medication lists, court documents, Social Security numbers, or other sensitive client information.</span>
+          </li>
+          <li>
+            <strong>Wait for instructions</strong>
+            <span>Staff can explain what is needed and how to share it if the referral moves forward.</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <InquiryForm context="referral" title="Start a professional referral conversation" intro="Tell us who you represent and how to reach you. Please do not send client records or sensitive information through this form." />
+  <InquiryForm
+    context="referral"
+    title="Start a professional referral conversation"
+    intro="Tell us who you represent, your role, and how you prefer to be reached. Please do not send client records or sensitive information."
+  >
+    <div slot="aside" class="inquiry-aside">
+      <div>
+        <h3>Availability first</h3>
+        <p>Confirm current availability before sending paperwork or planning a transition.</p>
+      </div>
+      <div>
+        <h3>Housing—not treatment</h3>
+        <p>Clinical care and medication management remain with independent licensed providers.</p>
+      </div>
+    </div>
+  </InquiryForm>
 </MainLayout>
 
 <style>
-  .scope-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: var(--gap-columns); }
-  .scope header { display: grid; align-content: start; gap: var(--space-4); }
-  .scope-list { border-top: 1px solid var(--slate-300); }
-  .scope-list > div { padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); }
-  .scope-list span { color: var(--teal-700); font-size: .76rem; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }
-  .scope-list h3 { margin-top: var(--space-2); }
-  .scope-list p { max-width: 44rem; margin-top: var(--space-2); }
-  .information-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--gap-columns); }
-  .information-title { display: grid; align-content: start; gap: var(--space-4); }
-  .information-copy { display: grid; gap: var(--space-5); }
-  @media (max-width: 800px) { .scope-grid, .information-grid { grid-template-columns: 1fr; } }
+  .professional-entry { background: var(--paper); }
+  .professional-layout { display: grid; grid-template-columns: minmax(18rem, .76fr) minmax(0, 1.24fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .role-intro { display: grid; gap: var(--space-4); }
+  .role-intro h2 { max-width: 12ch; }
+  .availability-call { display: inline-flex; width: fit-content; margin-top: var(--space-4); padding: var(--space-4) var(--space-5); align-items: center; gap: var(--space-3); color: var(--white); background: var(--teal-800); box-shadow: var(--shadow); font-size: 1.35rem; font-weight: 600; line-height: 1.1; }
+  .availability-call:hover { color: var(--white); background: var(--navy-950); }
+  .availability-call :global(svg) { width: 1.5rem; height: 1.5rem; stroke-width: 1.7; }
+  .availability-call small { display: block; margin-bottom: .35rem; color: #b9e5e1; font-size: .72rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+  .scope-ledger { margin: 0; border-top: 1px solid var(--slate-300); }
+  .scope-ledger > div { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: minmax(10rem, .54fr) minmax(0, 1.46fr); gap: var(--space-6); }
+  .scope-ledger dt { padding-top: .2rem; color: var(--teal-700); font-size: .78rem; font-weight: 650; letter-spacing: .08em; line-height: 1.45; text-transform: uppercase; }
+  .scope-ledger dd { margin: 0; }
+  .scope-ledger h3 { font-size: 1.3rem; }
+  .scope-ledger p { max-width: 40rem; margin-top: var(--space-2); color: var(--slate-600); line-height: 1.55; }
+
+  .referral-workflow { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
+  .workflow-layout { display: grid; grid-template-columns: minmax(17rem, .7fr) minmax(0, 1.3fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .workflow-layout > header { display: grid; gap: var(--space-4); }
+  .workflow-layout .eyebrow { color: #9ed7d2; }
+  .workflow-layout h2,
+  .workflow-layout h3 { color: var(--white); }
+  .workflow-layout > header h2 { max-width: 11ch; }
+  .workflow-layout > header > p:last-child { max-width: 28rem; color: var(--sky-100); }
+  .workflow-layout ol { margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, .24); list-style: none; }
+  .workflow-layout li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid rgba(255, 255, 255, .24); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
+  .workflow-layout li > span { color: #9ed7d2; font-size: .82rem; font-weight: 650; letter-spacing: .08em; }
+  .workflow-layout h3 { font-size: 1.25rem; }
+  .workflow-layout li p { max-width: 40rem; margin-top: var(--space-2); color: var(--sky-100); line-height: 1.5; }
+
+  .records-section { background: var(--sky-50); }
+  .records-layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .records-layout > header { display: grid; gap: var(--space-4); }
+  .records-layout > header h2 { max-width: 13ch; }
+  .records-copy > .lead { margin-bottom: var(--space-6); }
+  .records-copy ul { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .records-copy li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: minmax(11rem, .58fr) minmax(0, 1.42fr); gap: var(--space-6); }
+  .records-copy strong { color: var(--navy-900); font-weight: 600; }
+  .records-copy span { color: var(--slate-600); }
+
+  @media (max-width: 820px) {
+    .professional-layout,
+    .workflow-layout,
+    .records-layout { grid-template-columns: 1fr; gap: var(--space-7); }
+    .role-intro { max-width: 40rem; }
+  }
+
+  @media (max-width: 800px) {
+    :global(.page-hero--editorial figure) { order: -1; }
+  }
+
+  @media (max-width: 560px) {
+    .scope-ledger > div,
+    .records-copy li { grid-template-columns: 1fr; gap: var(--space-2); }
+    .workflow-layout li { grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-3); }
+    .availability-call { width: 100%; }
+  }
 </style>

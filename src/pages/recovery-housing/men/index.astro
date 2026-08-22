@@ -1,54 +1,190 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../../../layouts/MainLayout.astro';
-import PageHero from '../../../components/PageHero.astro';
 import CtaBand from '../../../components/CtaBand.astro';
-import IconBadge from '../../../components/IconBadge.astro';
----
-<MainLayout title="Men’s Recovery Housing" description="Structured recovery housing for adult men in Pittsburgh-area communities.">
-  <PageHero eyebrow="Men’s recovery housing" title="A structured place to keep moving forward." intro="Substance-free shared residences for adult men, with peer community and clear expectations built into daily life." image="/images/mens-community.jpg" imageAlt="Two men having a conversation in a community setting" actions />
 
-  <section class="section overview">
-    <div class="container overview-grid">
-      <div class="overview-copy"><p class="eyebrow">A place to rebuild routines</p><h2>Recovery continues when the day becomes ordinary again.</h2><p class="lead">A dependable home creates space to focus on work, appointments, meetings, relationships, and the responsibilities of everyday life.</p><p>New Beginnings men’s residences serve adults committed to substance-free living and participation in a recovery-focused household. Residents live alongside peers and remain connected to independent treatment and community recovery resources.</p></div>
-      <aside class="neighborhoods"><span>Neighborhood-level information</span><strong>Sheraden</strong><strong>McKees Rocks</strong><strong>Other Pittsburgh-area communities</strong><p>Exact locations are shared privately during intake.</p></aside>
+const householdRhythm = [
+  {
+    icon: 'calendar-check',
+    title: 'Clear expectations',
+    copy: 'A shared framework helps make the residence more consistent for everyone who lives there.',
+  },
+  {
+    icon: 'users-round',
+    title: 'Peer community',
+    copy: 'Residents live alongside other men who are taking the daily work of recovery seriously.',
+  },
+  {
+    icon: 'briefcase-business',
+    title: 'Everyday responsibility',
+    copy: 'Work, education, appointments, meetings, and household responsibilities remain part of ordinary life.',
+  },
+  {
+    icon: 'waypoints',
+    title: 'Outside connection',
+    copy: 'Treatment and other clinical services remain with independent licensed providers and community resources.',
+  },
+];
+---
+
+<MainLayout title="Men’s Recovery Housing" description="Structured recovery housing for adult men in Pittsburgh-area communities.">
+  <section class="men-hero">
+    <div class="container men-hero__grid">
+      <div class="men-hero__copy">
+        <p class="eyebrow">Men’s recovery housing</p>
+        <h1>A structured place to keep moving forward.</h1>
+        <p class="lead">Substance-free shared residences for adult men, with peer community and clear expectations built into daily life.</p>
+        <div class="actions men-hero__actions">
+          <a class="button button--light" href="/admissions/">Begin with admissions<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="men-hero__phone" href="tel:+14126280403"><Icon name="lucide:phone" aria-hidden="true" />Call 412-628-0403</a>
+        </div>
+      </div>
+      <figure class="men-hero__photo">
+        <img src="/images/home-entry.webp" alt="A home entry and staircase" width="2200" height="1467" fetchpriority="high" />
+      </figure>
     </div>
   </section>
 
-  <section class="section section--tint supports">
-    <div class="container supports-grid">
-      <div><p class="eyebrow">Inside the environment</p><h2>Four foundations for shared living.</h2></div>
-      <div class="support-list">
-        <article><IconBadge name="users-round" /><div><h3>Peer community</h3><p>Live alongside other men who understand that recovery is practiced one day at a time.</p></div></article>
-        <article><IconBadge name="clipboard-check" /><div><h3>Clear expectations</h3><p>Shared standards help protect the stability of residents and the household as a whole.</p></div></article>
-        <article><IconBadge name="briefcase-business" /><div><h3>Practical responsibility</h3><p>Daily routines support continued progress toward work, education, and personal goals.</p></div></article>
-        <article><IconBadge name="waypoints" /><div><h3>Outside connection</h3><p>Residents continue working with appropriate independent providers and recovery resources.</p></div></article>
+  <section class="rhythm-section">
+    <div class="container rhythm-layout">
+      <header class="rhythm-heading">
+        <p class="eyebrow">A place to rebuild routines</p>
+        <h2>Recovery continues when the day becomes ordinary again.</h2>
+        <p class="lead">A dependable home creates space to focus on the responsibilities, relationships, and recovery connections that shape everyday life.</p>
+      </header>
+      <div class="rhythm-copy">
+        <p>New Beginnings provides substance-free shared housing for adult men. Residents live alongside peers in a recovery-focused household while remaining connected to independent treatment and community recovery resources.</p>
+        <ul class="rhythm-list">
+          {householdRhythm.map((item) => (
+            <li>
+              <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
+              <div><h3>{item.title}</h3><p>{item.copy}</p></div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
 
-  <section class="section privacy">
-    <div class="container editorial-split">
-      <div class="editorial-title"><p class="eyebrow">Privacy and fit</p><h2>The right information is shared at the right time.</h2></div>
-      <div class="editorial-copy"><p class="lead">A website cannot determine whether a particular residence is the right fit.</p><p>Start with a general inquiry. New Beginnings will explain the current admissions process, discuss general fit and availability, and share exact location information privately when appropriate.</p><div class="callout-rule"><strong>Keep the first message general.</strong><p>Do not send diagnoses, medication details, treatment records, criminal-history information, Social Security numbers, or other sensitive information through the website.</p></div></div>
+  <section class="daily-section">
+    <div class="daily-layout">
+      <figure class="daily-photo">
+        <img src="/images/house-living-room.webp" alt="A comfortable shared living room" width="2200" height="1467" loading="lazy" />
+      </figure>
+      <div class="daily-copy">
+        <div class="daily-copy__inner">
+          <p class="eyebrow">Life beyond the residence</p>
+          <h2>A home can support the day without replacing it.</h2>
+          <p class="lead">Recovery housing adds stability around the responsibilities a resident already carries.</p>
+          <p>It is not inpatient care, a medical facility, or a substitute for professional treatment. The residence is one part of a wider recovery network that may include work, education, family, meetings, counseling, medical care, and other independent supports.</p>
+          <a class="text-link" href="/recovery-housing/">How recovery housing works</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <CtaBand title="Ask about men’s recovery housing." label="Begin with admissions" />
+  <section class="location-section">
+    <div class="container location-layout">
+      <header class="location-heading">
+        <Icon name="lucide:map-pin" aria-hidden="true" />
+        <div><p class="eyebrow">Where we serve</p><h2>Pittsburgh-area communities.</h2></div>
+      </header>
+      <div class="location-details">
+        <p>Public records reference <strong>Sheraden</strong> and <strong>McKees Rocks</strong>. Additional homes serve other Pittsburgh-area communities.</p>
+        <p class="location-private"><Icon name="lucide:lock-keyhole" aria-hidden="true" />Exact residence locations are shared privately during the admissions process. Identifying exterior photographs are not published.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="first-step-section">
+    <div class="container first-step-layout">
+      <div>
+        <p class="eyebrow">The first step</p>
+        <h2>Begin with a general conversation.</h2>
+      </div>
+      <div class="first-step-copy">
+        <p>Staff can explain the current admissions process, discuss general fit and availability, and provide exact location information privately when appropriate.</p>
+        <p><strong>Keep the first message general.</strong> Do not send diagnoses, medication details, treatment records, criminal-history information, Social Security numbers, or other sensitive information through the website.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Ask about men’s recovery housing." label="Begin with admissions" text="Start with a private, general conversation. Staff can explain the current process and what may happen next." />
 </MainLayout>
 
 <style>
-  .overview-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .55fr); gap: var(--gap-columns); align-items: start; }
-  .overview-copy { display: grid; gap: var(--space-5); max-width: var(--measure); }
-  .neighborhoods { display: grid; padding-block: var(--space-5); border-block: 1px solid var(--slate-300); gap: var(--space-3); }
-  .neighborhoods span { color: var(--teal-700); font-size: .76rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-  .neighborhoods strong { color: var(--navy-900); font-size: 1.3rem; }
-  .neighborhoods p { margin-top: var(--space-3); color: var(--slate-600); font-size: .92rem; }
-  .supports-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: var(--gap-columns); }
-  .supports-grid > div:first-child { display: grid; align-content: start; gap: var(--space-4); }
-  .support-list { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--slate-300); }
-  .support-list article { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); padding: var(--space-5); border-bottom: 1px solid var(--slate-300); }
-  .support-list article:nth-child(odd) { padding-left: 0; border-right: 1px solid var(--slate-300); }
-  .support-list article > div { display: grid; gap: var(--space-2); }
-  @media (max-width: 860px) { .overview-grid, .supports-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 620px) { .support-list { grid-template-columns: 1fr; } .support-list article, .support-list article:nth-child(odd) { padding-inline: 0; border-right: 0; } }
+  .men-hero { color: var(--white); background: var(--navy-950); }
+  .men-hero__grid { display: grid; min-height: clamp(34rem, 52vw, 43rem); grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; }
+  .men-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
+  .men-hero .eyebrow { color: #9ed7d2; }
+  .men-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.1rem, 5.7vw, 5.35rem); }
+  .men-hero .lead { max-width: 35rem; margin-top: var(--space-5); color: var(--sky-100); }
+  .men-hero__actions { margin-top: var(--space-6); }
+  .men-hero__actions .button { gap: .6rem; }
+  .men-hero__actions :global(svg) { width: 1rem; height: 1rem; }
+  .men-hero__phone { display: inline-flex; min-height: 3.25rem; padding-inline: .4rem; align-items: center; gap: .55rem; color: var(--white); font-weight: 650; }
+  .men-hero__phone:hover { color: #b9e5e1; }
+  .men-hero__phone :global(svg) { width: 1.05rem; height: 1.05rem; }
+  .men-hero__photo { margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
+  .men-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(.98); }
+
+  .rhythm-section { padding-block: var(--section-standard); background: var(--canvas); }
+  .rhythm-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .rhythm-heading h2 { max-width: 13ch; margin-top: var(--space-4); }
+  .rhythm-heading .lead { max-width: 32rem; margin-top: var(--space-6); }
+  .rhythm-copy > p { max-width: 44rem; color: var(--slate-600); }
+  .rhythm-list { margin: var(--space-6) 0 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .rhythm-list li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .rhythm-list > li > :global(svg) { width: 1.75rem; height: 1.75rem; color: var(--teal-700); stroke-width: 1.55; }
+  .rhythm-list h3 { font-size: 1.25rem; }
+  .rhythm-list p { max-width: 41rem; margin-top: .4rem; color: var(--slate-600); line-height: 1.5; }
+
+  .daily-section { background: var(--sky-50); }
+  .daily-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .daily-photo { min-height: 40rem; margin: 0; overflow: hidden; }
+  .daily-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.98); }
+  .daily-copy { display: grid; padding: var(--section-standard) var(--gutter); align-items: center; }
+  .daily-copy__inner { width: min(100%, 35rem); }
+  .daily-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
+  .daily-copy .lead { margin-top: var(--space-6); }
+  .daily-copy p:not(.eyebrow):not(.lead) { margin-top: var(--space-4); }
+  .daily-copy .text-link { margin-top: var(--space-6); }
+
+  .location-section { padding-block: var(--section-compact); border-bottom: 1px solid var(--slate-200); background: var(--paper); }
+  .location-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--gap-columns); align-items: start; }
+  .location-heading { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-4); }
+  .location-heading :global(svg) { width: 2rem; height: 2rem; color: var(--teal-700); stroke-width: 1.55; }
+  .location-heading h2 { max-width: 14ch; margin-top: var(--space-3); font-size: clamp(1.85rem, 3vw, 2.6rem); }
+  .location-details { max-width: 43rem; }
+  .location-details strong { color: var(--navy-900); font-weight: 600; }
+  .location-private { display: grid; margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
+  .location-private :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
+
+  .first-step-section { padding-block: var(--section-standard); background: var(--canvas); }
+  .first-step-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--gap-columns); align-items: start; }
+  .first-step-layout h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .first-step-copy { max-width: 43rem; }
+  .first-step-copy p + p { margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); color: var(--slate-600); font-size: .94rem; }
+  .first-step-copy strong { color: var(--navy-900); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .men-hero__grid, .rhythm-layout, .daily-layout, .location-layout, .first-step-layout { grid-template-columns: 1fr; }
+    .men-hero__photo { order: -1; height: clamp(20rem, 52vw, 27rem); margin: 0 calc(var(--gutter) * -1); }
+    .men-hero__copy { padding: var(--space-8) 0; }
+    .rhythm-layout, .location-layout, .first-step-layout { gap: var(--space-7); }
+    .daily-photo { height: clamp(21rem, 55vw, 29rem); min-height: 0; }
+    .daily-copy { padding-block: var(--space-8); }
+    .daily-copy__inner { width: min(100%, 43rem); margin-inline: auto; }
+  }
+
+  @media (max-width: 560px) {
+    .men-hero__photo { height: 16rem; }
+    .men-hero__copy { padding-block: var(--space-7); }
+    .men-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
+    .men-hero__actions { display: grid; }
+    .men-hero__actions .button, .men-hero__phone { width: 100%; justify-content: center; }
+    .rhythm-layout, .location-layout, .first-step-layout { gap: var(--space-6); }
+    .daily-photo { height: 17rem; }
+    .daily-copy { padding-inline: var(--gutter); }
+  }
 </style>

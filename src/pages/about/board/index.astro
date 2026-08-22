@@ -1,28 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components';
 import MainLayout from '../../../layouts/MainLayout.astro';
-import {
-  currentBoardMembers,
-} from '../../../data/leadership';
+import { currentBoardMembers } from '../../../data/leadership';
 
 const responsibilities = [
   {
-    icon: 'compass',
+    number: '01',
     title: 'Mission and direction',
     copy: 'Keep the organization focused on safe, accountable recovery housing and the long-term needs of the people and communities it serves.',
   },
   {
-    icon: 'scale',
+    number: '02',
     title: 'Ethical and legal oversight',
     copy: 'Provide nonprofit oversight, protect the organization’s purpose, and support compliance with applicable public responsibilities.',
   },
   {
-    icon: 'landmark',
+    number: '03',
     title: 'Financial stewardship',
     copy: 'Exercise care over the organization’s resources so they continue to support stable homes and responsible operations.',
   },
   {
-    icon: 'users-round',
+    number: '04',
     title: 'Organizational accountability',
     copy: 'Provide perspective and oversight while organizational leadership manages the day-to-day work of New Beginnings.',
   },
@@ -36,23 +34,24 @@ const responsibilities = [
   <section class="board-hero">
     <div class="container board-hero__grid">
       <div class="board-hero__copy">
-        <p class="eyebrow">About New Beginnings</p>
+        <p class="eyebrow">Board of Directors</p>
         <h1>Governance grounded in the mission.</h1>
         <p class="lead">
           New Beginnings is governed by a volunteer Board of Directors responsible for
           stewardship, oversight, and the organization’s nonprofit purpose.
         </p>
       </div>
-      <div class="board-hero__statement" aria-label="Governance priorities">
-        <span>Stewardship</span>
-        <span>Accountability</span>
-        <span>Community perspective</span>
-      </div>
+      <aside class="board-hero__mandate" aria-label="Board mandate">
+        <p class="board-hero__label">Board mandate</p>
+        <p>Protect the mission.</p>
+        <p>Steward the organization.</p>
+        <p>Maintain accountability.</p>
+      </aside>
     </div>
   </section>
 
   <section class="section governance">
-    <div class="container governance__grid">
+    <div class="container governance__layout">
       <header>
         <p class="eyebrow">The board’s role</p>
         <h2>Responsible nonprofit leadership.</h2>
@@ -65,11 +64,9 @@ const responsibilities = [
       <ol class="responsibilities">
         {responsibilities.map((item) => (
           <li>
-            <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </div>
+            <span class="responsibilities__number">{item.number}</span>
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
           </li>
         ))}
       </ol>
@@ -77,23 +74,24 @@ const responsibilities = [
   </section>
 
   {currentBoardMembers.length > 0 && (
-    <section class="section section--tint roster">
-      <div class="container">
-        <header class="roster__head">
+    <section class="section roster">
+      <div class="container roster__layout">
+        <header>
           <p class="eyebrow">Current board</p>
           <h2>Board of Directors</h2>
+          <p>The current public roster provided for this website is listed below.</p>
         </header>
-        <div class="roster__list">
+        <ul class="roster__list">
           {currentBoardMembers.map((person) => (
-            <a href={person.group === 'board' ? `/about/board/${person.slug}/` : `/about/${person.slug}/`}>
-              <span>
-                <strong>{person.name}</strong>
-                <small>{person.role}</small>
-              </span>
-              <Icon name="lucide:arrow-up-right" aria-hidden="true" />
-            </a>
+            <li>
+              <a href={person.group === 'board' ? `/about/board/${person.slug}/` : `/about/${person.slug}/`}>
+                <span class="roster__name">{person.name}</span>
+                <span class="roster__role">{person.role}</span>
+                <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )}
@@ -104,49 +102,70 @@ const responsibilities = [
         <p class="eyebrow">Public accountability</p>
         <h2>Credentials you can review.</h2>
       </div>
-      <p>
-        Nonprofit status, licensing information, and recovery-housing credentials are
-        collected in one place for residents, families, professionals, and supporters.
-      </p>
-      <a class="button button--light" href="/about/transparency/">View transparency information</a>
+      <div>
+        <p>
+          Nonprofit status, licensing information, and recovery-housing credentials are
+          collected in one place for residents, families, professionals, and supporters.
+        </p>
+        <a class="button button--light" href="/about/transparency/">
+          View transparency information
+          <Icon name="lucide:arrow-right" aria-hidden="true" />
+        </a>
+      </div>
     </div>
   </section>
 </MainLayout>
 
 <style>
-  .board-hero { padding-block: clamp(var(--space-8), 9vw, 8rem); background: var(--sky-50); border-bottom: 1px solid var(--slate-200); }
-  .board-hero__grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(18rem, .65fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: end; }
+  .board-hero { padding-block: var(--section-hero); color: var(--white); background: var(--navy-950); }
+  .board-hero__grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: clamp(var(--space-7), 9vw, 8rem); align-items: end; }
   .board-hero__copy { display: grid; gap: var(--space-5); }
-  .board-hero h1 { max-width: 13ch; }
-  .board-hero__statement { display: grid; border-block: 1px solid var(--slate-300); color: var(--navy-900); }
-  .board-hero__statement span { padding-block: var(--space-4); font-weight: 700; }
-  .board-hero__statement span + span { border-top: 1px solid var(--slate-300); }
+  .board-hero h1 { max-width: 12ch; color: var(--white); font-size: clamp(3rem, 5.6vw, 5.2rem); }
+  .board-hero .eyebrow { color: #9ed7d2; }
+  .board-hero .lead { max-width: 40rem; color: var(--sky-100); }
+  .board-hero__mandate { border-top: 1px solid rgba(255,255,255,.28); }
+  .board-hero__mandate p { padding-block: var(--space-4); border-bottom: 1px solid rgba(255,255,255,.28); color: var(--white); font-size: 1.05rem; font-weight: 600; }
+  .board-hero__mandate .board-hero__label { color: #9ed7d2; font-size: .75rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
 
-  .governance__grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
-  .governance header { display: grid; gap: var(--space-5); max-width: 33rem; }
+  .governance__layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .governance header { display: grid; gap: var(--space-4); max-width: 31rem; }
+  .governance h2 { max-width: 12ch; }
   .responsibilities { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .responsibilities li { display: grid; grid-template-columns: 2rem 1fr; gap: var(--space-5); padding-block: var(--space-6); border-bottom: 1px solid var(--slate-300); }
-  .responsibilities :global(svg) { width: 1.5rem; margin-top: .15rem; color: var(--teal-700); }
-  .responsibilities h3 { margin-bottom: var(--space-2); }
+  .responsibilities li { display: grid; grid-template-columns: 3rem minmax(12rem, .75fr) minmax(0, 1.25fr); gap: var(--space-5); padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); align-items: start; }
+  .responsibilities__number { color: var(--teal-700); font-size: .8rem; font-weight: 650; letter-spacing: .12em; }
+  .responsibilities h3 { font-size: 1.18rem; }
+  .responsibilities p { color: var(--slate-600); line-height: 1.55; }
 
-  .roster__head { display: grid; gap: var(--space-4); margin-bottom: var(--space-7); }
-  .roster__list { border-top: 1px solid var(--slate-300); }
-  .roster__list a { display: flex; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); align-items: center; justify-content: space-between; gap: var(--space-4); color: var(--navy-900); text-decoration: none; }
+  .roster { background: var(--sky-50); }
+  .roster__layout { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .roster header { display: grid; gap: var(--space-4); }
+  .roster__list { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .roster__list li { border-bottom: 1px solid var(--slate-300); }
+  .roster__list a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, .75fr) auto; gap: var(--space-5); padding-block: var(--space-5); align-items: center; color: var(--navy-900); }
   .roster__list a:hover { color: var(--teal-800); }
-  .roster__list span { display: grid; gap: var(--space-1); }
-  .roster__list strong { font-size: 1.35rem; }
-  .roster__list small { color: var(--slate-600); font-size: 1rem; }
-  .roster__list :global(svg) { width: 1.4rem; }
+  .roster__name { font-size: 1.3rem; font-weight: 600; }
+  .roster__role { color: var(--slate-600); }
+  .roster__list :global(svg) { width: 1.15rem; height: 1.15rem; }
 
-  .accountability { padding-block: var(--space-8); color: var(--white); background: var(--navy-950); }
-  .accountability__inner { display: grid; grid-template-columns: minmax(16rem, .8fr) minmax(18rem, 1fr) auto; gap: clamp(var(--space-6), 5vw, var(--space-8)); align-items: center; }
-  .accountability h2 { margin-top: var(--space-3); color: var(--white); font-size: clamp(2rem, 3.5vw, 3rem); }
+  .accountability { padding-block: var(--section-compact); color: var(--white); background: var(--navy-900); }
+  .accountability__inner { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: center; }
+  .accountability h2 { max-width: 14ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(2rem, 3.5vw, 3rem); }
   .accountability .eyebrow { color: #9ed7d2; }
+  .accountability p { max-width: 42rem; color: var(--sky-100); }
+  .accountability .button { margin-top: var(--space-5); gap: var(--space-2); }
+  .accountability .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 800px) {
-    .board-hero__grid, .governance__grid, .accountability__inner { grid-template-columns: 1fr; }
-    .board-hero__statement { max-width: 30rem; }
-    .accountability__inner { align-items: start; }
-    .accountability .button { justify-self: start; }
+    .board-hero__grid, .governance__layout, .roster__layout, .accountability__inner { grid-template-columns: 1fr; }
+    .board-hero__mandate { max-width: 32rem; }
+    .responsibilities li { grid-template-columns: 2.5rem minmax(0, 1fr); }
+    .responsibilities p { grid-column: 2; }
+  }
+
+  @media (max-width: 520px) {
+    .board-hero h1 { font-size: clamp(2.65rem, 13vw, 3.65rem); }
+    .roster__list a { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-2) var(--space-4); }
+    .roster__role { grid-column: 1; }
+    .roster__list :global(svg) { grid-column: 2; grid-row: 1 / 3; }
   }
 </style>

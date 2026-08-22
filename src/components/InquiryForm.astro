@@ -26,53 +26,158 @@ const options = context === 'referral'
       <p>Prefer to call? <a href={site.phoneHref}>{site.phone}</a></p>
       <slot name="aside" />
     </div>
-    <form data-contact-form>
+    <form data-contact-form data-context={context} novalidate>
       <div class="form-grid">
-        <label>First name<input required autocomplete="given-name" name="firstName" /></label>
-        <label>Last name<input required autocomplete="family-name" name="lastName" /></label>
-        <label>Email<input required type="email" autocomplete="email" name="email" /></label>
-        <label>Phone<input required type="tel" autocomplete="tel" name="phone" /></label>
+        <label>First name<input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
+        <label>Last name<input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
+        <label>Email<input required type="email" autocomplete="email" name="email" maxlength="254" /></label>
+        <label>Phone<input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
       </div>
-        <label>I am contacting you as or about<select name="contactType" required><option value="">Select one</option>{options.map((option) => <option>{option}</option>)}</select></label>
+      <label>I am contacting you as or about<select name="contactType" required><option value="">Select one</option>{options.map((option) => <option value={option}>{option}</option>)}</select></label>
+      {context === 'referral' && (
+        <div class="form-grid referral-fields">
+          <label><span class="field-label">Organization <small>(optional)</small></span><input autocomplete="organization" name="organization" maxlength="200" /></label>
+          <label><span class="field-label">Role <small>(optional)</small></span><input autocomplete="organization-title" name="role" maxlength="150" /></label>
+          <label class="full-width"><span class="field-label">Preferred contact method <small>(optional)</small></span><select name="preferredContact"><option value="">No preference</option><option value="Phone">Phone</option><option value="Email">Email</option></select></label>
+        </div>
+      )}
       <label>How can we help?<textarea name="message" rows="4" maxlength="1000"></textarea></label>
       <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
       <input type="hidden" name="startedAt" value="" />
       <p class="privacy-note">This form is for general inquiries only. Do not send medical records, diagnoses, medication information, Social Security numbers, or other sensitive information.</p>
-      <button class="button" type="submit">Send inquiry</button>
-      <p class="status" role="status" aria-live="polite"></p>
+      <div class="verification">
+        <p>Security check</p>
+        <div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div>
+      </div>
+      <button class="button" type="submit" data-submit-button>Send inquiry</button>
+      <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
     </form>
   </div>
 </section>
+<script is:inline>
+  window.onNbtsTurnstileReady = function () {
+    document.querySelectorAll('[data-turnstile-widget]').forEach(function (widget) {
+      var widgetId = window.turnstile.render(widget, {
+        sitekey: widget.dataset.sitekey,
+        theme: 'light',
+        action: 'contact',
+        size: window.matchMedia('(max-width: 419px)').matches ? 'compact' : 'flexible'
+      });
+      widget.dataset.widgetId = widgetId;
+    });
+  };
+</script>
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onNbtsTurnstileReady&render=explicit" async defer></script>
 <script>
+  const CONTACT_ENDPOINT = 'https://nbts-contact.pghdma.workers.dev/api/contact';
+
   document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
     const started = form.querySelector<HTMLInputElement>('[name="startedAt"]');
-    if (started) started.value = String(Date.now());
-    form.addEventListener('submit', (event) => {
+    const status = form.querySelector<HTMLElement>('.status');
+    const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
+
+    const restartTimer = () => {
+      if (started) started.value = String(Date.now());
+    };
+
+    const resetVerification = () => {
+      const widget = form.querySelector<HTMLElement>('.cf-turnstile');
+      const widgetId = widget?.dataset.widgetId;
+      const turnstile = (window as typeof window & { turnstile?: { reset: (widgetId?: string) => void } }).turnstile;
+      if (turnstile && widgetId) turnstile.reset(widgetId);
+    };
+
+    const setStatus = (message: string, type: 'success' | 'error' | 'sending' = 'sending') => {
+      if (!status) return;
+      status.textContent = message;
+      status.dataset.state = type;
+    };
+
+    restartTimer();
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const status = form.querySelector<HTMLElement>('.status');
-      if (status) status.textContent = 'Online form delivery is being finalized. Please call 412-628-0403 for immediate assistance.';
+
+      if (!form.reportValidity()) return;
+
+      const formData = new FormData(form);
+      if (!formData.get('cf-turnstile-response')) {
+        setStatus('Please complete the security check before sending your inquiry.', 'error');
+        return;
+      }
+
+      const payload = Object.fromEntries(formData.entries()) as Record<string, FormDataEntryValue>;
+      payload.context = form.dataset.context || 'contact';
+      payload.loadtime = payload.startedAt || '';
+      delete payload.startedAt;
+
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+        button.textContent = 'Sending…';
+      }
+      setStatus('Sending your inquiry…');
+
+      try {
+        const response = await fetch(CONTACT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => null) as { success?: boolean; message?: string } | null;
+
+        if (!response.ok || !result?.success) {
+          throw new Error(result?.message || 'We could not send your inquiry right now. Please call 412-628-0403.');
+        }
+
+        form.reset();
+        setStatus(result.message || 'Thank you. Your inquiry has been received by the website administrator for New Beginnings.', 'success');
+      } catch (error) {
+        const message = error instanceof Error
+          ? error.message
+          : 'We could not send your inquiry right now. Please call 412-628-0403.';
+        setStatus(message, 'error');
+      } finally {
+        restartTimer();
+        resetVerification();
+        if (button) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+          button.textContent = 'Send inquiry';
+        }
+      }
     });
   });
 </script>
 <style>
   .inquiry { padding-block: var(--section-standard); color: var(--white); background: var(--navy-900); }
   .inquiry-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: var(--gap-columns); align-items: start; }
-  .inquiry-copy { display: grid; gap: var(--space-5); position: sticky; top: 9rem; }
+  .inquiry-copy { display: grid; min-width: 0; gap: var(--space-5); position: sticky; top: 9rem; }
   h2 { color: var(--white); }
-  .inquiry-copy a { color: var(--white); font-weight: 750; }
+  .inquiry-copy a { color: var(--white); font-weight: 650; }
   .inquiry-copy :global(.inquiry-aside) { display: grid; margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid rgba(255,255,255,.22); gap: var(--space-4); }
   .inquiry-copy :global(.inquiry-aside h3) { color: var(--white); font-size: 1.05rem; }
   .inquiry-copy :global(.inquiry-aside p) { margin-top: var(--space-2); color: var(--sky-200); font-size: .92rem; }
   .inquiry-copy .lead { color: var(--sky-100); }
-  form { display: grid; gap: var(--space-4); padding: clamp(var(--space-5), 4vw, var(--space-7)); border-radius: var(--radius); background: var(--paper); color: var(--slate-700); box-shadow: var(--shadow); }
+  form { display: grid; min-width: 0; gap: var(--space-4); padding: clamp(var(--space-5), 4vw, var(--space-7)); border-radius: var(--radius); background: var(--paper); color: var(--slate-700); box-shadow: var(--shadow); }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-  label { display: grid; gap: var(--space-2); font-size: .92rem; font-weight: 700; }
+  label { display: grid; gap: var(--space-2); font-size: .92rem; font-weight: 650; }
+  .field-label { color: inherit; font: inherit; }
+  .field-label small { color: var(--slate-500); font-size: .82rem; font-weight: 500; }
+  .full-width { grid-column: 1 / -1; }
   input, select, textarea { width: 100%; padding: .75rem .85rem; border: 1px solid var(--slate-300); border-radius: .25rem; background: var(--white); color: var(--slate-700); }
   input:focus, select:focus, textarea:focus { border-color: var(--teal-700); box-shadow: 0 0 0 3px rgba(20,116,111,.14); outline: 0; }
   textarea { resize: vertical; }
   .privacy-note { color: var(--slate-600); font-size: .85rem; line-height: 1.45; }
+  .verification { display: grid; min-width: 0; gap: var(--space-2); }
+  .cf-turnstile { width: 100%; min-height: 65px; }
+  .verification > p { color: var(--slate-700); font-size: .92rem; font-weight: 650; }
+  button:disabled { cursor: wait; opacity: .72; }
   .trap { position: absolute; left: -9999px; }
-  .status { color: var(--navy-800); font-weight: 650; }
-  @media (max-width: 760px) { .inquiry-grid { grid-template-columns: 1fr; } .inquiry-copy { position: static; } }
+  .status { min-height: 1.5em; color: var(--navy-800); font-weight: 600; }
+  .status[data-state="error"] { color: #9b2c2c; }
+  .status[data-state="success"] { color: #22634f; }
+  @media (max-width: 760px) { .inquiry-grid { grid-template-columns: minmax(0,1fr); } .inquiry-copy { position: static; } }
+  @media (max-width: 419px) { .cf-turnstile { width: 150px; min-height: 140px; } }
   @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
 </style>

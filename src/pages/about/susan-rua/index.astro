@@ -22,18 +22,25 @@ if (!susanRua) {
         <p class="eyebrow">Organizational leadership</p>
         <h1>{susanRua.name}</h1>
         <p class="role">{susanRua.role}</p>
+        {susanRua.summary && <p class="lead">{susanRua.summary}</p>}
+      </div>
+      <aside class="founder-hero__record" aria-label="Professional record">
+        <p class="founder-hero__label">Professional record</p>
         {susanRua.credentials && (
-          <p class="credentials" aria-label="Professional credentials">
-            {susanRua.credentials.join(' · ')}
-          </p>
+          <div>
+            <span>Credentials</span>
+            <strong>{susanRua.credentials.join(' · ')}</strong>
+          </div>
         )}
-      </div>
-      <div class="founder-hero__statement">
-        <p>
-          Recovery housing works in the space between treatment appointments and everyday
-          life: a stable home, dependable routines, peer connection, and room to move forward.
-        </p>
-      </div>
+        <div>
+          <span>Field</span>
+          <strong>Substance use and recovery</strong>
+        </div>
+        <div>
+          <span>Specializing since</span>
+          <strong>1999</strong>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -41,7 +48,7 @@ if (!susanRua) {
     <div class="container biography__grid">
       <header>
         <p class="eyebrow">Background</p>
-        <h2>Clinical perspective. Lived-in understanding.</h2>
+        <h2>Counseling, nursing, and housing operations.</h2>
       </header>
       <div class="biography__copy">
         {susanRua.biography?.map((paragraph, index) => (
@@ -52,12 +59,12 @@ if (!susanRua) {
   </section>
 
   {(susanRua.education || susanRua.experience) && (
-    <section class="section section--tint record">
+    <section class="section record">
       <div class="container record__grid">
         {susanRua.experience && susanRua.experience.length > 0 && (
           <section aria-labelledby="experience-heading">
             <p class="eyebrow">Experience</p>
-            <h2 id="experience-heading">A long view of recovery.</h2>
+            <h2 id="experience-heading">Recovery-focused work.</h2>
             <ul>
               {susanRua.experience.map((item) => <li>{item}</li>)}
             </ul>
@@ -90,7 +97,10 @@ if (!susanRua) {
           their individual work in recovery.
         </p>
         <div class="actions">
-          <a class="button button--light" href="/recovery-housing/">How recovery housing works</a>
+          <a class="button button--light" href="/recovery-housing/">
+            How recovery housing works
+            <Icon name="lucide:arrow-right" aria-hidden="true" />
+          </a>
           <a class="mission-band__link" href="/about/board/">Board and governance</a>
         </div>
       </div>
@@ -99,27 +109,34 @@ if (!susanRua) {
 </MainLayout>
 
 <style>
-  .founder-hero { padding-block: clamp(var(--space-8), 9vw, 8rem); background: var(--sky-50); border-bottom: 1px solid var(--slate-200); }
+  .founder-hero { padding-block: var(--section-hero); background: var(--paper); border-bottom: 1px solid var(--slate-200); }
   .founder-hero__grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(19rem, .8fr); gap: clamp(var(--space-7), 9vw, 9rem); align-items: end; }
   .founder-hero__copy { display: grid; gap: var(--space-4); }
-  .founder-hero h1 { max-width: 12ch; }
-  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-6); align-items: center; gap: var(--space-2); font-weight: 700; text-decoration: none; }
-  .back-link :global(svg) { width: 1rem; }
-  .role { color: var(--teal-700); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; }
-  .credentials { padding-top: var(--space-4); border-top: 1px solid var(--slate-300); color: var(--navy-900); font-size: .9rem; font-weight: 750; letter-spacing: .1em; }
-  .founder-hero__statement { padding-block: var(--space-6); border-block: 1px solid var(--slate-300); }
-  .founder-hero__statement p { color: var(--navy-900); font-size: clamp(1.35rem, 2.3vw, 2rem); font-weight: 600; line-height: 1.35; }
+  .founder-hero h1 { max-width: 12ch; font-size: clamp(3.2rem, 5.8vw, 5.35rem); }
+  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-5); align-items: center; gap: var(--space-2); color: var(--navy-900); font-weight: 650; }
+  .back-link :global(svg) { width: 1rem; height: 1rem; }
+  .role { color: var(--teal-700); font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  .founder-hero .lead { margin-top: var(--space-2); }
+  .founder-hero__record { border-top: 1px solid var(--slate-300); }
+  .founder-hero__record > p, .founder-hero__record > div { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); }
+  .founder-hero__record .founder-hero__label { color: var(--slate-600); font-size: .75rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
+  .founder-hero__record div { display: grid; gap: var(--space-1); }
+  .founder-hero__record span { color: var(--slate-600); font-size: .78rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+  .founder-hero__record strong { color: var(--navy-900); font-size: 1.08rem; font-weight: 600; }
 
+  .biography { background: var(--sky-50); }
   .biography__grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
   .biography header { display: grid; gap: var(--space-4); }
+  .biography h2 { max-width: 13ch; }
   .biography__copy { max-width: var(--measure); }
   .biography__copy p + p { margin-top: var(--space-5); }
 
+  .record { background: var(--canvas); }
   .record__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-7), 9vw, 9rem); }
   .record section { display: grid; gap: var(--space-4); align-content: start; }
   .record h2 { max-width: 14ch; font-size: clamp(2rem, 3.4vw, 3rem); }
   .record ul { margin: var(--space-4) 0 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .record li { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); color: var(--navy-900); font-weight: 650; }
+  .record li { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); color: var(--navy-900); font-weight: 600; }
 
   .mission-band { padding-block: clamp(var(--space-8), 7vw, var(--space-9)); color: var(--white); background: var(--navy-950); }
   .mission-band__grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
@@ -127,11 +144,17 @@ if (!susanRua) {
   .mission-band .eyebrow { color: #9ed7d2; }
   .mission-band .lead { color: var(--sky-100); }
   .mission-band .actions { margin-top: var(--space-6); }
-  .mission-band__link { color: var(--white); font-weight: 700; }
+  .mission-band .button { gap: var(--space-2); }
+  .mission-band .button :global(svg) { width: 1rem; height: 1rem; }
+  .mission-band__link { color: var(--white); font-weight: 650; }
   .mission-band__link:hover { color: #9ed7d2; }
 
   @media (max-width: 760px) {
     .founder-hero__grid, .biography__grid, .record__grid, .mission-band__grid { grid-template-columns: 1fr; }
-    .founder-hero__statement { max-width: 35rem; }
+    .founder-hero__record { max-width: 34rem; }
+  }
+
+  @media (max-width: 520px) {
+    .founder-hero h1 { font-size: clamp(2.8rem, 14vw, 3.8rem); }
   }
 </style>

@@ -15,6 +15,12 @@ interface Props {
 }
 
 const { person } = Astro.props;
+const hasBackground = Boolean(
+  person.biography?.length ||
+  person.credentials?.length ||
+  person.education?.length ||
+  person.experience?.length,
+);
 ---
 
 <MainLayout
@@ -36,16 +42,34 @@ const { person } = Astro.props;
 
   <section class="section profile-body">
     <div class="container profile-grid">
-      <div class="profile-label">
-        <p class="eyebrow">Board service</p>
-        <h2>Stewardship of the mission.</h2>
-      </div>
+      <header>
+        <p class="eyebrow">Current public listing</p>
+        <h2>Board service</h2>
+      </header>
       <div class="profile-content">
         <p class="lead">
           {person.name} serves on the Board of Directors of New Beginnings Transitional
           Living Foundation.
         </p>
         {person.biography?.map((paragraph) => <p>{paragraph}</p>)}
+
+        {!hasBackground && (
+          <p>
+            This listing is intentionally concise. New Beginnings publishes leadership
+            information only after it has been confirmed for public use.
+          </p>
+        )}
+
+        <dl class="profile-record">
+          <div>
+            <dt>Organization</dt>
+            <dd>New Beginnings Transitional Living Foundation</dd>
+          </div>
+          <div>
+            <dt>Role</dt>
+            <dd>{person.role}</dd>
+          </div>
+        </dl>
 
         {person.credentials && person.credentials.length > 0 && (
           <section class="profile-detail" aria-labelledby="credentials-heading">
@@ -83,38 +107,51 @@ const { person } = Astro.props;
         <p class="eyebrow">Organization information</p>
         <h2>Review New Beginnings’ public credentials.</h2>
       </div>
-      <a class="button button--light" href="/about/transparency/">View transparency information</a>
+      <a class="button button--light" href="/about/transparency/">
+        View transparency information
+        <Icon name="lucide:arrow-right" aria-hidden="true" />
+      </a>
     </div>
   </section>
 </MainLayout>
 
 <style>
-  .profile-hero { padding-block: clamp(var(--space-8), 9vw, 8rem); background: var(--sky-50); border-bottom: 1px solid var(--slate-200); }
+  .profile-hero { padding-block: clamp(var(--space-8), 8vw, var(--space-9)); background: var(--sky-50); border-bottom: 1px solid var(--slate-200); }
   .profile-hero__inner { display: grid; gap: var(--space-4); }
-  .profile-hero h1 { max-width: 14ch; }
-  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-6); align-items: center; gap: var(--space-2); font-weight: 700; text-decoration: none; }
-  .back-link :global(svg) { width: 1rem; }
-  .role { color: var(--teal-700); font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 700; }
-  .profile-hero .lead { margin-top: var(--space-3); }
+  .profile-hero h1 { max-width: 15ch; font-size: clamp(3rem, 5.5vw, 5rem); }
+  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-5); align-items: center; gap: var(--space-2); color: var(--navy-900); font-weight: 650; }
+  .back-link :global(svg) { width: 1rem; height: 1rem; }
+  .role { color: var(--teal-700); font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 600; }
+  .profile-hero .lead { margin-top: var(--space-2); }
 
-  .profile-grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
-  .profile-label { display: grid; gap: var(--space-4); }
+  .profile-grid { display: grid; grid-template-columns: minmax(0, .68fr) minmax(0, 1.32fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .profile-grid > header { display: grid; gap: var(--space-4); }
   .profile-content { max-width: var(--measure); }
   .profile-content > p + p { margin-top: var(--space-5); }
-  .profile-detail { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); }
+  .profile-record { margin: var(--space-7) 0 0; border-top: 1px solid var(--slate-300); }
+  .profile-record > div { display: grid; grid-template-columns: minmax(8rem, .45fr) minmax(0, 1.55fr); gap: var(--space-5); padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); }
+  .profile-record dt { color: var(--slate-600); font-size: .78rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+  .profile-record dd { margin: 0; color: var(--navy-900); font-weight: 600; }
+  .profile-detail { margin-top: var(--space-7); }
   .profile-detail h3 { margin-bottom: var(--space-4); }
-  .profile-detail ul { display: grid; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
-  .profile-detail li { position: relative; padding-left: var(--space-5); }
-  .profile-detail li::before { position: absolute; top: .72em; left: 0; width: .5rem; height: 2px; background: var(--teal-700); content: ''; }
+  .profile-detail ul { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
+  .profile-detail li { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); }
 
-  .profile-footer { padding-block: var(--space-8); color: var(--white); background: var(--navy-950); }
+  .profile-footer { padding-block: var(--section-compact); color: var(--white); background: var(--navy-900); }
   .profile-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-7); }
   .profile-footer h2 { max-width: 18ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(2rem, 3.5vw, 3rem); }
   .profile-footer .eyebrow { color: #9ed7d2; }
+  .profile-footer .button { gap: var(--space-2); }
+  .profile-footer .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 760px) {
     .profile-grid { grid-template-columns: 1fr; }
     .profile-footer__inner { display: grid; }
     .profile-footer .button { justify-self: start; }
+  }
+
+  @media (max-width: 520px) {
+    .profile-hero h1 { font-size: clamp(2.7rem, 13vw, 3.7rem); }
+    .profile-record > div { grid-template-columns: 1fr; gap: var(--space-2); }
   }
 </style>

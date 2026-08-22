@@ -1,60 +1,208 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../../../layouts/MainLayout.astro';
-import PageHero from '../../../components/PageHero.astro';
 import CtaBand from '../../../components/CtaBand.astro';
----
-<MainLayout title="Women’s Recovery Housing" description="Recovery housing for adult women in Pittsburgh, built around privacy, consistency, and peer community.">
-  <PageHero eyebrow="Women’s recovery housing" title="Safety, structure, and a community of recovery." intro="A substance-free shared residence where adult women can strengthen routines, relationships, and independence." image="/images/womens-community.jpg" imageAlt="Women talking together in a bright community room" actions />
 
-  <section class="section opening">
-    <div class="container opening-grid">
-      <div class="opening-title"><p class="eyebrow">A dependable environment</p><h2>Space for daily recovery to take hold.</h2></div>
-      <div class="opening-copy"><p class="lead">Recovery housing can provide consistency during a season of change, without asking residents to step away from the responsibilities and relationships of ordinary life.</p><p>New Beginnings provides shared housing for adult women committed to substance-free living. The environment is peer-driven and recovery-focused, while treatment and other clinical services remain with independent licensed providers.</p></div>
-      <aside><span>Serving women in</span><strong>Brighton Heights</strong><small>and the greater Pittsburgh area</small></aside>
+const principles = [
+  {
+    number: '01',
+    title: 'Resident privacy',
+    copy: 'Safety guides how exact locations and personal information are shared.',
+  },
+  {
+    number: '02',
+    title: 'Peer community',
+    copy: 'Shared living places the daily work of recovery in a community of other women.',
+  },
+  {
+    number: '03',
+    title: 'Consistent expectations',
+    copy: 'A dependable household framework supports routines and shared responsibility.',
+  },
+  {
+    number: '04',
+    title: 'Independent care',
+    copy: 'Treatment and clinical services remain with appropriately licensed outside providers.',
+  },
+];
+---
+
+<MainLayout title="Women’s Recovery Housing" description="Recovery housing for adult women in Pittsburgh, built around privacy, consistency, and peer community.">
+  <section class="women-hero">
+    <div class="container women-hero__grid">
+      <figure class="women-hero__photo">
+        <img src="/images/shared-bedroom.webp" alt="A bright shared bedroom with two beds" width="2200" height="1466" fetchpriority="high" />
+      </figure>
+      <div class="women-hero__copy">
+        <p class="eyebrow">Women’s recovery housing</p>
+        <h1>Consistency for the work of moving forward.</h1>
+        <p class="lead">Substance-free shared housing for adult women, grounded in peer community, privacy, and the routines of everyday recovery.</p>
+        <div class="actions women-hero__actions">
+          <a class="button" href="/admissions/">Begin with admissions<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button button--outline" href="/recovery-housing/">How recovery housing works</a>
+        </div>
+        <p class="women-hero__location"><Icon name="lucide:map-pin" aria-hidden="true" />Serving women in Brighton Heights and the greater Pittsburgh area</p>
+      </div>
     </div>
   </section>
 
-  <section class="principles section--navy">
-    <div class="container principles-inner">
-      <div class="principles-head"><p class="eyebrow">What supports the home</p><h2>Dignity is practical.</h2><p>It shows up in privacy, consistency, shared responsibility, and the way people treat one another.</p></div>
-      <ol>
-        <li><span>01</span><div><h3>Privacy</h3><p>Resident safety guides how locations and personal information are shared.</p></div></li>
-        <li><span>02</span><div><h3>Shared recovery</h3><p>Peer connection turns individual effort into a more dependable community.</p></div></li>
-        <li><span>03</span><div><h3>Daily structure</h3><p>Consistent expectations support the routines that make greater independence possible.</p></div></li>
-        <li><span>04</span><div><h3>Connection to care</h3><p>Residents remain connected to appropriate outside treatment and recovery resources.</p></div></li>
+  <section class="opening-section">
+    <div class="container opening-layout">
+      <header class="opening-heading">
+        <p class="eyebrow">A dependable environment</p>
+        <h2>Space for daily recovery to take hold.</h2>
+      </header>
+      <div class="opening-copy">
+        <p class="lead">Recovery housing can provide consistency during a season of change, without asking residents to step away from the responsibilities and relationships of ordinary life.</p>
+        <p>New Beginnings provides shared housing for adult women committed to substance-free living. The environment is peer-driven and recovery-focused, while treatment and other clinical services remain with independent licensed providers.</p>
+      </div>
+      <aside class="opening-fact">
+        <Icon name="lucide:home" aria-hidden="true" />
+        <p><strong>Recovery is lived day by day.</strong><span>The residence supports the routines, relationships, and responsibilities that happen between milestones.</span></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="principles-section">
+    <div class="container principles-layout">
+      <header class="principles-heading">
+        <p class="eyebrow">What supports the home</p>
+        <h2>Dignity is practical.</h2>
+        <p>It shows up in privacy, consistency, shared responsibility, and the way people treat one another.</p>
+      </header>
+      <ol class="principles-list">
+        {principles.map((principle) => (
+          <li>
+            <span>{principle.number}</span>
+            <div><h3>{principle.title}</h3><p>{principle.copy}</p></div>
+          </li>
+        ))}
       </ol>
     </div>
   </section>
 
-  <section class="section inquiry-note">
-    <div class="container note-grid">
-      <div><p class="eyebrow">Beginning privately</p><h2>You do not need to tell your whole story online.</h2></div>
-      <div><p class="lead">The first step is a general conversation about what you are looking for.</p><p>New Beginnings will explain the current admissions process and share exact location information privately when appropriate. Please do not use the public form for treatment records, diagnoses, medication details, criminal-history information, or other sensitive information.</p><a class="text-link" href="/admissions/">See the admissions process</a></div>
+  <section class="community-section">
+    <div class="container community-layout">
+      <div class="community-copy">
+        <p class="eyebrow">Pittsburgh-area housing</p>
+        <h2>A residence connected to life beyond its front door.</h2>
+        <p class="lead">Recovery housing is one part of a wider network that can include work, education, family, recovery meetings, medical care, counseling, and other community resources.</p>
+        <div class="community-location">
+          <Icon name="lucide:map-pin" aria-hidden="true" />
+          <p><strong>Neighborhood-level information</strong>Women’s recovery housing is currently listed in Brighton Heights and the greater Pittsburgh area.</p>
+        </div>
+      </div>
+      <figure class="community-photo">
+        <img src="/images/house-kitchen.webp" alt="A kitchen and dining table in a welcoming home" width="2200" height="1467" loading="lazy" />
+      </figure>
     </div>
   </section>
 
-  <CtaBand title="Ask about women’s recovery housing." label="Begin with admissions" />
+  <section class="privacy-section">
+    <div class="container privacy-layout">
+      <header>
+        <p class="eyebrow">Beginning privately</p>
+        <h2>You do not need to tell your whole story online.</h2>
+      </header>
+      <div class="privacy-copy">
+        <p class="lead">The first step is a general conversation about what you are looking for.</p>
+        <p>Staff can explain the current admissions process and provide exact location information privately when appropriate. Please do not use the public form for treatment records, diagnoses, medication details, criminal-history information, or other sensitive information.</p>
+        <div class="privacy-actions">
+          <a class="button button--outline" href="/admissions/">See the admissions process<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <p><Icon name="lucide:lock-keyhole" aria-hidden="true" />Exact residence locations are not published on this website.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Ask about women’s recovery housing." label="Begin with admissions" text="Start with a private, general conversation. Staff can explain the current process and what may happen next." />
 </MainLayout>
 
 <style>
-  .opening-grid { display: grid; grid-template-columns: .8fr 1.05fr .55fr; gap: clamp(var(--space-6), 5vw, var(--space-8)); align-items: start; }
-  .opening-title, .opening-copy { display: grid; gap: var(--space-4); }
-  .opening-copy { max-width: var(--measure); }
-  .opening aside { display: grid; padding-block: var(--space-5); border-block: 1px solid var(--slate-300); gap: var(--space-2); }
-  .opening aside span { color: var(--teal-700); font-size: .75rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-  .opening aside strong { color: var(--navy-900); font-size: 1.3rem; }
-  .opening aside small { color: var(--slate-600); font-size: .9rem; }
-  .principles { padding-block: var(--section-standard); }
-  .principles-inner { display: grid; grid-template-columns: .75fr 1.25fr; gap: var(--gap-columns); }
-  .principles-head { display: grid; align-content: start; gap: var(--space-4); }
-  .principles-head > p:last-child { max-width: 28rem; color: var(--sky-200); }
-  .principles ol { margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.25); list-style: none; }
-  .principles li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-5); border-bottom: 1px solid rgba(255,255,255,.25); }
-  .principles li span { color: #9ed7d2; font-weight: 750; }
-  .principles li div { display: grid; gap: var(--space-2); }
-  .principles li p { color: var(--sky-200); }
-  .note-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: var(--gap-columns); }
-  .note-grid > div { display: grid; align-content: start; gap: var(--space-4); }
-  @media (max-width: 900px) { .opening-grid { grid-template-columns: 1fr 1fr; } .opening aside { grid-column: 1 / -1; grid-template-columns: auto auto 1fr; align-items: baseline; gap: var(--space-4); } .principles-inner, .note-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 600px) { .opening-grid { grid-template-columns: 1fr; } .opening aside { grid-column: auto; grid-template-columns: 1fr; gap: var(--space-2); } }
+  .women-hero { border-bottom: 1px solid var(--slate-200); background: var(--paper); }
+  .women-hero__grid { display: grid; min-height: clamp(35rem, 53vw, 44rem); grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: stretch; }
+  .women-hero__photo { margin: 0 0 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2); overflow: hidden; background: var(--slate-200); }
+  .women-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
+  .women-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem); flex-direction: column; justify-content: center; }
+  .women-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); font-size: clamp(3.1rem, 5.7vw, 5.35rem); }
+  .women-hero .lead { max-width: 34rem; margin-top: var(--space-5); }
+  .women-hero__actions { margin-top: var(--space-6); }
+  .women-hero__actions .button { gap: .6rem; }
+  .women-hero__actions :global(svg) { width: 1rem; height: 1rem; }
+  .women-hero__location { display: flex; max-width: 32rem; margin-top: var(--space-7); padding-top: var(--space-4); border-top: 1px solid var(--slate-300); align-items: flex-start; gap: .7rem; color: var(--slate-600); font-size: .92rem; line-height: 1.5; }
+  .women-hero__location :global(svg) { width: 1.15rem; height: 1.15rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; flex: 0 0 auto; }
+
+  .opening-section { padding-block: var(--section-standard); background: var(--canvas); }
+  .opening-layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1fr) minmax(15rem, .48fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .opening-heading h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .opening-copy { max-width: 39rem; }
+  .opening-copy p + p { margin-top: var(--space-5); }
+  .opening-fact { display: grid; padding-block: var(--space-5); border-block: 1px solid var(--slate-300); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); }
+  .opening-fact :global(svg) { width: 1.6rem; height: 1.6rem; color: var(--teal-700); stroke-width: 1.55; }
+  .opening-fact strong, .opening-fact span { display: block; }
+  .opening-fact strong { color: var(--navy-900); font-size: 1rem; font-weight: 600; line-height: 1.35; }
+  .opening-fact span { margin-top: .4rem; color: var(--slate-600); font-size: .9rem; line-height: 1.5; }
+
+  .principles-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
+  .principles-layout { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .principles-heading { position: sticky; top: 8.5rem; }
+  .principles-heading .eyebrow { color: #9ed7d2; }
+  .principles-heading h2 { max-width: 10ch; margin-top: var(--space-4); color: var(--white); }
+  .principles-heading > p:last-child { max-width: 28rem; margin-top: var(--space-5); color: var(--sky-200); }
+  .principles-list { margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.24); list-style: none; }
+  .principles-list li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid rgba(255,255,255,.24); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
+  .principles-list > li > span { color: #9ed7d2; font-size: .82rem; font-weight: 650; letter-spacing: .08em; }
+  .principles-list h3 { color: var(--white); font-size: 1.3rem; }
+  .principles-list p { max-width: 39rem; margin-top: .45rem; color: var(--sky-200); line-height: 1.5; }
+
+  .community-section { padding-block: var(--section-standard); background: var(--sky-50); }
+  .community-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
+  .community-copy { max-width: 39rem; }
+  .community-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
+  .community-copy .lead { margin-top: var(--space-6); }
+  .community-location { display: grid; margin-top: var(--space-7); padding-block: var(--space-5); border-block: 1px solid var(--slate-300); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); }
+  .community-location :global(svg) { width: 1.6rem; height: 1.6rem; color: var(--teal-700); stroke-width: 1.55; }
+  .community-location p { color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
+  .community-location strong { display: block; margin-bottom: .3rem; color: var(--navy-900); font-weight: 600; }
+  .community-photo { min-height: 34rem; margin: 0; overflow: hidden; box-shadow: var(--shadow-raised); }
+  .community-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(.98); }
+
+  .privacy-section { padding-block: var(--section-standard); background: var(--paper); }
+  .privacy-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--gap-columns); align-items: start; }
+  .privacy-layout header h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .privacy-copy { max-width: 43rem; }
+  .privacy-copy > p + p { margin-top: var(--space-5); }
+  .privacy-actions { display: grid; margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); grid-template-columns: auto minmax(14rem, 1fr); gap: var(--space-5); align-items: center; }
+  .privacy-actions .button { gap: .6rem; }
+  .privacy-actions .button :global(svg) { width: 1rem; height: 1rem; }
+  .privacy-actions p { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: .6rem; color: var(--slate-600); font-size: .9rem; line-height: 1.45; }
+  .privacy-actions p :global(svg) { width: 1.1rem; height: 1.1rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
+
+  @media (max-width: 960px) {
+    .opening-layout { grid-template-columns: 1fr 1fr; }
+    .opening-fact { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 900px) {
+    .women-hero__grid, .principles-layout, .community-layout, .privacy-layout { grid-template-columns: 1fr; }
+    .women-hero__photo { height: clamp(20rem, 52vw, 28rem); margin: 0 calc(var(--gutter) * -1); }
+    .women-hero__copy { padding: var(--space-8) 0; }
+    .principles-layout, .community-layout, .privacy-layout { gap: var(--space-7); }
+    .principles-heading { position: static; }
+    .community-photo { order: -1; min-height: 0; aspect-ratio: 16 / 10; }
+  }
+
+  @media (max-width: 620px) {
+    .women-hero__photo { height: 16rem; }
+    .women-hero__copy { padding-block: var(--space-7); }
+    .women-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
+    .women-hero__actions { display: grid; }
+    .women-hero__actions .button { width: 100%; }
+    .opening-layout { grid-template-columns: 1fr; gap: var(--space-6); }
+    .opening-fact { grid-column: auto; }
+    .principles-layout, .community-layout, .privacy-layout { gap: var(--space-6); }
+    .community-photo { aspect-ratio: 4 / 3; }
+    .privacy-actions { grid-template-columns: 1fr; align-items: start; }
+    .privacy-actions .button { width: 100%; }
+  }
 </style>
