@@ -81,6 +81,33 @@ const audit = await send('Runtime.evaluate', {
     h1Count: document.querySelectorAll('h1').length,
     duplicateIds: [...document.querySelectorAll('[id]')].map((node) => node.id).filter((id, index, ids) => ids.indexOf(id) !== index),
     unnamedButtons: [...document.querySelectorAll('button')].filter((button) => !(button.textContent || '').trim() && !button.getAttribute('aria-label')).length,
+    turnstileFrames: document.querySelectorAll('.cf-turnstile iframe').length,
+    turnstileResponseFields: document.querySelectorAll('[name="cf-turnstile-response"]').length,
+    turnstileApiPresent: typeof window.turnstile === 'object',
+    turnstileResources: performance.getEntriesByType('resource')
+      .filter((entry) => entry.name.includes('challenges.cloudflare.com'))
+      .map((entry) => ({ name: entry.name.split('?')[0], duration: Math.round(entry.duration), transferSize: entry.transferSize })),
+    turnstileWidgets: [...document.querySelectorAll('.cf-turnstile')].map((widget) => ({
+      widgetId: widget.dataset.widgetId || '',
+      childCount: widget.childElementCount,
+      width: Math.round(widget.getBoundingClientRect().width),
+      height: Math.round(widget.getBoundingClientRect().height),
+      display: getComputedStyle(widget).display,
+      visibility: getComputedStyle(widget).visibility,
+      hasShadowRoot: Boolean(widget.shadowRoot),
+      children: [...widget.children].map((child) => ({
+        tag: child.tagName.toLowerCase(),
+        id: child.id,
+        className: child.className,
+        type: child.getAttribute('type') || ''
+      })),
+      responsePresent: Boolean(widget.querySelector('[name="cf-turnstile-response"]')),
+      responseLength: widget.querySelector('[name="cf-turnstile-response"]')?.value.length || 0
+    })),
+    frameHosts: [...document.querySelectorAll('iframe')].map((frame) => {
+      try { return new URL(frame.src).hostname; } catch { return ''; }
+    }).filter(Boolean),
+    mapFrames: document.querySelectorAll('iframe[src*="openstreetmap.org"]').length,
     overflowingElements: [...document.querySelectorAll('body *')]
       .filter((element) => {
         const rect = element.getBoundingClientRect();
@@ -110,5 +137,21 @@ const screenshot = await send('Page.captureScreenshot', {
 });
 const output = `/tmp/nbts-${label}-${width}.png`;
 await writeFile(output, Buffer.from(screenshot.data, 'base64'));
-console.log(JSON.stringify({ output, width, height, captureHeight: maxCaptureHeight, ...audit.result.value }));
+const widgetView = await send('Runtime.evaluate', {
+  expression: `(() => {
+    const widget = document.querySelector('[data-turnstile-widget]');
+    if (!widget) return false;
+    widget.scrollIntoView({ block: 'center' });
+    return true;
+  })()`,
+  returnByValue: true,
+});
+let turnstileOutput = '';
+if (widgetView.result.value) {
+  await new Promise((resolve) => setTimeout(resolve, 1800));
+  const widgetScreenshot = await send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+  turnstileOutput = `/tmp/nbts-${label}-turnstile-${width}.png`;
+  await writeFile(turnstileOutput, Buffer.from(widgetScreenshot.data, 'base64'));
+}
+console.log(JSON.stringify({ output, turnstileOutput, width, height, captureHeight: maxCaptureHeight, ...audit.result.value }));
 socket.close();
