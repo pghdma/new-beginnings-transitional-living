@@ -106,14 +106,14 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .utility-inner { display: flex; min-height: 2.25rem; align-items: center; justify-content: space-between; gap: 1rem; }
   .utility-inner span { display: flex; align-items: center; gap: .55rem; }
   .utility-inner i { color: var(--slate-300); font-style: normal; }
-  .utility a { color: var(--white); font-weight: 700; }
-  .nav-wrap { background: rgba(255,254,250,.98); }
+  .utility a { color: var(--white); font-weight: 650; }
+  .nav-wrap { background: var(--paper); }
   .nav-inner { display: flex; min-height: 5rem; align-items: center; justify-content: space-between; gap: 2rem; }
   .wordmark { display: grid; color: var(--navy-950); line-height: 1; text-decoration: none; }
-  .wordmark span { font-size: 1.45rem; font-weight: 780; letter-spacing: -.025em; }
-  .wordmark small { margin-top: .3rem; color: var(--slate-600); font-size: .71rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
+  .wordmark span { font-size: 1.45rem; font-weight: 720; letter-spacing: -.025em; }
+  .wordmark small { margin-top: .3rem; color: var(--slate-600); font-size: .71rem; font-weight: 600; letter-spacing: .075em; text-transform: uppercase; }
   nav { display: flex; align-items: center; gap: clamp(.65rem, 1vw, 1.15rem); }
-  nav a { color: var(--navy-950); font-size: .9rem; font-weight: 650; text-decoration: none; }
+  nav a { color: var(--navy-950); font-size: .9rem; font-weight: 600; text-decoration: none; }
   nav > a[aria-current='page'], .nav-group.is-current > a, .nav-group > a[aria-current='page'] { color: var(--teal-700); }
   .nav-group { position: relative; display: flex; align-items: center; gap: .22rem; }
   .submenu-toggle { display: grid; width: 1.5rem; height: 1.75rem; padding: 0; place-items: center; border: 0; background: transparent; color: var(--navy-950); cursor: pointer; }
@@ -133,7 +133,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .menu-button[aria-expanded='true'] .menu-icon i:last-child { transform: translateY(-.44rem) rotate(-45deg); }
   @media (max-width: 1080px) {
     .menu-button { display: block; }
-    nav { position: absolute; inset: 7.25rem 0 auto; display: none; max-height: calc(100vh - 7.25rem); padding: 1rem; overflow-y: auto; border-top: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
+    nav { position: absolute; inset: 7.25rem 0 auto; display: none; max-height: calc(100vh - 7.25rem); padding: 1.5rem; overflow-y: auto; border-top: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
     nav.is-open { display: grid; }
     nav > a { padding: .75rem; }
     .nav-group { display: grid; grid-template-columns: 1fr auto; gap: 0; }
