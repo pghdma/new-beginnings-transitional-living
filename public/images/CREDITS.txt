@@ -1,5 +1,8 @@
 Photography is licensed from Pexels and used as general editorial imagery. People shown are models or members of the public and are not identified as New Beginnings residents.
 
+og-default.jpg is a screenshot of the New Beginnings homepage using the licensed
+house-living-room.webp photography credited below.
+
 hero-community.jpg and recovery-routine.jpg
 Curtis Adams — https://www.pexels.com/photo/communal-area-interior-design-5008384/
 
@@ -58,3 +61,12 @@ Zac Gudakov — https://unsplash.com/photos/a-living-room-with-a-staircase-JS7wy
 
 front-door.webp
 Arron Slade — https://unsplash.com/photos/a-blue-front-door-on-a-white-brick-house-fnPPA3hpbgQ
+
+windowed-living-room.webp
+Grovemade — https://unsplash.com/photos/empty-living-room-vfIx29EsLHA
+
+rustic-dining-room.webp
+Leandro Peixoto — https://unsplash.com/photos/empty-dining-room-with-opened-french-window-oUTNdrhfidc
+
+pittsburgh-rowhouses.webp
+Zhen Yao — https://unsplash.com/photos/a-row-of-multi-colored-houses-in-a-neighborhood-0bApZ0Yag0I

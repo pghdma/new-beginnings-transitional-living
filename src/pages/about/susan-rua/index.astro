@@ -14,7 +14,7 @@ if (!susanRua) {
 >
   <section class="founder-hero">
     <div class="container founder-hero__grid">
-      <div class="founder-hero__copy">
+      <div class="founder-hero__identity">
         <a class="back-link" href="/about/">
           <Icon name="lucide:arrow-left" aria-hidden="true" />
           About New Beginnings
@@ -22,33 +22,25 @@ if (!susanRua) {
         <p class="eyebrow">Organizational leadership</p>
         <h1>{susanRua.name}</h1>
         <p class="role">{susanRua.role}</p>
-        {susanRua.summary && <p class="lead">{susanRua.summary}</p>}
       </div>
-      <aside class="founder-hero__record" aria-label="Professional record">
-        <p class="founder-hero__label">Professional record</p>
-        {susanRua.credentials && (
-          <div>
-            <span>Credentials</span>
-            <strong>{susanRua.credentials.join(' · ')}</strong>
-          </div>
-        )}
-        <div>
-          <span>Field</span>
-          <strong>Substance use and recovery</strong>
+      <div class="founder-hero__introduction">
+        {susanRua.summary && <p class="lead">{susanRua.summary}</p>}
+        <div class="professional-scope" aria-label="Professional background summary">
+          {susanRua.credentials && (
+            <p><span>Credentials</span><strong>{susanRua.credentials.join(' · ')}</strong></p>
+          )}
+          <p><span>Field</span><strong>Substance use and recovery</strong></p>
+          <p><span>Specializing since</span><strong>1999</strong></p>
         </div>
-        <div>
-          <span>Specializing since</span>
-          <strong>1999</strong>
-        </div>
-      </aside>
+      </div>
     </div>
   </section>
 
   <section class="section biography">
     <div class="container biography__grid">
-      <header>
+      <header class="biography__intro">
         <p class="eyebrow">Background</p>
-        <h2>Counseling, nursing, and housing operations.</h2>
+        <h2>Experience shaped across care and housing.</h2>
       </header>
       <div class="biography__copy">
         {susanRua.biography?.map((paragraph, index) => (
@@ -59,25 +51,34 @@ if (!susanRua) {
   </section>
 
   {(susanRua.education || susanRua.experience) && (
-    <section class="section record">
-      <div class="container record__grid">
+    <section class="record">
+      <div class="container record__stage">
         {susanRua.experience && susanRua.experience.length > 0 && (
-          <section aria-labelledby="experience-heading">
+          <section class="experience" aria-labelledby="experience-heading">
             <p class="eyebrow">Experience</p>
             <h2 id="experience-heading">Recovery-focused work.</h2>
             <ul>
-              {susanRua.experience.map((item) => <li>{item}</li>)}
+              {susanRua.experience.map((item) => (
+                <li><Icon name="lucide:check" aria-hidden="true" />{item}</li>
+              ))}
             </ul>
           </section>
         )}
         {susanRua.education && susanRua.education.length > 0 && (
-          <section aria-labelledby="education-heading">
+          <section class="education" aria-labelledby="education-heading">
             <p class="eyebrow">Education and credentials</p>
             <h2 id="education-heading">Professional foundation.</h2>
             <ul>
-              {susanRua.education.map((item) => <li>{item}</li>)}
-              {susanRua.credentials?.map((item) => <li>{item}</li>)}
+              {susanRua.education.map((item) => (
+                <li><Icon name="lucide:graduation-cap" aria-hidden="true" />{item}</li>
+              ))}
             </ul>
+            {susanRua.credentials && (
+              <div class="credentials">
+                <span>Credentials</span>
+                <strong>{susanRua.credentials.join(' · ')}</strong>
+              </div>
+            )}
           </section>
         )}
       </div>
@@ -90,7 +91,7 @@ if (!susanRua) {
         <p class="eyebrow">The New Beginnings mission</p>
         <h2>A dependable foundation outside the treatment room.</h2>
       </div>
-      <div>
+      <div class="mission-band__copy">
         <p class="lead">
           New Beginnings provides recovery housing, not clinical treatment. Its homes are
           designed to support the daily structure and community that help residents continue
@@ -109,52 +110,73 @@ if (!susanRua) {
 </MainLayout>
 
 <style>
-  .founder-hero { padding-block: var(--section-hero); background: var(--paper); border-bottom: 1px solid var(--slate-200); }
-  .founder-hero__grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(19rem, .8fr); gap: clamp(var(--space-7), 9vw, 9rem); align-items: end; }
-  .founder-hero__copy { display: grid; gap: var(--space-4); }
-  .founder-hero h1 { max-width: 12ch; font-size: clamp(3.2rem, 5.8vw, 5.35rem); }
-  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-5); align-items: center; gap: var(--space-2); color: var(--navy-900); font-weight: 650; }
+  .founder-hero { color: var(--white); background: var(--navy-950); }
+  .founder-hero__grid { display: grid; min-height: clamp(36rem, 54vw, 44rem); grid-template-columns: minmax(0, 1.05fr) minmax(22rem, .95fr); gap: clamp(var(--space-8), 9vw, 9rem); align-items: center; }
+  .founder-hero__identity { display: grid; padding-block: var(--section-hero); gap: var(--space-4); }
+  .founder-hero .eyebrow { color: #9ed7d2; }
+  .founder-hero h1 { max-width: 10ch; color: var(--white); font-size: clamp(3.4rem, 6.3vw, 5.9rem); }
+  .role { color: #9ed7d2; font-size: clamp(1.2rem, 2vw, 1.55rem); font-weight: 600; }
+  .back-link { display: inline-flex; width: fit-content; margin-bottom: var(--space-6); align-items: center; gap: var(--space-2); color: var(--sky-100); font-weight: 650; }
+  .back-link:hover { color: var(--white); }
   .back-link :global(svg) { width: 1rem; height: 1rem; }
-  .role { color: var(--teal-700); font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
-  .founder-hero .lead { margin-top: var(--space-2); }
-  .founder-hero__record { border-top: 1px solid var(--slate-300); }
-  .founder-hero__record > p, .founder-hero__record > div { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); }
-  .founder-hero__record .founder-hero__label { color: var(--slate-600); font-size: .75rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
-  .founder-hero__record div { display: grid; gap: var(--space-1); }
-  .founder-hero__record span { color: var(--slate-600); font-size: .78rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
-  .founder-hero__record strong { color: var(--navy-900); font-size: 1.08rem; font-weight: 600; }
+  .founder-hero__introduction { max-width: 34rem; }
+  .founder-hero__introduction .lead { color: var(--sky-100); font-size: clamp(1.2rem, 2vw, 1.5rem); }
+  .professional-scope { display: grid; margin-top: var(--space-7); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5) var(--space-7); }
+  .professional-scope p { display: grid; gap: var(--space-2); }
+  .professional-scope span { color: #9ed7d2; font-size: .75rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+  .professional-scope strong { color: var(--white); font-size: 1.05rem; font-weight: 600; line-height: 1.35; }
 
-  .biography { background: var(--sky-50); }
-  .biography__grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
-  .biography header { display: grid; gap: var(--space-4); }
-  .biography h2 { max-width: 13ch; }
+  .biography { background: var(--paper); }
+  .biography__grid { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-8), 8vw, 8rem); align-items: start; }
+  .biography__intro { display: grid; max-width: 30rem; gap: var(--space-4); }
+  .biography__intro h2 { max-width: 12ch; }
   .biography__copy { max-width: var(--measure); }
   .biography__copy p + p { margin-top: var(--space-5); }
 
-  .record { background: var(--canvas); }
-  .record__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-7), 9vw, 9rem); }
-  .record section { display: grid; gap: var(--space-4); align-content: start; }
-  .record h2 { max-width: 14ch; font-size: clamp(2rem, 3.4vw, 3rem); }
-  .record ul { margin: var(--space-4) 0 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .record li { padding-block: var(--space-4); border-bottom: 1px solid var(--slate-300); color: var(--navy-900); font-weight: 600; }
+  .record { background: linear-gradient(90deg, var(--navy-900) 0 50%, var(--sky-50) 50% 100%); }
+  .record__stage { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(20rem, .85fr); align-items: center; }
+  .experience { display: grid; min-height: 39rem; padding: var(--section-standard) clamp(var(--space-7), 7vw, var(--space-9)) var(--section-standard) 0; color: var(--white); align-content: center; gap: var(--space-4); }
+  .experience .eyebrow { color: #9ed7d2; }
+  .experience h2 { max-width: 12ch; color: var(--white); }
+  .experience ul, .education ul { display: grid; margin: var(--space-5) 0 0; padding: 0; gap: var(--space-5); list-style: none; }
+  .experience li, .education li { display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: var(--space-3); font-weight: 600; line-height: 1.5; }
+  .experience li { color: var(--sky-100); }
+  .experience li > :global(svg), .education li > :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .25rem; color: #9ed7d2; stroke-width: 2; }
+  .education { display: grid; min-height: 39rem; padding: var(--section-standard) 0 var(--section-standard) clamp(var(--space-7), 7vw, var(--space-9)); align-content: center; gap: var(--space-4); }
+  .education h2 { max-width: 12ch; }
+  .education li { color: var(--navy-900); }
+  .education li > :global(svg) { color: var(--teal-700); }
+  .credentials { display: grid; margin-top: var(--space-6); gap: var(--space-2); }
+  .credentials span { color: var(--teal-700); font-size: .75rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+  .credentials strong { color: var(--navy-900); font-size: 1.15rem; font-weight: 600; letter-spacing: .04em; }
 
-  .mission-band { padding-block: clamp(var(--space-8), 7vw, var(--space-9)); color: var(--white); background: var(--navy-950); }
-  .mission-band__grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
-  .mission-band h2 { max-width: 16ch; margin-top: var(--space-3); color: var(--white); }
-  .mission-band .eyebrow { color: #9ed7d2; }
-  .mission-band .lead { color: var(--sky-100); }
+  .mission-band { padding-block: var(--section-standard); color: var(--white); background: var(--teal-800); }
+  .mission-band__grid { display: grid; grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr); gap: clamp(var(--space-8), 8vw, 8rem); align-items: start; }
+  .mission-band h2 { max-width: 15ch; margin-top: var(--space-4); color: var(--white); }
+  .mission-band .eyebrow { color: #c5ece8; }
+  .mission-band .lead { color: var(--white); }
   .mission-band .actions { margin-top: var(--space-6); }
   .mission-band .button { gap: var(--space-2); }
   .mission-band .button :global(svg) { width: 1rem; height: 1rem; }
   .mission-band__link { color: var(--white); font-weight: 650; }
-  .mission-band__link:hover { color: #9ed7d2; }
+  .mission-band__link:hover { color: #d7f2ef; }
 
-  @media (max-width: 760px) {
-    .founder-hero__grid, .biography__grid, .record__grid, .mission-band__grid { grid-template-columns: 1fr; }
-    .founder-hero__record { max-width: 34rem; }
+  @media (max-width: 820px) {
+    .founder-hero__grid, .biography__grid, .record__stage, .mission-band__grid { grid-template-columns: 1fr; }
+    .founder-hero__grid { padding-block: var(--space-8); gap: var(--space-7); }
+    .founder-hero__identity { padding-block: 0; }
+    .record { background: none; }
+    .experience, .education { min-height: 0; margin-inline: calc(var(--gutter) * -1); padding: var(--space-8) var(--gutter); }
+    .experience { background: var(--navy-900); }
+    .education { background: var(--sky-50); }
   }
 
   @media (max-width: 520px) {
-    .founder-hero h1 { font-size: clamp(2.8rem, 14vw, 3.8rem); }
+    .founder-hero__grid { padding-block: var(--space-7); }
+    .founder-hero h1 { font-size: clamp(2.9rem, 14vw, 4rem); }
+    .back-link { margin-bottom: var(--space-4); }
+    .professional-scope { grid-template-columns: 1fr; }
+    .experience, .education { padding-block: var(--space-7); padding-inline: var(--gutter); }
+    .mission-band .button { width: 100%; }
   }
 </style>

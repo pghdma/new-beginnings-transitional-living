@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import { site } from '../data/site';
 
@@ -25,94 +24,113 @@ const workflow = [
 ---
 
 <MainLayout title="Professional Referrals" description="Recovery-housing referral information for treatment providers, case managers, courts, and community partners.">
-  <PageHero
-    variant="editorial"
-    eyebrow="For professionals"
-    title="Coordinate a recovery-housing conversation."
-    intro="Information for treatment providers, case managers, discharge planners, courts, and community organizations helping an adult explore recovery housing."
-    image="/images/house-kitchen.webp"
-    imageAlt="A kitchen and dining table in a welcoming home"
-    fact={`Current availability can change. Begin with a direct conversation at ${site.phone}.`}
-  />
+  <section class="referral-hero" aria-labelledby="referral-title">
+    <div class="container referral-hero__grid">
+      <div class="referral-hero__copy">
+        <p class="eyebrow">For professionals</p>
+        <h1 id="referral-title">Coordinate a recovery-housing conversation.</h1>
+        <p class="lead">A clear starting point for treatment providers, case managers, discharge planners, courts, and community organizations helping an adult explore recovery housing.</p>
+        <div class="actions">
+          <a class="button" href="#inquiry">Start a professional inquiry</a>
+        </div>
+        <p class="referral-hero__note">Current availability can change. Begin with a general conversation before preparing or sending records.</p>
+      </div>
 
-  <section class="section professional-entry" aria-labelledby="role-title">
-    <div class="container professional-layout">
-      <header class="role-intro">
-        <p class="eyebrow">A defined role</p>
-        <h2 id="role-title">Housing that works alongside care.</h2>
-        <p class="lead">New Beginnings provides recovery-focused shared housing. Clinical treatment, emergency shelter, and crisis support remain separate services.</p>
-        <a class="availability-call" href={site.phoneHref}>
-          <Icon name="lucide:phone" aria-hidden="true" />
-          <span><small>Discuss availability</small>{site.phone}</span>
-        </a>
-      </header>
+      <figure class="referral-hero__photo">
+        <img src="/images/house-kitchen.webp" alt="A kitchen and dining table in a welcoming home" width="2200" height="1467" loading="eager" />
+        <figcaption>
+          <span>Recovery housing</span>
+          A stable shared home that works alongside independent care.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
-      <dl class="scope-ledger">
-        <div>
-          <dt>New Beginnings provides</dt>
-          <dd>
+  <section class="section professional-role" aria-labelledby="role-title">
+    <div class="container role-heading">
+      <p class="eyebrow">A defined role</p>
+      <h2 id="role-title">Housing can support recovery without becoming treatment.</h2>
+      <p class="lead">New Beginnings provides recovery-focused shared housing. Clinical care, emergency shelter, and crisis support remain separate services.</p>
+    </div>
+
+    <div class="container role-composition">
+      <figure>
+        <img src="/images/shared-bedroom.webp" alt="A shared bedroom with two neatly made beds" width="2200" height="1467" loading="lazy" />
+      </figure>
+
+      <div class="role-detail">
+        <article class="role-primary">
+          <div class="role-icon"><Icon name="lucide:house" aria-hidden="true" /></div>
+          <div>
+            <p class="eyebrow">New Beginnings provides</p>
             <h3>Recovery-focused housing</h3>
             <p>A substance-free shared environment, peer community, household expectations, and support for daily stability.</p>
-          </dd>
+          </div>
+        </article>
+
+        <div class="role-boundaries">
+          <article>
+            <Icon name="lucide:stethoscope" aria-hidden="true" />
+            <div><h3>Independent providers provide care.</h3><p>Counseling, medical care, medication management, and other licensed professional services remain with independent providers.</p></div>
+          </article>
+          <article>
+            <Icon name="lucide:life-buoy" aria-hidden="true" />
+            <div><h3>Emergency systems provide urgent support.</h3><p>Call 911 for an emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p></div>
+          </article>
         </div>
-        <div>
-          <dt>Independent providers provide</dt>
-          <dd>
-            <h3>Clinical treatment and care</h3>
-            <p>Counseling, medical care, medication management, and other licensed professional services.</p>
-          </dd>
-        </div>
-        <div>
-          <dt>Emergency systems provide</dt>
-          <dd>
-            <h3>Crisis and urgent support</h3>
-            <p>Call 911 for an emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p>
-          </dd>
-        </div>
-      </dl>
+      </div>
     </div>
   </section>
 
   <section class="referral-workflow" aria-labelledby="workflow-title">
-    <div class="container workflow-layout">
-      <header>
-        <p class="eyebrow">Referral workflow</p>
-        <h2 id="workflow-title">Start with availability—not records.</h2>
-        <p>A general conversation comes before any request for detailed information.</p>
-      </header>
-      <ol>
-        {workflow.map((step) => (
-          <li>
-            <span>{step.number}</span>
-            <div><h3>{step.title}</h3><p>{step.copy}</p></div>
-          </li>
-        ))}
-      </ol>
+    <div class="container workflow-heading">
+      <p class="eyebrow">Referral workflow</p>
+      <h2 id="workflow-title">Start with availability, not records.</h2>
+      <p>A general conversation comes before any request for detailed information.</p>
     </div>
+
+    <ol class="container workflow-steps">
+      {workflow.map((step) => (
+        <li>
+          <span class="step-number">{step.number}</span>
+          <div><h3>{step.title}</h3><p>{step.copy}</p></div>
+        </li>
+      ))}
+    </ol>
   </section>
 
-  <section class="section records-section" aria-labelledby="records-title">
-    <div class="container records-layout">
-      <header>
+  <section class="records-section" aria-labelledby="records-title">
+    <figure class="records-photo">
+      <img src="/images/contact.jpg" alt="A phone, notebook, and pencil arranged on a desk" width="1880" height="1253" loading="lazy" />
+    </figure>
+
+    <div class="records-copy">
+      <div class="records-copy__inner">
         <p class="eyebrow">Information handling</p>
         <h2 id="records-title">Keep client records out of the public form.</h2>
-      </header>
-      <div class="records-copy">
         <p class="lead">The form establishes contact with a referral source. It is not a portal for clinical, legal, or identifying records.</p>
-        <ul>
-          <li>
-            <strong>Appropriate for the first message</strong>
-            <span>Your name, organization, role, preferred contact method, and a general description of the housing inquiry.</span>
-          </li>
-          <li>
-            <strong>Do not submit here</strong>
-            <span>Treatment records, diagnoses, medication lists, court documents, Social Security numbers, or other sensitive client information.</span>
-          </li>
-          <li>
-            <strong>Wait for instructions</strong>
-            <span>Staff can explain what is needed and how to share it if the referral moves forward.</span>
-          </li>
-        </ul>
+
+        <div class="records-guidance">
+          <article>
+            <div class="records-icon"><Icon name="lucide:message-square-text" aria-hidden="true" /></div>
+            <div>
+              <h3>Appropriate for the first message</h3>
+              <p>Your name, organization, role, preferred contact method, and a general description of the housing inquiry.</p>
+            </div>
+          </article>
+          <article>
+            <div class="records-icon"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></div>
+            <div>
+              <h3>Keep sensitive information private</h3>
+              <p>Do not submit treatment records, diagnoses, medication lists, court documents, Social Security numbers, or other sensitive client information.</p>
+            </div>
+          </article>
+        </div>
+
+        <aside class="records-next">
+          <strong>Wait for private instructions.</strong>
+          <span>Staff can explain what is needed and how to share it if the referral moves forward.</span>
+        </aside>
       </div>
     </div>
   </section>
@@ -128,68 +146,106 @@ const workflow = [
         <p>Confirm current availability before sending paperwork or planning a transition.</p>
       </div>
       <div>
-        <h3>Housing—not treatment</h3>
-        <p>Clinical care and medication management remain with independent licensed providers.</p>
+        <h3>Prefer to call?</h3>
+        <p><a href={site.phoneHref}>{site.phone}</a></p>
       </div>
     </div>
   </InquiryForm>
 </MainLayout>
 
 <style>
-  .professional-entry { background: var(--paper); }
-  .professional-layout { display: grid; grid-template-columns: minmax(18rem, .76fr) minmax(0, 1.24fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-  .role-intro { display: grid; gap: var(--space-4); }
-  .role-intro h2 { max-width: 12ch; }
-  .availability-call { display: inline-flex; width: fit-content; margin-top: var(--space-4); padding: var(--space-4) var(--space-5); align-items: center; gap: var(--space-3); color: var(--white); background: var(--teal-800); box-shadow: var(--shadow); font-size: 1.35rem; font-weight: 600; line-height: 1.1; }
-  .availability-call:hover { color: var(--white); background: var(--navy-950); }
-  .availability-call :global(svg) { width: 1.5rem; height: 1.5rem; stroke-width: 1.7; }
-  .availability-call small { display: block; margin-bottom: .35rem; color: #b9e5e1; font-size: .72rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
-  .scope-ledger { margin: 0; border-top: 1px solid var(--slate-300); }
-  .scope-ledger > div { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: minmax(10rem, .54fr) minmax(0, 1.46fr); gap: var(--space-6); }
-  .scope-ledger dt { padding-top: .2rem; color: var(--teal-700); font-size: .78rem; font-weight: 650; letter-spacing: .08em; line-height: 1.45; text-transform: uppercase; }
-  .scope-ledger dd { margin: 0; }
-  .scope-ledger h3 { font-size: 1.3rem; }
-  .scope-ledger p { max-width: 40rem; margin-top: var(--space-2); color: var(--slate-600); line-height: 1.55; }
+  .referral-hero { overflow: hidden; background: var(--paper); }
+  .referral-hero__grid { display: grid; min-height: clamp(39rem, 58vw, 47rem); grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; }
+  .referral-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
+  .referral-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); font-size: clamp(3.1rem, 5.6vw, 5.25rem); }
+  .referral-hero .lead { max-width: 35rem; margin-top: var(--space-5); }
+  .referral-hero .actions { margin-top: var(--space-6); }
+  .referral-hero__note { max-width: 33rem; margin-top: var(--space-6); color: var(--slate-600); font-size: .95rem; line-height: 1.55; }
+  .referral-hero__photo { position: relative; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
+  .referral-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(.98); }
+  .referral-hero__photo::after { position: absolute; background: linear-gradient(to top, rgba(23, 55, 70, .82), rgba(23, 55, 70, 0) 46%); content: ''; inset: 0; }
+  .referral-hero__photo figcaption { position: absolute; z-index: 1; max-width: 27rem; color: var(--white); font-size: 1.15rem; font-weight: 600; line-height: 1.35; left: clamp(1.5rem, 4vw, 4rem); right: clamp(1.5rem, 4vw, 4rem); bottom: clamp(1.5rem, 4vw, 3.5rem); }
+  .referral-hero__photo figcaption span { display: block; margin-bottom: var(--space-2); color: #b9e5e1; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+
+  .professional-role { background: var(--sky-50); }
+  .role-heading { display: grid; max-width: 55rem; margin-bottom: var(--space-8); gap: var(--space-4); }
+  .role-heading h2 { max-width: 15ch; }
+  .role-heading .lead { max-width: 44rem; }
+  .role-composition { display: grid; grid-template-columns: minmax(24rem, .92fr) minmax(0, 1.08fr); align-items: stretch; }
+  .role-composition > figure { height: 42rem; margin: 0; overflow: hidden; order: 2; }
+  .role-composition > figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
+  .role-detail { display: flex; padding: clamp(2.25rem, 5vw, 4rem); color: var(--white); background: var(--navy-900); flex-direction: column; justify-content: center; }
+  .role-primary { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .role-icon, .records-icon { display: grid; width: 3.25rem; height: 3.25rem; border-radius: 50%; color: var(--teal-700); background: var(--sky-100); place-items: center; }
+  .role-detail .role-icon { color: #b9e5e1; background: rgba(255, 255, 255, .1); }
+  .role-icon :global(svg), .records-icon :global(svg) { width: 1.55rem; height: 1.55rem; stroke-width: 1.55; }
+  .role-detail .eyebrow { color: #9ed7d2; }
+  .role-primary h3 { max-width: 15ch; margin-top: var(--space-2); color: var(--white); font-size: clamp(1.65rem, 3vw, 2.25rem); }
+  .role-primary div:last-child > p:last-child { max-width: 33rem; margin-top: var(--space-3); color: var(--sky-100); }
+  .role-boundaries { display: grid; margin-top: var(--space-7); gap: var(--space-6); }
+  .role-boundaries article { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); align-items: start; }
+  .role-boundaries article > :global(svg) { width: 1.55rem; height: 1.55rem; margin-top: .1rem; color: #9ed7d2; stroke-width: 1.5; }
+  .role-boundaries h3 { color: var(--white); font-size: 1.2rem; }
+  .role-boundaries p { margin-top: var(--space-2); color: var(--sky-100); font-size: .96rem; line-height: 1.55; }
 
   .referral-workflow { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .workflow-layout { display: grid; grid-template-columns: minmax(17rem, .7fr) minmax(0, 1.3fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-  .workflow-layout > header { display: grid; gap: var(--space-4); }
-  .workflow-layout .eyebrow { color: #9ed7d2; }
-  .workflow-layout h2,
-  .workflow-layout h3 { color: var(--white); }
-  .workflow-layout > header h2 { max-width: 11ch; }
-  .workflow-layout > header > p:last-child { max-width: 28rem; color: var(--sky-100); }
-  .workflow-layout ol { margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, .24); list-style: none; }
-  .workflow-layout li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid rgba(255, 255, 255, .24); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
-  .workflow-layout li > span { color: #9ed7d2; font-size: .82rem; font-weight: 650; letter-spacing: .08em; }
-  .workflow-layout h3 { font-size: 1.25rem; }
-  .workflow-layout li p { max-width: 40rem; margin-top: var(--space-2); color: var(--sky-100); line-height: 1.5; }
+  .workflow-heading { display: grid; max-width: 52rem; margin-bottom: var(--space-8); gap: var(--space-4); }
+  .workflow-heading .eyebrow { color: #9ed7d2; }
+  .workflow-heading h2 { max-width: 14ch; color: var(--white); }
+  .workflow-heading > p:last-child { max-width: 38rem; color: var(--sky-100); }
+  .workflow-steps { display: grid; margin-top: 0; margin-bottom: 0; padding-left: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4rem); list-style: none; }
+  .workflow-steps li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .step-number { display: grid; width: 3rem; height: 3rem; border-radius: 50%; color: var(--navy-950); background: #9ed7d2; font-size: .82rem; font-weight: 700; letter-spacing: .06em; place-items: center; }
+  .workflow-steps h3 { color: var(--white); font-size: 1.25rem; }
+  .workflow-steps p { margin-top: var(--space-3); color: var(--sky-100); line-height: 1.55; }
 
-  .records-section { background: var(--sky-50); }
-  .records-layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-  .records-layout > header { display: grid; gap: var(--space-4); }
-  .records-layout > header h2 { max-width: 13ch; }
-  .records-copy > .lead { margin-bottom: var(--space-6); }
-  .records-copy ul { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .records-copy li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: minmax(11rem, .58fr) minmax(0, 1.42fr); gap: var(--space-6); }
-  .records-copy strong { color: var(--navy-900); font-weight: 600; }
-  .records-copy span { color: var(--slate-600); }
+  .records-section { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); align-items: stretch; background: var(--paper); }
+  .records-photo { min-height: 48rem; margin: 0; overflow: hidden; }
+  .records-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
+  .records-copy { display: flex; padding: var(--section-standard) clamp(2.5rem, 6vw, 6rem); align-items: center; }
+  .records-copy__inner { width: min(100%, 38rem); }
+  .records-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
+  .records-copy .lead { margin-top: var(--space-5); }
+  .records-guidance { display: grid; margin-top: var(--space-7); gap: var(--space-6); }
+  .records-guidance article { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .records-guidance h3 { font-size: 1.2rem; }
+  .records-guidance article p { margin-top: var(--space-2); color: var(--slate-600); font-size: .96rem; line-height: 1.55; }
+  .records-next { display: grid; margin-top: var(--space-7); padding: var(--space-5); color: var(--white); background: var(--teal-800); gap: var(--space-2); }
+  .records-next strong { color: var(--white); font-size: 1.08rem; }
+  .records-next span { color: #e5f1f0; line-height: 1.5; }
+  :global(.inquiry-aside a) { color: var(--white); }
 
-  @media (max-width: 820px) {
-    .professional-layout,
-    .workflow-layout,
-    .records-layout { grid-template-columns: 1fr; gap: var(--space-7); }
-    .role-intro { max-width: 40rem; }
-  }
-
-  @media (max-width: 800px) {
-    :global(.page-hero--editorial figure) { order: -1; }
+  @media (max-width: 900px) {
+    .referral-hero__grid { grid-template-columns: 1fr; }
+    .referral-hero__photo { order: -1; height: clamp(22rem, 58vw, 30rem); margin: 0 calc(var(--gutter) * -1); }
+    .referral-hero__copy { padding: var(--space-8) 0; }
+    .role-composition { grid-template-columns: 1fr; }
+    .role-composition > figure { height: clamp(21rem, 58vw, 30rem); order: -1; }
+    .role-detail { padding: var(--space-7); }
+    .workflow-steps { grid-template-columns: 1fr; gap: var(--space-7); }
+    .workflow-steps li { max-width: 42rem; }
+    .records-section { grid-template-columns: 1fr; }
+    .records-photo { height: clamp(20rem, 58vw, 29rem); min-height: 0; }
+    .records-copy { padding: var(--section-standard) var(--gutter); }
+    .records-copy__inner { width: min(100%, 46rem); margin-inline: auto; }
   }
 
   @media (max-width: 560px) {
-    .scope-ledger > div,
-    .records-copy li { grid-template-columns: 1fr; gap: var(--space-2); }
-    .workflow-layout li { grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-3); }
-    .availability-call { width: 100%; }
+    .referral-hero__photo { height: 17rem; }
+    .referral-hero__photo figcaption { font-size: .98rem; }
+    .referral-hero__copy { padding-block: var(--space-7); }
+    .referral-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
+    .referral-hero .button { width: 100%; }
+    .role-heading { margin-bottom: var(--space-6); }
+    .role-composition > figure { height: 17rem; }
+    .role-detail { padding: var(--space-6) var(--space-5); }
+    .role-primary { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
+    .role-icon, .records-icon { width: 2.65rem; height: 2.65rem; }
+    .role-boundaries { margin-top: var(--space-6); }
+    .workflow-heading { margin-bottom: var(--space-7); }
+    .workflow-steps li { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
+    .step-number { width: 2.65rem; height: 2.65rem; }
+    .records-photo { height: 17rem; }
+    .records-guidance article { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
   }
 </style>

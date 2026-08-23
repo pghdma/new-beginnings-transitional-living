@@ -46,22 +46,31 @@ const householdRhythm = [
   </section>
 
   <section class="rhythm-section">
-    <div class="container rhythm-layout">
-      <header class="rhythm-heading">
-        <p class="eyebrow">A place to rebuild routines</p>
-        <h2>Recovery continues when the day becomes ordinary again.</h2>
+    <div class="container">
+      <header class="rhythm-intro">
+        <div>
+          <p class="eyebrow">A place to rebuild routines</p>
+          <h2>Recovery continues when the day becomes ordinary again.</h2>
+        </div>
         <p class="lead">A dependable home creates space to focus on the responsibilities, relationships, and recovery connections that shape everyday life.</p>
       </header>
-      <div class="rhythm-copy">
-        <p>New Beginnings provides substance-free shared housing for adult men. Residents live alongside peers in a recovery-focused household while remaining connected to independent treatment and community recovery resources.</p>
-        <ul class="rhythm-list">
-          {householdRhythm.map((item) => (
-            <li>
-              <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
-              <div><h3>{item.title}</h3><p>{item.copy}</p></div>
-            </li>
-          ))}
-        </ul>
+
+      <div class="rhythm-stage">
+        <figure class="rhythm-photo">
+          <img src="/images/rustic-dining-room.webp" alt="A warm dining room with a table and chairs" width="1600" height="2133" loading="lazy" />
+        </figure>
+        <div class="rhythm-copy">
+          <p class="eyebrow">Inside the household</p>
+          <p class="rhythm-copy__lead">New Beginnings provides substance-free shared housing for adult men. Residents live alongside peers in a recovery-focused household while remaining connected to independent treatment and community recovery resources.</p>
+          <div class="rhythm-points" role="list">
+            {householdRhythm.map((item) => (
+              <article role="listitem">
+                <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
+                <div><h3>{item.title}</h3><p>{item.copy}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -104,7 +113,10 @@ const householdRhythm = [
       </div>
       <div class="first-step-copy">
         <p>Staff can explain the current admissions process, discuss general fit and availability, and provide exact location information privately when appropriate.</p>
-        <p><strong>Keep the first message general.</strong> Do not send diagnoses, medication details, treatment records, criminal-history information, Social Security numbers, or other sensitive information through the website.</p>
+        <aside class="first-step-privacy">
+          <Icon name="lucide:lock-keyhole" aria-hidden="true" />
+          <p><strong>Keep the first message general.</strong> Do not send diagnoses, medication details, treatment records, criminal-history information, Social Security numbers, or other sensitive information through the website.</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -129,15 +141,20 @@ const householdRhythm = [
   .men-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(.98); }
 
   .rhythm-section { padding-block: var(--section-standard); background: var(--canvas); }
-  .rhythm-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
-  .rhythm-heading h2 { max-width: 13ch; margin-top: var(--space-4); }
-  .rhythm-heading .lead { max-width: 32rem; margin-top: var(--space-6); }
-  .rhythm-copy > p { max-width: 44rem; color: var(--slate-600); }
-  .rhythm-list { margin: var(--space-6) 0 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .rhythm-list li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .rhythm-list > li > :global(svg) { width: 1.75rem; height: 1.75rem; color: var(--teal-700); stroke-width: 1.55; }
-  .rhythm-list h3 { font-size: 1.25rem; }
-  .rhythm-list p { max-width: 41rem; margin-top: .4rem; color: var(--slate-600); line-height: 1.5; }
+  .rhythm-intro { display: grid; margin-bottom: var(--space-7); grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr); gap: var(--gap-columns); align-items: end; }
+  .rhythm-intro h2 { max-width: 13ch; margin-top: var(--space-4); }
+  .rhythm-intro .lead { max-width: 36rem; padding-bottom: .35rem; }
+  .rhythm-stage { display: grid; min-height: 36rem; grid-template-columns: minmax(17rem, .68fr) minmax(0, 1.32fr); box-shadow: var(--shadow-raised); }
+  .rhythm-photo { min-height: 100%; margin: 0; overflow: hidden; background: var(--slate-200); }
+  .rhythm-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 58%; filter: saturate(.72) contrast(.98); }
+  .rhythm-copy { display: flex; padding: clamp(2.5rem, 5vw, 4.5rem); color: var(--white); background: var(--navy-900); flex-direction: column; justify-content: center; }
+  .rhythm-copy .eyebrow { color: #9ed7d2; }
+  .rhythm-copy__lead { max-width: 45rem; margin-top: var(--space-4); color: var(--sky-100); font-size: clamp(1.1rem, 1.6vw, 1.28rem); line-height: 1.55; }
+  .rhythm-points { display: grid; margin-top: clamp(2.5rem, 5vw, 4rem); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 3.25rem) clamp(1.75rem, 4vw, 3rem); }
+  .rhythm-points article { display: grid; grid-template-columns: 2.3rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .rhythm-points article > :global(svg) { width: 1.85rem; height: 1.85rem; color: #9ed7d2; stroke-width: 1.5; }
+  .rhythm-points h3 { color: var(--white); font-size: 1.2rem; }
+  .rhythm-points p { max-width: 29rem; margin-top: .45rem; color: var(--sky-200); font-size: .96rem; line-height: 1.5; }
 
   .daily-section { background: var(--sky-50); }
   .daily-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
@@ -157,21 +174,24 @@ const householdRhythm = [
   .location-heading h2 { max-width: 14ch; margin-top: var(--space-3); font-size: clamp(1.85rem, 3vw, 2.6rem); }
   .location-details { max-width: 43rem; }
   .location-details strong { color: var(--navy-900); font-weight: 600; }
-  .location-private { display: grid; margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
+  .location-private { display: grid; margin-top: var(--space-5); padding: var(--space-5); background: var(--sky-50); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
   .location-private :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
 
   .first-step-section { padding-block: var(--section-standard); background: var(--canvas); }
   .first-step-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--gap-columns); align-items: start; }
   .first-step-layout h2 { max-width: 12ch; margin-top: var(--space-4); }
   .first-step-copy { max-width: 43rem; }
-  .first-step-copy p + p { margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); color: var(--slate-600); font-size: .94rem; }
+  .first-step-privacy { display: grid; margin-top: var(--space-6); padding: var(--space-5); background: var(--paper); box-shadow: var(--shadow); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
+  .first-step-privacy :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
   .first-step-copy strong { color: var(--navy-900); font-weight: 600; }
 
   @media (max-width: 900px) {
-    .men-hero__grid, .rhythm-layout, .daily-layout, .location-layout, .first-step-layout { grid-template-columns: 1fr; }
+    .men-hero__grid, .rhythm-intro, .rhythm-stage, .daily-layout, .location-layout, .first-step-layout { grid-template-columns: 1fr; }
     .men-hero__photo { order: -1; height: clamp(20rem, 52vw, 27rem); margin: 0 calc(var(--gutter) * -1); }
     .men-hero__copy { padding: var(--space-8) 0; }
-    .rhythm-layout, .location-layout, .first-step-layout { gap: var(--space-7); }
+    .rhythm-intro, .location-layout, .first-step-layout { gap: var(--space-7); }
+    .rhythm-intro .lead { max-width: 43rem; }
+    .rhythm-photo { height: clamp(19rem, 47vw, 25rem); min-height: 0; }
     .daily-photo { height: clamp(21rem, 55vw, 29rem); min-height: 0; }
     .daily-copy { padding-block: var(--space-8); }
     .daily-copy__inner { width: min(100%, 43rem); margin-inline: auto; }
@@ -183,7 +203,9 @@ const householdRhythm = [
     .men-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
     .men-hero__actions { display: grid; }
     .men-hero__actions .button, .men-hero__phone { width: 100%; justify-content: center; }
-    .rhythm-layout, .location-layout, .first-step-layout { gap: var(--space-6); }
+    .rhythm-intro, .location-layout, .first-step-layout { gap: var(--space-6); }
+    .rhythm-copy { padding: var(--space-7) var(--space-5); }
+    .rhythm-points { grid-template-columns: 1fr; gap: var(--space-6); }
     .daily-photo { height: 17rem; }
     .daily-copy { padding-inline: var(--gutter); }
   }

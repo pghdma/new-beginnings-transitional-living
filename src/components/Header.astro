@@ -69,12 +69,23 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
     });
   };
 
+  const closeNavigation = (restoreFocus = false) => {
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.setAttribute('aria-label', 'Open navigation menu');
+    primaryNav?.classList.remove('is-open');
+    closeGroups();
+    if (restoreFocus) menuButton?.focus();
+  };
+
   menuButton?.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!open));
-    menuButton.setAttribute('aria-label', open ? 'Open navigation menu' : 'Close navigation menu');
-    primaryNav?.classList.toggle('is-open', !open);
-    if (open) closeGroups();
+    if (open) {
+      closeNavigation();
+    } else {
+      menuButton.setAttribute('aria-expanded', 'true');
+      menuButton.setAttribute('aria-label', 'Close navigation menu');
+      primaryNav?.classList.add('is-open');
+    }
   });
 
   groups.forEach((group) => {
@@ -89,6 +100,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
     });
     group.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        event.stopPropagation();
         closeGroup(group);
         toggle?.focus();
       }
@@ -98,6 +110,12 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   document.addEventListener('click', (event) => {
     const target = event.target;
     if (target instanceof Node && !primaryNav?.contains(target)) closeGroups();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
+      closeNavigation(true);
+    }
   });
 </script>
 <style>

@@ -44,7 +44,7 @@ const options = context === 'referral'
       <label>How can we help?<textarea name="message" rows="4" maxlength="1000"></textarea></label>
       <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
       <input type="hidden" name="startedAt" value="" />
-      <p class="privacy-note">This form is for general inquiries only. Do not send medical records, diagnoses, medication information, Social Security numbers, or other sensitive information.</p>
+      <p class="privacy-note">This form is for general inquiries only. Do not send medical records, diagnoses, medication information, Social Security numbers, or other sensitive information. <a href="/privacy/">Read the Privacy Policy.</a></p>
       <div class="verification">
         <p>Security check</p>
         <div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div>
@@ -153,6 +153,7 @@ const options = context === 'referral'
   .inquiry { padding-block: var(--section-standard); color: var(--white); background: var(--navy-900); }
   .inquiry-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: var(--gap-columns); align-items: start; }
   .inquiry-copy { display: grid; min-width: 0; gap: var(--space-5); position: sticky; top: 9rem; }
+  .inquiry-copy .eyebrow { color: #9ed7d2; }
   h2 { color: var(--white); }
   .inquiry-copy a { color: var(--white); font-weight: 650; }
   .inquiry-copy :global(.inquiry-aside) { display: grid; margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid rgba(255,255,255,.22); gap: var(--space-4); }
@@ -169,6 +170,7 @@ const options = context === 'referral'
   input:focus, select:focus, textarea:focus { border-color: var(--teal-700); box-shadow: 0 0 0 3px rgba(20,116,111,.14); outline: 0; }
   textarea { resize: vertical; }
   .privacy-note { color: var(--slate-600); font-size: .85rem; line-height: 1.45; }
+  .privacy-note a { color: var(--blue-700); font-weight: 650; text-decoration: underline; }
   .verification { display: grid; min-width: 0; gap: var(--space-2); }
   .cf-turnstile { width: 100%; min-height: 65px; }
   .verification > p { color: var(--slate-700); font-size: .92rem; font-weight: 650; }

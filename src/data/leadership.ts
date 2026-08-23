@@ -65,8 +65,8 @@ export const publishedOrganizationalLeadership = organizationalLeadership.filter
 
 export const publishedBoardMembers = boardMembers.filter((person) => person.published);
 
-// Susan Rua and Theresa Rem-Canofari are the current public roster supplied for
-// this site. A former member identified by the client is intentionally excluded.
+// Susan Rua and Theresa Rem-Canofari are the public roster supplied for this
+// website. A former member identified by the client is intentionally excluded.
 export const currentBoardMembers = [
   ...publishedOrganizationalLeadership,
   ...publishedBoardMembers,

@@ -7,21 +7,25 @@ import { site } from '../data/site';
 const dailyRhythm = [
   {
     number: '01',
+    icon: 'lucide:home',
     title: 'A dependable place to return to',
     copy: 'A substance-free shared residence gives each day a consistent starting point and place to come home to.',
   },
   {
     number: '02',
+    icon: 'lucide:list-checks',
     title: 'Responsibility within the home',
     copy: 'Shared expectations and household responsibilities help residents practice accountability in ordinary ways.',
   },
   {
     number: '03',
+    icon: 'lucide:route',
     title: 'Connection beyond the home',
     copy: 'Work, education, recovery meetings, appointments, and community relationships continue outside the residence.',
   },
   {
     number: '04',
+    icon: 'lucide:stethoscope',
     title: 'Independent clinical care',
     copy: 'Counseling, medical care, medication management, and other treatment remain with licensed outside providers.',
   },
@@ -58,8 +62,12 @@ const dailyRhythm = [
         <p class="lead">Recovery housing is a shared living environment for adults committed to building stable lives without alcohol or other drugs.</p>
         <p>Residents live alongside peers who understand the work of recovery. The home adds consistency and community while each person continues building connections to treatment, mutual-support groups, employment, education, family, and other community resources.</p>
         <aside class="scope-note">
-          <Icon name="lucide:stethoscope" aria-hidden="true" />
-          <p><strong>Housing, not clinical treatment.</strong> New Beginnings provides the living environment and recovery-focused structure. Clinical care remains with independent licensed providers.</p>
+          <span class="scope-note__icon"><Icon name="lucide:stethoscope" aria-hidden="true" /></span>
+          <div>
+            <p class="scope-note__label">Scope of service</p>
+            <h3>Housing, not clinical treatment.</h3>
+            <p>New Beginnings provides the living environment and recovery-focused structure. Clinical care remains with independent licensed providers.</p>
+          </div>
         </aside>
       </div>
     </div>
@@ -68,23 +76,33 @@ const dailyRhythm = [
   <section class="rhythm-section">
     <div class="container rhythm-layout">
       <header class="rhythm-heading">
-        <p class="eyebrow">How the environment helps</p>
-        <h2>Recovery has room to become routine.</h2>
+        <div class="rhythm-heading__title">
+          <p class="eyebrow">How the environment helps</p>
+          <h2>Recovery has room to become routine.</h2>
+        </div>
         <p>The important parts of a recovery residence are practical: consistency, shared responsibility, peer community, and connection to the wider recovery network.</p>
       </header>
-      <div class="rhythm-content">
-        <ol class="rhythm-list">
-          {dailyRhythm.map((item) => (
-            <li>
-              <span>{item.number}</span>
-              <div><h3>{item.title}</h3><p>{item.copy}</p></div>
-            </li>
-          ))}
-        </ol>
-        <aside class="crisis-note">
-          <Icon name="lucide:circle-alert" aria-hidden="true" />
-          <p><strong>Need immediate help?</strong> New Beginnings is not an emergency shelter or crisis service. Call 911 for an emergency, or call or text 988 for crisis support.</p>
-        </aside>
+      <div class="rhythm-composition">
+        <figure class="rhythm-photo">
+          <img src="/images/household-linens.webp" alt="Neatly folded household linens in a shared home" width="2200" height="1467" loading="lazy" />
+        </figure>
+        <div class="rhythm-field">
+          <ol class="rhythm-list">
+            {dailyRhythm.map((item) => (
+              <li>
+                <div class="rhythm-list__marker">
+                  <Icon name={item.icon} aria-hidden="true" />
+                  <span>{item.number}</span>
+                </div>
+                <div><h3>{item.title}</h3><p>{item.copy}</p></div>
+              </li>
+            ))}
+          </ol>
+          <aside class="crisis-note">
+            <Icon name="lucide:circle-alert" aria-hidden="true" />
+            <p><strong>Need immediate help?</strong> New Beginnings is not an emergency shelter or crisis service. Call 911 for an emergency, or call or text 988 for crisis support.</p>
+          </aside>
+        </div>
       </div>
     </div>
   </section>
@@ -100,12 +118,14 @@ const dailyRhythm = [
         <p>New Beginnings provides recovery housing for adult men and women in established Pittsburgh-area communities.</p>
         <nav class="pathway-links" aria-label="Recovery housing options">
           <a href="/recovery-housing/men/">
+            <span class="pathway-links__icon"><Icon name="lucide:house" aria-hidden="true" /></span>
             <span><small>For adult men</small><strong>Men’s recovery housing</strong></span>
-            <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+            <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
           </a>
           <a href="/recovery-housing/women/">
+            <span class="pathway-links__icon"><Icon name="lucide:house" aria-hidden="true" /></span>
             <span><small>For adult women</small><strong>Women’s recovery housing</strong></span>
-            <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+            <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
           </a>
         </nav>
         <p class="pathways-location"><Icon name="lucide:map-pin" aria-hidden="true" />Public records reference {site.neighborhoods.join(', ')}. Additional homes serve other Pittsburgh-area communities.</p>
@@ -138,7 +158,7 @@ const dailyRhythm = [
   .housing-hero__actions { margin-top: var(--space-6); }
   .housing-hero__actions .button { gap: .6rem; }
   .housing-hero__actions :global(svg) { width: 1rem; height: 1rem; }
-  .housing-hero__scope { display: flex; max-width: 32rem; margin-top: var(--space-7); padding-top: var(--space-4); border-top: 1px solid var(--slate-300); align-items: center; gap: .7rem; color: var(--slate-600); font-size: .92rem; }
+  .housing-hero__scope { display: flex; width: fit-content; max-width: 32rem; margin-top: var(--space-7); padding: .8rem 1rem; align-items: center; gap: .7rem; color: var(--slate-600); background: var(--sky-50); font-size: .92rem; }
   .housing-hero__scope :global(svg) { width: 1.2rem; height: 1.2rem; color: var(--teal-700); stroke-width: 1.6; }
   .housing-hero__photo { margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--slate-200); }
   .housing-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.8) contrast(.96); }
@@ -151,24 +171,31 @@ const dailyRhythm = [
   .definition-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
   .definition-copy > .lead { margin-top: var(--space-6); }
   .definition-copy > p:not(.eyebrow):not(.lead) { margin-top: var(--space-4); }
-  .scope-note { display: grid; margin-top: var(--space-7); padding: var(--space-5) 0; border-block: 1px solid var(--slate-300); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .scope-note :global(svg) { width: 1.7rem; height: 1.7rem; color: var(--teal-700); stroke-width: 1.55; }
-  .scope-note p { color: var(--slate-600); font-size: .96rem; line-height: 1.55; }
-  .scope-note strong { display: block; margin-bottom: .25rem; color: var(--navy-900); font-weight: 600; }
+  .scope-note { display: grid; margin-top: var(--space-7); padding: clamp(1.35rem, 2.5vw, 1.8rem); grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; background: var(--paper); box-shadow: var(--shadow-raised); }
+  .scope-note__icon { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; color: var(--teal-700); background: var(--sky-100); }
+  .scope-note__icon :global(svg) { width: 1.55rem; height: 1.55rem; stroke-width: 1.65; }
+  .scope-note__label { color: var(--teal-700) !important; font-size: .72rem !important; font-weight: 700; letter-spacing: .12em; line-height: 1.2 !important; text-transform: uppercase; }
+  .scope-note h3 { margin-top: .35rem; font-size: 1.18rem; }
+  .scope-note div > p:last-child { margin-top: .5rem; color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
 
   .rhythm-section { padding-block: var(--section-standard); background: var(--sky-50); }
-  .rhythm-layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
-  .rhythm-heading { position: sticky; top: 8.5rem; }
-  .rhythm-heading h2 { max-width: 12ch; margin-top: var(--space-4); }
-  .rhythm-heading > p:last-child { max-width: 31rem; margin-top: var(--space-5); }
-  .rhythm-list { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .rhythm-list li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
-  .rhythm-list > li > span { padding-top: .15rem; color: var(--teal-700); font-size: .82rem; font-weight: 650; letter-spacing: .08em; }
-  .rhythm-list h3 { font-size: 1.28rem; }
-  .rhythm-list p { max-width: 43rem; margin-top: .45rem; color: var(--slate-600); line-height: 1.55; }
-  .crisis-note { display: grid; margin-top: var(--space-6); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--slate-600); font-size: .92rem; line-height: 1.5; }
-  .crisis-note :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
-  .crisis-note strong { color: var(--navy-900); font-weight: 600; }
+  .rhythm-heading { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: end; }
+  .rhythm-heading__title h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .rhythm-heading > p:last-child { max-width: 37rem; color: var(--slate-600); font-size: 1.1rem; line-height: 1.65; }
+  .rhythm-composition { display: grid; margin-top: clamp(2.75rem, 6vw, 4.5rem); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); box-shadow: var(--shadow-raised); }
+  .rhythm-photo { min-height: 43rem; margin: 0; overflow: hidden; background: var(--slate-200); }
+  .rhythm-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.96); }
+  .rhythm-field { display: flex; padding: clamp(2.5rem, 5.5vw, 4.5rem); flex-direction: column; justify-content: center; color: var(--white); background: var(--navy-900); }
+  .rhythm-list { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem); list-style: none; }
+  .rhythm-list li { min-width: 0; }
+  .rhythm-list__marker { display: flex; margin-bottom: var(--space-4); align-items: center; gap: .7rem; color: #9ed7d2; }
+  .rhythm-list__marker :global(svg) { width: 1.45rem; height: 1.45rem; stroke-width: 1.55; }
+  .rhythm-list__marker span { font-size: .75rem; font-weight: 700; letter-spacing: .12em; }
+  .rhythm-list h3 { max-width: 15rem; color: var(--white); font-size: 1.3rem; line-height: 1.2; }
+  .rhythm-list p { max-width: 19rem; margin-top: .65rem; color: var(--sky-100); font-size: .96rem; line-height: 1.58; }
+  .crisis-note { display: grid; margin-top: clamp(2.75rem, 5vw, 4rem); padding: var(--space-5); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--sky-100); background: rgba(255,255,255,.07); font-size: .9rem; line-height: 1.5; }
+  .crisis-note :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: #9ed7d2; stroke-width: 1.6; }
+  .crisis-note strong { color: var(--white); font-weight: 650; }
 
   .pathways-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
   .pathways-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
@@ -178,13 +205,18 @@ const dailyRhythm = [
   .pathways-content .eyebrow { color: #9ed7d2; }
   .pathways-content h2 { max-width: 12ch; margin-top: var(--space-4); color: var(--white); }
   .pathways-content > p:not(.eyebrow):not(.pathways-location) { max-width: 34rem; margin-top: var(--space-5); color: var(--sky-100); }
-  .pathway-links { margin-top: var(--space-6); border-top: 1px solid rgba(255,255,255,.25); }
-  .pathway-links a { display: grid; padding-block: var(--space-5); border-bottom: 1px solid rgba(255,255,255,.25); grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--white); }
-  .pathway-links a:hover { color: #b9e5e1; }
+  .pathway-links { display: grid; margin-top: var(--space-6); gap: .8rem; }
+  .pathway-links a { display: grid; padding: 1.15rem 1.25rem; grid-template-columns: 2.65rem minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--white); background: var(--teal-700); box-shadow: 0 12px 30px rgba(5, 25, 35, .2); transition: transform .2s ease, background-color .2s ease; }
+  .pathway-links a:nth-child(2) { color: var(--navy-950); background: var(--paper); }
+  .pathway-links a:hover { color: var(--white); background: var(--teal-600); transform: translateY(-2px); }
+  .pathway-links a:nth-child(2):hover { color: var(--navy-950); background: var(--sky-100); }
+  .pathway-links__icon { display: grid; width: 2.65rem; height: 2.65rem; place-items: center; color: var(--white); background: rgba(255,255,255,.12); }
+  .pathway-links a:nth-child(2) .pathway-links__icon { color: var(--teal-700); background: var(--sky-100); }
   .pathway-links small, .pathway-links strong { display: block; }
-  .pathway-links small { color: #9ed7d2; font-size: .76rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
-  .pathway-links strong { margin-top: .25rem; font-size: 1.35rem; font-weight: 600; }
-  .pathway-links :global(svg) { width: 1.3rem; height: 1.3rem; stroke-width: 1.6; }
+  .pathway-links small { color: #caece9; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .pathway-links a:nth-child(2) small { color: var(--teal-700); }
+  .pathway-links strong { margin-top: .15rem; font-size: 1.15rem; font-weight: 650; }
+  .pathway-links :global(svg) { width: 1.25rem; height: 1.25rem; stroke-width: 1.6; }
   .pathways-location { display: flex; max-width: 34rem; margin-top: var(--space-5); align-items: flex-start; gap: .65rem; color: var(--sky-200); font-size: .9rem; line-height: 1.5; }
   .pathways-location :global(svg) { width: 1rem; height: 1rem; margin-top: .2rem; flex: 0 0 auto; }
 
@@ -197,12 +229,15 @@ const dailyRhythm = [
   .privacy-copy .text-link { margin-top: var(--space-5); }
 
   @media (max-width: 900px) {
-    .housing-hero__grid, .definition-layout, .rhythm-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
+    .housing-hero__grid, .definition-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
     .housing-hero__photo { order: -1; height: clamp(20rem, 52vw, 28rem); margin: 0 calc(var(--gutter) * -1); }
     .housing-hero__copy { padding: var(--space-8) 0; }
-    .definition-layout, .rhythm-layout { gap: var(--space-7); }
+    .definition-layout { gap: var(--space-7); }
     .definition-photo { height: auto; aspect-ratio: 16 / 10; }
-    .rhythm-heading { position: static; }
+    .rhythm-heading, .rhythm-composition { grid-template-columns: 1fr; }
+    .rhythm-heading { gap: var(--space-5); }
+    .rhythm-heading > p:last-child { max-width: 40rem; }
+    .rhythm-photo { min-height: 0; aspect-ratio: 16 / 8.5; }
     .pathways-layout { box-shadow: var(--shadow-raised); }
     .pathways-photo { height: clamp(18rem, 48vw, 26rem); min-height: 0; }
     .privacy-layout { gap: var(--space-6); }
@@ -214,9 +249,18 @@ const dailyRhythm = [
     .housing-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
     .housing-hero__actions { display: grid; }
     .housing-hero__actions .button { width: 100%; }
-    .definition-layout, .rhythm-layout { gap: var(--space-6); }
+    .housing-hero__scope { width: 100%; }
+    .definition-layout { gap: var(--space-6); }
     .definition-photo { aspect-ratio: 4 / 3; }
-    .scope-note { grid-template-columns: 1.7rem minmax(0, 1fr); gap: var(--space-3); }
+    .scope-note { grid-template-columns: 2.75rem minmax(0, 1fr); gap: var(--space-3); }
+    .scope-note__icon { width: 2.75rem; height: 2.75rem; }
+    .rhythm-photo { aspect-ratio: 4 / 3; }
+    .rhythm-field { padding: var(--space-7) var(--space-5); }
+    .rhythm-list { grid-template-columns: 1fr; gap: var(--space-7); }
+    .rhythm-list h3, .rhythm-list p { max-width: none; }
+    .crisis-note { padding: var(--space-4); }
+    .pathway-links a { padding: 1rem; grid-template-columns: 2.35rem minmax(0, 1fr) auto; gap: .8rem; }
+    .pathway-links__icon { width: 2.35rem; height: 2.35rem; }
     .pathways-content { padding: var(--space-7) var(--space-5); }
     .privacy-heading { grid-template-columns: 2rem minmax(0, 1fr); }
   }

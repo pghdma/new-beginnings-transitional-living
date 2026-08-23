@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "predeploy-check": "node scripts/predeploy-check.mjs"
+    "predeploy-check": "npm run check && npm run build && npx tsc -p worker/tsconfig.json --noEmit && node scripts/predeploy-check.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",

@@ -5,22 +5,22 @@ import CtaBand from '../../../components/CtaBand.astro';
 
 const principles = [
   {
-    number: '01',
+    icon: 'shield-check',
     title: 'Resident privacy',
     copy: 'Safety guides how exact locations and personal information are shared.',
   },
   {
-    number: '02',
+    icon: 'users-round',
     title: 'Peer community',
     copy: 'Shared living places the daily work of recovery in a community of other women.',
   },
   {
-    number: '03',
+    icon: 'house-heart',
     title: 'Consistent expectations',
     copy: 'A dependable household framework supports routines and shared responsibility.',
   },
   {
-    number: '04',
+    icon: 'stethoscope',
     title: 'Independent care',
     copy: 'Treatment and clinical services remain with appropriately licensed outside providers.',
   },
@@ -55,29 +55,32 @@ const principles = [
       <div class="opening-copy">
         <p class="lead">Recovery housing can provide consistency during a season of change, without asking residents to step away from the responsibilities and relationships of ordinary life.</p>
         <p>New Beginnings provides shared housing for adult women committed to substance-free living. The environment is peer-driven and recovery-focused, while treatment and other clinical services remain with independent licensed providers.</p>
+        <aside class="opening-fact">
+          <Icon name="lucide:home" aria-hidden="true" />
+          <p><strong>Recovery is lived day by day.</strong><span>The residence supports the routines, relationships, and responsibilities that happen between milestones.</span></p>
+        </aside>
       </div>
-      <aside class="opening-fact">
-        <Icon name="lucide:home" aria-hidden="true" />
-        <p><strong>Recovery is lived day by day.</strong><span>The residence supports the routines, relationships, and responsibilities that happen between milestones.</span></p>
-      </aside>
     </div>
   </section>
 
   <section class="principles-section">
-    <div class="container principles-layout">
+    <div class="container">
       <header class="principles-heading">
-        <p class="eyebrow">What supports the home</p>
-        <h2>Dignity is practical.</h2>
+        <div>
+          <p class="eyebrow">What supports the home</p>
+          <h2>Dignity is practical.</h2>
+        </div>
         <p>It shows up in privacy, consistency, shared responsibility, and the way people treat one another.</p>
       </header>
-      <ol class="principles-list">
+      <div class="principles-grid" role="list">
         {principles.map((principle) => (
-          <li>
-            <span>{principle.number}</span>
-            <div><h3>{principle.title}</h3><p>{principle.copy}</p></div>
-          </li>
+          <article role="listitem">
+            <span class="principle-icon"><Icon name={`lucide:${principle.icon}`} aria-hidden="true" /></span>
+            <h3>{principle.title}</h3>
+            <p>{principle.copy}</p>
+          </article>
         ))}
-      </ol>
+      </div>
     </div>
   </section>
 
@@ -93,7 +96,7 @@ const principles = [
         </div>
       </div>
       <figure class="community-photo">
-        <img src="/images/house-kitchen.webp" alt="A kitchen and dining table in a welcoming home" width="2200" height="1467" loading="lazy" />
+        <img src="/images/windowed-living-room.webp" alt="A bright living room with large windows and shared seating" width="2200" height="1467" loading="lazy" />
       </figure>
     </div>
   </section>
@@ -120,47 +123,47 @@ const principles = [
 
 <style>
   .women-hero { border-bottom: 1px solid var(--slate-200); background: var(--paper); }
-  .women-hero__grid { display: grid; min-height: clamp(35rem, 53vw, 44rem); grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: stretch; }
-  .women-hero__photo { margin: 0 0 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2); overflow: hidden; background: var(--slate-200); }
+  .women-hero__grid { display: grid; width: 100%; max-width: none; min-height: clamp(35rem, 53vw, 44rem); grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: stretch; }
+  .women-hero__photo { margin: 0; overflow: hidden; background: var(--slate-200); }
   .women-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
-  .women-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem); flex-direction: column; justify-content: center; }
+  .women-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) var(--gutter) clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem); flex-direction: column; justify-content: center; }
   .women-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); font-size: clamp(3.1rem, 5.7vw, 5.35rem); }
   .women-hero .lead { max-width: 34rem; margin-top: var(--space-5); }
   .women-hero__actions { margin-top: var(--space-6); }
   .women-hero__actions .button { gap: .6rem; }
   .women-hero__actions :global(svg) { width: 1rem; height: 1rem; }
-  .women-hero__location { display: flex; max-width: 32rem; margin-top: var(--space-7); padding-top: var(--space-4); border-top: 1px solid var(--slate-300); align-items: flex-start; gap: .7rem; color: var(--slate-600); font-size: .92rem; line-height: 1.5; }
+  .women-hero__location { display: flex; max-width: 32rem; margin-top: var(--space-7); align-items: flex-start; gap: .7rem; color: var(--slate-600); font-size: .92rem; line-height: 1.5; }
   .women-hero__location :global(svg) { width: 1.15rem; height: 1.15rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; flex: 0 0 auto; }
 
   .opening-section { padding-block: var(--section-standard); background: var(--canvas); }
-  .opening-layout { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1fr) minmax(15rem, .48fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .opening-layout { display: grid; grid-template-columns: minmax(0, .76fr) minmax(0, 1.24fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
   .opening-heading h2 { max-width: 12ch; margin-top: var(--space-4); }
-  .opening-copy { max-width: 39rem; }
+  .opening-copy { max-width: 45rem; padding: clamp(2rem, 4vw, 3.25rem); background: var(--paper); box-shadow: var(--shadow-raised); }
   .opening-copy p + p { margin-top: var(--space-5); }
-  .opening-fact { display: grid; padding-block: var(--space-5); border-block: 1px solid var(--slate-300); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); }
+  .opening-fact { display: grid; margin-top: var(--space-6); padding: var(--space-5); background: var(--sky-50); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); }
   .opening-fact :global(svg) { width: 1.6rem; height: 1.6rem; color: var(--teal-700); stroke-width: 1.55; }
   .opening-fact strong, .opening-fact span { display: block; }
   .opening-fact strong { color: var(--navy-900); font-size: 1rem; font-weight: 600; line-height: 1.35; }
   .opening-fact span { margin-top: .4rem; color: var(--slate-600); font-size: .9rem; line-height: 1.5; }
 
   .principles-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .principles-layout { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
-  .principles-heading { position: sticky; top: 8.5rem; }
+  .principles-heading { display: grid; margin-bottom: clamp(3rem, 6vw, 5rem); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: var(--gap-columns); align-items: end; }
   .principles-heading .eyebrow { color: #9ed7d2; }
   .principles-heading h2 { max-width: 10ch; margin-top: var(--space-4); color: var(--white); }
-  .principles-heading > p:last-child { max-width: 28rem; margin-top: var(--space-5); color: var(--sky-200); }
-  .principles-list { margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.24); list-style: none; }
-  .principles-list li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid rgba(255,255,255,.24); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
-  .principles-list > li > span { color: #9ed7d2; font-size: .82rem; font-weight: 650; letter-spacing: .08em; }
-  .principles-list h3 { color: var(--white); font-size: 1.3rem; }
-  .principles-list p { max-width: 39rem; margin-top: .45rem; color: var(--sky-200); line-height: 1.5; }
+  .principles-heading > p { max-width: 37rem; padding-bottom: .35rem; color: var(--sky-100); font-size: clamp(1.15rem, 1.8vw, 1.38rem); line-height: 1.5; }
+  .principles-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); }
+  .principles-grid article { min-width: 0; }
+  .principle-icon { display: grid; width: 3rem; height: 3rem; border-radius: 50%; color: var(--navy-950); background: #9ed7d2; place-items: center; }
+  .principle-icon :global(svg) { width: 1.45rem; height: 1.45rem; stroke-width: 1.7; }
+  .principles-grid h3 { max-width: 12rem; margin-top: var(--space-5); color: var(--white); font-size: 1.2rem; }
+  .principles-grid p { max-width: 17rem; margin-top: var(--space-3); color: var(--sky-200); font-size: .96rem; line-height: 1.5; }
 
   .community-section { padding-block: var(--section-standard); background: var(--sky-50); }
   .community-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
   .community-copy { max-width: 39rem; }
   .community-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
   .community-copy .lead { margin-top: var(--space-6); }
-  .community-location { display: grid; margin-top: var(--space-7); padding-block: var(--space-5); border-block: 1px solid var(--slate-300); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); }
+  .community-location { display: grid; margin-top: var(--space-7); padding: var(--space-5); background: var(--paper); box-shadow: var(--shadow); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); }
   .community-location :global(svg) { width: 1.6rem; height: 1.6rem; color: var(--teal-700); stroke-width: 1.55; }
   .community-location p { color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
   .community-location strong { display: block; margin-bottom: .3rem; color: var(--navy-900); font-weight: 600; }
@@ -172,23 +175,19 @@ const principles = [
   .privacy-layout header h2 { max-width: 12ch; margin-top: var(--space-4); }
   .privacy-copy { max-width: 43rem; }
   .privacy-copy > p + p { margin-top: var(--space-5); }
-  .privacy-actions { display: grid; margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--slate-300); grid-template-columns: auto minmax(14rem, 1fr); gap: var(--space-5); align-items: center; }
+  .privacy-actions { display: grid; margin-top: var(--space-6); padding: var(--space-5); background: var(--sky-50); grid-template-columns: auto minmax(14rem, 1fr); gap: var(--space-5); align-items: center; }
   .privacy-actions .button { gap: .6rem; }
   .privacy-actions .button :global(svg) { width: 1rem; height: 1rem; }
   .privacy-actions p { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: .6rem; color: var(--slate-600); font-size: .9rem; line-height: 1.45; }
   .privacy-actions p :global(svg) { width: 1.1rem; height: 1.1rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
 
-  @media (max-width: 960px) {
-    .opening-layout { grid-template-columns: 1fr 1fr; }
-    .opening-fact { grid-column: 1 / -1; }
-  }
-
   @media (max-width: 900px) {
-    .women-hero__grid, .principles-layout, .community-layout, .privacy-layout { grid-template-columns: 1fr; }
-    .women-hero__photo { height: clamp(20rem, 52vw, 28rem); margin: 0 calc(var(--gutter) * -1); }
-    .women-hero__copy { padding: var(--space-8) 0; }
-    .principles-layout, .community-layout, .privacy-layout { gap: var(--space-7); }
-    .principles-heading { position: static; }
+    .women-hero__grid, .opening-layout, .principles-heading, .community-layout, .privacy-layout { grid-template-columns: 1fr; }
+    .women-hero__photo { height: clamp(20rem, 52vw, 28rem); }
+    .women-hero__copy { padding: var(--space-8) var(--gutter); }
+    .opening-layout, .principles-heading, .community-layout, .privacy-layout { gap: var(--space-7); }
+    .opening-copy { max-width: 48rem; }
+    .principles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7) var(--space-6); }
     .community-photo { order: -1; min-height: 0; aspect-ratio: 16 / 10; }
   }
 
@@ -198,9 +197,12 @@ const principles = [
     .women-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
     .women-hero__actions { display: grid; }
     .women-hero__actions .button { width: 100%; }
-    .opening-layout { grid-template-columns: 1fr; gap: var(--space-6); }
-    .opening-fact { grid-column: auto; }
-    .principles-layout, .community-layout, .privacy-layout { gap: var(--space-6); }
+    .opening-layout, .principles-heading, .community-layout, .privacy-layout { gap: var(--space-6); }
+    .opening-copy { padding: var(--space-6) var(--space-5); }
+    .principles-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+    .principles-grid article { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 0 var(--space-4); }
+    .principles-grid h3 { grid-column: 2; margin-top: 0; align-self: center; }
+    .principles-grid p { grid-column: 2; margin-top: var(--space-2); }
     .community-photo { aspect-ratio: 4 / 3; }
     .privacy-actions { grid-template-columns: 1fr; align-items: start; }
     .privacy-actions .button { width: 100%; }

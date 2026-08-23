@@ -5,17 +5,17 @@ import { susanRua } from '../data/leadership';
 
 const commitments = [
   {
-    number: '01',
+    icon: 'heart-handshake',
     title: 'Dignity',
     copy: 'People in recovery deserve to be treated as adults, neighbors, and whole human beings.',
   },
   {
-    number: '02',
+    icon: 'scale',
     title: 'Accountability',
     copy: 'Clear expectations and shared responsibility help protect the stability of each home.',
   },
   {
-    number: '03',
+    icon: 'users-round',
     title: 'Community',
     copy: 'Peer connection and outside partnerships help recovery extend beyond the walls of a residence.',
   },
@@ -82,17 +82,17 @@ const commitments = [
   </section>
 
   <section class="commitments">
-    <div class="commitments__visual">
-      <img
-        src="/images/home-entry.webp"
-        alt="A welcoming home entry and staircase"
-        width="2200"
-        height="1467"
-        loading="lazy"
-      />
-    </div>
-    <div class="commitments__content">
-      <div class="commitments__inner">
+    <div class="container commitments__scene">
+      <figure class="commitments__visual">
+        <img
+          src="/images/windowed-living-room.webp"
+          alt="A bright shared living and dining room set for an ordinary day at home"
+          width="2200"
+          height="1467"
+          loading="lazy"
+        />
+      </figure>
+      <div class="commitments__content">
         <header>
           <p class="eyebrow">What guides the work</p>
           <h2>Principles carried into daily life.</h2>
@@ -104,7 +104,9 @@ const commitments = [
         <ol>
           {commitments.map((commitment) => (
             <li>
-              <span>{commitment.number}</span>
+              <span class="commitments__icon">
+                <Icon name={`lucide:${commitment.icon}`} aria-hidden="true" />
+              </span>
               <div>
                 <h3>{commitment.title}</h3>
                 <p>{commitment.copy}</p>
@@ -131,34 +133,44 @@ const commitments = [
             of operating sober-living homes. That perspective informs an organization built
             around stable housing, clear expectations, and connection to recovery support.
           </p>
-          <a class="text-link" href="/about/susan-rua/">Meet Susan Rua</a>
+          <a class="button button--light" href="/about/susan-rua/">
+            Meet Susan Rua
+            <Icon name="lucide:arrow-right" aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>
   )}
 
   <section class="governance-band">
-    <div class="container governance-band__grid">
-      <div>
+    <div class="container governance-band__scene">
+      <div class="governance-band__content">
         <p class="eyebrow">Nonprofit governance</p>
         <h2>Accountability extends beyond the homes.</h2>
-      </div>
-      <div>
         <p class="lead">
           A volunteer Board of Directors provides stewardship and oversight of the New
           Beginnings mission and its nonprofit responsibilities.
         </p>
         <nav class="governance-band__links" aria-label="Governance information">
-          <a href="/about/board/">
-            <span>Board and governance</span>
-            <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+          <a class="button" href="/about/board/">
+            <Icon name="lucide:users-round" aria-hidden="true" />
+            Board and governance
           </a>
-          <a href="/about/transparency/">
-            <span>Credentials and public records</span>
-            <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+          <a class="button button--outline" href="/about/transparency/">
+            <Icon name="lucide:badge-check" aria-hidden="true" />
+            Credentials and public records
           </a>
         </nav>
       </div>
+      <figure class="governance-band__figure">
+        <img
+          src="/images/rustic-dining-room.webp"
+          alt="An empty dining table beneath a tall window"
+          width="1600"
+          height="2133"
+          loading="lazy"
+        />
+      </figure>
     </div>
   </section>
 </MainLayout>
@@ -175,51 +187,72 @@ const commitments = [
   .about-hero__figure { min-height: 100%; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--slate-200); box-shadow: -1.25rem 1.5rem 3.5rem rgba(23, 55, 70, .11); }
   .about-hero__figure img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; }
 
-  .mission__grid, .founder__grid, .governance-band__grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
-  .mission header, .founder__identity, .governance-band__grid > div:first-child { display: grid; gap: var(--space-4); }
+  .mission { background: var(--sky-50); }
+  .mission__grid, .founder__grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
+  .mission header, .founder__identity { display: grid; gap: var(--space-4); }
   .mission h2 { max-width: 13ch; }
-  .mission__copy, .founder__copy { max-width: var(--measure); }
+  .mission__copy { max-width: var(--measure); padding: clamp(var(--space-6), 4vw, var(--space-7)); background: var(--paper); box-shadow: var(--shadow-raised); }
+  .founder__copy { max-width: var(--measure); }
   .mission__copy p + p, .founder__copy p + p { margin-top: var(--space-5); }
 
-  .commitments { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); background: var(--paper); }
-  .commitments__visual { min-height: 43rem; overflow: hidden; background: var(--slate-200); }
+  .commitments { padding-block: var(--section-standard); overflow: hidden; background: var(--paper); }
+  .commitments__scene { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; }
+  .commitments__visual { height: 46rem; margin: 0; overflow: hidden; background: var(--slate-200); box-shadow: var(--shadow-raised); grid-column: 1 / 8; grid-row: 1; }
   .commitments__visual img { width: 100%; height: 100%; object-fit: cover; }
-  .commitments__content { display: grid; padding: var(--section-standard) var(--gutter); align-items: center; }
-  .commitments__inner { width: min(100%, 38rem); margin-inline: auto; }
+  .commitments__content { position: relative; z-index: 1; padding: clamp(var(--space-7), 6vw, var(--space-9)); background: var(--paper); box-shadow: var(--shadow-raised); grid-column: 7 / 13; grid-row: 1; }
   .commitments header { display: grid; gap: var(--space-4); margin-bottom: var(--space-7); }
   .commitments h2 { max-width: 13ch; }
-  .commitments ol { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .commitments li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); }
-  .commitments li > span { color: var(--teal-700); font-size: .8rem; font-weight: 650; letter-spacing: .12em; }
+  .commitments ol { display: grid; margin: 0; padding: 0; gap: var(--space-6); list-style: none; }
+  .commitments li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .commitments__icon { display: grid; width: 3rem; height: 3rem; border-radius: 50%; color: var(--teal-700); background: var(--sky-100); place-items: center; }
+  .commitments__icon :global(svg) { width: 1.45rem; height: 1.45rem; stroke-width: 1.7; }
   .commitments h3 { margin-bottom: var(--space-2); }
+  .commitments li p { color: var(--slate-600); line-height: 1.55; }
 
-  .founder { background: var(--canvas); }
-  .founder__credentials { color: var(--teal-700); font-size: .9rem; font-weight: 650; letter-spacing: .1em; }
-  .founder .text-link { margin-top: var(--space-6); }
+  .founder { color: var(--sky-100); background: var(--navy-900); }
+  .founder .eyebrow { color: #9ed7d2; }
+  .founder h2 { color: var(--white); }
+  .founder__credentials { color: #b9e5e1; font-size: .9rem; font-weight: 650; letter-spacing: .1em; }
+  .founder__copy .lead { color: var(--white); }
+  .founder__copy > p:not(.lead) { color: var(--sky-100); }
+  .founder .button { width: fit-content; margin-top: var(--space-6); gap: var(--space-2); }
+  .founder .button :global(svg) { width: 1rem; height: 1rem; }
 
-  .governance-band { padding-block: clamp(var(--space-8), 7vw, var(--space-9)); color: var(--white); background: var(--navy-950); }
-  .governance-band h2 { max-width: 14ch; color: var(--white); }
-  .governance-band .eyebrow { color: #9ed7d2; }
-  .governance-band .lead { color: var(--sky-100); }
-  .governance-band__links { display: grid; margin-top: var(--space-6); border-top: 1px solid rgba(255,255,255,.24); }
-  .governance-band__links a { display: flex; padding-block: var(--space-4); border-bottom: 1px solid rgba(255,255,255,.24); align-items: center; justify-content: space-between; gap: var(--space-4); color: var(--white); font-weight: 650; }
-  .governance-band__links a:hover { color: #9ed7d2; }
-  .governance-band__links :global(svg) { width: 1.1rem; height: 1.1rem; }
+  .governance-band { overflow: hidden; background: var(--sky-50); }
+  .governance-band__scene { display: grid; min-height: 36rem; grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr); align-items: stretch; }
+  .governance-band__content { display: grid; padding: var(--section-standard) clamp(var(--space-6), 5vw, var(--space-9)) var(--section-standard) 0; align-content: center; gap: var(--space-4); }
+  .governance-band h2 { max-width: 13ch; }
+  .governance-band .lead { max-width: 36rem; margin-top: var(--space-2); }
+  .governance-band__links { display: flex; flex-wrap: wrap; margin-top: var(--space-5); gap: var(--space-3); }
+  .governance-band__links .button { gap: var(--space-2); }
+  .governance-band__links :global(svg) { width: 1.05rem; height: 1.05rem; }
+  .governance-band__figure { min-height: 100%; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--slate-200); box-shadow: -1.4rem 1.6rem 3.8rem rgba(23, 55, 70, .12); }
+  .governance-band__figure img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; }
 
   @media (max-width: 800px) {
     .about-hero__grid { min-height: 0; grid-template-columns: 1fr; }
     .about-hero__figure { height: clamp(17rem, 58vw, 26rem); margin: 0 calc(var(--gutter) * -1); order: -1; box-shadow: none; }
     .about-hero__copy { padding-block: var(--space-8); padding-right: 0; }
-    .mission__grid, .founder__grid, .governance-band__grid { grid-template-columns: 1fr; }
-    .commitments { grid-template-columns: 1fr; }
-    .commitments__visual { min-height: 0; aspect-ratio: 4 / 3; }
-    .commitments__content { padding-block: var(--space-8); }
+    .mission__grid, .founder__grid, .governance-band__scene { grid-template-columns: 1fr; }
+    .commitments__scene { display: block; }
+    .commitments__visual { height: auto; min-height: 0; aspect-ratio: 16 / 10; }
+    .commitments__content { width: calc(100% - (var(--space-6) * 2)); margin: calc(var(--space-7) * -1) auto 0; padding: var(--space-8); }
+    .governance-band__figure { height: clamp(20rem, 58vw, 30rem); min-height: 0; margin: 0 calc(var(--gutter) * -1); order: -1; box-shadow: none; }
+    .governance-band__content { padding-block: var(--space-8); padding-right: 0; }
   }
 
   @media (max-width: 520px) {
     .about-hero__copy { padding-block: var(--space-7); }
     .about-hero h1 { font-size: clamp(2.75rem, 13vw, 3.65rem); }
     .about-hero__figure { height: 16rem; }
-    .commitments__content { padding: var(--space-7) var(--gutter); }
+    .mission__copy { padding: var(--space-6) var(--space-5); }
+    .commitments { padding-block: var(--space-8); }
+    .commitments__visual { aspect-ratio: 4 / 3; }
+    .commitments__content { width: calc(100% - (var(--space-4) * 2)); margin-top: calc(var(--space-5) * -1); padding: var(--space-7) var(--space-5); }
+    .commitments li { grid-template-columns: 2.7rem minmax(0, 1fr); gap: var(--space-3); }
+    .commitments__icon { width: 2.7rem; height: 2.7rem; }
+    .founder .button, .governance-band__links .button { width: 100%; }
+    .governance-band__figure { height: 17rem; }
+    .governance-band__links { display: grid; }
   }
 </style>

@@ -32,23 +32,28 @@ const steps = [
     intro="You do not need to prepare your whole history or share sensitive information online. Start with a general inquiry so staff can explain the current process."
     image="/images/front-door.webp"
     imageAlt="A teal front door at the entrance to a home"
+    imageWidth={2200}
+    imageHeight={3481}
     fact="An inquiry begins a conversation. It does not guarantee admission, availability, or placement in a particular residence."
   />
 
   <section class="admissions-start" aria-labelledby="start-title">
     <div class="container start-layout">
-      <aside class="phone-first">
-        <p class="eyebrow">The simplest first step</p>
-        <h2 id="start-title">Call New Beginnings.</h2>
-        <a class="phone-number" href={site.phoneHref}>
-          <Icon name="lucide:phone" aria-hidden="true" />
-          <span>{site.phone}</span>
-        </a>
-        <p>Use the number above to begin a general housing conversation. Exact residence locations and sensitive details are handled privately.</p>
-      </aside>
+      <header class="start-intro">
+        <div>
+          <p class="eyebrow">The simplest first step</p>
+          <h2 id="start-title">One call begins the conversation.</h2>
+        </div>
+        <div class="start-intro__call">
+          <p>Use this number for a general housing conversation. Exact locations and sensitive details are handled privately.</p>
+          <a class="button" href={site.phoneHref}>
+            <Icon name="lucide:phone" aria-hidden="true" />
+            Call {site.phone}
+          </a>
+        </div>
+      </header>
 
-      <div class="start-process">
-        <p class="eyebrow">What happens next</p>
+      <div class="start-process" aria-label="Three stages of a housing inquiry">
         <ol>
           {steps.map((step) => (
             <li>
@@ -65,30 +70,37 @@ const steps = [
   </section>
 
   <section class="section preparation" aria-labelledby="prepare-title">
-    <div class="container preparation-layout">
-      <header class="preparation-intro">
-        <p class="eyebrow">Prepare for first contact</p>
-        <h2 id="prepare-title">A few basics are enough.</h2>
-        <p class="lead">The first conversation is for orientation—not for exchanging a complete personal, medical, or legal record.</p>
-      </header>
+    <div class="preparation-layout">
+      <figure class="preparation-photo">
+        <img src="/images/admissions.jpg" alt="Notebooks and coffee arranged around a shared table" width="1880" height="1245" loading="lazy" />
+      </figure>
+      <div class="preparation-content">
+        <div class="preparation-content__inner">
+          <header class="preparation-intro">
+            <p class="eyebrow">Prepare for first contact</p>
+            <h2 id="prepare-title">A few basics are enough.</h2>
+            <p class="lead">The first conversation is for orientation—not for exchanging a complete personal, medical, or legal record.</p>
+          </header>
 
-      <div class="preparation-details">
-        <div class="appropriate-details">
-          <h3>Helpful to share</h3>
-          <ul>
-            <li>Your name and the best way to reach you</li>
-            <li>Whether you are asking for yourself, a loved one, or a client</li>
-            <li>Whether you are looking for men’s or women’s housing</li>
-            <li>Any general timing question you want to discuss</li>
-          </ul>
-        </div>
-        <aside class="privacy-details">
-          <Icon name="lucide:lock-keyhole" aria-hidden="true" />
-          <div>
-            <h3>Keep sensitive records out of the public form.</h3>
-            <p>Do not submit diagnoses, medication information, treatment or court records, Social Security numbers, financial-account information, or other private documents.</p>
+          <div class="preparation-details">
+            <div class="appropriate-details">
+              <h3>Helpful to share</h3>
+              <ul>
+                <li>Your name and the best way to reach you</li>
+                <li>Whether you are asking for yourself, a loved one, or a client</li>
+                <li>Whether you are looking for men’s or women’s housing</li>
+                <li>Any general timing question you want to discuss</li>
+              </ul>
+            </div>
+            <aside class="privacy-details">
+              <Icon name="lucide:lock-keyhole" aria-hidden="true" />
+              <div>
+                <h3>Keep sensitive records out of the public form.</h3>
+                <p>Do not submit diagnoses, medication information, treatment or court records, Social Security numbers, financial-account information, or other private documents.</p>
+              </div>
+            </aside>
           </div>
-        </aside>
+        </div>
       </div>
     </div>
   </section>
@@ -141,31 +153,34 @@ const steps = [
 
 <style>
   .admissions-start { padding-block: var(--section-standard); background: var(--paper); }
-  .start-layout { display: grid; grid-template-columns: minmax(18rem, .74fr) minmax(0, 1.26fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-  .phone-first { padding: clamp(2.25rem, 5vw, 3.5rem); color: var(--white); background: var(--navy-950); box-shadow: var(--shadow-raised); }
-  .phone-first .eyebrow { color: #a6ddd8; }
-  .phone-first h2 { max-width: 10ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(2rem, 3.6vw, 3.15rem); }
-  .phone-first > p:last-child { max-width: 29rem; margin-top: var(--space-6); color: var(--sky-100); }
-  .phone-number { display: inline-flex; margin-top: var(--space-6); align-items: center; gap: var(--space-3); color: var(--white); font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 600; line-height: 1.15; }
-  .phone-number:hover { color: #b9e5e1; }
-  .phone-number :global(svg) { width: 1.55rem; height: 1.55rem; color: #9ed7d2; stroke-width: 1.7; }
-  .start-process > .eyebrow { margin-bottom: var(--space-4); }
-  .start-process ol { margin: 0; padding: 0; border-top: 1px solid var(--slate-300); list-style: none; }
-  .start-process li { display: grid; padding-block: var(--space-5); border-bottom: 1px solid var(--slate-300); grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
-  .step-number { padding-top: .2rem; color: var(--teal-700); font-size: .86rem; font-weight: 650; letter-spacing: .08em; }
+  .start-layout { display: grid; gap: var(--space-7); }
+  .start-intro { display: grid; grid-template-columns: minmax(0, .9fr) minmax(18rem, 1.1fr); gap: var(--gap-columns); align-items: end; }
+  .start-intro h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .start-intro__call { display: grid; max-width: 35rem; justify-items: start; gap: var(--space-5); }
+  .start-intro__call .button { gap: .65rem; }
+  .start-intro__call .button :global(svg) { width: 1.05rem; height: 1.05rem; }
+  .start-process { padding: clamp(1.8rem, 4vw, 3rem); background: var(--navy-950); box-shadow: var(--shadow-raised); }
+  .start-process ol { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); list-style: none; }
+  .start-process li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); }
+  .step-number { color: #9ed7d2; font-size: 1.6rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; }
   .start-process h3 { font-size: 1.3rem; }
-  .start-process p { max-width: 42rem; margin-top: var(--space-2); color: var(--slate-600); line-height: 1.55; }
+  .start-process h3 { color: var(--white); }
+  .start-process p { max-width: 30rem; margin-top: var(--space-2); color: var(--sky-100); line-height: 1.5; }
 
-  .preparation { background: var(--sky-50); }
-  .preparation-layout { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .preparation { padding: 0; background: var(--sky-50); }
+  .preparation-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .preparation-photo { min-height: 48rem; margin: 0; overflow: hidden; }
+  .preparation-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.82) contrast(.98); }
+  .preparation-content { display: grid; padding: var(--section-standard) var(--gutter); align-items: center; }
+  .preparation-content__inner { width: min(100%, 40rem); margin-inline: auto; }
   .preparation-intro { display: grid; gap: var(--space-4); }
   .preparation-intro h2 { max-width: 11ch; }
-  .preparation-details { display: grid; gap: var(--space-6); }
-  .appropriate-details { padding-block: var(--space-2) var(--space-6); border-bottom: 1px solid var(--slate-300); }
+  .preparation-details { display: grid; margin-top: var(--space-7); gap: var(--space-6); }
+  .appropriate-details { padding: var(--space-5); background: var(--paper); box-shadow: var(--shadow); }
   .appropriate-details ul { display: grid; margin-top: var(--space-5); padding: 0; gap: var(--space-3); list-style: none; }
   .appropriate-details li { position: relative; padding-left: 1.85rem; }
   .appropriate-details li::before { position: absolute; top: .05rem; left: 0; color: var(--teal-700); content: '✓'; font-weight: 650; }
-  .privacy-details { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); }
+  .privacy-details { display: grid; padding-inline: var(--space-2); grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); }
   .privacy-details :global(svg) { width: 1.9rem; height: 1.9rem; color: var(--teal-700); stroke-width: 1.55; }
   .privacy-details h3 { max-width: 25rem; }
   .privacy-details p { max-width: 42rem; margin-top: var(--space-3); color: var(--slate-600); }
@@ -181,16 +196,20 @@ const steps = [
   details p { max-width: 46rem; margin-top: var(--space-3); color: var(--slate-600); }
 
   @media (max-width: 800px) {
-    .start-layout,
-    .preparation-layout,
+    .start-intro,
     .faq-layout { grid-template-columns: 1fr; gap: var(--space-7); }
-    .phone-first { max-width: 38rem; }
+    .start-process ol { grid-template-columns: 1fr; gap: var(--space-6); }
+    .preparation-layout { grid-template-columns: 1fr; }
+    .preparation-photo { min-height: 0; aspect-ratio: 16 / 10; }
+    .preparation-content { padding-block: var(--section-standard); }
   }
 
   @media (max-width: 520px) {
-    .phone-first { padding: var(--space-6) var(--space-5); }
-    .phone-number { font-size: 1.55rem; }
-    .start-process li { grid-template-columns: 2.35rem minmax(0, 1fr); gap: var(--space-3); }
+    .start-process { padding: var(--space-6) var(--space-5); }
+    .start-process li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-3); }
+    .step-number { font-size: 1.35rem; }
+    .preparation-photo { aspect-ratio: 4 / 3; }
+    .preparation-content { padding-block: var(--space-8); }
     .preparation-details { gap: var(--space-5); }
   }
 </style>
