@@ -10,11 +10,11 @@ interface Props {
   phone?: boolean;
 }
 const {
-  eyebrow = 'Take the next step',
-  title = 'Looking for recovery housing?',
+  eyebrow = 'Take the Next Step',
+  title = 'Looking for Recovery Housing?',
   text = 'Start with a private, general conversation. Staff can explain the current process and what may happen next.',
   href = '/admissions/',
-  label = 'Admissions information',
+  label = 'Admissions Information',
   phone = true,
 } = Astro.props;
 ---
@@ -27,18 +27,14 @@ const {
     </div>
     <div class="actions">
       <a class="button button--light" href={href}>{label}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-      {phone && <a class="button button--phone" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
+      {phone && <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
     </div>
   </div>
 </section>
 <style>
   .cta-band { position: relative; overflow: hidden; }
-  .cta-band .eyebrow { margin-bottom: var(--space-3); color: #9ed7d2; }
+  .cta-band .eyebrow { margin-bottom: var(--space-3); color: var(--accent-on-dark); }
   .cta-band__copy, .actions { position: relative; z-index: 1; }
-  .button { gap: .65rem; }
-  .button :global(svg) { width: 1.05rem; height: 1.05rem; }
-  .button--phone { border-color: rgba(255,255,255,.7); color: var(--white); background: transparent; }
-  .button--phone:hover { color: var(--navy-950); background: var(--white); }
   @media (max-width: 760px) {
     .actions { display: grid; align-items: stretch; }
     .button { width: 100%; }

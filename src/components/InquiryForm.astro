@@ -14,7 +14,8 @@ const buttonLabel = 'Send Message';
   <header class="inquiry-form__header">
     <p class="eyebrow">Send a Message</p>
     <h2 id="inquiry-title">How Can We Help?</h2>
-    <p>Use this form for a general question. Please keep medical, legal, and other sensitive information out of your message.</p>
+    <p class="inquiry-form__intro">Use this form for a general question. Please keep medical, legal, and other sensitive information out of your message.</p>
+    <p class="form-required-note">All fields are required unless marked optional.</p>
   </header>
 
   <form data-contact-form data-context="contact" novalidate>
@@ -168,10 +169,10 @@ const buttonLabel = 'Send Message';
   }
 
   .inquiry-form__header h2 {
-    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    font-size: var(--type-section-medium);
   }
 
-  .inquiry-form__header > p:last-child {
+  .inquiry-form__intro {
     color: var(--slate-600);
   }
 
@@ -185,8 +186,8 @@ const buttonLabel = 'Send Message';
     display: grid;
     gap: var(--space-2);
     color: var(--navy-900);
-    font-size: .95rem;
-    font-weight: 650;
+    font-size: var(--form-label-size);
+    font-weight: var(--weight-semibold);
   }
 
   .field-label {
@@ -197,17 +198,17 @@ const buttonLabel = 'Send Message';
   .field-label small {
     color: var(--slate-500);
     font-size: .84rem;
-    font-weight: 500;
+    font-weight: var(--weight-medium);
   }
 
   input,
   select,
   textarea {
     width: 100%;
-    min-height: 3.2rem;
+    min-height: var(--control-min-height);
     padding: .78rem .9rem;
-    border: 1px solid var(--slate-300);
-    border-radius: var(--radius);
+    border: var(--control-border);
+    border-radius: var(--control-radius);
     background: var(--white);
     color: var(--slate-700);
   }
@@ -221,20 +222,20 @@ const buttonLabel = 'Send Message';
   select:focus,
   textarea:focus {
     border-color: var(--teal-700);
-    box-shadow: 0 0 0 3px rgba(20, 116, 111, .14);
+    box-shadow: var(--focus-ring-soft);
     outline: 0;
   }
 
   .privacy-note {
     max-width: 62ch;
     color: var(--slate-600);
-    font-size: .86rem;
+    font-size: var(--form-help-size);
     line-height: 1.5;
   }
 
   .privacy-note a {
     color: var(--blue-700);
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     text-decoration: underline;
   }
 
@@ -247,7 +248,7 @@ const buttonLabel = 'Send Message';
   .verification > p {
     color: var(--navy-900);
     font-size: .92rem;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
   }
 
   .cf-turnstile {
@@ -273,7 +274,8 @@ const buttonLabel = 'Send Message';
   .status {
     min-height: 1.5em;
     color: var(--navy-800);
-    font-weight: 600;
+    font-size: var(--form-status-size);
+    font-weight: var(--weight-heading);
   }
 
   .status[data-state="error"] {

@@ -11,7 +11,8 @@ import { site } from '../data/site';
         This three step form begins the conversation about housing and current availability.
         It does not replace the private admissions process or guarantee a room.
       </p>
-      <p class="call-option">Prefer to speak with someone? <a href={site.phoneHref}>Call {site.phone}.</a></p>
+      <p class="call-option">Prefer to speak with someone? <a class="inline-link" href={site.phoneHref}>Call {site.phone}.</a></p>
+      <p class="form-required-note">All fields are required unless marked optional.</p>
     </header>
 
     <form data-housing-application novalidate>
@@ -48,7 +49,7 @@ import { site } from '../data/site';
             <label class="choice"><input required type="radio" name="preferredContact" value="Email" /><span><strong>Email</strong></span></label>
           </div>
         </fieldset>
-        <label class="select-field">Best Time to Reach You <small>(Optional)</small><select name="bestTime"><option value="">Any Time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
+        <label class="select-field">Best Time to Reach You <small>(optional)</small><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
         <div class="step-actions step-actions--forward">
           <button class="button" type="button" data-next-step>Continue to Applicant and Housing</button>
         </div>
@@ -75,7 +76,7 @@ import { site } from '../data/site';
             <label class="choice"><input required type="radio" name="adultStatus" value="No" /><span><strong>No</strong></span></label>
           </div>
         </fieldset>
-        <label class="select-field">Desired Move Timing<select name="moveTiming" required><option value="">Select One</option><option value="As soon as available">As Soon as Available</option><option value="Within two weeks">Within Two Weeks</option><option value="Within 30 days">Within 30 Days</option><option value="Planning ahead">Planning Ahead</option></select></label>
+        <label class="select-field">Desired Move Timing<select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
         <fieldset class="choice-group">
           <legend>Has the Applicant Lived With New Beginnings Before?</legend>
           <div class="choice-grid choice-grid--two compact-choices">
@@ -99,12 +100,12 @@ import { site } from '../data/site';
       <fieldset class="form-section" data-form-step="3" hidden>
         <legend tabindex="-1"><strong>Final Details</strong></legend>
         <p class="section-intro">Add any general information that would help staff prepare for the first conversation.</p>
-        <label class="select-field">Primary Referral Source <small>(Optional)</small><select name="referralSource"><option value="">Select One</option><option value="Treatment provider">Treatment Provider</option><option value="Court or justice partner">Court or Justice Partner</option><option value="Family or friend">Family or Friend</option><option value="Community organization">Community Organization</option><option value="Online search">Online Search</option><option value="Other">Other</option></select></label>
-        <label>Questions or General Information <small>(Optional)</small><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
+        <label class="select-field">Primary Referral Source <small>(optional)</small><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
+        <label>Questions or General Information <small>(optional)</small><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
         <p class="field-guidance" id="message-guidance">Do not include diagnoses, medications, treatment records, legal records, Social Security numbers, or other sensitive information.</p>
         <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I would like to discuss accessibility or accommodation needs privately.</span></label>
         <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand that submitting this application starts a review and does not guarantee availability or admission.</span></label>
-        <label class="trap" aria-hidden="true">Leave This Empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+        <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
         <input type="hidden" name="startedAt" value="" />
         <div class="submission-area">
           <div>
@@ -250,19 +251,20 @@ import { site } from '../data/site';
 
 <style>
   .application { padding-block: var(--section-standard); background: var(--sky-50); }
-  .application-shell { max-width: 70rem; }
+  .application-shell { max-width: var(--max-form); }
   .application-heading { display: grid; max-width: 48rem; margin: 0 auto var(--space-7); justify-items: center; gap: var(--space-3); text-align: center; }
   .application-heading h2 { max-width: 18ch; }
-  .application-heading > p:not(.eyebrow) { max-width: 62ch; font-size: 1.08rem; }
+  .application-heading > p:not(.eyebrow):not(.form-required-note) { max-width: 62ch; font-size: 1.08rem; }
+  .application-heading .form-required-note { font-size: var(--form-help-size); }
   .application-heading .call-option { font-size: .96rem; }
-  .application-heading a { font-weight: 650; }
+  .application-heading a { font-weight: var(--weight-semibold); }
   form { overflow: hidden; border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); scroll-margin-top: 7rem; }
   .form-progress { padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-8)); border-bottom: 1px solid var(--slate-200); background: var(--white); }
   .form-progress ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
   .form-progress li { position: relative; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); color: var(--slate-500); align-items: center; gap: var(--space-3); }
   .form-progress li:not(:last-child)::after { position: absolute; top: 50%; right: var(--space-4); left: calc(2.25rem + var(--space-4)); height: 1px; background: var(--slate-200); content: ''; }
-  .form-progress li span { display: grid; width: 2.25rem; height: 2.25rem; border: 1px solid var(--slate-300); border-radius: 50%; background: var(--white); font-weight: 650; place-items: center; }
-  .form-progress li strong { position: relative; z-index: 1; width: fit-content; padding-right: var(--space-3); background: var(--white); font-size: .92rem; font-weight: 600; }
+  .form-progress li span { display: grid; width: 2.25rem; height: 2.25rem; border: 1px solid var(--slate-300); border-radius: 50%; background: var(--white); font-weight: var(--weight-semibold); place-items: center; }
+  .form-progress li strong { position: relative; z-index: 1; width: fit-content; padding-right: var(--space-3); background: var(--white); font-size: .92rem; font-weight: var(--weight-heading); }
   .form-progress li.is-current { color: var(--navy-900); }
   .form-progress li.is-current span { border-color: var(--teal-700); background: var(--teal-700); color: var(--white); }
   .form-progress li.is-complete { color: var(--teal-700); }
@@ -270,16 +272,16 @@ import { site } from '../data/site';
   .progress-summary { display: none; }
   .form-section { display: grid; min-width: 0; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); border: 0; gap: var(--space-5); }
   .form-section[hidden] { display: none; }
-  .form-section > legend { display: grid; width: 100%; padding: 0; color: var(--navy-900); outline: 0; }
-  .form-section > legend strong { font-size: clamp(1.65rem, 3vw, 2.25rem); font-weight: 600; line-height: 1.15; }
+  .form-section > legend { display: grid; width: 100%; padding: 0; color: var(--navy-900); }
+  .form-section > legend strong { font-size: var(--type-section-compact); font-weight: var(--weight-heading); line-height: 1.15; }
   .section-intro { max-width: 58ch; margin-top: calc(var(--space-3) * -1); color: var(--slate-600); }
   .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
   .applicant-fields[hidden] { display: none; }
-  label, .choice-group > legend { color: var(--navy-900); font-size: .96rem; font-weight: 650; }
+  label, .choice-group > legend { color: var(--navy-900); font-size: var(--form-label-size); font-weight: var(--weight-semibold); }
   label { display: grid; gap: var(--space-2); }
-  label small { color: var(--slate-500); font-size: .85rem; font-weight: 500; }
-  input, select, textarea { width: 100%; padding: .82rem .9rem; border: 1px solid var(--slate-300); border-radius: .25rem; background: var(--white); color: var(--slate-700); }
-  input:focus, select:focus, textarea:focus { border-color: var(--teal-700); outline: 0; box-shadow: 0 0 0 3px rgba(20, 116, 111, .14); }
+  label small { color: var(--slate-500); font-size: var(--form-help-size); font-weight: var(--weight-medium); }
+  input:not([type="radio"]):not([type="checkbox"]), select, textarea { width: 100%; min-height: var(--control-min-height); padding: .78rem .9rem; border: var(--control-border); border-radius: var(--control-radius); background: var(--white); color: var(--slate-700); }
+  input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus { border-color: var(--teal-700); outline: 0; box-shadow: var(--focus-ring-soft); }
   textarea { min-height: 9rem; resize: vertical; }
   .choice-group { display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-3); }
   .choice-group > legend { padding: 0; }
@@ -291,29 +293,29 @@ import { site } from '../data/site';
   .choice:has(input:checked) { border-color: var(--teal-700); background: var(--sky-100); box-shadow: inset 0 0 0 1px var(--teal-700); }
   .choice input { width: 1.1rem; height: 1.1rem; margin: .14rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
   .choice span { display: grid; gap: var(--space-1); }
-  .choice strong { color: var(--navy-900); font-size: 1rem; font-weight: 650; line-height: 1.25; }
-  .choice small { color: var(--slate-600); font-size: .86rem; font-weight: 400; line-height: 1.4; }
+  .choice strong { color: var(--navy-900); font-size: 1rem; font-weight: var(--weight-semibold); line-height: 1.25; }
+  .choice small { color: var(--slate-600); font-size: .86rem; font-weight: var(--weight-regular); line-height: 1.4; }
   .compact-choices { max-width: 31rem; }
   .compact-choices .choice { min-height: 0; align-items: center; }
   .field-guidance { margin-top: calc(var(--space-3) * -1); color: var(--slate-600); font-size: .87rem; line-height: 1.45; }
   .check-choice { display: flex; padding: var(--space-4); border: 1px solid var(--slate-300); border-radius: var(--radius); background: var(--sky-50); align-items: flex-start; gap: var(--space-3); cursor: pointer; }
   .check-choice input { width: 1.15rem; height: 1.15rem; margin: .15rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
-  .check-choice span { color: var(--slate-700); font-weight: 500; }
+  .check-choice span { color: var(--slate-700); font-weight: var(--weight-medium); }
   .step-actions { display: flex; padding-top: var(--space-5); border-top: 1px solid var(--slate-200); justify-content: space-between; gap: var(--space-3); }
   .step-actions--forward { justify-content: flex-end; }
   .step-actions--back-only { padding-top: 0; border-top: 0; justify-content: flex-start; }
   .button-secondary { border: 1px solid var(--navy-900); background: transparent; color: var(--navy-900); }
   .submission-area { display: grid; grid-template-columns: minmax(0, 1fr) auto; padding-top: var(--space-5); border-top: 1px solid var(--slate-200); gap: var(--space-6); align-items: end; }
-  .privacy-note { max-width: 60ch; color: var(--slate-600); font-size: .85rem; line-height: 1.5; }
-  .privacy-note a { color: var(--blue-700); font-weight: 650; text-decoration: underline; }
+  .privacy-note { max-width: 60ch; color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
+  .privacy-note a { color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; }
   .verification { display: grid; min-width: 0; margin-top: var(--space-4); gap: var(--space-2); }
-  .verification > p { color: var(--slate-700); font-size: .9rem; font-weight: 650; }
+  .verification > p { color: var(--slate-700); font-size: .9rem; font-weight: var(--weight-semibold); }
   .cf-turnstile { width: 100%; min-height: 65px; }
   .submit-block { display: grid; justify-items: stretch; gap: var(--space-3); }
   .submit-block .button { min-width: 13rem; }
   button:disabled { cursor: wait; opacity: .72; }
   .trap { position: absolute; left: -9999px; }
-  .status { max-width: 24rem; min-height: 1.5em; color: var(--navy-800); font-size: .9rem; font-weight: 600; }
+  .status { max-width: 24rem; min-height: 1.5em; color: var(--navy-800); font-size: var(--form-status-size); font-weight: var(--weight-heading); }
   .status[data-state="error"] { color: var(--error); }
   .status[data-state="success"] { color: var(--success); }
   @media (max-width: 760px) {
@@ -332,7 +334,7 @@ import { site } from '../data/site';
   @media (max-width: 560px) {
     .application { padding-block: var(--space-7); }
     .form-progress ol { display: none; }
-    .progress-summary { display: block; color: var(--navy-900); font-size: .92rem; font-weight: 650; }
+    .progress-summary { display: block; color: var(--navy-900); font-size: .92rem; font-weight: var(--weight-semibold); }
     .form-section { padding: var(--space-5); }
     .form-grid, .choice-grid--two { grid-template-columns: 1fr; }
     .choice { min-height: 0; }

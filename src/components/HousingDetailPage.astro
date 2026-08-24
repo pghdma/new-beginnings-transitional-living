@@ -110,7 +110,7 @@ const galleryCopy = [
         <p class="lead">{heroLead}</p>
         <div class="actions housing-hero__actions">
           <a class="button button--light" href="/admissions/">Ask About Availability<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button housing-hero__secondary" href="#frequently-asked-questions">Read Common Questions</a>
+          <a class="button button--outline-light" href="#frequently-asked-questions">Read Common Questions</a>
         </div>
         <div class="housing-hero__facts" aria-label="Housing overview">
           <span><Icon name="lucide:users-round" aria-hidden="true" />Adult {audienceLabel}</span>
@@ -230,7 +230,7 @@ const galleryCopy = [
       <div class="faq-intro">
         <p class="eyebrow">Frequently Asked Questions</p>
         <h2>Answers for Residents, Families, and Referral Partners</h2>
-        <p>These answers explain what is known now and identify the house specific details to confirm directly. For current availability, call <a href={site.phoneHref}>{site.phone}</a>.</p>
+        <p>These answers explain what is known now and identify the house specific details to confirm directly. For current availability, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>.</p>
       </div>
       <div class="faq-groups">
         {faqs.map((group) => (
@@ -294,17 +294,15 @@ const galleryCopy = [
   .housing-hero { color: var(--white); background: var(--navy-950); }
   .housing-hero__grid { display: grid; min-height: clamp(35rem, 51vw, 43rem); grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: stretch; }
   .housing-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
-  .housing-hero .eyebrow { color: #9ed7d2; }
-  .housing-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.1rem, 5.5vw, 5.25rem); }
+  .housing-hero .eyebrow { color: var(--accent-on-dark); }
+  .housing-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-interior); }
   .housing-hero .lead { max-width: 35rem; margin-top: var(--space-5); color: var(--sky-100); }
   .housing-hero__actions { margin-top: var(--space-6); }
-  .housing-hero__actions .button { gap: .6rem; }
+  .housing-hero__actions .button { gap: var(--button-gap); }
   .housing-hero__actions :global(svg) { width: 1rem; height: 1rem; }
-  .housing-hero__secondary { border-color: rgba(255, 255, 255, .72); color: var(--white); background: transparent; }
-  .housing-hero__secondary:hover { color: var(--navy-950); background: var(--white); }
-  .housing-hero__facts { display: flex; margin-top: var(--space-7); flex-wrap: wrap; gap: var(--space-3) var(--space-5); color: var(--sky-100); font-size: .92rem; font-weight: 600; }
+  .housing-hero__facts { display: flex; margin-top: var(--space-7); flex-wrap: wrap; gap: var(--space-3) var(--space-5); color: var(--sky-100); font-size: .92rem; font-weight: var(--weight-heading); }
   .housing-hero__facts span { display: inline-flex; align-items: center; gap: .55rem; }
-  .housing-hero__facts :global(svg) { width: 1.1rem; height: 1.1rem; color: #9ed7d2; stroke-width: 1.65; }
+  .housing-hero__facts :global(svg) { width: 1.1rem; height: 1.1rem; color: var(--accent-on-dark); stroke-width: 1.65; }
   .housing-hero__media { margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
   .housing-hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(.98); }
 
@@ -315,8 +313,8 @@ const galleryCopy = [
   .household-photo { margin: 0; overflow: hidden; background: var(--slate-200); grid-area: photo; }
   .household-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(.98); }
   .household-copy { display: flex; padding: clamp(2.5rem, 5vw, 4.5rem); color: var(--white); background: var(--navy-900); flex-direction: column; justify-content: center; grid-area: copy; }
-  .household-copy .eyebrow { color: #9ed7d2; }
-  .household-copy h2 { max-width: 17ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(2rem, 3.2vw, 3rem); }
+  .household-copy .eyebrow { color: var(--accent-on-dark); }
+  .household-copy h2 { max-width: 17ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-section-feature); }
   .household-copy__lead { max-width: 43rem; margin-top: var(--space-5); color: var(--sky-100); font-size: 1.12rem; line-height: 1.55; }
   .household-features { display: grid; margin-top: clamp(2.5rem, 5vw, 4rem); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 3rem); }
   .household-features article { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: start; }
@@ -325,11 +323,11 @@ const galleryCopy = [
 
   .decision-section { padding-block: var(--section-standard); background: var(--sky-50); }
   .decision-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: var(--gap-columns); align-items: start; }
-  .decision-intro { position: sticky; top: 8rem; }
+  .decision-intro { position: sticky; top: var(--sticky-offset-compact); }
   .decision-intro h2 { max-width: 13ch; margin-top: var(--space-4); }
   .decision-intro .lead { margin-top: var(--space-5); }
   .written-information { display: grid; margin-top: var(--space-6); padding: var(--space-5); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); color: var(--sky-100); background: var(--navy-900); box-shadow: var(--shadow); }
-  .written-information > :global(svg) { width: 1.7rem; height: 1.7rem; color: #9ed7d2; stroke-width: 1.55; }
+  .written-information > :global(svg) { width: 1.7rem; height: 1.7rem; color: var(--accent-on-dark); stroke-width: 1.55; }
   .written-information h3 { color: var(--white); font-size: 1.12rem; }
   .written-information p { margin-top: .45rem; font-size: .92rem; line-height: 1.5; }
   .decision-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--paper); box-shadow: var(--shadow-raised); }
@@ -341,7 +339,7 @@ const galleryCopy = [
 
   .supports-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
   .supports-heading { max-width: 48rem; margin-inline: auto; text-align: center; }
-  .supports-heading .eyebrow { color: #9ed7d2; }
+  .supports-heading .eyebrow { color: var(--accent-on-dark); }
   .supports-heading h2 { margin-top: var(--space-4); color: var(--white); }
   .supports-heading .lead { margin: var(--space-5) auto 0; color: var(--sky-100); }
   .supports-grid { display: grid; margin-top: var(--space-8); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.75rem, 4vw, 3rem); text-align: center; }
@@ -357,22 +355,22 @@ const galleryCopy = [
   .question-panel img { position: absolute; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; inset: 0; filter: saturate(.72) contrast(.98); }
   .question-panel__shade { position: absolute; background: linear-gradient(0deg, rgba(10, 38, 50, .96) 0%, rgba(10, 38, 50, .7) 42%, rgba(10, 38, 50, .08) 75%); inset: 0; }
   .question-panel__copy { position: absolute; padding: clamp(1.5rem, 3vw, 2.25rem); inset: auto 0 0; color: var(--white); }
-  .question-panel__number { color: #9ed7d2; font-size: .82rem; font-weight: 650; letter-spacing: .12em; }
+  .question-panel__number { color: var(--accent-on-dark); font-size: .82rem; font-weight: var(--weight-semibold); letter-spacing: .12em; }
   .question-panel h3 { margin-top: var(--space-3); color: var(--white); }
   .question-panel p { margin-top: var(--space-3); color: var(--sky-100); font-size: .94rem; line-height: 1.5; }
   .question-panel:hover img { transform: scale(1.035); }
 
   .faq-section { padding-block: var(--section-standard); background: var(--sky-50); scroll-margin-top: 7rem; }
   .faq-layout { display: grid; grid-template-columns: minmax(0, .68fr) minmax(0, 1.32fr); gap: var(--gap-columns); align-items: start; }
-  .faq-intro { position: sticky; top: 8rem; }
+  .faq-intro { position: sticky; top: var(--sticky-offset-compact); }
   .faq-intro h2 { max-width: 12ch; margin-top: var(--space-4); }
   .faq-intro > p:last-child { max-width: 35rem; margin-top: var(--space-5); }
-  .faq-intro a { font-weight: 650; }
+  .faq-intro a { font-weight: var(--weight-semibold); }
   .faq-groups { display: grid; gap: var(--space-7); }
-  .faq-group h3 { margin-bottom: var(--space-4); color: var(--teal-800); font-size: .85rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+  .faq-group h3 { margin-bottom: var(--space-4); color: var(--teal-800); font-size: .85rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
   .faq-list { border-top: 1px solid var(--slate-300); }
   .faq-list details { border-bottom: 1px solid var(--slate-300); }
-  .faq-list summary { display: grid; min-height: 4.75rem; padding: var(--space-5) 0; cursor: pointer; list-style: none; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--navy-900); font-size: 1.12rem; font-weight: 600; line-height: 1.35; }
+  .faq-list summary { display: grid; min-height: 4.75rem; padding: var(--space-5) 0; cursor: pointer; list-style: none; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--navy-900); font-size: 1.12rem; font-weight: var(--weight-heading); line-height: 1.35; }
   .faq-list summary::-webkit-details-marker { display: none; }
   .faq-list summary :global(svg) { width: 1.2rem; height: 1.2rem; color: var(--teal-700); transition: transform .2s ease; }
   .faq-list details[open] summary :global(svg) { transform: rotate(45deg); }
@@ -386,7 +384,7 @@ const galleryCopy = [
   .location-privacy { display: grid; padding: clamp(2rem, 5vw, 3.5rem); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); background: var(--paper); box-shadow: var(--shadow-raised); }
   .location-privacy > :global(svg) { width: 1.7rem; height: 1.7rem; color: var(--teal-700); stroke-width: 1.55; }
   .location-privacy p { margin-top: var(--space-3); }
-  .location-privacy .button { width: fit-content; margin-top: var(--space-5); grid-column: 2; gap: .6rem; }
+  .location-privacy .button { width: fit-content; margin-top: var(--space-5); grid-column: 2; gap: var(--button-gap); }
   .location-privacy .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 960px) {

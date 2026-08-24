@@ -81,7 +81,7 @@ const accountabilityProof = [
     <div class="container about-hero__inner">
       <div class="about-hero__copy">
         <p class="eyebrow">About New Beginnings</p>
-        <h1>A Pittsburgh Nonprofit With a Practical Purpose.</h1>
+        <h1>A Pittsburgh Nonprofit With a Practical Purpose</h1>
         <p class="lead">
           New Beginnings gives adults in recovery a stable place to strengthen the routines,
           skills, and connections that support lasting change.
@@ -97,8 +97,8 @@ const accountabilityProof = [
   <section class="purpose-section">
     <div class="container purpose-section__intro">
       <header>
-        <p class="eyebrow">Our purpose</p>
-        <h2>Housing, Support, and a Foundation for Independence.</h2>
+        <p class="eyebrow">Our Purpose</p>
+        <h2>Housing, Support, and a Foundation for Independence</h2>
       </header>
       <div class="purpose-section__copy">
         <p class="purpose-section__statement">
@@ -151,8 +151,8 @@ const accountabilityProof = [
   <section class="principles-band">
     <div class="principles-band__content">
       <header>
-        <p class="eyebrow">What guides the work</p>
-        <h2>Principles Carried Into Daily Life.</h2>
+        <p class="eyebrow">What Guides the Work</p>
+        <h2>Principles Carried Into Daily Life</h2>
         <p>
           A stable residence is shaped by how people are treated, what everyone can count on,
           and how responsibility is shared.
@@ -187,7 +187,7 @@ const accountabilityProof = [
     <section class="founder-profile">
       <div class="container founder-profile__grid">
         <div class="founder-profile__content">
-          <p class="eyebrow">President and founder</p>
+          <p class="eyebrow">President and Founder</p>
           <h2>{susanRua.name}</h2>
           {susanRua.summary && <p class="lead">{susanRua.summary}</p>}
           <p>
@@ -224,8 +224,8 @@ const accountabilityProof = [
   <section class="governance-section" id="governance">
     <div class="container governance-section__intro">
       <div>
-        <p class="eyebrow">Nonprofit governance</p>
-        <h2>Stewardship Beyond the Homes.</h2>
+        <p class="eyebrow">Nonprofit Governance</p>
+        <h2>Stewardship Beyond the Homes</h2>
       </div>
       <p class="lead">
         A volunteer Board of Directors provides mission stewardship, nonprofit oversight,
@@ -237,8 +237,8 @@ const accountabilityProof = [
     <div class="container governance-section__stage">
       <article class="board-preview">
         <div class="board-preview__content">
-          <p class="eyebrow">People and stewardship</p>
-          <h3>Board Leadership Grounded in the Mission.</h3>
+          <p class="eyebrow">People and Stewardship</p>
+          <h3>Board Leadership Grounded in the Mission</h3>
           <p>
             The published board roster brings organizational leadership and volunteer
             oversight together around the work of New Beginnings.
@@ -252,7 +252,7 @@ const accountabilityProof = [
             ))}
           </div>
           <a class="button button--light" href="/about/board/">
-            Meet the board
+            Meet the Board
             <Icon name="lucide:arrow-right" aria-hidden="true" />
           </a>
         </div>
@@ -271,8 +271,8 @@ const accountabilityProof = [
       <article class="records-preview">
         <div class="records-preview__content">
           <header>
-            <p class="eyebrow">Independent verification</p>
-            <h3>Public Standing You Can Check.</h3>
+            <p class="eyebrow">Independent Verification</p>
+            <h3>Public Standing You Can Check</h3>
           </header>
           <div class="records-preview__proof" aria-label="Public credentials">
             {accountabilityProof.map((item) => (
@@ -283,7 +283,7 @@ const accountabilityProof = [
             ))}
           </div>
           <a class="button" href="/about/transparency/">
-            Review our standing
+            Review Our Standing
             <Icon name="lucide:arrow-right" aria-hidden="true" />
           </a>
         </div>
@@ -299,21 +299,21 @@ const accountabilityProof = [
   .about-hero__shade { background: linear-gradient(90deg, rgba(9,34,45,.97) 0%, rgba(9,34,45,.9) 38%, rgba(9,34,45,.62) 64%, rgba(9,34,45,.2) 100%); }
   .about-hero__inner { position: relative; z-index: 1; padding-block: clamp(4.5rem, 7vw, 6.5rem); }
   .about-hero__copy { max-width: 43rem; }
-  .about-hero .eyebrow { color: #a6ddd8; }
-  .about-hero h1 { max-width: 13ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.25rem, 5.1vw, 4.65rem); font-weight: 600; }
-  .about-hero .lead { max-width: 38rem; margin-top: var(--space-5); color: #eef5f4; }
-  .about-hero__origin { display: flex; margin-top: var(--space-6); align-items: center; gap: .65rem; color: #dcebea; font-size: .93rem; }
-  .about-hero__origin :global(svg) { width: 1.1rem; height: 1.1rem; color: #a6ddd8; stroke-width: 1.7; }
+  .about-hero .eyebrow { color: var(--accent-on-image); }
+  .about-hero h1 { max-width: 13ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-narrative); font-weight: var(--weight-heading); }
+  .about-hero .lead { max-width: 38rem; margin-top: var(--space-5); color: var(--text-on-dark); }
+  .about-hero__origin { display: flex; margin-top: var(--space-6); align-items: center; gap: var(--button-gap); color: var(--text-muted-on-dark); font-size: .93rem; }
+  .about-hero__origin :global(svg) { width: 1.1rem; height: 1.1rem; color: var(--accent-on-image); stroke-width: 1.7; }
 
   .purpose-section { padding-block: var(--section-standard); background: var(--canvas); }
   .purpose-section__intro { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
   .purpose-section__intro header { display: grid; gap: var(--space-4); }
   .purpose-section__intro h2 { max-width: 13ch; }
   .purpose-section__copy { display: grid; max-width: 48rem; gap: var(--space-7); }
-  .purpose-section__statement { max-width: 39rem; color: var(--navy-900); font-size: clamp(1.35rem, 2vw, 1.75rem); font-weight: 500; letter-spacing: -.01em; line-height: 1.45; }
+  .purpose-section__statement { max-width: 39rem; color: var(--navy-900); font-size: clamp(1.35rem, 2vw, 1.75rem); font-weight: var(--weight-medium); letter-spacing: -.01em; line-height: 1.45; }
   .purpose-section__details { display: grid; border-top: 1px solid var(--slate-300); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-5), 4vw, var(--space-8)); }
   .purpose-section__details > div { padding-top: var(--space-5); }
-  .purpose-section__details span { display: block; margin-bottom: var(--space-3); color: var(--teal-700); font-size: .74rem; font-weight: 650; letter-spacing: .11em; text-transform: uppercase; }
+  .purpose-section__details span { display: block; margin-bottom: var(--space-3); color: var(--teal-700); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .11em; text-transform: uppercase; }
   .purpose-section__details p { color: var(--slate-600); line-height: 1.65; }
   .purpose-gallery { display: grid; height: clamp(23rem, 31vw, 29rem); margin-top: clamp(var(--space-8), 7vw, var(--space-10)); grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
   .purpose-gallery__scene { position: relative; min-width: 0; margin: 0; overflow: hidden; background: var(--slate-200); box-shadow: 0 .8rem 2rem rgba(23,55,70,.08); transition: box-shadow .35s ease, transform .35s ease; }
@@ -323,7 +323,7 @@ const accountabilityProof = [
   .purpose-gallery__scene:nth-child(3) img { object-position: center; }
   .purpose-gallery__scene::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.9), rgba(9,34,45,.1) 62%); content: ''; inset: 0; transition: background .4s ease; }
   .purpose-gallery__scene figcaption { position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); color: var(--white); }
-  .purpose-gallery__scene h3 { color: var(--white); font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -.01em; line-height: 1.1; }
+  .purpose-gallery__scene h3 { color: var(--white); font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: var(--weight-heading); letter-spacing: -.01em; line-height: 1.1; }
   .purpose-gallery__scene figcaption p { max-width: 29rem; max-height: 0; margin-top: 0; overflow: hidden; color: var(--sky-100); font-size: clamp(.95rem, 1.3vw, 1.06rem); line-height: 1.5; opacity: 0; transform: translateY(.65rem); transition: max-height .45s ease, margin-top .35s ease, opacity .3s ease, transform .4s ease; }
   .purpose-gallery__scene:hover, .purpose-gallery__scene:focus-visible { box-shadow: 0 1.15rem 2.8rem rgba(23,55,70,.16); transform: translateY(-.25rem); }
   .purpose-gallery__scene:hover img, .purpose-gallery__scene:focus-visible img { filter: saturate(.82) contrast(1.02); transform: scale(1.035); }
@@ -335,7 +335,7 @@ const accountabilityProof = [
   .principles-band__visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.72) contrast(.98); }
   .principles-band__content { display: grid; padding: var(--section-standard) max(var(--gutter), calc((100vw - var(--max)) / 2)) var(--section-standard) clamp(3rem, 6vw, 6.5rem); grid-area: content; align-content: center; }
   .principles-band__content header { display: grid; max-width: 38rem; gap: var(--space-4); }
-  .principles-band .eyebrow { color: #9ed7d2; }
+  .principles-band .eyebrow { color: var(--accent-on-dark); }
   .principles-band h2 { max-width: 12ch; color: var(--white); }
   .principles-band__content header > p:last-child { color: var(--sky-100); font-size: 1.08rem; line-height: 1.6; }
   .principles-band ul { display: grid; max-width: 40rem; margin: var(--space-8) 0 0; padding: 0; gap: var(--space-6); list-style: none; }
@@ -354,9 +354,9 @@ const accountabilityProof = [
   .founder-profile__content h2 { max-width: 11ch; }
   .founder-profile__content > p:not(.eyebrow, .lead) { max-width: 40rem; }
   .founder-profile__highlights { display: grid; margin: var(--space-2) 0 0; padding: var(--space-5) 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); list-style: none; }
-  .founder-profile__highlights li { display: grid; min-width: 0; grid-template-columns: 1.6rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .94rem; font-weight: 600; line-height: 1.4; }
+  .founder-profile__highlights li { display: grid; min-width: 0; grid-template-columns: 1.6rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .94rem; font-weight: var(--weight-heading); line-height: 1.4; }
   .founder-profile__highlights :global(svg) { width: 1.4rem; height: 1.4rem; margin-top: .05rem; color: var(--teal-700); stroke-width: 1.65; }
-  .founder-profile .button { width: fit-content; margin-top: var(--space-2); gap: .65rem; }
+  .founder-profile .button { width: fit-content; margin-top: var(--space-2); gap: var(--button-gap); }
   .founder-profile .button :global(svg) { width: 1rem; height: 1rem; }
 
   .governance-section { padding-block: var(--section-standard); background: var(--sky-50); }
@@ -367,19 +367,19 @@ const accountabilityProof = [
   .governance-section__stage { display: grid; margin-top: clamp(var(--space-8), 7vw, var(--space-10)); gap: clamp(var(--space-6), 4vw, var(--space-8)); }
   .board-preview { display: grid; min-height: 32rem; overflow: hidden; grid-template-areas: 'visual content'; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); color: var(--white); background: var(--navy-900); box-shadow: 0 1.25rem 3.25rem rgba(23,55,70,.14); }
   .board-preview__content { display: flex; min-width: 0; padding: clamp(var(--space-7), 5vw, var(--space-9)); grid-area: content; flex-direction: column; align-items: flex-start; justify-content: center; }
-  .board-preview .eyebrow { color: #a6ddd8; }
-  .board-preview h3, .records-preview h3 { max-width: 13ch; margin-top: var(--space-3); font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.08; }
+  .board-preview .eyebrow { color: var(--accent-on-image); }
+  .board-preview h3, .records-preview h3 { max-width: 13ch; margin-top: var(--space-3); font-size: var(--type-section-medium); font-weight: var(--weight-heading); letter-spacing: -.02em; line-height: 1.08; }
   .board-preview h3 { color: var(--white); }
   .board-preview__content > p:not(.eyebrow) { max-width: 32rem; margin-top: var(--space-4); color: var(--sky-100); font-size: 1.03rem; line-height: 1.58; }
   .board-preview__roster { display: grid; width: 100%; max-width: 32rem; margin-top: var(--space-7); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
   .board-preview__roster div { display: grid; gap: .2rem; }
-  .board-preview__roster strong { color: var(--white); font-size: 1.04rem; font-weight: 600; }
-  .board-preview__roster span { color: #b9d2d5; font-size: .9rem; line-height: 1.35; }
-  .board-preview .button { margin-top: var(--space-7); gap: .65rem; }
+  .board-preview__roster strong { color: var(--white); font-size: 1.04rem; font-weight: var(--weight-heading); }
+  .board-preview__roster span { color: var(--text-muted-on-dark); font-size: .9rem; line-height: 1.35; }
+  .board-preview .button { margin-top: var(--space-7); gap: var(--button-gap); }
   .board-preview__visual { position: relative; min-height: 100%; margin: 0; overflow: hidden; grid-area: visual; background: var(--navy-950); }
   .board-preview__visual::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.82), rgba(9,34,45,.03) 58%); content: ''; inset: 0; }
   .board-preview__visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.99); }
-  .board-preview__visual figcaption { position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); color: #d9e9e8; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .board-preview__visual figcaption { position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); color: var(--text-muted-on-dark); font-size: .8rem; font-weight: var(--weight-heading); letter-spacing: .08em; text-transform: uppercase; }
   .records-preview { min-width: 0; background: var(--paper); box-shadow: 0 1.15rem 3rem rgba(23,55,70,.1); }
   .records-preview__content { display: grid; padding: clamp(var(--space-6), 4vw, var(--space-8)); grid-template-columns: minmax(13rem, .82fr) minmax(0, 1.55fr) auto; gap: clamp(var(--space-6), 4vw, var(--space-8)); align-items: center; }
   .records-preview__content header { display: grid; gap: var(--space-3); }
@@ -388,8 +388,8 @@ const accountabilityProof = [
   .records-preview__proof > div { display: grid; min-width: 0; justify-items: center; gap: var(--space-3); text-align: center; }
   .records-preview__proof :global(svg) { width: 1.45rem; height: 1.45rem; padding: .7rem; box-sizing: content-box; border-radius: 50%; color: var(--teal-700); background: var(--sky-100); stroke-width: 1.65; }
   .records-preview__proof span { display: grid; color: var(--slate-600); font-size: .9rem; line-height: 1.3; }
-  .records-preview__proof strong { color: var(--navy-900); font-size: .98rem; font-weight: 600; }
-  .records-preview .button { white-space: nowrap; gap: .65rem; }
+  .records-preview__proof strong { color: var(--navy-900); font-size: .98rem; font-weight: var(--weight-heading); }
+  .records-preview .button { white-space: nowrap; gap: var(--button-gap); }
   .board-preview .button :global(svg), .records-preview .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 900px) {

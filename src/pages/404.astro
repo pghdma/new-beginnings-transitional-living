@@ -34,22 +34,22 @@ const helpfulPages = [
     <div class="container">
       <div class="not-found__surface">
         <div class="not-found__message">
-          <p class="eyebrow">404 · Page not found</p>
-          <h1 id="not-found-title">We couldn’t find that page.</h1>
+          <p class="eyebrow">404 Page Not Found</p>
+          <h1 id="not-found-title">We Couldn’t Find That Page</h1>
           <p class="lead">
             The address may have changed, or the page may no longer exist. Return to the
             homepage or choose a useful place to continue.
           </p>
           <div class="actions">
-            <a class="button" href="/">Return to the homepage</a>
+            <a class="button" href="/">Return to the Homepage</a>
             <a class="text-link" href="/contact/">Contact New Beginnings</a>
           </div>
         </div>
 
         <nav class="not-found__directory" aria-labelledby="directory-title">
           <div class="not-found__directory-heading">
-            <p class="eyebrow">Website directory</p>
-            <h2 id="directory-title">Helpful places to continue</h2>
+            <p class="eyebrow">Website Directory</p>
+            <h2 id="directory-title">Helpful Places to Continue</h2>
           </div>
 
           <ul>
@@ -96,7 +96,7 @@ const helpfulPages = [
     max-width: 13ch;
     margin-top: var(--space-4);
     font-size: clamp(2.7rem, 5.5vw, 4.4rem);
-    font-weight: 600;
+    font-weight: var(--weight-heading);
   }
 
   .not-found__message .lead {
@@ -123,8 +123,8 @@ const helpfulPages = [
   .not-found__directory-heading h2 {
     max-width: 13ch;
     margin-top: var(--space-3);
-    font-size: clamp(1.65rem, 2.8vw, 2.25rem);
-    font-weight: 600;
+    font-size: var(--type-section-compact);
+    font-weight: var(--weight-heading);
     line-height: 1.18;
   }
 
@@ -150,7 +150,7 @@ const helpfulPages = [
     display: block;
     color: var(--navy-900);
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: var(--weight-heading);
     line-height: 1.3;
   }
 

@@ -250,12 +250,12 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     text-align: center;
   }
 
-  .board-hero .eyebrow { color: #9ed7d2; }
+  .board-hero .eyebrow { color: var(--accent-on-dark); }
 
   .board-hero h1 {
     max-width: 14ch;
     color: var(--white);
-    font-size: clamp(3rem, 6vw, 5.35rem);
+    font-size: var(--type-display-centered);
     line-height: 1.02;
   }
 
@@ -443,7 +443,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     width: 4.5rem;
     height: 4.5rem;
     margin-bottom: var(--space-6);
-    color: #9ed7d2;
+    color: var(--accent-on-dark);
     border: 1px solid rgba(158, 215, 210, .55);
     border-radius: 50%;
     place-items: center;
@@ -493,7 +493,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     border-radius: 50%;
     place-items: center;
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 600;
+    font-weight: var(--weight-heading);
     letter-spacing: .04em;
   }
 
@@ -508,7 +508,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     margin-bottom: var(--space-3);
     color: var(--teal-700);
     font-size: .78rem;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     letter-spacing: .12em;
     text-transform: uppercase;
   }
@@ -516,7 +516,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   .member h3 {
     color: var(--navy-900);
     font-size: clamp(2rem, 3vw, 2.7rem);
-    font-weight: 600;
+    font-weight: var(--weight-heading);
     line-height: 1.08;
   }
 
@@ -528,7 +528,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   }
 
   .member__face--back .member__role {
-    color: #9ed7d2;
+    color: var(--accent-on-dark);
   }
 
   .member__face--back h3 {
@@ -543,9 +543,9 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
 
   .member__credentials {
     margin-top: var(--space-6);
-    color: #9ed7d2;
+    color: var(--accent-on-dark);
     font-size: .82rem;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     letter-spacing: .1em;
   }
 
@@ -562,7 +562,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     border-top: 1px solid var(--slate-200);
     background: var(--paper);
     font: inherit;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     cursor: pointer;
   }
 
@@ -574,7 +574,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   .member__toggle:focus-visible {
     position: relative;
     z-index: 2;
-    outline: 3px solid var(--teal-500);
+    outline: 3px solid var(--focus);
     outline-offset: -3px;
   }
 
@@ -620,7 +620,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   }
 
   .public-record__inner { width: min(100%, 37rem); }
-  .public-record .eyebrow { color: #9ed7d2; }
+  .public-record .eyebrow { color: var(--accent-on-dark); }
 
   .public-record h2 {
     max-width: 13ch;

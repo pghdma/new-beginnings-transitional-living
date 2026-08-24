@@ -1,5 +1,76 @@
 # Build Playbook & Style Guide
 
+## New Beginnings Project Rules
+
+This section is the source of truth for the current New Beginnings site. The broader playbook below documents historical lessons and general practices. If a later section conflicts with these project rules, follow this section.
+
+### Visual System
+
+- Use Source Sans 3, institutional navy and teal, pale sky, paper, and off white surfaces.
+- Use the shared tokens in `src/styles/global.css` for color, weight, type roles, spacing, controls, header geometry, medallions, focus, and common depth.
+- Use `--shadow` for a subtle surface and `--shadow-raised` for a meaningful raised panel. Unique image and interaction shadows may remain scoped when they communicate a deliberate depth level.
+- Use modest radii. Circles are reserved for medallions and real portraits.
+- Use Lucide icons only. Icons are foreground information aids, never background decoration.
+- Prefer licensed home, interior, household detail, and Pittsburgh photography over generic people.
+- Never use AI generated photography.
+
+### Type and Copy
+
+- Marketing headings and buttons use Title Case.
+- Marketing headings do not end with periods. Questions retain question marks.
+- Inline prose links, help text, and legal section headings use sentence case.
+- Eyebrows render in uppercase through the shared `.eyebrow` style.
+- Do not use em dashes or en dashes in website copy.
+- Do not repair casing with `text-transform: capitalize`. Write the correct source text.
+
+### Layout Families
+
+The approved hero families are intentionally different. Do not flatten them into one generic component.
+
+- Home uses a full background image with left aligned copy.
+- About uses a shorter full background image with left aligned copy.
+- Contact uses a compact centered panorama with the image behind the copy.
+- Transparency uses an image backed accountability hero.
+- Board uses centered introductory copy with contained supporting media.
+- Admissions uses a compact application masthead.
+- Support Us uses a donation introduction and giving planner.
+- Legal pages use a document masthead with review metadata.
+- Recovery overview, housing details, and professional information use editorial split heroes.
+
+The accepted section introduction families are centered stack, balanced split, editorial split, and sticky reference introduction. In a balanced split, do not pair a long heading with one very short sentence. Shorten the heading, strengthen the supporting copy, or choose a different composition.
+
+### Responsive Rules
+
+- The common tiers are 1080px for navigation, 900px for wide editorial layouts, 860px or 820px for content driven layouts, 760px for the primary mobile system, and 480px for compact phones.
+- Component specific breakpoints are allowed only when the content requires them.
+- Meaningful copy appears before its supporting image in both document and visual order on mobile.
+- Do not use CSS order reversal as the normal mobile solution.
+- Use one column for feature groups on phones.
+- Keep at least 24px page gutters on compact screens.
+- Preserve readable line length, visible focus, reduced motion, and WCAG AA contrast.
+
+### Components and Actions
+
+- Use the global button family for primary, outline, light, and light outline actions.
+- Use `.inline-link` for links inside prose.
+- External links that open a new tab must announce that behavior in their accessible name.
+- Use `.icon-medallion` for contained feature and contact icons. Use compact inline icons for simple factual rows.
+- Treat all items in one icon group the same way.
+- Shared forms use the same control height, radius, border, focus ring, label, help, privacy, and status conventions.
+- `CtaBand` is the shared closing pattern for recovery housing and professional pages. Other approved pages keep their contextual endings.
+
+### Privacy and Claims
+
+- Publish only neighborhood level residence information.
+- Never publish residence addresses, pins, or identifying exterior photographs.
+- Label the administrative office as an office, not a residence.
+- Do not invent current rent, amenities, rules, board biographies, donation prices, or outcomes.
+- Use a verified portrait only for a real identified leader.
+
+### Release Verification
+
+Before publishing, run `npm run check`, `npm run build`, `npm run predeploy-check`, and `git diff --check`. Render every canonical page at 390px, 866px, and 1440px. Confirm no horizontal overflow, broken images, duplicate IDs, unnamed controls, incorrect heading counts, or em and en dashes.
+
 A portable starting point for building premium, static brochure/marketing sites
 on this server (Astro + Cloudflare Pages). Copy this file into a new project and
 follow it. It encodes the architecture, the token system, and the design and

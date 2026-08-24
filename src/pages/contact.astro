@@ -9,15 +9,22 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
 
 <MainLayout title="Contact" description="Call, email, or send a message to New Beginnings about recovery housing, professional questions, donations, or the organization.">
   <section class="contact-intro" aria-labelledby="contact-title">
-    <div class="container contact-intro__grid">
+    <img
+      class="contact-intro__image"
+      src="/images/pittsburgh-point-panorama.webp"
+      alt=""
+      aria-hidden="true"
+      width="2400"
+      height="680"
+      fetchpriority="high"
+    />
+    <div class="contact-intro__shade" aria-hidden="true"></div>
+    <div class="container contact-intro__inner">
       <div class="contact-intro__copy">
-        <p class="eyebrow">Contact New Beginnings</p>
+        <p class="eyebrow">Get in Touch</p>
         <h1 id="contact-title">Contact New Beginnings</h1>
         <p class="lead">Questions about recovery housing, professional information, donations, or the organization can begin with a call, an email, or a message.</p>
       </div>
-      <figure class="contact-intro__media">
-        <img src="/images/rustic-dining-room.webp" alt="An empty dining room with a shared table and natural light" width="1600" height="2133" fetchpriority="high" />
-      </figure>
     </div>
   </section>
 
@@ -59,7 +66,13 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
                 {site.office.street}<br />
                 {officeLine}
               </address>
-              <a class="directions-link" href={site.office.directionsHref} target="_blank" rel="noopener noreferrer">
+              <a
+                class="directions-link"
+                href={site.office.directionsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Get Directions, opens in a new tab"
+              >
                 Get Directions
                 <Icon name="lucide:external-link" aria-hidden="true" />
               </a>
@@ -89,56 +102,66 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
 
 <style>
   .contact-intro {
+    position: relative;
+    display: grid;
+    min-height: clamp(25rem, 31vw, 29rem);
+    overflow: hidden;
+    align-items: center;
+    isolation: isolate;
     color: var(--white);
     background: var(--navy-950);
   }
 
-  .contact-intro__grid {
-    display: grid;
-    height: clamp(26rem, 35vw, 31rem);
-    grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr);
-    align-items: stretch;
+  .contact-intro__image,
+  .contact-intro__shade {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    inset: 0;
+  }
+
+  .contact-intro__image {
+    z-index: 0;
+    object-fit: cover;
+    object-position: center 52%;
+    filter: saturate(.72) contrast(1.02);
+  }
+
+  .contact-intro__shade {
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(9, 34, 45, .72), rgba(9, 34, 45, .86));
+  }
+
+  .contact-intro__inner {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(4.25rem, 7vw, 6rem);
   }
 
   .contact-intro__copy {
     display: grid;
-    padding: clamp(3.75rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4.5rem) clamp(3.75rem, 6vw, 5rem) 0;
-    align-content: center;
+    max-width: 52rem;
+    margin-inline: auto;
     gap: var(--space-4);
-  }
-
-  .contact-intro__media {
-    position: relative;
-    min-width: 0;
-    min-height: 0;
-    margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0;
-    overflow: hidden;
-    background: var(--navy-900);
-  }
-
-  .contact-intro__media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 63%;
-    filter: saturate(.82) contrast(.98);
+    text-align: center;
   }
 
   .contact-intro .eyebrow {
-    color: #a6ddd8;
+    color: var(--accent-on-image);
   }
 
   .contact-intro h1 {
-    max-width: 12ch;
+    max-width: 15ch;
+    margin-inline: auto;
     color: var(--white);
-    font-size: clamp(3.1rem, 5vw, 4.5rem);
+    font-size: var(--type-display-banner);
   }
 
   .contact-intro .lead {
-    max-width: 46rem;
-    color: var(--sky-100);
+    max-width: 45rem;
+    margin-inline: auto;
+    color: var(--text-on-dark);
   }
 
   .contact-main {
@@ -169,7 +192,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
   }
 
   .contact-details .eyebrow {
-    color: #a6ddd8;
+    color: var(--accent-on-image);
   }
 
   .contact-details h2,
@@ -179,7 +202,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
 
   .contact-details h2 {
     max-width: 12ch;
-    font-size: clamp(2rem, 3.1vw, 2.8rem);
+    font-size: var(--type-section-medium);
   }
 
   .contact-details header > p:last-child {
@@ -215,7 +238,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
   }
 
   .contact-list a {
-    font-weight: 600;
+    font-weight: var(--weight-heading);
   }
 
   .contact-list a:hover {
@@ -249,7 +272,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     width: 1.15rem;
     height: 1.15rem;
     margin-top: .15rem;
-    color: #a6ddd8;
+    color: var(--accent-on-image);
   }
 
   .contact-safety {
@@ -274,14 +297,6 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
   }
 
   @media (max-width: 860px) {
-    .contact-intro__grid {
-      grid-template-columns: minmax(0, 1fr) minmax(18rem, .82fr);
-    }
-
-    .contact-intro__copy {
-      padding-right: var(--space-6);
-    }
-
     .contact-shell {
       grid-template-columns: 1fr;
     }
@@ -301,22 +316,20 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
   }
 
   @media (max-width: 720px) {
-    .contact-intro__grid {
-      height: auto;
-      grid-template-columns: 1fr;
+    .contact-intro {
+      min-height: 25rem;
     }
 
-    .contact-intro__media {
-      height: clamp(13.5rem, 48vw, 18rem);
-      margin-inline: calc(var(--gutter) * -1);
+    .contact-intro__inner {
+      padding-block: 3.5rem;
     }
 
-    .contact-intro__media img {
-      object-position: center 64%;
+    .contact-intro__image {
+      object-position: 68% center;
     }
 
-    .contact-intro__copy {
-      padding: var(--space-7) 0;
+    .contact-intro__shade {
+      background: linear-gradient(180deg, rgba(9, 34, 45, .78), rgba(9, 34, 45, .92));
     }
   }
 

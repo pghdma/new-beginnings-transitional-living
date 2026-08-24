@@ -46,7 +46,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
         ) : (
           <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
         ))}
-        <a class="nav-cta" href="/admissions/#inquiry">Ask about housing</a>
+        <a class="nav-cta" href="/admissions/#inquiry">Ask About Housing</a>
       </nav>
     </div>
   </div>
@@ -121,17 +121,17 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
 <style>
   .site-header { position: sticky; z-index: 100; top: 0; box-shadow: 0 1px 0 rgba(23,55,70,.08); }
   .utility { color: var(--white); background: var(--navy-950); font-size: .86rem; }
-  .utility-inner { display: flex; min-height: 2.25rem; align-items: center; justify-content: space-between; gap: 1rem; }
+  .utility-inner { display: flex; min-height: var(--header-utility-height); align-items: center; justify-content: space-between; gap: 1rem; }
   .utility-inner span { display: flex; align-items: center; gap: .55rem; }
   .utility-inner i { color: var(--slate-300); font-style: normal; }
-  .utility a { color: var(--white); font-weight: 650; }
+  .utility a { color: var(--white); font-weight: var(--weight-semibold); }
   .nav-wrap { background: var(--paper); }
-  .nav-inner { display: flex; min-height: 5rem; align-items: center; justify-content: space-between; gap: 2rem; }
+  .nav-inner { display: flex; min-height: var(--header-nav-height); align-items: center; justify-content: space-between; gap: 2rem; }
   .wordmark { display: grid; color: var(--navy-950); line-height: 1; text-decoration: none; }
   .wordmark span { font-size: 1.45rem; font-weight: 720; letter-spacing: -.025em; }
-  .wordmark small { margin-top: .3rem; color: var(--slate-600); font-size: .71rem; font-weight: 600; letter-spacing: .075em; text-transform: uppercase; }
+  .wordmark small { margin-top: .3rem; color: var(--slate-600); font-size: .71rem; font-weight: var(--weight-heading); letter-spacing: .075em; text-transform: uppercase; }
   nav { display: flex; align-items: center; gap: clamp(.65rem, 1vw, 1.15rem); }
-  nav a { color: var(--navy-950); font-size: .9rem; font-weight: 600; text-decoration: none; }
+  nav a { color: var(--navy-950); font-size: .9rem; font-weight: var(--weight-heading); text-decoration: none; }
   nav > a[aria-current='page'], .nav-group.is-current > a, .nav-group > a[aria-current='page'] { color: var(--teal-700); }
   .nav-group { position: relative; display: flex; align-items: center; gap: .22rem; }
   .submenu-toggle { display: grid; width: 1.5rem; height: 1.75rem; padding: 0; place-items: center; border: 0; background: transparent; color: var(--navy-950); cursor: pointer; }
@@ -151,7 +151,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .menu-button[aria-expanded='true'] .menu-icon i:last-child { transform: translateY(-.44rem) rotate(-45deg); }
   @media (max-width: 1080px) {
     .menu-button { display: block; }
-    nav { position: absolute; inset: 7.25rem 0 auto; display: none; max-height: calc(100vh - 7.25rem); padding: 1.5rem; overflow-y: auto; border-top: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
+    nav { position: absolute; inset: var(--header-total-height) 0 auto; display: none; max-height: calc(100vh - var(--header-total-height)); padding: 1.5rem; overflow-y: auto; border-top: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
     nav.is-open { display: grid; }
     nav > a { padding: .75rem; }
     .nav-group { display: grid; grid-template-columns: 1fr auto; gap: 0; }

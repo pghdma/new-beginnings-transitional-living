@@ -25,7 +25,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
   <header class="legal-masthead" aria-labelledby="legal-page-title">
     <div class="container legal-masthead__inner">
       <div class="legal-masthead__copy">
-        <p class="eyebrow">Website information</p>
+        <p class="eyebrow">Website Information</p>
         <h1 id="legal-page-title">{title}</h1>
         <p class="legal-masthead__intro">{intro}</p>
       </div>
@@ -124,8 +124,8 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
   .legal-masthead h1 {
     max-width: 15ch;
     margin-top: var(--space-4);
-    font-size: clamp(2.75rem, 5vw, 4.65rem);
-    font-weight: 600;
+    font-size: var(--type-display-document);
+    font-weight: var(--weight-heading);
     line-height: 1.04;
   }
 
@@ -153,7 +153,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
     margin: 0;
     color: var(--teal-700);
     font-size: .74rem;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     letter-spacing: .13em;
     line-height: 1.25;
     text-transform: uppercase;
@@ -181,7 +181,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
 
   .legal-toc-wrap {
     position: sticky;
-    top: 8.5rem;
+    top: var(--sticky-offset);
     align-self: start;
   }
 
@@ -224,14 +224,14 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
   .legal-toc-link.is-active {
     color: var(--navy-900);
     background: var(--sky-100);
-    font-weight: 600;
+    font-weight: var(--weight-heading);
   }
 
   .legal-toc-num {
     color: var(--slate-600);
     font-size: .7rem;
     font-variant-numeric: tabular-nums;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     letter-spacing: .07em;
     line-height: 1.75;
   }
@@ -280,7 +280,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
   .legal-content :global(.legal-section > h2) {
     margin: 0 0 var(--space-5);
     font-size: clamp(1.6rem, 3vw, 2rem);
-    font-weight: 600;
+    font-weight: var(--weight-heading);
     letter-spacing: -.015em;
     line-height: 1.18;
   }
@@ -292,7 +292,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
     content: attr(data-label);
     font-family: var(--font-body);
     font-size: .72rem;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     letter-spacing: .13em;
     line-height: 1.25;
     text-transform: uppercase;
@@ -301,7 +301,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
   .legal-content :global(h3) {
     margin: var(--space-6) 0 var(--space-3);
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: var(--weight-heading);
     letter-spacing: -.01em;
     line-height: 1.3;
   }
@@ -328,7 +328,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
   }
 
   .legal-content :global(a) {
-    font-weight: 600;
+    font-weight: var(--weight-heading);
     text-decoration-line: underline;
     text-decoration-thickness: .07em;
     text-underline-offset: .18em;
@@ -336,7 +336,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
 
   .legal-content :global(strong) {
     color: var(--navy-900);
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
   }
 
   .legal-content :global(.legal-callout) {
@@ -354,7 +354,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
     margin: .2rem 0 0;
     color: var(--teal-700);
     font-size: .73rem;
-    font-weight: 650;
+    font-weight: var(--weight-semibold);
     letter-spacing: .12em;
     line-height: 1.35;
     text-transform: uppercase;
@@ -416,7 +416,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
       align-items: center;
       padding: var(--space-4) var(--space-5);
       color: var(--navy-900);
-      font-weight: 600;
+      font-weight: var(--weight-heading);
       cursor: pointer;
       list-style: none;
     }
@@ -442,7 +442,7 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
     .legal-toc-disclosure summary small {
       color: var(--slate-600);
       font-size: .82rem;
-      font-weight: 500;
+      font-weight: var(--weight-medium);
     }
 
     .legal-toc-disclosure nav {
