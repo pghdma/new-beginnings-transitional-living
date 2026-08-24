@@ -4,194 +4,347 @@ import MainLayout from '../layouts/MainLayout.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import { site } from '../data/site';
 
-const routes = [
-  {
-    label: 'Housing availability',
-    copy: 'For yourself, a loved one, or someone you support.',
-    href: '/admissions/',
-    action: 'Review admissions',
-    icon: 'home',
-  },
-  {
-    label: 'Professional referral',
-    copy: 'For providers, case managers, discharge planners, courts, and community partners.',
-    href: '/referrals/',
-    action: 'Referral information',
-    icon: 'briefcase-medical',
-  },
-  {
-    label: 'Support or partnership',
-    copy: 'For contributions, practical support, and community partnerships.',
-    href: '/support-us/',
-    action: 'Ways to support',
-    icon: 'heart-handshake',
-  },
-  {
-    label: 'Organization questions',
-    copy: 'For governance, credentials, licensing, or public-record questions.',
-    href: '/about/transparency/',
-    action: 'Review public information',
-    icon: 'badge-check',
-  },
-];
+const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}`;
 ---
 
-<MainLayout title="Contact" description="Contact New Beginnings about recovery housing, professional referrals, partnerships, or the organization.">
-  <section class="contact-hero" aria-labelledby="contact-hero-title">
-    <img
-      class="contact-hero__image"
-      src="/images/windowed-living-room.webp"
-      alt="A bright living and dining room with wide windows"
-      width="2200"
-      height="1467"
-      loading="eager"
-    />
-    <div class="contact-hero__shade" aria-hidden="true"></div>
-    <div class="container contact-hero__inner">
-      <div class="contact-hero__copy">
+<MainLayout title="Contact" description="Call, email, or send a message to New Beginnings about recovery housing, professional questions, donations, or the organization.">
+  <section class="contact-intro" aria-labelledby="contact-title">
+    <div class="container contact-intro__grid">
+      <div class="contact-intro__copy">
         <p class="eyebrow">Contact New Beginnings</p>
-        <h1 id="contact-hero-title">Start with the right conversation.</h1>
-        <p class="lead">Housing questions, professional referrals, community support, and organizational questions can all begin here.</p>
-        <div class="actions">
-          <a class="button button--light" href={site.phoneHref}>
-            <Icon name="lucide:phone" aria-hidden="true" />
-            Call {site.phone}
-          </a>
-          <a class="button contact-hero__message" href="#inquiry">Send a general message</a>
-        </div>
-        <p class="contact-hero__boundary"><Icon name="lucide:circle-alert" aria-hidden="true" />This website and phone line are not emergency or crisis services.</p>
+        <h1 id="contact-title">Contact New Beginnings</h1>
+        <p class="lead">Questions about recovery housing, professional information, donations, or the organization can begin with a call, an email, or a message.</p>
       </div>
+      <figure class="contact-intro__media">
+        <img src="/images/rustic-dining-room.webp" alt="An empty dining room with a shared table and natural light" width="1600" height="2133" fetchpriority="high" />
+      </figure>
     </div>
   </section>
 
-  <section class="section contact-directory" aria-labelledby="contact-start-title">
-    <div class="container directory-layout">
-      <header class="directory-intro">
-        <p class="eyebrow">Choose the right route</p>
-        <h2 id="contact-start-title">One organization. A few different starting points.</h2>
-        <p class="lead">Choose the path closest to your question. If you are unsure, call or use the general form below.</p>
-      </header>
+  <section class="contact-main" aria-label="Contact Details and Message Form">
+    <div class="container contact-shell">
+      <div class="contact-details">
+        <header>
+          <p class="eyebrow">Contact Details</p>
+          <h2>Ways to Reach Us</h2>
+          <p>Choose the contact option that works best for you.</p>
+        </header>
 
-      <div class="routing-options">
-        <ul>
-          {routes.map((route) => (
-            <li>
-              <Icon name={`lucide:${route.icon}`} aria-hidden="true" />
-              <div>
-                <h3>{route.label}</h3>
-                <p>{route.copy}</p>
-                <a href={route.href}>{route.action}<Icon name="lucide:arrow-up-right" aria-hidden="true" /></a>
-              </div>
-            </li>
-          ))}
+        <ul class="contact-list">
+          <li>
+            <span class="icon-medallion icon-medallion--dark" aria-hidden="true">
+              <Icon name="lucide:phone" />
+            </span>
+            <div>
+              <h3>Call Us</h3>
+              <a href={site.phoneHref}>{site.phone}</a>
+            </div>
+          </li>
+          <li>
+            <span class="icon-medallion icon-medallion--dark" aria-hidden="true">
+              <Icon name="lucide:mail" />
+            </span>
+            <div>
+              <h3>Email Us</h3>
+              <a href={site.emailHref}>{site.email}</a>
+            </div>
+          </li>
+          <li>
+            <span class="icon-medallion icon-medallion--dark" aria-hidden="true">
+              <Icon name="lucide:map-pin" />
+            </span>
+            <div>
+              <h3>Administrative Office</h3>
+              <address>
+                {site.office.street}<br />
+                {officeLine}
+              </address>
+              <a class="directions-link" href={site.office.directionsHref} target="_blank" rel="noopener noreferrer">
+                Get Directions
+                <Icon name="lucide:external-link" aria-hidden="true" />
+              </a>
+            </div>
+          </li>
         </ul>
+
+        <p class="office-note"><Icon name="lucide:info" aria-hidden="true" />This is the administrative office, not a recovery residence. Please call before visiting.</p>
       </div>
+
+      <InquiryForm />
     </div>
   </section>
 
-  <section class="service-area" aria-labelledby="service-area-title">
-    <figure>
-      <img src="/images/pittsburgh-rowhouses.webp" alt="A residential street of closely spaced houses in Pittsburgh" width="1800" height="1204" loading="lazy" />
-    </figure>
-    <div class="service-area-copy">
-      <p class="eyebrow">Service area</p>
-      <h2 id="service-area-title">Pittsburgh and surrounding Allegheny County communities.</h2>
-      <p>Neighborhood-level information helps prospective residents and referral partners understand the general service area without publishing someone’s home address.</p>
-      <div class="service-area-notes">
-        <div>
-          <Icon name="lucide:map-pin" aria-hidden="true" />
-          <p><strong>Examples in public records</strong>{site.neighborhoods.join(' · ')}. Additional homes serve other Pittsburgh-area communities.</p>
-        </div>
-        <div>
-          <Icon name="lucide:lock-keyhole" aria-hidden="true" />
-          <p><strong>Residence privacy</strong>Exact locations are shared privately when appropriate during the intake process.</p>
-        </div>
+  <section class="contact-safety" aria-labelledby="contact-safety-title">
+    <div class="container contact-safety__inner">
+      <span class="icon-medallion" aria-hidden="true">
+        <Icon name="lucide:heart-pulse" />
+      </span>
+      <div>
+        <h2 id="contact-safety-title">Need Immediate Help?</h2>
+        <p>New Beginnings is not an emergency or crisis service. Call 911 for an emergency. Call or text 988 for crisis support.</p>
       </div>
     </div>
   </section>
-
-  <InquiryForm
-    context="contact"
-    title="Send a general inquiry"
-    intro="Choose the reason for your message and tell us how to reach you. Keep medical, treatment, legal, and other sensitive details out of the public form."
-  >
-    <div slot="aside" class="inquiry-aside">
-      <div>
-        <h3>Residence privacy</h3>
-        <p>Recovery-house street addresses are not published. Exact locations are shared privately when appropriate.</p>
-      </div>
-      <div>
-        <h3>Urgent help</h3>
-        <p>Call 911 for a medical emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p>
-      </div>
-    </div>
-  </InquiryForm>
 </MainLayout>
 
 <style>
-  .contact-hero { position: relative; display: grid; min-height: clamp(35rem, 57vw, 45rem); overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
-  .contact-hero__image,
-  .contact-hero__shade { position: absolute; width: 100%; height: 100%; inset: 0; }
-  .contact-hero__image { object-fit: cover; object-position: 58% center; filter: saturate(.82) contrast(.98); }
-  .contact-hero__shade { background: linear-gradient(90deg, rgba(10,35,46,.97) 0%, rgba(10,35,46,.92) 39%, rgba(10,35,46,.66) 61%, rgba(10,35,46,.18) 100%); }
-  .contact-hero__inner { position: relative; z-index: 1; padding-block: clamp(5rem, 9vw, 8rem); }
-  .contact-hero__copy { max-width: 45rem; }
-  .contact-hero .eyebrow { color: #a6ddd8; }
-  .contact-hero h1 { max-width: 10ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.25rem, 6vw, 5.5rem); }
-  .contact-hero .lead { max-width: 36rem; margin-top: var(--space-5); color: #edf5f4; }
-  .contact-hero .actions { margin-top: var(--space-6); }
-  .contact-hero .button { gap: .65rem; }
-  .contact-hero .button :global(svg) { width: 1.05rem; height: 1.05rem; }
-  .contact-hero__message { border-color: rgba(255,255,255,.72); background: rgba(10,35,46,.22); }
-  .contact-hero__message:hover { color: var(--navy-950); background: var(--white); }
-  .contact-hero__boundary { display: flex; max-width: 34rem; margin-top: var(--space-7); align-items: flex-start; gap: .65rem; color: #d6e8e6; font-size: .93rem; }
-  .contact-hero__boundary :global(svg) { width: 1.1rem; height: 1.1rem; margin-top: .2rem; color: #a6ddd8; flex: 0 0 auto; }
-
-  .contact-directory { background: var(--paper); }
-  .directory-layout { display: grid; grid-template-columns: minmax(18rem, .68fr) minmax(0, 1.32fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
-  .directory-intro { display: grid; gap: var(--space-4); }
-  .directory-intro h2 { max-width: 12ch; }
-  .routing-options { padding: clamp(var(--space-6), 4vw, var(--space-8)); color: var(--white); background: var(--navy-900); box-shadow: 0 1.1rem 2.8rem rgba(23,55,70,.12); }
-  .routing-options ul { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-7), 4vw, var(--space-8)); list-style: none; }
-  .routing-options li { display: grid; min-height: 13rem; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); align-content: start; }
-  .routing-options li > :global(svg) { width: 3rem; height: 3rem; padding: .72rem; color: #a6ddd8; border: 1px solid rgba(166,221,216,.45); border-radius: 50%; stroke-width: 1.5; }
-  .routing-options h3 { color: var(--white); font-size: 1.3rem; }
-  .routing-options p { max-width: 28rem; margin-top: var(--space-3); color: var(--sky-200); line-height: 1.5; }
-  .routing-options a { display: inline-flex; width: fit-content; margin-top: var(--space-5); padding: .72rem 1rem; align-items: center; gap: .55rem; color: var(--navy-950); background: var(--white); font-weight: 650; }
-  .routing-options a:hover { color: var(--navy-950); background: #cfece9; }
-  .routing-options a :global(svg) { width: 1rem; height: 1rem; }
-
-  .service-area { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: stretch; background: var(--sky-50); }
-  .service-area figure { min-height: 37rem; margin: 0; overflow: hidden; }
-  .service-area figure img { width: 100%; height: 100%; object-fit: cover; object-position: 47% center; filter: saturate(.82) contrast(.98); }
-  .service-area-copy { display: flex; max-width: 43rem; padding: var(--section-standard) clamp(2.5rem, 6vw, 6rem); flex-direction: column; justify-content: center; }
-  .service-area-copy h2 { max-width: 13ch; margin-top: var(--space-4); font-size: clamp(2rem, 3.6vw, 3.25rem); }
-  .service-area-copy > p:not(.eyebrow) { max-width: 36rem; margin-top: var(--space-5); }
-  .service-area-notes { display: grid; margin-top: var(--space-7); padding: var(--space-5); gap: var(--space-5); background: var(--paper); box-shadow: var(--shadow); }
-  .service-area-notes > div { display: grid; grid-template-columns: 1.7rem minmax(0, 1fr); gap: var(--space-3); align-items: start; }
-  .service-area-notes :global(svg) { width: 1.45rem; height: 1.45rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.6; }
-  .service-area-notes p { line-height: 1.5; }
-  .service-area-notes strong { display: block; margin-bottom: .25rem; color: var(--navy-900); font-size: .88rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
-
-  @media (max-width: 820px) {
-    .directory-layout,
-    .service-area { grid-template-columns: 1fr; }
-    .directory-layout { gap: var(--space-7); }
-    .service-area figure { height: clamp(20rem, 62vw, 29rem); min-height: 0; }
-    .service-area-copy { max-width: none; padding: var(--section-standard) var(--gutter); }
+  .contact-intro {
+    color: var(--white);
+    background: var(--navy-950);
   }
 
-  @media (max-width: 760px) {
-    .contact-hero { min-height: 42rem; align-items: end; }
-    .contact-hero__image { object-position: 64% center; }
-    .contact-hero__shade { background: linear-gradient(0deg, rgba(10,35,46,.97) 0%, rgba(10,35,46,.86) 58%, rgba(10,35,46,.35) 100%); }
-    .contact-hero__inner { padding-block: var(--space-8); }
-    .contact-hero h1 { font-size: clamp(2.8rem, 12vw, 3.6rem); }
-    .contact-hero .actions { display: grid; }
-    .contact-hero .button { width: 100%; }
-    .routing-options ul { grid-template-columns: 1fr; }
-    .routing-options { padding: var(--space-6) var(--space-5); }
-    .routing-options li { min-height: 0; }
-    .service-area figure { order: -1; }
+  .contact-intro__grid {
+    display: grid;
+    height: clamp(26rem, 35vw, 31rem);
+    grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr);
+    align-items: stretch;
+  }
+
+  .contact-intro__copy {
+    display: grid;
+    padding: clamp(3.75rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4.5rem) clamp(3.75rem, 6vw, 5rem) 0;
+    align-content: center;
+    gap: var(--space-4);
+  }
+
+  .contact-intro__media {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0;
+    overflow: hidden;
+    background: var(--navy-900);
+  }
+
+  .contact-intro__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 63%;
+    filter: saturate(.82) contrast(.98);
+  }
+
+  .contact-intro .eyebrow {
+    color: #a6ddd8;
+  }
+
+  .contact-intro h1 {
+    max-width: 12ch;
+    color: var(--white);
+    font-size: clamp(3.1rem, 5vw, 4.5rem);
+  }
+
+  .contact-intro .lead {
+    max-width: 46rem;
+    color: var(--sky-100);
+  }
+
+  .contact-main {
+    padding-block: var(--section-compact);
+    background: var(--sky-50);
+  }
+
+  .contact-shell {
+    display: grid;
+    grid-template-columns: minmax(18rem, .78fr) minmax(0, 1.22fr);
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .contact-details {
+    display: flex;
+    min-width: 0;
+    padding: clamp(var(--space-6), 4vw, var(--space-8));
+    color: var(--white);
+    background: var(--navy-900);
+    flex-direction: column;
+  }
+
+  .contact-details header {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .contact-details .eyebrow {
+    color: #a6ddd8;
+  }
+
+  .contact-details h2,
+  .contact-details h3 {
+    color: var(--white);
+  }
+
+  .contact-details h2 {
+    max-width: 12ch;
+    font-size: clamp(2rem, 3.1vw, 2.8rem);
+  }
+
+  .contact-details header > p:last-child {
+    max-width: 28rem;
+    color: var(--sky-200);
+  }
+
+  .contact-list {
+    display: grid;
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    gap: var(--space-6);
+    list-style: none;
+  }
+
+  .contact-list li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .contact-list h3 {
+    margin-bottom: var(--space-2);
+    font-size: 1.15rem;
+  }
+
+  .contact-list a,
+  .contact-list address {
+    color: var(--sky-100);
+    font-style: normal;
+    line-height: 1.55;
+  }
+
+  .contact-list a {
+    font-weight: 600;
+  }
+
+  .contact-list a:hover {
+    color: var(--white);
+  }
+
+  .directions-link {
+    display: inline-flex;
+    margin-top: var(--space-3);
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .directions-link :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .office-note {
+    display: grid;
+    margin-top: auto;
+    padding-top: var(--space-7);
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    color: var(--sky-200);
+    font-size: .9rem;
+    line-height: 1.5;
+  }
+
+  .office-note :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: .15rem;
+    color: #a6ddd8;
+  }
+
+  .contact-safety {
+    padding-block: var(--section-compact);
+    background: var(--paper);
+  }
+
+  .contact-safety__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .contact-safety h2 {
+    font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+  }
+
+  .contact-safety p {
+    max-width: 48rem;
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 860px) {
+    .contact-intro__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, .82fr);
+    }
+
+    .contact-intro__copy {
+      padding-right: var(--space-6);
+    }
+
+    .contact-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-details {
+      min-height: 0;
+    }
+
+    .office-note {
+      margin-top: var(--space-7);
+    }
+
+    .contact-safety__inner {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+  }
+
+  @media (max-width: 720px) {
+    .contact-intro__grid {
+      height: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .contact-intro__media {
+      height: clamp(13.5rem, 48vw, 18rem);
+      margin-inline: calc(var(--gutter) * -1);
+    }
+
+    .contact-intro__media img {
+      object-position: center 64%;
+    }
+
+    .contact-intro__copy {
+      padding: var(--space-7) 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+
+    .contact-intro h1 {
+      font-size: clamp(2.65rem, 12vw, 3.35rem);
+    }
+
+    .contact-main {
+      padding-block: var(--space-7);
+    }
+
+    .contact-details {
+      padding: var(--space-6) var(--space-5);
+    }
+
+    .contact-list {
+      gap: var(--space-5);
+    }
+
+    .contact-safety__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-safety__inner > .icon-medallion {
+      margin-bottom: var(--space-1);
+    }
+
   }
 </style>

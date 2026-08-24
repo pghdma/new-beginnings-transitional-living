@@ -1,250 +1,270 @@
 ---
 import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
-import InquiryForm from '../components/InquiryForm.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
 
-const workflow = [
-  {
-    number: '01',
-    title: 'Confirm current availability',
-    copy: 'Call or send a professional inquiry before preparing records or making placement assumptions.',
-  },
-  {
-    number: '02',
-    title: 'Discuss the housing request',
-    copy: 'Identify your organization and role, then share only the general context needed for an initial fit conversation.',
-  },
-  {
-    number: '03',
-    title: 'Follow private instructions',
-    copy: 'If the conversation moves forward, staff can explain what is needed and how to share it appropriately.',
-  },
+const audiences = [
+  { icon: 'lucide:hospital', title: 'Hospital and Treatment Teams', copy: 'Discharge planners, social workers, counselors, and other providers helping an adult plan the next step after treatment or stabilization.' },
+  { icon: 'lucide:scale', title: 'Courts and Supervision', copy: 'Probation officers, parole officers, court staff, and other justice partners looking for accountable recovery housing information.' },
+  { icon: 'lucide:briefcase-business', title: 'Case Management and Reentry', copy: 'Case managers, housing navigators, and reentry professionals coordinating practical support in the community.' },
+  { icon: 'lucide:landmark', title: 'Community Organizations', copy: 'County teams, nonprofit partners, and community programs that need a clear picture of New Beginnings and its role.' },
+];
+
+const credentials = [
+  { icon: 'lucide:badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed recovery residences' },
+  { icon: 'lucide:shield-check', title: 'WestPARR', copy: 'Inspected recovery housing' },
+  { icon: 'lucide:landmark', title: '501(c)(3)', copy: 'Pennsylvania public charity' },
+];
+
+const questions = [
+  { question: 'Is New Beginnings a Treatment Provider?', answer: 'No. New Beginnings provides recovery housing. Counseling, medical care, medication management, and other clinical services remain with independent licensed providers.' },
+  { question: 'How Can I Verify the Organization and Its Housing?', answer: 'The Credentials and Transparency page links to public nonprofit information, Pennsylvania DDAP licensing information, and the WestPARR directory. New Beginnings operates licensed residences and WestPARR inspected recovery housing.' },
+  { question: 'How Do I Ask About Current Availability?', answer: 'Use the Admissions page for a current housing inquiry. A professional may help an applicant complete it. Availability can change, and submitting the form does not guarantee admission or placement.' },
+  { question: 'Can I Send Records Through the Website?', answer: 'No. Do not submit treatment records, diagnoses, medication details, court records, supervision records, Social Security numbers, or other sensitive information through a public website form. Begin with limited contact and housing information.' },
+  { question: 'Are House Addresses Published Online?', answer: 'No. New Beginnings publishes neighborhood level information rather than individual house addresses or identifying exterior photographs. Exact locations are discussed privately when appropriate.' },
+  { question: 'Does New Beginnings Provide Emergency Placement?', answer: 'New Beginnings is not an emergency shelter or crisis service. Call 911 for an emergency. Call or text 988 for crisis support.' },
 ];
 ---
 
-<MainLayout title="Professional Referrals" description="Recovery-housing referral information for treatment providers, case managers, courts, and community partners.">
-  <section class="referral-hero" aria-labelledby="referral-title">
-    <div class="container referral-hero__grid">
-      <div class="referral-hero__copy">
-        <p class="eyebrow">For professionals</p>
-        <h1 id="referral-title">Coordinate a recovery-housing conversation.</h1>
-        <p class="lead">A clear starting point for treatment providers, case managers, discharge planners, courts, and community organizations helping an adult explore recovery housing.</p>
+<MainLayout
+  title="For Professionals"
+  description="Information for probation officers, social workers, case managers, treatment providers, courts, and community partners exploring New Beginnings recovery housing."
+>
+  <section class="professional-hero" aria-labelledby="professional-title">
+    <div class="container professional-hero__grid">
+      <div class="professional-hero__copy">
+        <p class="eyebrow">Information for Professionals</p>
+        <h1 id="professional-title">A Clear Place to Start.</h1>
+        <p class="lead">Practical information for professionals helping an adult explore recovery housing in the Pittsburgh area.</p>
         <div class="actions">
-          <a class="button" href="#inquiry">Start a professional inquiry</a>
+          <a class="button button--light" href="/recovery-housing/">Review Housing Options<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button professional-hero__outline" href="/contact/">Contact New Beginnings</a>
         </div>
-        <p class="referral-hero__note">Current availability can change. Begin with a general conversation before preparing or sending records.</p>
+        <p class="professional-hero__note"><Icon name="lucide:lock-keyhole" aria-hidden="true" />Please keep medical, treatment, court, and supervision records out of public website forms.</p>
       </div>
-
-      <figure class="referral-hero__photo">
-        <img src="/images/house-kitchen.webp" alt="A kitchen and dining table in a welcoming home" width="2200" height="1467" loading="eager" />
-        <figcaption>
-          <span>Recovery housing</span>
-          A stable shared home that works alongside independent care.
-        </figcaption>
+      <figure class="professional-hero__photo">
+        <img src="/images/shared-bedroom.webp" alt="A representative shared bedroom with two beds and a desk" width="2200" height="1466" fetchpriority="high" />
+        <figcaption>Representative residential imagery. Individual New Beginnings homes are not identified online.</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="section professional-role" aria-labelledby="role-title">
-    <div class="container role-heading">
-      <p class="eyebrow">A defined role</p>
-      <h2 id="role-title">Housing can support recovery without becoming treatment.</h2>
-      <p class="lead">New Beginnings provides recovery-focused shared housing. Clinical care, emergency shelter, and crisis support remain separate services.</p>
+  <section class="audience-section" aria-labelledby="audience-title">
+    <div class="container">
+      <header class="section-head section-head--center">
+        <p class="eyebrow">Who This Page Is For</p>
+        <h2 id="audience-title">Information for the People Coordinating Care and Support.</h2>
+      </header>
+      <ul class="audience-grid">
+        {audiences.map((audience) => (
+          <li>
+            <span class="icon-medallion icon-medallion--lg"><Icon name={audience.icon} aria-hidden="true" /></span>
+            <h3>{audience.title}</h3>
+            <p>{audience.copy}</p>
+          </li>
+        ))}
+      </ul>
     </div>
+  </section>
 
-    <div class="container role-composition">
-      <figure>
-        <img src="/images/shared-bedroom.webp" alt="A shared bedroom with two neatly made beds" width="2200" height="1466" loading="lazy" />
-      </figure>
-
-      <div class="role-detail">
-        <article class="role-primary">
-          <div class="role-icon icon-medallion icon-medallion--dark"><Icon name="lucide:house" aria-hidden="true" /></div>
-          <div>
-            <p class="eyebrow">New Beginnings provides</p>
-            <h3>Recovery-focused housing</h3>
-            <p>A substance-free shared environment, peer community, household expectations, and support for daily stability.</p>
-          </div>
-        </article>
-
-        <div class="role-boundaries">
-          <article>
-            <Icon name="lucide:stethoscope" aria-hidden="true" />
-            <div><h3>Independent providers provide care.</h3><p>Counseling, medical care, medication management, and other licensed professional services remain with independent providers.</p></div>
-          </article>
-          <article>
-            <Icon name="lucide:life-buoy" aria-hidden="true" />
-            <div><h3>Emergency systems provide urgent support.</h3><p>Call 911 for an emergency. Call or text 988 for the Suicide &amp; Crisis Lifeline.</p></div>
-          </article>
+  <section class="role-section" aria-labelledby="role-title">
+    <div class="container role-layout">
+      <div class="role-copy">
+        <p class="eyebrow">A Defined Role</p>
+        <h2 id="role-title">Recovery Housing Supports Daily Life.</h2>
+        <p class="lead">New Beginnings provides a substance free shared living environment with peer community and household expectations.</p>
+        <p>Residents can continue building connections to treatment, recovery meetings, employment, education, family, supervision, and community resources outside the home.</p>
+        <div class="scope-comparison">
+          <article><Icon name="lucide:house" aria-hidden="true" /><h3>New Beginnings Provides</h3><p>Recovery housing, a shared household, peer community, and a dependable residential setting.</p></article>
+          <article><Icon name="lucide:stethoscope" aria-hidden="true" /><h3>Independent Providers Handle</h3><p>Counseling, medical care, medication management, and other clinical treatment.</p></article>
         </div>
       </div>
+      <figure class="role-photo"><img src="/images/rustic-dining-room.webp" alt="An empty dining room with a shared table and natural light" width="1600" height="2133" loading="lazy" /></figure>
     </div>
   </section>
 
-  <section class="referral-workflow" aria-labelledby="workflow-title">
-    <div class="container workflow-heading">
-      <p class="eyebrow">Referral workflow</p>
-      <h2 id="workflow-title">Start with availability, not records.</h2>
-      <p>A general conversation comes before any request for detailed information.</p>
-    </div>
-
-    <ol class="container workflow-steps">
-      {workflow.map((step) => (
-        <li>
-          <span class="step-number">{step.number}</span>
-          <div><h3>{step.title}</h3><p>{step.copy}</p></div>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-  <section class="records-section" aria-labelledby="records-title">
-    <figure class="records-photo">
-      <img src="/images/credentials.jpg" alt="A person reviewing documents at a meeting table" width="1880" height="1253" loading="lazy" />
-    </figure>
-
-    <div class="records-copy">
-      <div class="records-copy__inner">
-        <p class="eyebrow">Information handling</p>
-        <h2 id="records-title">Keep client records out of the public form.</h2>
-        <p class="lead">The form establishes contact with a referral source. It is not a portal for clinical, legal, or identifying records.</p>
-
-        <div class="records-guidance">
-          <article>
-            <div class="records-icon icon-medallion"><Icon name="lucide:message-square-text" aria-hidden="true" /></div>
-            <div>
-              <h3>Appropriate for the first message</h3>
-              <p>Your name, organization, role, preferred contact method, and a general description of the housing inquiry.</p>
-            </div>
-          </article>
-          <article>
-            <div class="records-icon icon-medallion"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></div>
-            <div>
-              <h3>Keep sensitive information private</h3>
-              <p>Do not submit treatment records, diagnoses, medication lists, court documents, Social Security numbers, or other sensitive client information.</p>
-            </div>
-          </article>
+  <section class="verification-section" aria-labelledby="verification-title">
+    <div class="container verification-layout">
+      <div class="verification-copy">
+        <p class="eyebrow">Independent Verification</p>
+        <h2 id="verification-title">Credentials Matter When You Help Someone Choose Housing.</h2>
+        <p>Pennsylvania requires recovery houses to be licensed before they accept referrals from state agencies or state funded facilities. Courts must give first consideration to licensed recovery houses when making residential recommendations for people under their supervision.</p>
+        <div class="actions">
+          <a class="button button--light" href="/about/transparency/">Verify Our Standing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="text-link verification-guidance" href="https://www.pa.gov/services/ddap/apply-to-become-a-licensed-recovery-house">Review Pennsylvania Guidance</a>
         </div>
+      </div>
+      <ul class="credential-grid">
+        {credentials.map((credential) => (
+          <li><span class="icon-medallion icon-medallion--dark"><Icon name={credential.icon} aria-hidden="true" /></span><div><h3>{credential.title}</h3><p>{credential.copy}</p></div></li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-        <aside class="records-next">
-          <strong>Wait for private instructions.</strong>
-          <span>Staff can explain what is needed and how to share it if the referral moves forward.</span>
-        </aside>
+  <section class="coordination-section" aria-labelledby="coordination-title">
+    <div class="container">
+      <header class="coordination-heading split-intro">
+        <div><p class="eyebrow">How to Coordinate</p><h2 id="coordination-title">One Housing Inquiry Path. Clear Professional Support.</h2></div>
+        <p>Professionals do not need a separate referral form. Use Admissions for a housing request and Contact for general coordination questions.</p>
+      </header>
+      <ol class="coordination-steps">
+        <li><span>01</span><Icon name="lucide:search" aria-hidden="true" /><h3>Review the Housing</h3><p>Start with the recovery housing overview and the pages for adult men and women.</p><a class="button button--outline" href="/recovery-housing/">Explore Housing</a></li>
+        <li><span>02</span><Icon name="lucide:clipboard-list" aria-hidden="true" /><h3>Begin an Availability Inquiry</h3><p>The applicant or a person assisting them can use the Admissions application.</p><a class="button button--outline" href="/admissions/">Go to Admissions</a></li>
+        <li><span>03</span><Icon name="lucide:messages-square" aria-hidden="true" /><h3>Ask Professional Questions</h3><p>Call or use Contact for general questions about coordination, credentials, and service scope.</p><a class="button button--outline" href="/contact/">Contact New Beginnings</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="professional-faq" aria-labelledby="professional-faq-title">
+    <div class="container faq-layout">
+      <header class="faq-heading">
+        <p class="eyebrow">Professional Questions</p>
+        <h2 id="professional-faq-title">What Partners Often Need to Know.</h2>
+        <p>For a question specific to one person or a current opening, call <a href={site.phoneHref}>{site.phone}</a>.</p>
+      </header>
+      <div class="faq-list" data-single-accordion>
+        {questions.map((item, index) => (
+          <details open={index === 0}><summary><span>{item.question}</span><Icon name="lucide:plus" aria-hidden="true" /></summary><div class="faq-answer"><p>{item.answer}</p></div></details>
+        ))}
       </div>
     </div>
   </section>
 
-  <InquiryForm
-    context="referral"
-    title="Start a professional referral conversation"
-    intro="Tell us who you represent, your role, and how you prefer to be reached. Please do not send client records or sensitive information."
-  >
-    <div slot="aside" class="inquiry-aside">
-      <div>
-        <h3>Availability first</h3>
-        <p>Confirm current availability before sending paperwork or planning a transition.</p>
-      </div>
-      <div>
-        <h3>Prefer to call?</h3>
-        <p><a href={site.phoneHref}>{site.phone}</a></p>
-      </div>
-    </div>
-  </InquiryForm>
+  <CtaBand eyebrow="Professional Questions" title="Need to Talk Through the Right Next Step?" text="Call New Beginnings for a general professional question, or use Admissions when someone is ready to ask about current housing availability." href="/contact/" label="Contact New Beginnings" />
 </MainLayout>
 
+<script>
+  document.querySelectorAll<HTMLElement>('[data-single-accordion]').forEach((accordion) => {
+    const items = Array.from(accordion.querySelectorAll<HTMLDetailsElement>('details'));
+    items.forEach((item) => item.addEventListener('toggle', () => {
+      if (item.open) items.forEach((other) => { if (other !== item) other.removeAttribute('open'); });
+    }));
+  });
+</script>
+
 <style>
-  .referral-hero { overflow: hidden; background: var(--paper); }
-  .referral-hero__grid { display: grid; min-height: clamp(39rem, 58vw, 47rem); grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; }
-  .referral-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
-  .referral-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); font-size: clamp(3.1rem, 5.6vw, 5.25rem); }
-  .referral-hero .lead { max-width: 35rem; margin-top: var(--space-5); }
-  .referral-hero .actions { margin-top: var(--space-6); }
-  .referral-hero__note { max-width: 33rem; margin-top: var(--space-6); color: var(--slate-600); font-size: .95rem; line-height: 1.55; }
-  .referral-hero__photo { position: relative; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
-  .referral-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(.98); }
-  .referral-hero__photo::after { position: absolute; background: linear-gradient(to top, rgba(23, 55, 70, .82), rgba(23, 55, 70, 0) 46%); content: ''; inset: 0; }
-  .referral-hero__photo figcaption { position: absolute; z-index: 1; max-width: 27rem; color: var(--white); font-size: 1.15rem; font-weight: 600; line-height: 1.35; left: clamp(1.5rem, 4vw, 4rem); right: clamp(1.5rem, 4vw, 4rem); bottom: clamp(1.5rem, 4vw, 3.5rem); }
-  .referral-hero__photo figcaption span { display: block; margin-bottom: var(--space-2); color: #b9e5e1; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+  .professional-hero { color: var(--white); background: var(--navy-950); }
+  .professional-hero__grid { display: grid; min-height: clamp(35rem, 54vw, 44rem); grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); align-items: stretch; }
+  .professional-hero__copy { display: flex; padding: var(--section-hero) clamp(2.5rem, 6vw, 5rem) var(--section-hero) 0; flex-direction: column; justify-content: center; }
+  .professional-hero .eyebrow { color: #a6ddd8; }
+  .professional-hero h1 { max-width: 9ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.4rem, 6.2vw, 5.7rem); }
+  .professional-hero .lead { max-width: 36rem; margin-top: var(--space-5); color: var(--sky-100); }
+  .professional-hero .actions { margin-top: var(--space-6); }
+  .professional-hero .button { gap: .6rem; }
+  .professional-hero .button :global(svg) { width: 1rem; height: 1rem; }
+  .professional-hero__outline { border-color: rgba(255,255,255,.72); color: var(--white); background: transparent; }
+  .professional-hero__outline:hover { color: var(--navy-950); background: var(--white); }
+  .professional-hero__note { display: flex; max-width: 38rem; margin-top: var(--space-7); align-items: flex-start; gap: .7rem; color: var(--sky-200); font-size: .91rem; line-height: 1.5; }
+  .professional-hero__note :global(svg) { width: 1.1rem; height: 1.1rem; margin-top: .18rem; color: #a6ddd8; flex: 0 0 auto; }
+  .professional-hero__photo { position: relative; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
+  .professional-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.72) contrast(.96); }
+  .professional-hero__photo::after { position: absolute; background: linear-gradient(90deg, rgba(23,55,70,.22), transparent 35%); content: ''; inset: 0; }
+  .professional-hero__photo figcaption { position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); padding: .7rem .85rem; color: var(--sky-100); background: rgba(15,42,54,.82); font-size: .78rem; line-height: 1.4; }
 
-  .professional-role { background: var(--sky-50); }
-  .role-heading { display: grid; max-width: 55rem; margin-bottom: var(--space-8); gap: var(--space-4); }
-  .role-heading h2 { max-width: 15ch; }
-  .role-heading .lead { max-width: 44rem; }
-  .role-composition { display: grid; grid-template-columns: minmax(24rem, .92fr) minmax(0, 1.08fr); align-items: stretch; }
-  .role-composition > figure { height: 42rem; margin: 0; overflow: hidden; order: 2; }
-  .role-composition > figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
-  .role-detail { display: flex; padding: clamp(2.25rem, 5vw, 4rem); color: var(--white); background: var(--navy-900); flex-direction: column; justify-content: center; }
-  .role-primary { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .role-detail .role-icon { color: #b9e5e1; background: rgba(255, 255, 255, .1); }
-  .role-icon :global(svg), .records-icon :global(svg) { width: 1.55rem; height: 1.55rem; stroke-width: 1.55; }
-  .role-detail .eyebrow { color: #9ed7d2; }
-  .role-primary h3 { max-width: 15ch; margin-top: var(--space-2); color: var(--white); font-size: clamp(1.65rem, 3vw, 2.25rem); }
-  .role-primary div:last-child > p:last-child { max-width: 33rem; margin-top: var(--space-3); color: var(--sky-100); }
-  .role-boundaries { display: grid; margin-top: var(--space-7); gap: var(--space-6); }
-  .role-boundaries article { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); align-items: start; }
-  .role-boundaries article > :global(svg) { width: 1.55rem; height: 1.55rem; margin-top: .1rem; color: #9ed7d2; stroke-width: 1.5; }
-  .role-boundaries h3 { color: var(--white); font-size: 1.2rem; }
-  .role-boundaries p { margin-top: var(--space-2); color: var(--sky-100); font-size: .96rem; line-height: 1.55; }
+  .audience-section { padding-block: var(--section-standard); background: var(--paper); }
+  .audience-section .section-head { max-width: 48rem; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+  .audience-grid { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.75rem, 4vw, 3rem); list-style: none; }
+  .audience-grid li { display: flex; text-align: center; align-items: center; flex-direction: column; }
+  .audience-grid h3 { max-width: 14rem; margin-top: var(--space-5); font-size: 1.2rem; }
+  .audience-grid p { max-width: 17rem; margin-top: var(--space-3); color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
 
-  .referral-workflow { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .workflow-heading { display: grid; max-width: 52rem; margin-bottom: var(--space-8); gap: var(--space-4); }
-  .workflow-heading .eyebrow { color: #9ed7d2; }
-  .workflow-heading h2 { max-width: 14ch; color: var(--white); }
-  .workflow-heading > p:last-child { max-width: 38rem; color: var(--sky-100); }
-  .workflow-steps { display: grid; margin-top: 0; margin-bottom: 0; padding-left: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4rem); list-style: none; }
-  .workflow-steps li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .step-number { display: grid; width: 3rem; height: 3rem; border-radius: 50%; color: var(--navy-950); background: #9ed7d2; font-size: .82rem; font-weight: 700; letter-spacing: .06em; place-items: center; }
-  .workflow-steps h3 { color: var(--white); font-size: 1.25rem; }
-  .workflow-steps p { margin-top: var(--space-3); color: var(--sky-100); line-height: 1.55; }
+  .role-section { padding-block: var(--section-standard); background: var(--sky-50); }
+  .role-layout { display: grid; grid-template-areas: 'photo copy'; grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
+  .role-photo { height: 39rem; margin: 0; overflow: hidden; box-shadow: var(--shadow-raised); grid-area: photo; }
+  .role-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.97); }
+  .role-copy { grid-area: copy; }
+  .role-copy h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .role-copy > .lead { margin-top: var(--space-5); }
+  .role-copy > p:not(.eyebrow):not(.lead) { max-width: 38rem; margin-top: var(--space-4); }
+  .scope-comparison { display: grid; margin-top: var(--space-7); grid-template-columns: repeat(2, minmax(0, 1fr)); box-shadow: var(--shadow); }
+  .scope-comparison article { padding: var(--space-6); background: var(--paper); }
+  .scope-comparison article + article { color: var(--white); background: var(--teal-700); }
+  .scope-comparison :global(svg) { width: 1.8rem; height: 1.8rem; color: var(--teal-700); stroke-width: 1.55; }
+  .scope-comparison article + article :global(svg) { color: #c7eeea; }
+  .scope-comparison h3 { margin-top: var(--space-4); font-size: 1.08rem; }
+  .scope-comparison article + article h3 { color: var(--white); }
+  .scope-comparison p { margin-top: var(--space-3); color: var(--slate-600); font-size: .9rem; line-height: 1.5; }
+  .scope-comparison article + article p { color: var(--sky-100); }
 
-  .records-section { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); align-items: stretch; background: var(--paper); }
-  .records-photo { min-height: 48rem; margin: 0; overflow: hidden; }
-  .records-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
-  .records-copy { display: flex; padding: var(--section-standard) clamp(2.5rem, 6vw, 6rem); align-items: center; }
-  .records-copy__inner { width: min(100%, 38rem); }
-  .records-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
-  .records-copy .lead { margin-top: var(--space-5); }
-  .records-guidance { display: grid; margin-top: var(--space-7); gap: var(--space-6); }
-  .records-guidance article { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .records-guidance h3 { font-size: 1.2rem; }
-  .records-guidance article p { margin-top: var(--space-2); color: var(--slate-600); font-size: .96rem; line-height: 1.55; }
-  .records-next { display: grid; margin-top: var(--space-7); padding: var(--space-5); color: var(--white); background: var(--teal-800); gap: var(--space-2); }
-  .records-next strong { color: var(--white); font-size: 1.08rem; }
-  .records-next span { color: #e5f1f0; line-height: 1.5; }
-  :global(.inquiry-aside a) { color: var(--white); }
+  .verification-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-900); }
+  .verification-layout { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
+  .verification-copy .eyebrow { color: #a6ddd8; }
+  .verification-copy h2 { max-width: 14ch; margin-top: var(--space-4); color: var(--white); }
+  .verification-copy > p:not(.eyebrow) { max-width: 42rem; margin-top: var(--space-5); color: var(--sky-100); }
+  .verification-copy .actions { margin-top: var(--space-6); }
+  .verification-copy .button { gap: .6rem; }
+  .verification-copy .button :global(svg) { width: 1rem; height: 1rem; }
+  .verification-guidance { color: var(--white); }
+  .verification-guidance:hover { color: #c7eeea; }
+  .credential-grid { display: grid; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); gap: var(--space-6); color: var(--white); background: rgba(255,255,255,.055); box-shadow: 0 1.1rem 3rem rgba(5,25,35,.2); list-style: none; }
+  .credential-grid li { display: grid; grid-template-columns: var(--icon-medallion-size-md) minmax(0, 1fr); gap: var(--space-4); align-items: center; }
+  .credential-grid h3 { color: var(--white); font-size: 1.1rem; }
+  .credential-grid p { margin-top: .2rem; color: var(--sky-200); font-size: .9rem; }
+
+  .coordination-section { padding-block: var(--section-standard); background: var(--paper); }
+  .coordination-heading h2 { margin-top: var(--space-4); }
+  .coordination-heading > p { color: var(--slate-600); font-size: 1.05rem; }
+  .coordination-steps { display: grid; margin: clamp(3rem, 6vw, 4.5rem) 0 0; padding: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); list-style: none; }
+  .coordination-steps li { position: relative; display: flex; min-height: 25rem; padding: clamp(var(--space-6), 4vw, var(--space-7)); overflow: hidden; background: var(--sky-50); flex-direction: column; align-items: flex-start; }
+  .coordination-steps li:nth-child(2) { color: var(--white); background: var(--teal-700); }
+  .coordination-steps li:nth-child(3) { color: var(--white); background: var(--navy-900); }
+  .coordination-steps li > span { position: absolute; top: var(--space-5); right: var(--space-5); color: rgba(29,64,80,.15); font-size: 3.25rem; font-weight: 650; line-height: 1; }
+  .coordination-steps li:nth-child(n + 2) > span { color: rgba(255,255,255,.18); }
+  .coordination-steps li > :global(svg) { width: 2rem; height: 2rem; color: var(--teal-700); stroke-width: 1.55; }
+  .coordination-steps li:nth-child(n + 2) > :global(svg) { color: #c7eeea; }
+  .coordination-steps h3 { max-width: 14rem; margin-top: var(--space-6); }
+  .coordination-steps li:nth-child(n + 2) h3 { color: var(--white); }
+  .coordination-steps p { margin-top: var(--space-4); color: var(--slate-600); font-size: .95rem; line-height: 1.55; }
+  .coordination-steps li:nth-child(n + 2) p { color: var(--sky-100); }
+  .coordination-steps .button { width: 100%; margin-top: auto; padding-top: .8rem; padding-bottom: .8rem; }
+  .coordination-steps li:nth-child(n + 2) .button { border-color: rgba(255,255,255,.72); color: var(--white); }
+  .coordination-steps li:nth-child(n + 2) .button:hover { color: var(--navy-950); background: var(--white); }
+
+  .professional-faq { padding-block: var(--section-standard); background: var(--sky-50); }
+  .faq-layout { display: grid; grid-template-columns: minmax(17rem, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+  .faq-heading { display: grid; gap: var(--space-4); }
+  .faq-heading h2 { max-width: 12ch; }
+  .faq-heading > p:not(.eyebrow) { max-width: 27rem; color: var(--slate-600); }
+  .faq-heading a { font-weight: 650; }
+  .faq-list { background: var(--paper); box-shadow: var(--shadow-raised); }
+  .faq-list details + details { border-top: 1px solid var(--slate-200); }
+  .faq-list summary { display: grid; padding: var(--space-5) var(--space-6); grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-5); align-items: center; color: var(--navy-900); cursor: pointer; font-size: 1.08rem; font-weight: 650; list-style: none; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary :global(svg) { width: 1.25rem; height: 1.25rem; color: var(--teal-700); transition: transform .18s ease; }
+  .faq-list details[open] summary :global(svg) { transform: rotate(45deg); }
+  .faq-answer { padding: 0 var(--space-6) var(--space-6); }
+  .faq-answer p { max-width: 60ch; color: var(--slate-600); }
 
   @media (max-width: 900px) {
-    .referral-hero__grid { grid-template-columns: 1fr; }
-    .referral-hero__photo { order: -1; height: clamp(22rem, 58vw, 30rem); margin: 0 calc(var(--gutter) * -1); }
-    .referral-hero__copy { padding: var(--space-8) 0; }
-    .role-composition { grid-template-columns: 1fr; }
-    .role-composition > figure { height: clamp(21rem, 58vw, 30rem); order: -1; }
-    .role-detail { padding: var(--space-7); }
-    .workflow-steps { grid-template-columns: 1fr; gap: var(--space-7); }
-    .workflow-steps li { max-width: 42rem; }
-    .records-section { grid-template-columns: 1fr; }
-    .records-photo { height: clamp(20rem, 58vw, 29rem); min-height: 0; }
-    .records-copy { padding: var(--section-standard) var(--gutter); }
-    .records-copy__inner { width: min(100%, 46rem); margin-inline: auto; }
+    .professional-hero__grid, .role-layout, .verification-layout, .faq-layout { grid-template-columns: 1fr; }
+    .professional-hero__photo { height: clamp(20rem, 55vw, 27rem); margin: 0 calc(var(--gutter) * -1); }
+    .professional-hero__copy { padding: var(--space-8) 0; }
+    .audience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); }
+    .role-layout { grid-template-areas: 'copy' 'photo'; gap: var(--space-7); }
+    .role-photo { height: auto; aspect-ratio: 16 / 10; }
+    .verification-layout { gap: var(--space-7); }
+    .credential-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .credential-grid li { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   }
 
-  @media (max-width: 760px) {
-    .referral-hero__photo { height: 17rem; }
-    .referral-hero__photo figcaption { font-size: .98rem; }
-    .referral-hero__copy { padding-block: var(--space-7); }
-    .referral-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
-    .referral-hero .button { width: 100%; }
-    .role-heading { margin-bottom: var(--space-6); }
-    .role-composition > figure { height: 17rem; }
-    .role-detail { padding: var(--space-6) var(--space-5); }
-    .role-primary { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
-    .role-icon, .records-icon { width: 2.65rem; height: 2.65rem; }
-    .role-boundaries { margin-top: var(--space-6); }
-    .workflow-heading { margin-bottom: var(--space-7); }
-    .workflow-steps li { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
-    .step-number { width: 2.65rem; height: 2.65rem; }
-    .records-photo { height: 17rem; }
-    .records-guidance article { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
+  @media (max-width: 700px) {
+    .professional-hero__photo { height: 16rem; }
+    .professional-hero__copy { padding-block: var(--space-7); }
+    .professional-hero h1 { font-size: clamp(2.75rem, 13vw, 3.65rem); }
+    .professional-hero .actions { display: grid; }
+    .professional-hero .button { width: 100%; }
+    .audience-grid, .credential-grid, .coordination-steps, .scope-comparison { grid-template-columns: 1fr; }
+    .audience-grid { gap: var(--space-7); }
+    .role-photo { aspect-ratio: 4 / 3; }
+    .scope-comparison article { padding: var(--space-5); }
+    .credential-grid li { grid-template-columns: var(--icon-medallion-size-md) minmax(0, 1fr); justify-items: start; text-align: left; }
+    .coordination-steps { gap: var(--space-4); }
+    .coordination-steps li { min-height: 21rem; }
+    .faq-list summary { padding: var(--space-5); }
+    .faq-answer { padding: 0 var(--space-5) var(--space-5); }
   }
+
+  @media (prefers-reduced-motion: reduce) { .faq-list summary :global(svg) { transition: none; } }
 </style>

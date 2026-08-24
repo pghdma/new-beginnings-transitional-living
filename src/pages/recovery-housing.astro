@@ -53,9 +53,6 @@ const dailyRhythm = [
 
   <section class="definition-section">
     <div class="container definition-layout">
-      <figure class="definition-photo">
-        <img src="/images/house-kitchen.webp" alt="A kitchen and dining table in a welcoming home" width="2200" height="1467" loading="lazy" />
-      </figure>
       <div class="definition-copy">
         <p class="eyebrow">What recovery housing is</p>
         <h2>A bridge toward greater independence.</h2>
@@ -70,6 +67,9 @@ const dailyRhythm = [
           </div>
         </aside>
       </div>
+      <figure class="definition-photo">
+        <img src="/images/house-kitchen.webp" alt="A kitchen and dining table in a welcoming home" width="2200" height="1467" loading="lazy" />
+      </figure>
     </div>
   </section>
 
@@ -109,9 +109,6 @@ const dailyRhythm = [
 
   <section class="pathways-section">
     <div class="container pathways-layout">
-      <figure class="pathways-photo">
-        <img src="/images/pittsburgh.jpg" alt="The Pittsburgh skyline viewed across the rivers" width="1880" height="1253" loading="lazy" />
-      </figure>
       <div class="pathways-content">
         <p class="eyebrow">Our housing network</p>
         <h2>Separate residences. A shared purpose.</h2>
@@ -130,14 +127,14 @@ const dailyRhythm = [
         </nav>
         <p class="pathways-location"><Icon name="lucide:map-pin" aria-hidden="true" />Public records reference {site.neighborhoods.join(', ')}. Additional homes serve other Pittsburgh-area communities.</p>
       </div>
+      <figure class="pathways-photo">
+        <img src="/images/pittsburgh.jpg" alt="The Pittsburgh skyline viewed across the rivers" width="1880" height="1253" loading="lazy" />
+      </figure>
     </div>
   </section>
 
   <section class="privacy-section" id="residence-privacy">
     <div class="container privacy-layout">
-      <figure class="privacy-photo">
-        <img src="/images/front-door.webp" alt="A welcoming residential front door viewed from inside" width="2200" height="3481" loading="lazy" />
-      </figure>
       <div class="privacy-content">
         <span class="privacy-content__icon icon-medallion icon-medallion--solid"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></span>
         <p class="eyebrow">Residence privacy</p>
@@ -148,6 +145,9 @@ const dailyRhythm = [
           <Icon name="lucide:arrow-right" aria-hidden="true" />
         </a>
       </div>
+      <figure class="privacy-photo">
+        <img src="/images/front-door.webp" alt="A welcoming residential front door viewed from inside" width="2200" height="3481" loading="lazy" />
+      </figure>
     </div>
   </section>
 
@@ -169,10 +169,10 @@ const dailyRhythm = [
   .housing-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.8) contrast(.96); }
 
   .definition-section { padding-block: var(--section-standard); background: var(--canvas); }
-  .definition-layout { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
-  .definition-photo { height: 35rem; margin: 0; overflow: hidden; box-shadow: var(--shadow-raised); }
+  .definition-layout { display: grid; grid-template-areas: 'photo copy'; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
+  .definition-photo { height: 35rem; margin: 0; overflow: hidden; grid-area: photo; box-shadow: var(--shadow-raised); }
   .definition-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(.97); }
-  .definition-copy { max-width: 42rem; }
+  .definition-copy { max-width: 42rem; grid-area: copy; }
   .definition-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
   .definition-copy > .lead { margin-top: var(--space-6); }
   .definition-copy > p:not(.eyebrow):not(.lead) { margin-top: var(--space-4); }
@@ -201,10 +201,10 @@ const dailyRhythm = [
   .crisis-note strong { color: var(--white); font-weight: 650; }
 
   .pathways-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .pathways-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
-  .pathways-photo { min-height: 38rem; margin: 0; overflow: hidden; }
+  .pathways-layout { display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .pathways-photo { min-height: 38rem; margin: 0; overflow: hidden; grid-area: photo; }
   .pathways-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.72) contrast(.96); }
-  .pathways-content { display: flex; padding: clamp(2.5rem, 6vw, 5rem); background: var(--navy-900); flex-direction: column; justify-content: center; }
+  .pathways-content { display: flex; padding: clamp(2.5rem, 6vw, 5rem); background: var(--navy-900); flex-direction: column; justify-content: center; grid-area: content; }
   .pathways-content .eyebrow { color: #9ed7d2; }
   .pathways-content h2 { max-width: 12ch; margin-top: var(--space-4); color: var(--white); }
   .pathways-content > p:not(.eyebrow):not(.pathways-location) { max-width: 34rem; margin-top: var(--space-5); color: var(--sky-100); }
@@ -223,10 +223,10 @@ const dailyRhythm = [
   .pathways-location :global(svg) { width: 1rem; height: 1rem; margin-top: .2rem; flex: 0 0 auto; }
 
   .privacy-section { padding-block: var(--section-standard); background: var(--paper); }
-  .privacy-layout { display: grid; min-height: 31rem; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; box-shadow: 0 1.15rem 3rem rgba(23,55,70,.12); }
-  .privacy-photo { min-height: 31rem; margin: 0; overflow: hidden; background: var(--slate-200); }
+  .privacy-layout { display: grid; min-height: 31rem; grid-template-areas: 'photo content'; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; box-shadow: 0 1.15rem 3rem rgba(23,55,70,.12); }
+  .privacy-photo { min-height: 31rem; margin: 0; overflow: hidden; background: var(--slate-200); grid-area: photo; }
   .privacy-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(.98); }
-  .privacy-content { display: flex; padding: clamp(var(--space-7), 6vw, var(--space-9)); background: var(--sky-50); flex-direction: column; align-items: flex-start; justify-content: center; }
+  .privacy-content { display: flex; padding: clamp(var(--space-7), 6vw, var(--space-9)); background: var(--sky-50); flex-direction: column; align-items: flex-start; justify-content: center; grid-area: content; }
   .privacy-content__icon { margin-bottom: var(--space-6); }
   .privacy-content__icon :global(svg) { width: 1.55rem; height: 1.55rem; }
   .privacy-content h2 { max-width: 15ch; margin-top: var(--space-3); font-size: clamp(2rem, 3.2vw, 2.8rem); }
@@ -236,16 +236,16 @@ const dailyRhythm = [
 
   @media (max-width: 900px) {
     .housing-hero__grid, .definition-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
-    .housing-hero__photo { order: -1; height: clamp(20rem, 52vw, 28rem); margin: 0 calc(var(--gutter) * -1); }
+    .housing-hero__photo { height: clamp(20rem, 52vw, 28rem); margin: 0 calc(var(--gutter) * -1); }
     .housing-hero__copy { padding: var(--space-8) 0; }
-    .definition-layout { gap: var(--space-7); }
+    .definition-layout { grid-template-areas: 'copy' 'photo'; gap: var(--space-7); }
     .definition-photo { height: auto; aspect-ratio: 16 / 10; }
     .rhythm-composition { grid-template-columns: 1fr; }
     .rhythm-heading > p:last-child { max-width: 40rem; }
     .rhythm-photo { min-height: 0; aspect-ratio: 16 / 8.5; }
-    .pathways-layout { box-shadow: var(--shadow-raised); }
+    .pathways-layout { grid-template-areas: 'content' 'photo'; box-shadow: var(--shadow-raised); }
     .pathways-photo { height: clamp(18rem, 48vw, 26rem); min-height: 0; }
-    .privacy-layout { min-height: 0; }
+    .privacy-layout { min-height: 0; grid-template-areas: 'content' 'photo'; }
     .privacy-photo { min-height: 0; aspect-ratio: 16 / 9; }
   }
 

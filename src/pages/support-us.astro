@@ -3,196 +3,634 @@ import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
-const supportPaths = [
+const configuredPayPalUrl = import.meta.env.PUBLIC_PAYPAL_DONATE_URL?.trim();
+const paypalDonateUrl = configuredPayPalUrl && /^https:\/\/(?:www\.)?paypal\.com\//i.test(configuredPayPalUrl)
+  ? configuredPayPalUrl
+  : '';
+const paypalReady = Boolean(paypalDonateUrl);
+
+const impactLevels = [
   {
-    icon: 'hand-coins',
-    eyebrow: 'Financial support',
-    title: 'Discuss a contribution directly.',
-    copy: 'Online giving is not currently offered through this website. Contact New Beginnings to ask how financial contributions are being accepted and to receive appropriate documentation.',
-    label: 'Ask about contributing',
+    amount: '25',
+    icon: 'package-open',
+    title: 'Support Everyday Essentials',
+    copy: 'Helps with practical household needs in a shared recovery home.',
   },
   {
-    icon: 'package-check',
-    eyebrow: 'Practical support',
-    title: 'Match help to a current household need.',
-    copy: 'Household needs change. Before purchasing, collecting, or delivering items, contact the organization so practical support can be useful when it arrives.',
-    label: 'Ask about current needs',
+    amount: '50',
+    icon: 'house-heart',
+    title: 'Strengthen a Shared Home',
+    copy: 'Helps sustain the ordinary resources that make daily routines possible.',
   },
   {
-    icon: 'handshake',
-    eyebrow: 'Community partnership',
-    title: 'Begin a longer-term conversation.',
-    copy: 'Businesses, nonprofits, faith communities, and civic organizations can ask about responsible ways to strengthen recovery housing in the Pittsburgh area.',
-    label: 'Discuss a partnership',
+    amount: '100',
+    icon: 'key-round',
+    title: 'Sustain Recovery Housing',
+    copy: 'Helps offset the ongoing costs behind dependable, substance free shared housing.',
+  },
+  {
+    amount: '250',
+    icon: 'heart-handshake',
+    title: 'Invest in Lasting Stability',
+    copy: 'Provides meaningful support for the recovery housing mission across Pittsburgh area residences.',
   },
 ];
 ---
 
-<MainLayout title="Support Our Work" description="Support nonprofit recovery housing for adult men and women in Pittsburgh-area communities.">
-  <section class="support-hero" aria-labelledby="support-title">
-    <div class="container support-hero__grid">
-      <div class="support-hero__copy">
+<MainLayout title="Donate" description="Make a financial contribution to support nonprofit recovery housing for adult men and women in Pittsburgh.">
+  <section class="donate-hero" aria-labelledby="donate-title">
+    <div class="container donate-hero__grid">
+      <div class="donate-hero__copy">
         <p class="eyebrow">Support New Beginnings</p>
-        <h1 id="support-title">Help sustain the everyday work of a stable home.</h1>
-        <p class="lead">Community support can strengthen the practical resources and local relationships behind recovery-focused housing for adult men and women.</p>
-        <div class="actions">
-          <a class="button button--light" href="/contact/#inquiry">Start a support conversation</a>
-        </div>
-        <p class="support-hero__truth">Online giving is not currently offered through this website. A direct conversation is the place to begin.</p>
+        <h1 id="donate-title">Help Make Recovery Housing Possible</h1>
+        <p class="lead">Choose a one time or monthly gift to support New Beginnings and its recovery housing mission for adults in Pittsburgh.</p>
+        <p class="donate-hero__reassurance">
+          <Icon name="lucide:badge-check" aria-hidden="true" />
+          New Beginnings is a 501(c)(3) public charity.
+        </p>
       </div>
 
-      <div class="support-hero__media">
-        <figure class="support-hero__photo">
-          <img src="/images/home-entry.webp" alt="A welcoming home entry with a staircase and sitting area" width="2200" height="1467" loading="eager" />
-        </figure>
-      </div>
+      <form
+        class="donation-planner"
+        id="donation-planner"
+        action="/contact/"
+        method="get"
+        data-paypal-url={paypalDonateUrl || undefined}
+        aria-labelledby="gift-title"
+      >
+        <input type="hidden" name="topic" value="Donation" />
+        <div class="donation-planner__heading">
+          <p class="eyebrow">Make a Donation</p>
+          <h2 id="gift-title">Choose Your Gift</h2>
+          <p>Select a giving schedule and an amount. You will confirm your choices before completing your gift.</p>
+        </div>
+
+        <fieldset class="choice-group frequency-group">
+          <legend>How Often Would You Like to Give?</legend>
+          <div class="frequency-options">
+            <label>
+              <input type="radio" name="frequency" value="One Time" checked />
+              <span><Icon name="lucide:gift" aria-hidden="true" />One Time</span>
+            </label>
+            <label>
+              <input type="radio" name="frequency" value="Monthly" />
+              <span><Icon name="lucide:calendar-heart" aria-hidden="true" />Monthly</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group amount-group">
+          <legend>Choose an Amount</legend>
+          <div class="amount-options">
+            {impactLevels.map((level, index) => (
+              <label>
+                <input type="radio" name="amount" value={level.amount} checked={index === 1} />
+                <span>${level.amount}</span>
+              </label>
+            ))}
+            <label class="amount-options__other">
+              <input type="radio" name="amount" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+
+          <div class="custom-amount" id="custom-amount" hidden>
+            <label for="custom-gift-amount">Enter Your Gift Amount</label>
+            <div class="custom-amount__control">
+              <span aria-hidden="true">$</span>
+              <input id="custom-gift-amount" name="customAmount" type="number" min="1" step="1" inputmode="decimal" autocomplete="off" />
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="gift-summary" id="gift-summary" aria-live="polite">Your Planned Gift: $50 One Time</p>
+
+        <button class="button donation-planner__submit" type="submit">
+          {paypalReady ? 'Continue With PayPal' : 'Contact Us About This Gift'}
+          <Icon name={paypalReady ? 'lucide:external-link' : 'lucide:arrow-right'} aria-hidden="true" />
+        </button>
+
+        <p class="donation-planner__note">
+          {paypalReady
+            ? 'You will review and complete your gift securely through PayPal.'
+            : 'Online PayPal giving is being connected. Until it is active, staff can help with a one time or monthly gift through the contact page.'}
+        </p>
+      </form>
     </div>
   </section>
 
-  <section class="support-foundation" aria-labelledby="foundation-title">
-    <img class="foundation-photo" src="/images/pittsburgh-rowhouses.webp" alt="" width="1800" height="1204" loading="lazy" />
-    <div class="foundation-scrim" aria-hidden="true"></div>
-    <div class="container foundation-layout">
-      <header class="foundation-heading">
-        <p class="eyebrow">A Pittsburgh public charity</p>
-        <h2 id="foundation-title">Support with a clear purpose.</h2>
-        <p class="lead">New Beginnings Transitional Living Foundation is a tax-exempt 501(c)(3) public charity serving adults in recovery.</p>
+  <section class="gift-impact" aria-labelledby="impact-title">
+    <div class="container">
+      <header class="section-head section-head--center">
+        <p class="eyebrow">Your Gift at Work</p>
+        <h2 id="impact-title">See What Your Gift Can Help Support</h2>
+        <p class="lead">Every contribution helps sustain the work behind stable shared homes and everyday recovery routines.</p>
       </header>
 
-      <div class="foundation-story">
-        <p>Stable housing depends on ordinary resources, reliable routines, and strong community relationships. Because needs change, New Beginnings asks supporters to begin with a conversation rather than assume what a residence needs.</p>
-        <dl class="foundation-facts" aria-label="Nonprofit information">
-          <div><dt>Federal status</dt><dd>501(c)(3) public charity</dd></div>
-          <div><dt>Employer identification number</dt><dd>{site.ein}</dd></div>
-          <div><dt>Contribution note</dt><dd>Tax-deductible to the extent permitted by law</dd></div>
-        </dl>
-        <a class="button button--light" href="/about/transparency/">Review public records<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      <div class="gift-impact__composition">
+        <figure class="gift-impact__media">
+          <img src="/images/household-linens.webp" alt="Freshly folded household linens" width="2200" height="1236" loading="lazy" />
+          <figcaption>Practical support for the work behind a stable home.</figcaption>
+        </figure>
+
+        <div class="impact-directory" aria-label="Illustrative giving levels">
+          {impactLevels.map((level) => (
+            <button class="impact-level" type="button" data-impact-amount={level.amount} aria-label={`Choose a $${level.amount} gift`}>
+              <span class="impact-level__amount">${level.amount}</span>
+              <span class="icon-medallion" aria-hidden="true">
+                <Icon name={`lucide:${level.icon}`} />
+              </span>
+              <span class="impact-level__copy">
+                <strong>{level.title}</strong>
+                <span>{level.copy}</span>
+              </span>
+              <Icon class="impact-level__arrow" name="lucide:arrow-up" aria-hidden="true" />
+            </button>
+          ))}
+        </div>
       </div>
+
+      <p class="impact-disclaimer">Giving levels illustrate ways a contribution can support the mission. They are not the price of a specific item, service, or guaranteed result. Actual needs and costs vary.</p>
     </div>
   </section>
 
-  <section class="support-routes" aria-labelledby="support-routes-title">
-    <div class="container routes-heading">
-      <p class="eyebrow">Ways to support</p>
-      <h2 id="support-routes-title">Bring the idea. We’ll begin with what is useful now.</h2>
-      <p>Choose the conversation closest to the support you have in mind. Each route begins with the same practical step: contact New Beginnings directly.</p>
-    </div>
-
-    <div class="container support-scene">
-      <figure>
-        <img src="/images/house-living-room.webp" alt="A comfortable living room with seating and natural light" width="2200" height="1467" loading="lazy" />
-      </figure>
-      <div class="support-paths">
-        {supportPaths.map((path) => (
-          <article>
-            <div class="path-icon icon-medallion"><Icon name={`lucide:${path.icon}`} aria-hidden="true" /></div>
-            <div>
-              <p class="eyebrow">{path.eyebrow}</p>
-              <h3>{path.title}</h3>
-              <p>{path.copy}</p>
-              <a class="text-link" href="/contact/#inquiry">{path.label}</a>
-            </div>
-          </article>
-        ))}
+  <section class="donation-trust section--navy" aria-labelledby="trust-title">
+    <div class="container donation-trust__grid">
+      <div class="donation-trust__heading">
+        <p class="eyebrow">Give With Confidence</p>
+        <h2 id="trust-title">A Pittsburgh Public Charity</h2>
       </div>
-    </div>
-  </section>
 
-  <section class="support-next" aria-labelledby="support-next-title">
-    <div class="container support-next__inner">
-      <div class="support-next__copy">
-        <p class="eyebrow">Accountability before support</p>
-        <h2 id="support-next-title">Know the organization. Then start a conversation.</h2>
-        <p>Public nonprofit records, Pennsylvania licensing, and independent recovery-housing credentials are available for review.</p>
-      </div>
-      <div class="support-next__actions">
-        <a class="button button--light" href="/contact/#inquiry">Contact New Beginnings</a>
-        <a class="support-next__record" href="/about/transparency/">Review credentials and public records</a>
+      <div class="donation-trust__details">
+        <p>New Beginnings Transitional Living Foundation is a tax exempt 501(c)(3) public charity. Contributions may be tax deductible to the extent allowed by law.</p>
+        <div class="donation-trust__facts" aria-label="Nonprofit information">
+          <div>
+            <Icon name="lucide:badge-check" aria-hidden="true" />
+            <span><strong>Federal Status</strong>501(c)(3) Public Charity</span>
+          </div>
+          <div>
+            <Icon name="lucide:landmark" aria-hidden="true" />
+            <span><strong>Employer Identification Number</strong>{site.ein}</span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="button button--light" href="/about/transparency/">
+            Review Credentials and Public Records
+            <Icon name="lucide:arrow-right" aria-hidden="true" />
+          </a>
+          <a class="button donation-trust__phone" href={site.phoneHref}>
+            <Icon name="lucide:phone" aria-hidden="true" />
+            Questions About Giving
+          </a>
+        </div>
       </div>
     </div>
   </section>
 </MainLayout>
 
+<script>
+  const planner = document.querySelector<HTMLFormElement>('#donation-planner');
+
+  if (planner) {
+    const amountInputs = Array.from(planner.querySelectorAll<HTMLInputElement>('input[name="amount"]'));
+    const frequencyInputs = Array.from(planner.querySelectorAll<HTMLInputElement>('input[name="frequency"]'));
+    const customAmount = planner.querySelector<HTMLElement>('#custom-amount');
+    const customAmountInput = planner.querySelector<HTMLInputElement>('#custom-gift-amount');
+    const summary = planner.querySelector<HTMLElement>('#gift-summary');
+    const impactButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-impact-amount]'));
+
+    const updatePlanner = () => {
+      const selectedAmount = amountInputs.find((input) => input.checked)?.value ?? '50';
+      const selectedFrequency = frequencyInputs.find((input) => input.checked)?.value ?? 'One Time';
+      const isOther = selectedAmount === 'Other';
+
+      if (customAmount) customAmount.hidden = !isOther;
+      if (customAmountInput) customAmountInput.required = isOther;
+
+      const customValue = customAmountInput?.value.trim();
+      const amountLabel = isOther && customValue ? `$${customValue}` : isOther ? 'a Custom Amount' : `$${selectedAmount}`;
+      if (summary) summary.textContent = `Your Planned Gift: ${amountLabel} ${selectedFrequency}`;
+    };
+
+    amountInputs.forEach((input) => input.addEventListener('change', updatePlanner));
+    frequencyInputs.forEach((input) => input.addEventListener('change', updatePlanner));
+    customAmountInput?.addEventListener('input', updatePlanner);
+
+    impactButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const amount = button.dataset.impactAmount;
+        const matchingInput = amountInputs.find((input) => input.value === amount);
+        if (!matchingInput) return;
+        matchingInput.checked = true;
+        updatePlanner();
+        planner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.setTimeout(() => matchingInput.focus({ preventScroll: true }), 450);
+      });
+    });
+
+    planner.addEventListener('submit', (event) => {
+      const paypalUrl = planner.dataset.paypalUrl;
+      if (!paypalUrl) return;
+      event.preventDefault();
+      window.open(paypalUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    updatePlanner();
+  }
+</script>
+
 <style>
-  .support-hero { overflow: hidden; color: var(--white); background: var(--navy-950); }
-  .support-hero__grid { display: grid; min-height: clamp(42rem, 62vw, 50rem); grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr); align-items: stretch; }
-  .support-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 5vw, 4.5rem) clamp(5.5rem, 9vw, 8rem) 0; flex-direction: column; justify-content: center; }
-  .support-hero .eyebrow { color: #9ed7d2; }
-  .support-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.15rem, 5.6vw, 5.35rem); }
-  .support-hero .lead { max-width: 34rem; margin-top: var(--space-5); color: var(--sky-100); }
-  .support-hero .actions { margin-top: var(--space-6); }
-  .support-hero__truth { max-width: 32rem; margin-top: var(--space-6); color: var(--sky-200); font-size: .95rem; line-height: 1.55; }
-  .support-hero__media { position: relative; min-width: 0; margin-right: calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2); }
-  .support-hero__photo { height: 100%; margin: 0; overflow: hidden; }
-  .support-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.98); }
+  .donate-hero {
+    padding-block: var(--section-hero);
+    color: var(--white);
+    background: var(--navy-950);
+  }
 
-  .support-foundation { position: relative; overflow: hidden; padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .foundation-photo, .foundation-scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .foundation-photo { object-fit: cover; object-position: center 44%; filter: saturate(.64) contrast(.98); }
-  .foundation-scrim { background: linear-gradient(90deg, rgba(16,52,67,.96) 0%, rgba(16,52,67,.92) 52%, rgba(16,52,67,.77) 100%); }
-  .foundation-layout { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(3rem, 8vw, 7.5rem); align-items: start; }
-  .foundation-heading { display: grid; gap: var(--space-4); }
-  .foundation-heading .eyebrow { color: #9ed7d2; }
-  .foundation-heading h2 { max-width: 11ch; color: var(--white); }
-  .foundation-heading .lead { max-width: 31rem; margin-top: var(--space-2); color: var(--sky-100); }
-  .foundation-story > p { max-width: 43rem; color: var(--sky-100); font-size: 1.12rem; }
-  .foundation-facts { display: grid; margin: var(--space-7) 0 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
-  .foundation-facts div { padding-top: var(--space-4); border-top: 1px solid rgba(185,229,225,.38); }
-  .foundation-facts dt { color: #9ed7d2; font-size: .72rem; font-weight: 650; letter-spacing: .08em; line-height: 1.35; text-transform: uppercase; }
-  .foundation-facts dd { margin: var(--space-2) 0 0; color: var(--white); font-size: .95rem; line-height: 1.45; }
-  .foundation-story .button { margin-top: var(--space-7); gap: .6rem; }
-  .foundation-story .button :global(svg) { width: 1rem; height: 1rem; }
+  .donate-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(32rem, 1.18fr);
+    gap: clamp(3rem, 8vw, 7rem);
+    align-items: center;
+  }
 
-  .support-routes { padding-block: var(--section-standard); background: var(--sky-50); }
-  .routes-heading { display: grid; max-width: 50rem; margin-bottom: var(--space-8); gap: var(--space-4); }
-  .routes-heading h2 { max-width: 15ch; }
-  .routes-heading > p:last-child { max-width: 43rem; }
-  .support-scene { display: grid; min-height: 48rem; grid-template-columns: minmax(0, 1.08fr) minmax(25rem, .92fr); align-items: center; }
-  .support-scene > figure { height: 100%; min-height: 42rem; margin: 0; overflow: hidden; box-shadow: var(--shadow-raised); }
-  .support-scene > figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
-  .support-paths { position: relative; z-index: 1; margin-left: clamp(-4.5rem, -5vw, -2.5rem); padding: clamp(2.25rem, 5vw, 4rem); background: var(--paper); box-shadow: var(--shadow-raised); }
-  .support-paths article { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .support-paths article + article { margin-top: var(--space-7); }
-  .path-icon { width: 3rem; height: 3rem; }
-  .path-icon :global(svg) { width: 1.4rem; height: 1.4rem; stroke-width: 1.6; }
-  .support-paths h3 { max-width: 16ch; margin-top: var(--space-2); }
-  .support-paths article div:last-child > p:not(.eyebrow) { margin-top: var(--space-3); color: var(--slate-600); line-height: 1.55; }
-  .support-paths .text-link { margin-top: var(--space-4); }
+  .donate-hero .eyebrow { color: #9ed7d2; }
 
-  .support-next { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .support-next__inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(17rem, .9fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
-  .support-next .eyebrow { color: #9ed7d2; }
-  .support-next h2 { max-width: 15ch; margin-top: var(--space-4); color: var(--white); }
-  .support-next__copy > p:last-child { max-width: 42rem; margin-top: var(--space-5); color: var(--sky-100); }
-  .support-next__actions { display: grid; justify-items: start; gap: var(--space-5); }
-  .support-next__record { color: var(--white); font-weight: 650; }
-  .support-next__record:hover { color: #b9e5e1; }
+  .donate-hero h1 {
+    max-width: 9.6ch;
+    margin-top: var(--space-4);
+    color: var(--white);
+    font-size: clamp(3.2rem, 5.4vw, 5.15rem);
+  }
 
-  @media (max-width: 900px) {
-    .support-hero__grid, .foundation-layout, .support-next__inner { grid-template-columns: 1fr; }
-    .support-hero__media { order: -1; height: clamp(23rem, 60vw, 32rem); margin: 0 calc(var(--gutter) * -1); }
-    .support-hero__copy { padding: var(--space-8) 0; }
-    .foundation-layout, .support-next__inner { gap: var(--space-7); }
-    .foundation-heading { max-width: 42rem; }
-    .foundation-story { max-width: 46rem; }
+  .donate-hero .lead {
+    max-width: 34rem;
+    margin-top: var(--space-5);
+    color: var(--sky-100);
+  }
+
+  .donate-hero__reassurance {
+    display: flex;
+    margin-top: var(--space-6);
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--sky-200);
+    font-weight: 600;
+  }
+
+  .donate-hero__reassurance :global(svg) {
+    width: 1.55rem;
+    height: 1.55rem;
+    color: #9ed7d2;
+  }
+
+  .donation-planner {
+    display: grid;
+    padding: clamp(2rem, 4vw, 3rem);
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: var(--radius-lg);
+    color: var(--slate-700);
+    background: var(--paper);
+    box-shadow: 0 26px 70px rgba(4, 25, 35, .32);
+    gap: var(--space-6);
+  }
+
+  .donation-planner__heading { display: grid; gap: var(--space-3); }
+  .donation-planner__heading .eyebrow { color: var(--teal-700); }
+  .donation-planner__heading h2 { font-size: clamp(2rem, 3vw, 2.8rem); }
+  .donation-planner__heading p:last-child { max-width: 38rem; }
+
+  .choice-group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .choice-group legend,
+  .custom-amount > label {
+    margin-bottom: var(--space-3);
+    color: var(--navy-900);
+    font-size: .92rem;
+    font-weight: 650;
+  }
+
+  .frequency-options,
+  .amount-options { display: grid; gap: var(--space-2); }
+  .frequency-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .amount-options { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+  .frequency-options label,
+  .amount-options label { position: relative; cursor: pointer; }
+
+  .frequency-options input,
+  .amount-options input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .frequency-options span,
+  .amount-options span {
+    display: flex;
+    min-height: 3.4rem;
+    border: 1px solid var(--slate-300);
+    border-radius: var(--radius);
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    color: var(--navy-900);
+    background: var(--white);
+    font-weight: 650;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+
+  .frequency-options span :global(svg) { width: 1.2rem; height: 1.2rem; }
+  .frequency-options label:hover span,
+  .amount-options label:hover span { border-color: var(--teal-700); }
+
+  .frequency-options input:checked + span,
+  .amount-options input:checked + span {
+    border-color: var(--teal-700);
+    color: var(--white);
+    background: var(--teal-700);
+    box-shadow: 0 8px 18px rgba(20, 116, 111, .18);
+  }
+
+  .frequency-options input:focus-visible + span,
+  .amount-options input:focus-visible + span {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .custom-amount[hidden] { display: none; }
+  .custom-amount { margin-top: var(--space-4); }
+
+  .custom-amount__control {
+    display: grid;
+    min-height: 3.5rem;
+    border: 1px solid var(--slate-300);
+    border-radius: var(--radius);
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    background: var(--white);
+  }
+
+  .custom-amount__control span { padding-left: var(--space-4); color: var(--navy-900); font-weight: 650; }
+
+  .custom-amount__control input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: .75rem 1rem .75rem .5rem;
+    border: 0;
+    outline: 0;
+    color: var(--navy-900);
+    background: transparent;
+  }
+
+  .custom-amount__control:focus-within { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+  .gift-summary {
+    padding: var(--space-4);
+    color: var(--navy-900);
+    background: var(--sky-100);
+    font-weight: 650;
+    text-align: center;
+  }
+
+  .donation-planner__submit {
+    width: 100%;
+    min-height: 3.75rem;
+    gap: var(--space-3);
+    font-size: 1.08rem;
+    cursor: pointer;
+  }
+
+  .donation-planner__submit :global(svg) { width: 1.15rem; height: 1.15rem; }
+
+  .donation-planner__note {
+    color: var(--slate-600);
+    font-size: .92rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .gift-impact { padding-block: var(--section-standard); background: var(--canvas); }
+
+  .gift-impact .section-head {
+    max-width: 51rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .gift-impact .section-head h2 { max-width: 18ch; margin-inline: auto; }
+  .gift-impact .section-head .lead { margin-inline: auto; }
+
+  .gift-impact__composition {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    align-items: stretch;
+    background: var(--paper);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .gift-impact__media {
+    position: relative;
+    min-height: 36rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .gift-impact__media::after {
+    position: absolute;
+    background: linear-gradient(180deg, transparent 45%, rgba(23, 55, 70, .82));
+    content: '';
+    inset: 0;
+  }
+
+  .gift-impact__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 51% center;
+  }
+
+  .gift-impact__media figcaption {
+    position: absolute;
+    z-index: 1;
+    right: var(--space-6);
+    bottom: var(--space-6);
+    left: var(--space-6);
+    max-width: 22rem;
+    color: var(--white);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .impact-directory { display: grid; align-content: stretch; }
+
+  .impact-level {
+    display: grid;
+    min-height: 9rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 0;
+    border-bottom: 1px solid var(--slate-200);
+    grid-template-columns: 4.5rem 3.25rem minmax(0, 1fr) auto;
+    gap: var(--space-4);
+    align-items: center;
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background .15s ease;
+  }
+
+  .impact-level:last-child { border-bottom: 0; }
+  .impact-level:hover,
+  .impact-level:focus-visible { background: var(--sky-50); }
+
+  .impact-level__amount { color: var(--teal-700); font-size: 1.55rem; font-weight: 700; }
+  .impact-level__copy { display: grid; gap: var(--space-1); }
+
+  .impact-level__copy strong {
+    color: var(--navy-900);
+    font-size: 1.15rem;
+    font-weight: 650;
+  }
+
+  .impact-level__copy span { color: var(--slate-600); }
+
+  .impact-level__arrow {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--teal-700);
+    transition: transform .15s ease;
+  }
+
+  .impact-level:hover .impact-level__arrow { transform: translateY(-.2rem); }
+
+  .impact-disclaimer {
+    max-width: 68rem;
+    margin: var(--space-5) auto 0;
+    color: var(--slate-600);
+    font-size: .9rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .donation-trust { padding-block: var(--section-standard); }
+
+  .donation-trust__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+    gap: clamp(3rem, 8vw, 7.5rem);
+    align-items: start;
+  }
+
+  .donation-trust__heading { display: grid; gap: var(--space-4); }
+  .donation-trust__heading h2 { max-width: 10ch; color: var(--white); }
+
+  .donation-trust__details > p {
+    max-width: 44rem;
+    color: var(--sky-100);
+    font-size: 1.12rem;
+  }
+
+  .donation-trust__facts {
+    display: grid;
+    margin-top: var(--space-7);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .donation-trust__facts > div {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+    color: var(--sky-100);
+  }
+
+  .donation-trust__facts :global(svg) {
+    width: 1.65rem;
+    height: 1.65rem;
+    color: #9ed7d2;
+    stroke-width: 1.65;
+  }
+
+  .donation-trust__facts span { display: grid; gap: var(--space-1); }
+
+  .donation-trust__facts strong {
+    color: var(--white);
+    font-size: .8rem;
+    font-weight: 650;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .donation-trust__details .actions { margin-top: var(--space-7); }
+  .donation-trust__details .button { gap: .65rem; }
+  .donation-trust__details .button :global(svg) { width: 1.05rem; height: 1.05rem; }
+
+  .donation-trust__phone {
+    border-color: rgba(255, 255, 255, .72);
+    color: var(--white);
+    background: transparent;
+  }
+
+  .donation-trust__phone:hover { color: var(--navy-950); background: var(--white); }
+
+  @media (max-width: 1000px) {
+    .donate-hero__grid,
+    .donation-trust__grid { grid-template-columns: 1fr; }
+    .donate-hero__grid { max-width: 47rem; }
+    .donate-hero__copy { max-width: 40rem; }
+    .donation-trust__grid { gap: var(--space-7); }
+    .donation-trust__heading h2 { max-width: 15ch; }
   }
 
   @media (max-width: 760px) {
-    .support-scene { min-height: 0; grid-template-columns: 1fr; }
-    .support-scene > figure { height: clamp(20rem, 62vw, 29rem); min-height: 0; }
-    .support-paths { margin: calc(var(--space-6) * -1) var(--space-4) 0; }
-    .support-hero__media { height: 19rem; }
-    .support-hero__copy { padding-block: var(--space-7); }
-    .support-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
-    .support-hero .button { width: 100%; }
-    .foundation-facts { grid-template-columns: 1fr; }
-    .foundation-story .button { width: 100%; }
-    .routes-heading { margin-bottom: var(--space-6); }
-    .support-scene > figure { height: 17rem; }
-    .support-paths { margin: calc(var(--space-5) * -1) var(--space-3) 0; padding: var(--space-6) var(--space-5); }
-    .support-paths article { grid-template-columns: 2.65rem minmax(0, 1fr); gap: var(--space-3); }
-    .support-paths article + article { margin-top: var(--space-6); }
-    .path-icon { width: 2.65rem; height: 2.65rem; }
-    .support-next__actions .button { width: 100%; }
+    .donate-hero { padding-block: var(--space-8); }
+    .donate-hero__grid { gap: var(--space-7); }
+    .donate-hero h1 { font-size: clamp(2.65rem, 12.2vw, 3.55rem); }
+    .donation-planner { padding: var(--space-5); gap: var(--space-5); }
+    .amount-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .amount-options__other { grid-column: 1 / -1; }
+    .gift-impact__composition { grid-template-columns: 1fr; }
+    .gift-impact__media {
+      min-width: 0;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .impact-level {
+      min-height: auto;
+      grid-template-columns: 3.5rem 3.25rem minmax(0, 1fr);
+    }
+
+    .impact-level__amount { font-size: 1.3rem; }
+    .impact-level__arrow { display: none; }
+    .donation-trust__facts { grid-template-columns: 1fr; }
+    .donation-trust__details .actions { display: grid; }
+    .donation-trust__details .button { width: 100%; }
+  }
+
+  @media (max-width: 430px) {
+    .donation-planner {
+      margin-inline: calc(var(--gutter) * -.25);
+      padding: var(--space-5) var(--space-4);
+    }
+
+    .frequency-options span { padding-inline: .65rem; font-size: .95rem; }
+
+    .impact-level {
+      grid-template-columns: 3.25rem minmax(0, 1fr);
+      gap: var(--space-3);
+    }
+
+    .impact-level .icon-medallion { grid-column: 1; grid-row: 2; }
+    .impact-level__amount { grid-column: 1 / -1; }
+    .impact-level__copy { grid-column: 2; grid-row: 2; }
   }
 </style>

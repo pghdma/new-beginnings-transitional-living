@@ -1,59 +1,62 @@
 ---
-import { site } from '../data/site';
-interface Props {
-  title?: string;
-  intro?: string;
-  context?: 'housing' | 'referral' | 'contact';
-}
-const {
-  title = 'Start with a conversation',
-  intro = 'Tell us how to reach you. Please do not include medical details or other sensitive information.',
-  context = 'contact',
-} = Astro.props;
+const options = [
+  'Housing availability',
+  'Professional question',
+  'Donation or partnership',
+  'Organization or public records',
+  'Something else',
+];
 
-const options = context === 'referral'
-  ? ['Treatment provider', 'Case manager or discharge planner', 'Court or justice partner', 'Community organization', 'Family or support person', 'Something else']
-  : context === 'housing'
-    ? ['Myself', 'A loved one', 'A client', 'Something else']
-    : ['Housing', 'Professional referral', 'Donation or partnership', 'General organization question', 'Something else'];
+const buttonLabel = 'Send Message';
 ---
-<section class="inquiry" id="inquiry" aria-labelledby="inquiry-title">
-  <div class="container inquiry-grid">
-    <div class="inquiry-copy">
-      <p class="eyebrow">Take the next step</p>
-      <h2 id="inquiry-title">{title}</h2>
-      <p class="lead">{intro}</p>
-      <p>Prefer to call? <a href={site.phoneHref}>{site.phone}</a></p>
-      <slot name="aside" />
+
+<div class="inquiry-form" id="inquiry" aria-labelledby="inquiry-title">
+  <header class="inquiry-form__header">
+    <p class="eyebrow">Send a Message</p>
+    <h2 id="inquiry-title">How Can We Help?</h2>
+    <p>Use this form for a general question. Please keep medical, legal, and other sensitive information out of your message.</p>
+  </header>
+
+  <form data-contact-form data-context="contact" novalidate>
+    <label>
+      Full Name
+      <input required autocomplete="name" name="name" maxlength="200" />
+    </label>
+    <label>
+      Email Address
+      <input required type="email" autocomplete="email" name="email" maxlength="254" />
+    </label>
+    <label>
+      <span class="field-label">Phone Number <small>(optional)</small></span>
+      <input type="tel" autocomplete="tel" name="phone" maxlength="20" />
+    </label>
+    <label>
+      What Can We Help With?
+      <select name="contactType" required>
+        <option value="">Select one</option>
+        {options.map((option) => <option value={option}>{option}</option>)}
+      </select>
+    </label>
+    <label>
+      Message
+      <textarea required name="message" rows="5" maxlength="5000"></textarea>
+    </label>
+
+    <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+    <input type="hidden" name="startedAt" value="" />
+
+    <p class="privacy-note">Do not send medical records, diagnoses, medication information, Social Security numbers, or other sensitive information. <a href="/privacy/">Read the Privacy Policy.</a></p>
+
+    <div class="verification">
+      <p>Security Check</p>
+      <div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div>
     </div>
-    <form data-contact-form data-context={context} novalidate>
-      <div class="form-grid">
-        <label>First name<input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
-        <label>Last name<input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
-        <label>Email<input required type="email" autocomplete="email" name="email" maxlength="254" /></label>
-        <label>Phone<input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
-      </div>
-      <label>I am contacting you as or about<select name="contactType" required><option value="">Select one</option>{options.map((option) => <option value={option}>{option}</option>)}</select></label>
-      {context === 'referral' && (
-        <div class="form-grid referral-fields">
-          <label><span class="field-label">Organization <small>(optional)</small></span><input autocomplete="organization" name="organization" maxlength="200" /></label>
-          <label><span class="field-label">Role <small>(optional)</small></span><input autocomplete="organization-title" name="role" maxlength="150" /></label>
-          <label class="full-width"><span class="field-label">Preferred contact method <small>(optional)</small></span><select name="preferredContact"><option value="">No preference</option><option value="Phone">Phone</option><option value="Email">Email</option></select></label>
-        </div>
-      )}
-      <label>How can we help?<textarea name="message" rows="4" maxlength="1000"></textarea></label>
-      <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
-      <input type="hidden" name="startedAt" value="" />
-      <p class="privacy-note">This form is for general inquiries only. Do not send medical records, diagnoses, medication information, Social Security numbers, or other sensitive information. <a href="/privacy/">Read the Privacy Policy.</a></p>
-      <div class="verification">
-        <p>Security check</p>
-        <div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div>
-      </div>
-      <button class="button" type="submit" data-submit-button>Send inquiry</button>
-      <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
-    </form>
-  </div>
-</section>
+
+    <button class="button" type="submit" data-submit-button data-default-label={buttonLabel}>{buttonLabel}</button>
+    <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+  </form>
+</div>
+
 <script is:inline>
   window.onNbtsTurnstileReady = function () {
     document.querySelectorAll('[data-turnstile-widget]').forEach(function (widget) {
@@ -102,7 +105,7 @@ const options = context === 'referral'
 
       const formData = new FormData(form);
       if (!formData.get('cf-turnstile-response')) {
-        setStatus('Please complete the security check before sending your inquiry.', 'error');
+        setStatus('Please complete the security check before sending your message.', 'error');
         return;
       }
 
@@ -114,9 +117,9 @@ const options = context === 'referral'
       if (button) {
         button.disabled = true;
         button.setAttribute('aria-busy', 'true');
-        button.textContent = 'Sending…';
+        button.textContent = 'Sending';
       }
-      setStatus('Sending your inquiry…');
+      setStatus('Sending your message.');
 
       try {
         const response = await fetch(CONTACT_ENDPOINT, {
@@ -127,15 +130,15 @@ const options = context === 'referral'
         const result = await response.json().catch(() => null) as { success?: boolean; message?: string } | null;
 
         if (!response.ok || !result?.success) {
-          throw new Error(result?.message || 'We could not send your inquiry right now. Please call 412-628-0403.');
+          throw new Error(result?.message || 'We could not send your message. Please call 412-628-0403 or email srua65@gmail.com.');
         }
 
         form.reset();
-        setStatus(result.message || 'Thank you. Your inquiry has been received by the website administrator for New Beginnings.', 'success');
+        setStatus(result.message || 'Thank you. Your message has been received by the website administrator for New Beginnings.', 'success');
       } catch (error) {
         const message = error instanceof Error
           ? error.message
-          : 'We could not send your inquiry right now. Please call 412-628-0403.';
+          : 'We could not send your message. Please call 412-628-0403 or email srua65@gmail.com.';
         setStatus(message, 'error');
       } finally {
         restartTimer();
@@ -143,43 +146,158 @@ const options = context === 'referral'
         if (button) {
           button.disabled = false;
           button.removeAttribute('aria-busy');
-          button.textContent = 'Send inquiry';
+          button.textContent = button.dataset.defaultLabel || 'Send Message';
         }
       }
     });
   });
 </script>
+
 <style>
-  .inquiry { padding-block: var(--section-standard); color: var(--white); background: var(--navy-900); }
-  .inquiry-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: var(--gap-columns); align-items: start; }
-  .inquiry-copy { display: grid; min-width: 0; gap: var(--space-5); position: sticky; top: 9rem; }
-  .inquiry-copy .eyebrow { color: #9ed7d2; }
-  h2 { color: var(--white); }
-  .inquiry-copy a { color: var(--white); font-weight: 650; }
-  .inquiry-copy :global(.inquiry-aside) { display: grid; margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid rgba(255,255,255,.22); gap: var(--space-4); }
-  .inquiry-copy :global(.inquiry-aside h3) { color: var(--white); font-size: 1.05rem; }
-  .inquiry-copy :global(.inquiry-aside p) { margin-top: var(--space-2); color: var(--sky-200); font-size: .92rem; }
-  .inquiry-copy .lead { color: var(--sky-100); }
-  form { display: grid; min-width: 0; gap: var(--space-4); padding: clamp(var(--space-5), 4vw, var(--space-7)); border-radius: var(--radius); background: var(--paper); color: var(--slate-700); box-shadow: var(--shadow); }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-  label { display: grid; gap: var(--space-2); font-size: .92rem; font-weight: 650; }
-  .field-label { color: inherit; font: inherit; }
-  .field-label small { color: var(--slate-500); font-size: .82rem; font-weight: 500; }
-  .full-width { grid-column: 1 / -1; }
-  input, select, textarea { width: 100%; padding: .75rem .85rem; border: 1px solid var(--slate-300); border-radius: .25rem; background: var(--white); color: var(--slate-700); }
-  input:focus, select:focus, textarea:focus { border-color: var(--teal-700); box-shadow: 0 0 0 3px rgba(20,116,111,.14); outline: 0; }
-  textarea { resize: vertical; }
-  .privacy-note { color: var(--slate-600); font-size: .85rem; line-height: 1.45; }
-  .privacy-note a { color: var(--blue-700); font-weight: 650; text-decoration: underline; }
-  .verification { display: grid; min-width: 0; gap: var(--space-2); }
-  .cf-turnstile { width: 100%; min-height: 65px; }
-  .verification > p { color: var(--slate-700); font-size: .92rem; font-weight: 650; }
-  button:disabled { cursor: wait; opacity: .72; }
-  .trap { position: absolute; left: -9999px; }
-  .status { min-height: 1.5em; color: var(--navy-800); font-weight: 600; }
-  .status[data-state="error"] { color: #9b2c2c; }
-  .status[data-state="success"] { color: #22634f; }
-  @media (max-width: 760px) { .inquiry-grid { grid-template-columns: minmax(0,1fr); } .inquiry-copy { position: static; } }
-  @media (max-width: 420px) { .cf-turnstile { width: 150px; min-height: 140px; } }
-  @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
+  .inquiry-form {
+    min-width: 0;
+    padding: clamp(var(--space-6), 4vw, var(--space-8));
+    background: var(--paper);
+  }
+
+  .inquiry-form__header {
+    display: grid;
+    max-width: 38rem;
+    margin-bottom: var(--space-6);
+    gap: var(--space-3);
+  }
+
+  .inquiry-form__header h2 {
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+  }
+
+  .inquiry-form__header > p:last-child {
+    color: var(--slate-600);
+  }
+
+  form {
+    display: grid;
+    min-width: 0;
+    gap: var(--space-4);
+  }
+
+  label {
+    display: grid;
+    gap: var(--space-2);
+    color: var(--navy-900);
+    font-size: .95rem;
+    font-weight: 650;
+  }
+
+  .field-label {
+    color: inherit;
+    font: inherit;
+  }
+
+  .field-label small {
+    color: var(--slate-500);
+    font-size: .84rem;
+    font-weight: 500;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 3.2rem;
+    padding: .78rem .9rem;
+    border: 1px solid var(--slate-300);
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--slate-700);
+  }
+
+  textarea {
+    min-height: 9rem;
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--teal-700);
+    box-shadow: 0 0 0 3px rgba(20, 116, 111, .14);
+    outline: 0;
+  }
+
+  .privacy-note {
+    max-width: 62ch;
+    color: var(--slate-600);
+    font-size: .86rem;
+    line-height: 1.5;
+  }
+
+  .privacy-note a {
+    color: var(--blue-700);
+    font-weight: 650;
+    text-decoration: underline;
+  }
+
+  .verification {
+    display: grid;
+    min-width: 0;
+    gap: var(--space-2);
+  }
+
+  .verification > p {
+    color: var(--navy-900);
+    font-size: .92rem;
+    font-weight: 650;
+  }
+
+  .cf-turnstile {
+    width: 100%;
+    min-height: 65px;
+  }
+
+  button {
+    width: fit-content;
+    min-width: 10.5rem;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: .72;
+  }
+
+  .trap {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .status {
+    min-height: 1.5em;
+    color: var(--navy-800);
+    font-weight: 600;
+  }
+
+  .status[data-state="error"] {
+    color: var(--error);
+  }
+
+  .status[data-state="success"] {
+    color: var(--success);
+  }
+
+  @media (max-width: 560px) {
+    .inquiry-form {
+      padding: var(--space-6) var(--space-5);
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .cf-turnstile {
+      width: 150px;
+      min-height: 140px;
+    }
+  }
 </style>

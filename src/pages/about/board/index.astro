@@ -166,15 +166,6 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   )}
 
   <section class="public-record" aria-labelledby="public-record-title">
-    <div class="public-record__media">
-      <img
-        src="/images/admissions.jpg"
-        alt="Notebooks and coffee arranged on a shared work table"
-        width="1880"
-        height="1253"
-        loading="lazy"
-      />
-    </div>
     <div class="public-record__content">
       <div class="public-record__inner">
         <p class="eyebrow">Governance and Accountability</p>
@@ -188,6 +179,15 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
           <Icon name="lucide:arrow-right" aria-hidden="true" />
         </a>
       </div>
+    </div>
+    <div class="public-record__media">
+      <img
+        src="/images/admissions.jpg"
+        alt="Notebooks and coffee arranged on a shared work table"
+        width="1880"
+        height="1253"
+        loading="lazy"
+      />
     </div>
   </section>
 </MainLayout>
@@ -591,6 +591,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   .public-record {
     display: grid;
     min-height: 37rem;
+    grid-template-areas: 'media content';
     grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
     color: var(--white);
     background: var(--navy-950);
@@ -599,6 +600,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   .public-record__media {
     min-height: 37rem;
     overflow: hidden;
+    grid-area: media;
     background: var(--slate-200);
   }
 
@@ -613,6 +615,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   .public-record__content {
     display: grid;
     padding: var(--section-standard) max(var(--gutter), calc((100vw - var(--max)) / 2)) var(--section-standard) clamp(3rem, 6vw, 6.5rem);
+    grid-area: content;
     align-items: center;
   }
 
@@ -665,6 +668,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
 
     .public-record {
       min-height: 0;
+      grid-template-areas: 'content' 'media';
       grid-template-columns: 1fr;
     }
 

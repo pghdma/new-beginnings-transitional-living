@@ -8,6 +8,7 @@
 const DELIVERY_ENDPOINT = 'https://sbs-contact.pghdma.workers.dev/api/contact';
 const DELIVERY_ORIGIN = 'https://stepbystepsupport.net';
 const PHONE = '412-628-0403';
+const EMAIL = 'srua65@gmail.com';
 const PROJECT_PAGES_HOST = 'new-beginnings-transitional-living.pages.dev';
 
 const EXACT_ORIGINS = new Set([
@@ -16,9 +17,10 @@ const EXACT_ORIGINS = new Set([
 	`https://${PROJECT_PAGES_HOST}`,
 ]);
 
-type InquiryContext = 'housing' | 'referral' | 'contact';
+type InquiryContext = 'housing' | 'contact';
 
 interface InquiryPayload {
+	name: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -29,6 +31,17 @@ interface InquiryPayload {
 	organization: string;
 	role: string;
 	preferredContact: string;
+	housingType: string;
+	adultStatus: string;
+	moveTiming: string;
+	bestTime: string;
+	applicantFirstName: string;
+	applicantLastName: string;
+	previousResident: string;
+	sharedLivingAgreement: string;
+	referralSource: string;
+	accommodationDiscussion: string;
+	applicationAcknowledgement: string;
 	website: string;
 	loadtime: string;
 	turnstileToken: string;
@@ -86,7 +99,6 @@ function hasControlCharacters(value: string): boolean {
 
 function contextLabel(context: InquiryContext): string {
 	if (context === 'housing') return 'Housing and admissions';
-	if (context === 'referral') return 'Professional referral';
 	return 'General contact';
 }
 
@@ -99,7 +111,18 @@ function buildForwardedMessage(payload: InquiryPayload): string {
 
 	if (payload.organization) lines.push(`Organization: ${payload.organization}`);
 	if (payload.role) lines.push(`Role: ${payload.role}`);
+	if (payload.housingType) lines.push(`Housing requested: ${payload.housingType}`);
+	if (payload.applicantFirstName || payload.applicantLastName) {
+		lines.push(`Applicant: ${`${payload.applicantFirstName} ${payload.applicantLastName}`.trim()}`);
+	}
+	if (payload.adultStatus) lines.push(`Applicant is 18 or older: ${payload.adultStatus}`);
+	if (payload.moveTiming) lines.push(`Preferred timing: ${payload.moveTiming}`);
+	if (payload.previousResident) lines.push(`Previous New Beginnings resident: ${payload.previousResident}`);
+	if (payload.sharedLivingAgreement) lines.push(`Willing to follow shared home expectations: ${payload.sharedLivingAgreement}`);
+	if (payload.referralSource) lines.push(`Primary referral source: ${payload.referralSource}`);
+	if (payload.accommodationDiscussion) lines.push('Requests a private accessibility or accommodation conversation: Yes');
 	if (payload.preferredContact) lines.push(`Preferred contact method: ${payload.preferredContact}`);
+	if (payload.bestTime) lines.push(`Best time to reach: ${payload.bestTime}`);
 
 	lines.push('', 'Message:', payload.message || '(No additional message was provided.)');
 	return lines.join('\n');
@@ -107,11 +130,12 @@ function buildForwardedMessage(payload: InquiryPayload): string {
 
 function parsePayload(body: Record<string, unknown>): InquiryPayload {
 	const suppliedContext = stringValue(body.context);
-	const context: InquiryContext = suppliedContext === 'housing' || suppliedContext === 'referral'
+	const context: InquiryContext = suppliedContext === 'housing'
 		? suppliedContext
 		: 'contact';
 
 	return {
+		name: stringValue(body.name),
 		firstName: stringValue(body.firstName),
 		lastName: stringValue(body.lastName),
 		email: stringValue(body.email),
@@ -122,6 +146,17 @@ function parsePayload(body: Record<string, unknown>): InquiryPayload {
 		organization: stringValue(body.organization),
 		role: stringValue(body.role),
 		preferredContact: stringValue(body.preferredContact),
+		housingType: stringValue(body.housingType),
+		adultStatus: stringValue(body.adultStatus),
+		moveTiming: stringValue(body.moveTiming),
+		bestTime: stringValue(body.bestTime),
+		applicantFirstName: stringValue(body.applicantFirstName),
+		applicantLastName: stringValue(body.applicantLastName),
+		previousResident: stringValue(body.previousResident),
+		sharedLivingAgreement: stringValue(body.sharedLivingAgreement),
+		referralSource: stringValue(body.referralSource),
+		accommodationDiscussion: stringValue(body.accommodationDiscussion),
+		applicationAcknowledgement: stringValue(body.applicationAcknowledgement),
 		website: stringValue(body.website),
 		loadtime: stringValue(body.loadtime || body.startedAt),
 		turnstileToken: stringValue(body['cf-turnstile-response']),
@@ -130,22 +165,66 @@ function parsePayload(body: Record<string, unknown>): InquiryPayload {
 
 function validate(payload: InquiryPayload): string[] {
 	const errors: string[] = [];
-	const fullName = `${payload.firstName} ${payload.lastName}`.trim();
+	const legacyName = `${payload.firstName} ${payload.lastName}`.trim();
+	const fullName = payload.context === 'contact' ? payload.name || legacyName : legacyName;
 
-	if (!payload.firstName) errors.push('First name is required.');
-	if (!payload.lastName) errors.push('Last name is required.');
-	if (payload.firstName.length > 100 || payload.lastName.length > 100) errors.push('Name is too long.');
+	if (payload.context === 'housing') {
+		if (!payload.firstName) errors.push('First name is required.');
+		if (!payload.lastName) errors.push('Last name is required.');
+		if (payload.firstName.length > 100 || payload.lastName.length > 100) errors.push('Name is too long.');
+	} else {
+		if (!fullName) errors.push('Full name is required.');
+		if (fullName.length > 200) errors.push('Name is too long.');
+	}
 	if (hasControlCharacters(fullName)) errors.push('Name contains invalid characters.');
 	if (!payload.email) errors.push('Email is required.');
 	else if (!validEmail(payload.email) || payload.email.length > 254) errors.push('Please enter a valid email address.');
-	if (!payload.phone) errors.push('Phone is required.');
-	else if (!validPhone(payload.phone)) errors.push('Please enter a valid phone number.');
-	if (!payload.contactType) errors.push('Please select what your inquiry is about.');
+	if (payload.context === 'housing' && !payload.phone) errors.push('Phone is required.');
+	else if (payload.phone && !validPhone(payload.phone)) errors.push('Please enter a valid phone number.');
+	if (!payload.contactType && payload.context !== 'housing') errors.push('Please select what your inquiry is about.');
 	if (payload.contactType.length > 120) errors.push('Contact type is too long.');
+	if (payload.context === 'contact' && !payload.message) errors.push('Message is required.');
 	if (payload.message.length > 5000) errors.push('Message is too long.');
 	if (payload.organization.length > 200) errors.push('Organization is too long.');
 	if (payload.role.length > 150) errors.push('Role is too long.');
 	if (payload.preferredContact.length > 50) errors.push('Preferred contact method is too long.');
+	if (payload.housingType.length > 50) errors.push('Housing request is too long.');
+	if (payload.adultStatus.length > 20) errors.push('Adult status is too long.');
+	if (payload.moveTiming.length > 50) errors.push('Preferred timing is too long.');
+	if (payload.bestTime.length > 50) errors.push('Preferred contact time is too long.');
+	if (payload.applicantFirstName.length > 100 || payload.applicantLastName.length > 100) errors.push('Applicant name is too long.');
+	if (hasControlCharacters(`${payload.applicantFirstName} ${payload.applicantLastName}`.trim())) errors.push('Applicant name contains invalid characters.');
+	if (payload.referralSource.length > 100) errors.push('Referral source is too long.');
+	if (payload.context === 'housing') {
+		const allowedContactTypes = new Set(['Applicant', 'Family or support person', 'Professional or referral partner']);
+		const allowedHousingTypes = new Set(["Men's recovery housing", "Women's recovery housing"]);
+		const allowedYesNo = new Set(['Yes', 'No']);
+		const allowedTiming = new Set(['As soon as available', 'Within two weeks', 'Within 30 days', 'Planning ahead']);
+		const allowedContactMethods = new Set(['Phone', 'Email']);
+		const allowedBestTimes = new Set(['', 'Morning', 'Afternoon', 'Evening']);
+		const allowedReferralSources = new Set(['', 'Treatment provider', 'Court or justice partner', 'Family or friend', 'Community organization', 'Online search', 'Other']);
+
+		if (!allowedContactTypes.has(payload.contactType)) errors.push('Please select who is completing the application.');
+		if (!payload.housingType) errors.push('Please select the housing requested.');
+		else if (!allowedHousingTypes.has(payload.housingType)) errors.push('Please select a valid housing option.');
+		if (!payload.adultStatus) errors.push('Please confirm whether the applicant is an adult.');
+		else if (!allowedYesNo.has(payload.adultStatus)) errors.push('Please select a valid adult status.');
+		if (!payload.moveTiming) errors.push('Please select the preferred timing.');
+		else if (!allowedTiming.has(payload.moveTiming)) errors.push('Please select a valid move timing.');
+		if (!payload.preferredContact) errors.push('Please select a preferred contact method.');
+		else if (!allowedContactMethods.has(payload.preferredContact)) errors.push('Please select a valid contact method.');
+		if (!allowedBestTimes.has(payload.bestTime)) errors.push('Please select a valid contact time.');
+		if (!payload.previousResident) errors.push('Please answer the previous residency question.');
+		else if (!allowedYesNo.has(payload.previousResident)) errors.push('Please select a valid previous residency answer.');
+		if (!payload.sharedLivingAgreement) errors.push('Please answer the shared home expectations question.');
+		else if (!allowedYesNo.has(payload.sharedLivingAgreement)) errors.push('Please select a valid shared home answer.');
+		if (!allowedReferralSources.has(payload.referralSource)) errors.push('Please select a valid referral source.');
+		if (payload.contactType !== 'Applicant' && (!payload.applicantFirstName || !payload.applicantLastName)) {
+			errors.push('Applicant first and last name are required when someone else completes the application.');
+		}
+		if (payload.accommodationDiscussion && payload.accommodationDiscussion !== 'Yes') errors.push('Accommodation request is invalid.');
+		if (payload.applicationAcknowledgement !== 'Yes') errors.push('Please acknowledge the application notice.');
+	}
 	if (!payload.turnstileToken) errors.push('Please complete the security check and try again.');
 
 	return errors;
@@ -196,7 +275,9 @@ async function handleContact(request: Request, origin: string): Promise<Response
 		return json({ success: false, message: errors.join(' ') }, 422, origin);
 	}
 
-	const name = `${payload.firstName} ${payload.lastName}`.trim();
+	const name = payload.context === 'contact'
+		? payload.name || `${payload.firstName} ${payload.lastName}`.trim()
+		: `${payload.firstName} ${payload.lastName}`.trim();
 	const forwardedBody = {
 		name,
 		phone: payload.phone,
@@ -223,12 +304,12 @@ async function handleContact(request: Request, origin: string): Promise<Response
 	} catch {
 		return json({
 			success: false,
-			message: `We could not send your inquiry right now. Please call ${PHONE}.`,
+			message: `We could not send your message. Please call ${PHONE} or email ${EMAIL}.`,
 		}, 502, origin);
 	}
 
 	if (!downstream.ok) {
-		let message = `We could not send your inquiry right now. Please call ${PHONE}.`;
+		let message = `We could not send your message. Please call ${PHONE} or email ${EMAIL}.`;
 		if (downstream.status === 403) {
 			message = 'The security check expired or could not be verified. Please complete it again.';
 		}

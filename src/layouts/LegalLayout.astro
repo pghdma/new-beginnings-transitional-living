@@ -111,9 +111,10 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
 
   .legal-masthead__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
-    gap: clamp(var(--space-7), 8vw, var(--space-10));
+    grid-template-columns: minmax(0, 46rem) minmax(14rem, 18rem);
+    gap: clamp(var(--space-7), 5vw, var(--space-9));
     align-items: end;
+    justify-content: start;
   }
 
   .legal-masthead__copy {
@@ -178,9 +179,14 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
     justify-content: center;
   }
 
-  .legal-toc {
+  .legal-toc-wrap {
     position: sticky;
-    top: 9rem;
+    top: 8.5rem;
+    align-self: start;
+  }
+
+  .legal-toc {
+    position: static;
   }
 
   .legal-toc-heading {
@@ -385,6 +391,10 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
     .legal-layout {
       max-width: 50rem;
       gap: var(--space-5);
+    }
+
+    .legal-toc-wrap {
+      position: static;
     }
 
     .legal-toc--desktop {
