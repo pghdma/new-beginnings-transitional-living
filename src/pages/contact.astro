@@ -151,12 +151,14 @@ const routes = [
   .directory-layout { display: grid; grid-template-columns: minmax(18rem, .68fr) minmax(0, 1.32fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
   .directory-intro { display: grid; gap: var(--space-4); }
   .directory-intro h2 { max-width: 12ch; }
-  .routing-options ul { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); list-style: none; }
-  .routing-options li { display: grid; min-height: 15rem; padding: clamp(1.5rem, 3vw, 2.25rem); grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); background: var(--sky-50); box-shadow: var(--shadow); align-content: start; }
-  .routing-options li > :global(svg) { width: 2rem; height: 2rem; color: var(--teal-700); stroke-width: 1.5; }
-  .routing-options h3 { font-size: 1.3rem; }
-  .routing-options p { max-width: 28rem; margin-top: var(--space-3); color: var(--slate-600); line-height: 1.5; }
-  .routing-options a { display: inline-flex; margin-top: var(--space-5); align-items: center; gap: .55rem; font-weight: 650; }
+  .routing-options { padding: clamp(var(--space-6), 4vw, var(--space-8)); color: var(--white); background: var(--navy-900); box-shadow: 0 1.1rem 2.8rem rgba(23,55,70,.12); }
+  .routing-options ul { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-7), 4vw, var(--space-8)); list-style: none; }
+  .routing-options li { display: grid; min-height: 13rem; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); align-content: start; }
+  .routing-options li > :global(svg) { width: 3rem; height: 3rem; padding: .72rem; color: #a6ddd8; border: 1px solid rgba(166,221,216,.45); border-radius: 50%; stroke-width: 1.5; }
+  .routing-options h3 { color: var(--white); font-size: 1.3rem; }
+  .routing-options p { max-width: 28rem; margin-top: var(--space-3); color: var(--sky-200); line-height: 1.5; }
+  .routing-options a { display: inline-flex; width: fit-content; margin-top: var(--space-5); padding: .72rem 1rem; align-items: center; gap: .55rem; color: var(--navy-950); background: var(--white); font-weight: 650; }
+  .routing-options a:hover { color: var(--navy-950); background: #cfece9; }
   .routing-options a :global(svg) { width: 1rem; height: 1rem; }
 
   .service-area { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: stretch; background: var(--sky-50); }
@@ -179,7 +181,7 @@ const routes = [
     .service-area-copy { max-width: none; padding: var(--section-standard) var(--gutter); }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 760px) {
     .contact-hero { min-height: 42rem; align-items: end; }
     .contact-hero__image { object-position: 64% center; }
     .contact-hero__shade { background: linear-gradient(0deg, rgba(10,35,46,.97) 0%, rgba(10,35,46,.86) 58%, rgba(10,35,46,.35) 100%); }
@@ -188,7 +190,8 @@ const routes = [
     .contact-hero .actions { display: grid; }
     .contact-hero .button { width: 100%; }
     .routing-options ul { grid-template-columns: 1fr; }
-    .routing-options li { min-height: 0; padding: var(--space-5); }
+    .routing-options { padding: var(--space-6) var(--space-5); }
+    .routing-options li { min-height: 0; }
     .service-area figure { order: -1; }
   }
 </style>

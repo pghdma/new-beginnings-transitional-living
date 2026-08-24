@@ -92,7 +92,7 @@ function contextLabel(context: InquiryContext): string {
 
 function buildForwardedMessage(payload: InquiryPayload): string {
 	const lines = [
-		`[New Beginnings website — ${contextLabel(payload.context)}]`,
+		`[New Beginnings website: ${contextLabel(payload.context)}]`,
 		'',
 		`Contacting as/about: ${payload.contactType}`,
 	];

@@ -3,70 +3,81 @@ Photography is licensed from Pexels and used as general editorial imagery. Peopl
 og-default.jpg is a screenshot of the New Beginnings homepage using the licensed
 house-living-room.webp photography credited below.
 
+The files in images/social/ are 1200 × 630 social-preview crops derived from the
+client-provided or licensed source photographs credited in this file. No generated
+or synthetic imagery is used.
+
+susan-rua.webp is the client-provided portrait of Susan Rua reused from the
+Step By Step Support sister-site project.
+
 hero-community.jpg and recovery-routine.jpg
-Curtis Adams — https://www.pexels.com/photo/communal-area-interior-design-5008384/
+Curtis Adams: https://www.pexels.com/photo/communal-area-interior-design-5008384/
 
 community-table.jpg
-Jakub Zerdzicki — https://www.pexels.com/photo/modern-conference-room-with-orange-chairs-36149083/
+Jakub Zerdzicki: https://www.pexels.com/photo/modern-conference-room-with-orange-chairs-36149083/
 
 mens-community.jpg
-Mizuno K — https://www.pexels.com/photo/men-in-shirts-sitting-13335592/
+Mizuno K: https://www.pexels.com/photo/men-in-shirts-sitting-13335592/
 
 womens-community.jpg
-SHVETS production — https://www.pexels.com/photo/mental-female-specialist-speaking-to-group-of-clients-7176302/
+SHVETS production: https://www.pexels.com/photo/mental-female-specialist-speaking-to-group-of-clients-7176302/
 
 womens-shared-living.jpg
-Monstera Production — https://www.pexels.com/photo/positive-young-multiracial-girlfriends-laughing-while-chatting-on-sofa-in-cozy-apartment-5331214/
+Monstera Production: https://www.pexels.com/photo/positive-young-multiracial-girlfriends-laughing-while-chatting-on-sofa-in-cozy-apartment-5331214/
 
 daily-life.jpg
-cottonbro studio — https://www.pexels.com/photo/woman-in-white-long-sleeve-shirt-sitting-on-chair-7128760/
+cottonbro studio: https://www.pexels.com/photo/woman-in-white-long-sleeve-shirt-sitting-on-chair-7128760/
 
 admissions.jpg
-Muhtelifane — https://www.pexels.com/photo/cozy-study-scene-with-coffee-and-notebooks-29091898/
+Muhtelifane: https://www.pexels.com/photo/cozy-study-scene-with-coffee-and-notebooks-29091898/
 
 referrals.jpg
-Ron Lach — https://www.pexels.com/photo/a-woman-in-white-dress-shirt-reading-a-document-9870138/
+Ron Lach: https://www.pexels.com/photo/a-woman-in-white-dress-shirt-reading-a-document-9870138/
 
 pittsburgh.jpg
-Nicolas DeSarno — https://www.pexels.com/photo/gray-white-concrete-buildings-during-clear-blue-sky-195220/
+Nicolas DeSarno: https://www.pexels.com/photo/gray-white-concrete-buildings-during-clear-blue-sky-195220/
+
+pittsburgh-point-panorama.webp
+André Eusébio: https://www.pexels.com/photo/stunning-aerial-view-of-pittsburgh-skyline-and-incline-32548410/
+The source photograph was cropped to a panoramic composition for this website.
 
 board.jpg
-Werner Pfennig — https://www.pexels.com/photo/professional-people-sitting-at-the-table-6949865/
+Werner Pfennig: https://www.pexels.com/photo/professional-people-sitting-at-the-table-6949865/
 
 support.jpg
-Julia M Cameron — https://www.pexels.com/photo/people-sorting-clothes-6994869/
+Julia M Cameron: https://www.pexels.com/photo/people-sorting-clothes-6994869/
 
 contact.jpg
-Porapak Apichodilok — https://www.pexels.com/photo/flat-lay-photography-of-smartphone-printer-paper-sunglasses-and-pencil-370474/
+Porapak Apichodilok: https://www.pexels.com/photo/flat-lay-photography-of-smartphone-printer-paper-sunglasses-and-pencil-370474/
 
 credentials.jpg
-cottonbro studio — https://www.pexels.com/photo/a-person-signing-contract-documents-6814526/
+cottonbro studio: https://www.pexels.com/photo/a-person-signing-contract-documents-6814526/
 
 The following photographs are licensed from Unsplash and used as representative editorial imagery. They do not depict New Beginnings residences or facility locations.
 
 house-living-room.webp
-Francesca Tosolini — https://unsplash.com/photos/living-room-interior-6japTIjUQoI
+Francesca Tosolini: https://unsplash.com/photos/living-room-interior-6japTIjUQoI
 
 house-kitchen.webp
-Clay Banks — https://unsplash.com/photos/a-cozy-kitchen-with-a-dining-table-and-chairs-tA2lrWRgoRQ
+Clay Banks: https://unsplash.com/photos/a-cozy-kitchen-with-a-dining-table-and-chairs-tA2lrWRgoRQ
 
 shared-bedroom.webp
-Clay Banks — https://unsplash.com/photos/a-room-with-two-beds-and-a-rug-on-the-floor-vFXMsnuOMTg
+Clay Banks: https://unsplash.com/photos/a-room-with-two-beds-and-a-rug-on-the-floor-vFXMsnuOMTg
 
 household-linens.webp
-Murat Ts. — https://unsplash.com/photos/a-stack-of-folded-towels-sitting-on-a-towel-rack-7GCHCT-y1HI
+Murat Ts.: https://unsplash.com/photos/a-stack-of-folded-towels-sitting-on-a-towel-rack-7GCHCT-y1HI
 
 home-entry.webp
-Zac Gudakov — https://unsplash.com/photos/a-living-room-with-a-staircase-JS7wyeAc9eA
+Zac Gudakov: https://unsplash.com/photos/a-living-room-with-a-staircase-JS7wyeAc9eA
 
 front-door.webp
-Arron Slade — https://unsplash.com/photos/a-blue-front-door-on-a-white-brick-house-fnPPA3hpbgQ
+Arron Slade: https://unsplash.com/photos/a-blue-front-door-on-a-white-brick-house-fnPPA3hpbgQ
 
 windowed-living-room.webp
-Grovemade — https://unsplash.com/photos/empty-living-room-vfIx29EsLHA
+Grovemade: https://unsplash.com/photos/empty-living-room-vfIx29EsLHA
 
 rustic-dining-room.webp
-Leandro Peixoto — https://unsplash.com/photos/empty-dining-room-with-opened-french-window-oUTNdrhfidc
+Leandro Peixoto: https://unsplash.com/photos/empty-dining-room-with-opened-french-window-oUTNdrhfidc
 
 pittsburgh-rowhouses.webp
-Zhen Yao — https://unsplash.com/photos/a-row-of-multi-colored-houses-in-a-neighborhood-0bApZ0Yag0I
+Zhen Yao: https://unsplash.com/photos/a-row-of-multi-colored-houses-in-a-neighborhood-0bApZ0Yag0I

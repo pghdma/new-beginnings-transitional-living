@@ -1,5 +1,11 @@
 /board /about/board/ 301
 /board/* /about/board/:splat 301
+/about/board/theresa-rem-canofari /about/board/ 301
+/about/board/theresa-rem-canofari/ /about/board/ 301
+/about/board/theresa-rem-canofari/* /about/board/ 301
+/about/susan-rua /about/board/#susan-rua 301
+/about/susan-rua/ /about/board/#susan-rua 301
+/about/susan-rua/* /about/board/#susan-rua 301
 /mens-housing /recovery-housing/men/ 301
 /mens-housing/* /recovery-housing/men/:splat 301
 /womens-housing /recovery-housing/women/ 301

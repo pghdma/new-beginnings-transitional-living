@@ -39,7 +39,7 @@ const steps = [
 
   <section class="admissions-start" aria-labelledby="start-title">
     <div class="container start-layout">
-      <header class="start-intro">
+      <header class="start-intro split-intro">
         <div>
           <p class="eyebrow">The simplest first step</p>
           <h2 id="start-title">One call begins the conversation.</h2>
@@ -79,7 +79,7 @@ const steps = [
           <header class="preparation-intro">
             <p class="eyebrow">Prepare for first contact</p>
             <h2 id="prepare-title">A few basics are enough.</h2>
-            <p class="lead">The first conversation is for orientation—not for exchanging a complete personal, medical, or legal record.</p>
+            <p class="lead">The first conversation is for orientation, not for exchanging a complete personal, medical, or legal record.</p>
           </header>
 
           <div class="preparation-details">
@@ -154,8 +154,7 @@ const steps = [
 <style>
   .admissions-start { padding-block: var(--section-standard); background: var(--paper); }
   .start-layout { display: grid; gap: var(--space-7); }
-  .start-intro { display: grid; grid-template-columns: minmax(0, .9fr) minmax(18rem, 1.1fr); gap: var(--gap-columns); align-items: end; }
-  .start-intro h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .start-intro h2 { margin-top: var(--space-4); }
   .start-intro__call { display: grid; max-width: 35rem; justify-items: start; gap: var(--space-5); }
   .start-intro__call .button { gap: .65rem; }
   .start-intro__call .button :global(svg) { width: 1.05rem; height: 1.05rem; }
@@ -204,7 +203,7 @@ const steps = [
     .preparation-content { padding-block: var(--section-standard); }
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 760px) {
     .start-process { padding: var(--space-6) var(--space-5); }
     .start-process li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-3); }
     .step-number { font-size: 1.35rem; }

@@ -15,9 +15,13 @@ interface Props {
 }
 
 const { title, intro, description = intro, updated, sections } = Astro.props;
+const parsedReviewDate = new Date(updated);
+const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
+  ? undefined
+  : parsedReviewDate.toISOString().slice(0, 10);
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title} description={description} lastReviewed={lastReviewed}>
   <header class="legal-masthead" aria-labelledby="legal-page-title">
     <div class="container legal-masthead__inner">
       <div class="legal-masthead__copy">
@@ -441,7 +445,7 @@ const { title, intro, description = intro, updated, sections } = Astro.props;
     }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 760px) {
     .legal-masthead {
       padding-block: var(--space-7);
     }

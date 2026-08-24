@@ -1,0 +1,22 @@
+{
+  "name": "New Beginnings Transitional Living Foundation",
+  "short_name": "New Beginnings",
+  "description": "Structured recovery housing for adult men and women in Pittsburgh.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#102c3c",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

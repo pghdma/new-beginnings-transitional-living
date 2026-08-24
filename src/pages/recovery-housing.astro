@@ -62,7 +62,7 @@ const dailyRhythm = [
         <p class="lead">Recovery housing is a shared living environment for adults committed to building stable lives without alcohol or other drugs.</p>
         <p>Residents live alongside peers who understand the work of recovery. The home adds consistency and community while each person continues building connections to treatment, mutual-support groups, employment, education, family, and other community resources.</p>
         <aside class="scope-note">
-          <span class="scope-note__icon"><Icon name="lucide:stethoscope" aria-hidden="true" /></span>
+          <span class="scope-note__icon icon-medallion"><Icon name="lucide:stethoscope" aria-hidden="true" /></span>
           <div>
             <p class="scope-note__label">Scope of service</p>
             <h3>Housing, not clinical treatment.</h3>
@@ -73,12 +73,12 @@ const dailyRhythm = [
     </div>
   </section>
 
-  <section class="rhythm-section">
+  <section class="rhythm-section" id="daily-rhythm">
     <div class="container rhythm-layout">
-      <header class="rhythm-heading">
+      <header class="rhythm-heading split-intro">
         <div class="rhythm-heading__title">
           <p class="eyebrow">How the environment helps</p>
-          <h2>Recovery has room to become routine.</h2>
+          <h2>Recovery Becomes Part of the Routine.</h2>
         </div>
         <p>The important parts of a recovery residence are practical: consistency, shared responsibility, peer community, and connection to the wider recovery network.</p>
       </header>
@@ -118,12 +118,12 @@ const dailyRhythm = [
         <p>New Beginnings provides recovery housing for adult men and women in established Pittsburgh-area communities.</p>
         <nav class="pathway-links" aria-label="Recovery housing options">
           <a href="/recovery-housing/men/">
-            <span class="pathway-links__icon"><Icon name="lucide:house" aria-hidden="true" /></span>
+            <span class="pathway-links__icon icon-medallion icon-medallion--sm"><Icon name="lucide:house" aria-hidden="true" /></span>
             <span><small>For adult men</small><strong>Men’s recovery housing</strong></span>
             <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
           </a>
           <a href="/recovery-housing/women/">
-            <span class="pathway-links__icon"><Icon name="lucide:house" aria-hidden="true" /></span>
+            <span class="pathway-links__icon icon-medallion icon-medallion--sm"><Icon name="lucide:house" aria-hidden="true" /></span>
             <span><small>For adult women</small><strong>Women’s recovery housing</strong></span>
             <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
           </a>
@@ -133,15 +133,20 @@ const dailyRhythm = [
     </div>
   </section>
 
-  <section class="privacy-section">
+  <section class="privacy-section" id="residence-privacy">
     <div class="container privacy-layout">
-      <div class="privacy-heading">
-        <Icon name="lucide:lock-keyhole" aria-hidden="true" />
-        <div><p class="eyebrow">Residence privacy</p><h2>Useful information without publishing someone’s home.</h2></div>
-      </div>
-      <div class="privacy-copy">
+      <figure class="privacy-photo">
+        <img src="/images/front-door.webp" alt="A welcoming residential front door viewed from inside" width="2200" height="3481" loading="lazy" />
+      </figure>
+      <div class="privacy-content">
+        <span class="privacy-content__icon icon-medallion icon-medallion--solid"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></span>
+        <p class="eyebrow">Residence privacy</p>
+        <h2>Useful information without publishing someone’s home.</h2>
         <p>New Beginnings does not publish individual house addresses, maps, or identifying exterior photographs. Exact locations are shared privately when they are relevant to an admissions or referral conversation.</p>
-        <a class="text-link" href="/about/transparency/">Review our public credentials</a>
+        <a class="button button--outline" href="/about/transparency/">
+          Review our public credentials
+          <Icon name="lucide:arrow-right" aria-hidden="true" />
+        </a>
       </div>
     </div>
   </section>
@@ -171,16 +176,14 @@ const dailyRhythm = [
   .definition-copy h2 { max-width: 13ch; margin-top: var(--space-4); }
   .definition-copy > .lead { margin-top: var(--space-6); }
   .definition-copy > p:not(.eyebrow):not(.lead) { margin-top: var(--space-4); }
-  .scope-note { display: grid; margin-top: var(--space-7); padding: clamp(1.35rem, 2.5vw, 1.8rem); grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; background: var(--paper); box-shadow: var(--shadow-raised); }
-  .scope-note__icon { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; color: var(--teal-700); background: var(--sky-100); }
-  .scope-note__icon :global(svg) { width: 1.55rem; height: 1.55rem; stroke-width: 1.65; }
+  .scope-note { display: grid; margin-top: var(--space-7); padding: clamp(1.35rem, 2.5vw, 1.8rem); grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; background: var(--sky-50); }
+  .scope-note__icon :global(svg) { width: 1.55rem; height: 1.55rem; }
   .scope-note__label { color: var(--teal-700) !important; font-size: .72rem !important; font-weight: 700; letter-spacing: .12em; line-height: 1.2 !important; text-transform: uppercase; }
   .scope-note h3 { margin-top: .35rem; font-size: 1.18rem; }
   .scope-note div > p:last-child { margin-top: .5rem; color: var(--slate-600); font-size: .94rem; line-height: 1.55; }
 
   .rhythm-section { padding-block: var(--section-standard); background: var(--sky-50); }
-  .rhythm-heading { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: end; }
-  .rhythm-heading__title h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .rhythm-heading__title h2 { margin-top: var(--space-4); }
   .rhythm-heading > p:last-child { max-width: 37rem; color: var(--slate-600); font-size: 1.1rem; line-height: 1.65; }
   .rhythm-composition { display: grid; margin-top: clamp(2.75rem, 6vw, 4.5rem); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); box-shadow: var(--shadow-raised); }
   .rhythm-photo { min-height: 43rem; margin: 0; overflow: hidden; background: var(--slate-200); }
@@ -210,8 +213,7 @@ const dailyRhythm = [
   .pathway-links a:nth-child(2) { color: var(--navy-950); background: var(--paper); }
   .pathway-links a:hover { color: var(--white); background: var(--teal-600); transform: translateY(-2px); }
   .pathway-links a:nth-child(2):hover { color: var(--navy-950); background: var(--sky-100); }
-  .pathway-links__icon { display: grid; width: 2.65rem; height: 2.65rem; place-items: center; color: var(--white); background: rgba(255,255,255,.12); }
-  .pathway-links a:nth-child(2) .pathway-links__icon { color: var(--teal-700); background: var(--sky-100); }
+  .pathway-links__icon { color: var(--teal-700); background: var(--sky-100); }
   .pathway-links small, .pathway-links strong { display: block; }
   .pathway-links small { color: #caece9; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
   .pathway-links a:nth-child(2) small { color: var(--teal-700); }
@@ -220,13 +222,17 @@ const dailyRhythm = [
   .pathways-location { display: flex; max-width: 34rem; margin-top: var(--space-5); align-items: flex-start; gap: .65rem; color: var(--sky-200); font-size: .9rem; line-height: 1.5; }
   .pathways-location :global(svg) { width: 1rem; height: 1rem; margin-top: .2rem; flex: 0 0 auto; }
 
-  .privacy-section { padding-block: var(--section-compact); background: var(--paper); }
-  .privacy-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: var(--gap-columns); align-items: start; }
-  .privacy-heading { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-4); }
-  .privacy-heading :global(svg) { width: 2rem; height: 2rem; margin-top: .1rem; color: var(--teal-700); stroke-width: 1.55; }
-  .privacy-heading h2 { max-width: 15ch; margin-top: var(--space-3); font-size: clamp(1.8rem, 3vw, 2.55rem); }
-  .privacy-copy { max-width: 42rem; }
-  .privacy-copy .text-link { margin-top: var(--space-5); }
+  .privacy-section { padding-block: var(--section-standard); background: var(--paper); }
+  .privacy-layout { display: grid; min-height: 31rem; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; box-shadow: 0 1.15rem 3rem rgba(23,55,70,.12); }
+  .privacy-photo { min-height: 31rem; margin: 0; overflow: hidden; background: var(--slate-200); }
+  .privacy-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(.98); }
+  .privacy-content { display: flex; padding: clamp(var(--space-7), 6vw, var(--space-9)); background: var(--sky-50); flex-direction: column; align-items: flex-start; justify-content: center; }
+  .privacy-content__icon { margin-bottom: var(--space-6); }
+  .privacy-content__icon :global(svg) { width: 1.55rem; height: 1.55rem; }
+  .privacy-content h2 { max-width: 15ch; margin-top: var(--space-3); font-size: clamp(2rem, 3.2vw, 2.8rem); }
+  .privacy-content > p:not(.eyebrow) { max-width: 38rem; margin-top: var(--space-5); }
+  .privacy-content .button { margin-top: var(--space-6); gap: var(--space-2); }
+  .privacy-content .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 900px) {
     .housing-hero__grid, .definition-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
@@ -234,16 +240,16 @@ const dailyRhythm = [
     .housing-hero__copy { padding: var(--space-8) 0; }
     .definition-layout { gap: var(--space-7); }
     .definition-photo { height: auto; aspect-ratio: 16 / 10; }
-    .rhythm-heading, .rhythm-composition { grid-template-columns: 1fr; }
-    .rhythm-heading { gap: var(--space-5); }
+    .rhythm-composition { grid-template-columns: 1fr; }
     .rhythm-heading > p:last-child { max-width: 40rem; }
     .rhythm-photo { min-height: 0; aspect-ratio: 16 / 8.5; }
     .pathways-layout { box-shadow: var(--shadow-raised); }
     .pathways-photo { height: clamp(18rem, 48vw, 26rem); min-height: 0; }
-    .privacy-layout { gap: var(--space-6); }
+    .privacy-layout { min-height: 0; }
+    .privacy-photo { min-height: 0; aspect-ratio: 16 / 9; }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 760px) {
     .housing-hero__photo { height: 16rem; }
     .housing-hero__copy { padding-block: var(--space-7); }
     .housing-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
@@ -253,15 +259,14 @@ const dailyRhythm = [
     .definition-layout { gap: var(--space-6); }
     .definition-photo { aspect-ratio: 4 / 3; }
     .scope-note { grid-template-columns: 2.75rem minmax(0, 1fr); gap: var(--space-3); }
-    .scope-note__icon { width: 2.75rem; height: 2.75rem; }
     .rhythm-photo { aspect-ratio: 4 / 3; }
     .rhythm-field { padding: var(--space-7) var(--space-5); }
     .rhythm-list { grid-template-columns: 1fr; gap: var(--space-7); }
     .rhythm-list h3, .rhythm-list p { max-width: none; }
     .crisis-note { padding: var(--space-4); }
     .pathway-links a { padding: 1rem; grid-template-columns: 2.35rem minmax(0, 1fr) auto; gap: .8rem; }
-    .pathway-links__icon { width: 2.35rem; height: 2.35rem; }
     .pathways-content { padding: var(--space-7) var(--space-5); }
-    .privacy-heading { grid-template-columns: 2rem minmax(0, 1fr); }
+    .privacy-content { padding: var(--space-7) var(--space-5); }
+    .privacy-content .button { width: 100%; }
   }
 </style>

@@ -6,49 +6,53 @@ import { currentBoardMembers } from '../../../data/leadership';
 const responsibilities = [
   {
     icon: 'compass',
-    title: 'Mission and direction',
-    copy: 'Keep the organization focused on safe, accountable recovery housing and the long-term needs of the people and communities it serves.',
+    title: 'Mission Direction',
+    copy: 'Keep the work centered on responsible recovery housing and the long term needs of the people and communities New Beginnings serves.',
   },
   {
-    icon: 'scale',
-    title: 'Ethical and legal oversight',
-    copy: 'Provide nonprofit oversight, protect the organization’s purpose, and support compliance with applicable public responsibilities.',
-  },
-  {
-    icon: 'hand-coins',
-    title: 'Financial stewardship',
-    copy: 'Exercise care over the organization’s resources so they continue to support stable homes and responsible operations.',
+    icon: 'landmark',
+    title: 'Financial Stewardship',
+    copy: 'Exercise care over nonprofit resources so they continue to support stable housing and responsible operations.',
   },
   {
     icon: 'badge-check',
-    title: 'Organizational accountability',
-    copy: 'Provide perspective and oversight while organizational leadership manages the day-to-day work of New Beginnings.',
+    title: 'Public Accountability',
+    copy: 'Support ethical governance, legal compliance, and clear public information about the organization and its standing.',
   },
 ];
+
+const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
+  if (person.slug === 'susan-rua') {
+    return 'Susan founded New Beginnings and connects organizational leadership with the board’s work of mission stewardship and nonprofit accountability.';
+  }
+
+  return 'Theresa is listed as a volunteer board member supporting governance, mission stewardship, and nonprofit accountability.';
+};
 ---
 
 <MainLayout
   title="Board of Directors"
-  description="Learn how the volunteer Board of Directors provides governance and stewardship for New Beginnings Transitional Living Foundation."
+  description="Meet the volunteer Board of Directors providing governance and stewardship for New Beginnings Transitional Living Foundation."
 >
   <section class="board-hero">
-    <div class="container board-hero__grid">
+    <div class="container board-hero__inner">
       <div class="board-hero__copy">
         <p class="eyebrow">Board of Directors</p>
-        <h1>Stewardship in service of the mission.</h1>
+        <h1>Volunteer Leadership for the Mission</h1>
         <p class="lead">
-          A volunteer Board of Directors provides governance, oversight, and long-range
-          stewardship for New Beginnings Transitional Living Foundation.
+          The board provides governance, oversight, and long term stewardship for New
+          Beginnings Transitional Living Foundation.
         </p>
-        <a class="button button--light" href="#board-roster">
-          Meet the board
+        <a class="button button--light" href="#meet-the-board">
+          Meet the Board
           <Icon name="lucide:arrow-down" aria-hidden="true" />
         </a>
       </div>
-      <figure class="board-hero__figure">
+
+      <figure class="board-hero__media">
         <img
           src="/images/community-table.jpg"
-          alt="An empty meeting table prepared for a group conversation"
+          alt="An empty meeting table and chairs ready for a working conversation"
           width="1880"
           height="1253"
           fetchpriority="high"
@@ -57,24 +61,25 @@ const responsibilities = [
     </div>
   </section>
 
-  <section class="section governance">
-    <div class="container governance__layout">
-      <header class="governance__intro">
-        <p class="eyebrow">The board’s role</p>
-        <h2>Responsible nonprofit leadership is active work.</h2>
-        <p class="lead">
-          The board protects the mission and helps New Beginnings remain accountable to the
-          people and Pittsburgh-area communities it serves.
+  <section class="board-role" aria-labelledby="board-role-title">
+    <div class="container">
+      <header class="board-role__intro">
+        <p class="eyebrow">What the Board Does</p>
+        <h2 id="board-role-title">Purposeful Stewardship</h2>
+        <p>
+          Organizational leadership manages the daily work. The board helps protect the
+          mission, steward resources, and maintain accountable nonprofit governance.
         </p>
       </header>
-      <ul class="responsibilities">
+
+      <ul class="board-role__features">
         {responsibilities.map((item) => (
           <li>
-            <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </div>
+            <span class="board-role__icon icon-medallion icon-medallion--xl" aria-hidden="true">
+              <Icon name={`lucide:${item.icon}`} />
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
           </li>
         ))}
       </ul>
@@ -82,27 +87,77 @@ const responsibilities = [
   </section>
 
   {currentBoardMembers.length > 0 && (
-    <section class="roster" id="board-roster">
-      <div class="container roster__layout">
-        <header class="roster__intro">
-          <p class="eyebrow">Board roster</p>
-          <h2>People entrusted with the work.</h2>
+    <section class="board-directory" id="meet-the-board" aria-labelledby="board-directory-title">
+      <div class="container">
+        <header class="board-directory__intro">
+          <p class="eyebrow">Meet the Board</p>
+          <h2 id="board-directory-title">People Providing Oversight</h2>
           <p>
-            This is the leadership roster published on the New Beginnings website.
+            New Beginnings publishes its board roster so residents, families,
+            professionals, and supporters can see who is entrusted with governance.
           </p>
         </header>
-        <ul class="roster__people">
+
+        <ul class:list={['board-directory__grid', { 'board-directory__grid--two': currentBoardMembers.length === 2 }]}>
           {currentBoardMembers.map((person) => (
-            <li>
-              <a href={person.group === 'board' ? `/about/board/${person.slug}/` : `/about/${person.slug}/`}>
-                <span class="roster__role">{person.role}</span>
-                <span class="roster__name">{person.name}</span>
-                {person.summary && <span class="roster__summary">{person.summary}</span>}
-                <span class="roster__action">
-                  View profile
-                  <Icon name="lucide:arrow-up-right" aria-hidden="true" />
-                </span>
-              </a>
+            <li id={person.slug}>
+              <article class="member" data-member-card>
+                <div class="member__stage" data-member-stage>
+                  <div class="member__face member__face--front" data-member-front>
+                    <div class:list={['member__media', { 'member__media--portrait': person.slug === 'susan-rua' }]}>
+                      {person.slug === 'susan-rua' ? (
+                        <img
+                          src="/images/susan-rua.webp"
+                          alt="Susan Rua"
+                          width="900"
+                          height="1125"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="member__monogram" aria-hidden="true">
+                          <span>TRC</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div class="member__content">
+                      <p class="member__role">{person.role}</p>
+                      <h3 id={`${person.slug}-name`}>{person.name}</h3>
+                    </div>
+                  </div>
+
+                  <div
+                    class="member__face member__face--back"
+                    id={`${person.slug}-details`}
+                    data-member-back
+                    aria-hidden="true"
+                  >
+                    <div class="member__back-mark" aria-hidden="true">
+                      <Icon name={person.slug === 'susan-rua' ? 'lucide:house-heart' : 'lucide:landmark'} />
+                    </div>
+                    <p class="member__role">{person.role}</p>
+                    <h3>{person.name}</h3>
+                    <p>{profileSummary(person)}</p>
+                    {person.slug === 'susan-rua' && person.credentials && (
+                      <p class="member__credentials">{person.credentials.join(' · ')}</p>
+                    )}
+                  </div>
+                </div>
+
+                <button
+                  class="member__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={`${person.slug}-details`}
+                  aria-label={`About ${person.name}`}
+                  data-member-name={person.name}
+                  data-member-first-name={person.name.split(' ')[0]}
+                  data-member-toggle
+                >
+                  <span data-member-toggle-label>About {person.name.split(' ')[0]}</span>
+                  <Icon name="lucide:refresh-cw" aria-hidden="true" />
+                </button>
+              </article>
             </li>
           ))}
         </ul>
@@ -110,27 +165,26 @@ const responsibilities = [
     </section>
   )}
 
-  <section class="accountability">
-    <figure class="accountability__figure">
+  <section class="public-record" aria-labelledby="public-record-title">
+    <div class="public-record__media">
       <img
-        src="/images/pittsburgh.jpg"
-        alt="Downtown Pittsburgh and its rivers"
+        src="/images/admissions.jpg"
+        alt="Notebooks and coffee arranged on a shared work table"
         width="1880"
         height="1253"
         loading="lazy"
       />
-    </figure>
-    <div class="accountability__content">
-      <div class="accountability__inner">
-        <p class="eyebrow">Public accountability</p>
-        <h2>Standing that can be reviewed independently.</h2>
+    </div>
+    <div class="public-record__content">
+      <div class="public-record__inner">
+        <p class="eyebrow">Governance and Accountability</p>
+        <h2 id="public-record-title">Public Standing You Can Review</h2>
         <p>
-          New Beginnings collects its nonprofit status, state licensing information, and
-          recovery-housing credentials in one place for residents, families, professionals,
-          and supporters.
+          Nonprofit status, state licensing information, and recovery housing credentials
+          are collected in one place for independent review.
         </p>
         <a class="button" href="/about/transparency/">
-          Review credentials and records
+          Review Credentials and Records
           <Icon name="lucide:arrow-right" aria-hidden="true" />
         </a>
       </div>
@@ -138,76 +192,534 @@ const responsibilities = [
   </section>
 </MainLayout>
 
+<script>
+  const memberCards = document.querySelectorAll<HTMLElement>('[data-member-card]');
+
+  memberCards.forEach((card) => {
+    const toggle = card.querySelector<HTMLButtonElement>('[data-member-toggle]');
+    const label = card.querySelector<HTMLElement>('[data-member-toggle-label]');
+    const front = card.querySelector<HTMLElement>('[data-member-front]');
+    const back = card.querySelector<HTMLElement>('[data-member-back]');
+
+    if (!toggle || !label || !front || !back) return;
+
+    const memberName = toggle.dataset.memberName ?? 'Board Member';
+    const memberFirstName = toggle.dataset.memberFirstName ?? memberName;
+
+    const setExpanded = (expanded: boolean) => {
+      toggle.setAttribute('aria-expanded', String(expanded));
+      front.setAttribute('aria-hidden', String(expanded));
+      back.setAttribute('aria-hidden', String(!expanded));
+      card.toggleAttribute('data-flipped', expanded);
+      label.textContent = expanded ? 'Show Front' : `About ${memberFirstName}`;
+      toggle.setAttribute('aria-label', expanded ? `Show the front of ${memberName}'s card` : `About ${memberName}`);
+    };
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      setExpanded(!expanded);
+    });
+
+    const memberId = card.closest('li')?.id;
+    const requestedMember = new URLSearchParams(window.location.search).get('member');
+    if (window.location.hash === `#${memberId}` || requestedMember === memberId) {
+      setExpanded(true);
+    }
+  });
+</script>
+
 <style>
-  .board-hero { overflow: hidden; color: var(--white); background: var(--navy-950); }
-  .board-hero__grid { display: grid; min-height: clamp(38rem, 58vw, 48rem); grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: stretch; }
-  .board-hero__copy { display: grid; padding: var(--section-hero) clamp(var(--space-6), 5vw, var(--space-9)) var(--section-hero) 0; align-content: center; gap: var(--space-5); }
+  .board-hero {
+    overflow: hidden;
+    padding-block: clamp(4.75rem, 8vw, 7.5rem) 0;
+    color: var(--white);
+    background: linear-gradient(to bottom, var(--navy-950) 0 78%, var(--canvas) 78% 100%);
+  }
+
+  .board-hero__inner {
+    display: grid;
+    gap: clamp(3rem, 6vw, 5.5rem);
+  }
+
+  .board-hero__copy {
+    display: grid;
+    max-width: 47rem;
+    margin-inline: auto;
+    justify-items: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+
   .board-hero .eyebrow { color: #9ed7d2; }
-  .board-hero h1 { max-width: 10ch; color: var(--white); font-size: clamp(3.1rem, 5.7vw, 5.45rem); }
-  .board-hero .lead { max-width: 35rem; color: var(--sky-100); }
-  .board-hero .button { width: fit-content; margin-top: var(--space-2); gap: var(--space-2); }
-  .board-hero .button :global(svg) { width: 1rem; height: 1rem; }
-  .board-hero__figure { min-height: 100%; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--slate-200); box-shadow: -1.4rem 1.6rem 3.8rem rgba(7, 28, 38, .28); }
-  .board-hero__figure img { width: 100%; height: 100%; object-fit: cover; object-position: 56% center; }
 
-  .governance { background: var(--canvas); }
-  .governance__layout { display: grid; grid-template-columns: minmax(0, .74fr) minmax(0, 1.26fr); gap: clamp(var(--space-8), 8vw, 8rem); align-items: start; }
-  .governance__intro { display: grid; max-width: 31rem; gap: var(--space-4); }
-  .governance__intro h2 { max-width: 12ch; }
-  .responsibilities { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-7), 6vw, var(--space-9)) clamp(var(--space-7), 5vw, var(--space-8)); list-style: none; }
-  .responsibilities li { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .responsibilities li > :global(svg) { width: 1.8rem; height: 1.8rem; margin-top: .1rem; color: var(--teal-700); stroke-width: 1.6; }
-  .responsibilities h3 { margin-bottom: var(--space-3); }
-  .responsibilities p { color: var(--slate-600); line-height: 1.6; }
+  .board-hero h1 {
+    max-width: 14ch;
+    color: var(--white);
+    font-size: clamp(3rem, 6vw, 5.35rem);
+    line-height: 1.02;
+  }
 
-  .roster { padding-block: var(--section-standard); color: var(--white); background: var(--navy-900); }
-  .roster__layout { display: grid; grid-template-columns: minmax(0, .66fr) minmax(0, 1.34fr); gap: clamp(var(--space-8), 8vw, 8rem); align-items: start; }
-  .roster__intro { display: grid; max-width: 30rem; gap: var(--space-4); }
-  .roster__intro .eyebrow { color: #9ed7d2; }
-  .roster__intro h2 { max-width: 11ch; color: var(--white); }
-  .roster__intro p:last-child { color: var(--sky-100); }
-  .roster__people { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(var(--space-7), 5vw, var(--space-8)); list-style: none; }
-  .roster__people a { display: flex; min-height: 21rem; color: var(--white); flex-direction: column; }
-  .roster__people a:hover { color: #b7e4df; }
-  .roster__role { margin-bottom: var(--space-4); color: #9ed7d2; font-size: .78rem; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
-  .roster__name { max-width: 10ch; color: inherit; font-size: clamp(2rem, 3.5vw, 3.25rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.05; }
-  .roster__summary { margin-top: var(--space-5); color: var(--sky-100); font-size: .98rem; line-height: 1.55; }
-  .roster__action { display: inline-flex; margin-top: auto; padding-top: var(--space-6); align-items: center; gap: var(--space-2); font-weight: 650; }
-  .roster__action :global(svg) { width: 1rem; height: 1rem; }
+  .board-hero .lead {
+    max-width: 39rem;
+    color: var(--sky-100);
+  }
 
-  .accountability { display: grid; min-height: 34rem; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); background: var(--paper); }
-  .accountability__figure { min-height: 34rem; margin: 0; overflow: hidden; background: var(--slate-200); }
-  .accountability__figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .accountability__content { display: grid; padding: var(--section-standard) var(--gutter); align-items: center; }
-  .accountability__inner { width: min(100%, 37rem); margin-inline: auto; }
-  .accountability h2 { max-width: 14ch; margin-top: var(--space-4); }
-  .accountability p:not(.eyebrow) { max-width: 36rem; margin-top: var(--space-5); }
-  .accountability .button { margin-top: var(--space-6); gap: var(--space-2); }
-  .accountability .button :global(svg) { width: 1rem; height: 1rem; }
+  .board-hero .button {
+    width: fit-content;
+    margin-top: var(--space-2);
+    gap: var(--space-2);
+  }
+
+  .board-hero .button :global(svg),
+  .member .button :global(svg),
+  .public-record .button :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .board-hero__media {
+    position: relative;
+    min-height: clamp(20rem, 38vw, 31rem);
+    margin: 0;
+    overflow: hidden;
+    background: var(--slate-200);
+    box-shadow: 0 1.7rem 4rem rgba(7, 28, 38, .22);
+  }
+
+  .board-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 62%;
+  }
+
+  .board-role {
+    padding-block: var(--section-standard);
+    background: var(--canvas);
+  }
+
+  .board-role__intro,
+  .board-directory__intro {
+    display: grid;
+    max-width: 46rem;
+    margin-inline: auto;
+    justify-items: center;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .board-role__intro h2,
+  .board-directory__intro h2 {
+    max-width: 14ch;
+  }
+
+  .board-role__intro > p:last-child,
+  .board-directory__intro > p:last-child {
+    max-width: 41rem;
+    font-size: 1.08rem;
+    line-height: 1.7;
+  }
+
+  .board-role__features {
+    display: grid;
+    margin: clamp(3.5rem, 7vw, 5.5rem) 0 0;
+    padding: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    list-style: none;
+  }
+
+  .board-role__features li {
+    display: grid;
+    min-width: 0;
+    padding-inline: clamp(var(--space-5), 3vw, var(--space-8));
+    justify-items: center;
+    align-content: start;
+    text-align: center;
+  }
+
+  .board-role__features li + li {
+    border-left: 1px solid var(--slate-200);
+  }
+
+  .board-role__icon {
+    margin-bottom: var(--space-5);
+    background: var(--paper);
+    box-shadow: 0 .65rem 1.6rem rgba(23, 55, 70, .08);
+  }
+
+  .board-role__icon :global(svg) {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: 1.65;
+  }
+
+  .board-role__features h3 {
+    margin-bottom: var(--space-3);
+    color: var(--navy-900);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+
+  .board-role__features p {
+    max-width: 23rem;
+    color: var(--slate-600);
+    line-height: 1.65;
+  }
+
+  .board-directory {
+    padding-block: var(--section-standard);
+    background: var(--sky-100);
+  }
+
+  .board-directory__grid {
+    display: grid;
+    margin: clamp(3.5rem, 7vw, 5.5rem) auto 0;
+    padding: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(var(--space-6), 3vw, var(--space-8));
+    list-style: none;
+  }
+
+  .board-directory__grid--two {
+    max-width: 68rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .member {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr auto;
+    background: var(--paper);
+    box-shadow: 0 1.25rem 3.2rem rgba(23, 55, 70, .13);
+    perspective: 75rem;
+  }
+
+  .member__stage {
+    display: grid;
+    min-height: 31rem;
+    transform-style: preserve-3d;
+    transition: transform 520ms cubic-bezier(.2, .75, .25, 1);
+  }
+
+  .member[data-flipped] .member__stage {
+    transform: rotateY(180deg);
+  }
+
+  .member__face {
+    display: grid;
+    min-width: 0;
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .member__face--front {
+    grid-template-rows: auto 1fr;
+  }
+
+  .member__face--back {
+    padding: clamp(var(--space-7), 4vw, var(--space-9));
+    align-content: center;
+    transform: rotateY(180deg);
+    color: var(--white);
+    background: linear-gradient(145deg, var(--navy-950), var(--navy-800));
+  }
+
+  .member__face[aria-hidden="true"] {
+    visibility: hidden;
+    transition: visibility 0s linear 260ms;
+  }
+
+  .member__face[aria-hidden="false"] {
+    visibility: visible;
+    transition: visibility 0s linear 260ms;
+  }
+
+  .member__face--front[aria-hidden="false"] {
+    transition-delay: 0s;
+  }
+
+  .member__back-mark {
+    display: grid;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: var(--space-6);
+    color: #9ed7d2;
+    border: 1px solid rgba(158, 215, 210, .55);
+    border-radius: 50%;
+    place-items: center;
+  }
+
+  .member__back-mark :global(svg) {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: 1.6;
+  }
+
+  .member__media {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    background: var(--navy-900);
+  }
+
+  .member__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 29%;
+    transition: transform 400ms ease;
+  }
+
+  .member:not([data-flipped]):hover .member__media img,
+  .member:not([data-flipped]):focus-within .member__media img {
+    transform: scale(1.025);
+  }
+
+  .member__monogram {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    background: linear-gradient(135deg, rgba(25, 126, 120, .98), rgba(16, 44, 60, .98));
+    place-items: center;
+  }
+
+  .member__monogram span {
+    display: grid;
+    width: clamp(8rem, 17vw, 11rem);
+    aspect-ratio: 1;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, .58);
+    border-radius: 50%;
+    place-items: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+
+  .member__content {
+    display: flex;
+    padding: clamp(var(--space-6), 4vw, var(--space-8));
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .member__role {
+    margin-bottom: var(--space-3);
+    color: var(--teal-700);
+    font-size: .78rem;
+    font-weight: 650;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .member h3 {
+    color: var(--navy-900);
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    font-weight: 600;
+    line-height: 1.08;
+  }
+
+  .member__content > p:not(.member__role) {
+    max-width: 35rem;
+    margin-top: var(--space-4);
+    color: var(--slate-600);
+    line-height: 1.65;
+  }
+
+  .member__face--back .member__role {
+    color: #9ed7d2;
+  }
+
+  .member__face--back h3 {
+    color: var(--white);
+  }
+
+  .member__face--back > p:not(.member__role, .member__credentials) {
+    margin-top: var(--space-5);
+    color: var(--sky-100);
+    line-height: 1.7;
+  }
+
+  .member__credentials {
+    margin-top: var(--space-6);
+    color: #9ed7d2;
+    font-size: .82rem;
+    font-weight: 650;
+    letter-spacing: .1em;
+  }
+
+  .member__toggle {
+    display: flex;
+    width: 100%;
+    min-height: 4.5rem;
+    padding: var(--space-4) clamp(var(--space-6), 4vw, var(--space-8));
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    color: var(--navy-900);
+    border: 0;
+    border-top: 1px solid var(--slate-200);
+    background: var(--paper);
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .member__toggle:hover {
+    color: var(--teal-700);
+    background: var(--sky-100);
+  }
+
+  .member__toggle:focus-visible {
+    position: relative;
+    z-index: 2;
+    outline: 3px solid var(--teal-500);
+    outline-offset: -3px;
+  }
+
+  .member__toggle :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+    transition: transform 520ms cubic-bezier(.2, .75, .25, 1);
+  }
+
+  .member__toggle[aria-expanded="true"] :global(svg) {
+    transform: rotate(180deg);
+  }
+
+  .public-record {
+    display: grid;
+    min-height: 37rem;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    color: var(--white);
+    background: var(--navy-950);
+  }
+
+  .public-record__media {
+    min-height: 37rem;
+    overflow: hidden;
+    background: var(--slate-200);
+  }
+
+  .public-record__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 56% center;
+    filter: saturate(.72) contrast(.98);
+  }
+
+  .public-record__content {
+    display: grid;
+    padding: var(--section-standard) max(var(--gutter), calc((100vw - var(--max)) / 2)) var(--section-standard) clamp(3rem, 6vw, 6.5rem);
+    align-items: center;
+  }
+
+  .public-record__inner { width: min(100%, 37rem); }
+  .public-record .eyebrow { color: #9ed7d2; }
+
+  .public-record h2 {
+    max-width: 13ch;
+    margin-top: var(--space-4);
+    color: var(--white);
+  }
+
+  .public-record p:not(.eyebrow) {
+    max-width: 35rem;
+    margin-top: var(--space-5);
+    color: var(--sky-100);
+    font-size: 1.08rem;
+    line-height: 1.7;
+  }
+
+  .public-record .button {
+    margin-top: var(--space-7);
+    gap: var(--space-2);
+  }
+
+  @media (max-width: 1000px) {
+    .board-directory__grid,
+    .board-directory__grid--two {
+      max-width: 68rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
 
   @media (max-width: 900px) {
-    .board-hero__grid, .governance__layout, .roster__layout { grid-template-columns: 1fr; }
-    .board-hero__figure { height: clamp(19rem, 58vw, 31rem); min-height: 0; margin: 0 calc(var(--gutter) * -1); order: -1; box-shadow: none; }
-    .board-hero__copy { padding-block: var(--space-8); padding-right: 0; }
-    .governance__intro, .roster__intro { max-width: 43rem; }
+    .board-role__features {
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+
+    .board-role__features li {
+      max-width: 35rem;
+      margin-inline: auto;
+    }
+
+    .board-role__features li + li {
+      padding-top: var(--space-7);
+      border-top: 1px solid var(--slate-200);
+      border-left: 0;
+    }
+
+    .public-record {
+      min-height: 0;
+      grid-template-columns: 1fr;
+    }
+
+    .public-record__media {
+      min-height: 0;
+      aspect-ratio: 16 / 8;
+    }
+
+    .public-record__content {
+      padding: var(--section-standard) var(--gutter);
+    }
   }
 
-  @media (max-width: 680px) {
-    .responsibilities, .roster__people, .accountability { grid-template-columns: 1fr; }
-    .roster__people { gap: var(--space-8); }
-    .roster__people a { min-height: 0; }
-    .roster__action { margin-top: var(--space-5); }
-    .accountability__figure { min-height: 22rem; }
+  @media (max-width: 760px) {
+    .board-hero {
+      padding-top: var(--space-8);
+      background: linear-gradient(to bottom, var(--navy-950) 0 84%, var(--canvas) 84% 100%);
+    }
+
+    .board-hero__inner { gap: var(--space-8); }
+    .board-hero__copy { justify-items: start; text-align: left; }
+    .board-hero h1 { font-size: clamp(2.75rem, 12vw, 4.2rem); }
+    .board-hero__media { min-height: 0; aspect-ratio: 4 / 3; }
+    .board-hero__media img { object-position: 52% center; }
+
+    .board-directory__grid,
+    .board-directory__grid--two {
+      max-width: 34rem;
+      grid-template-columns: 1fr;
+    }
+
+    .board-hero .button,
+    .member__toggle,
+    .public-record .button {
+      width: 100%;
+    }
+
+    .board-role__features li { padding-inline: 0; }
+    .member__content { padding: var(--space-6); }
+    .member__stage { min-height: 29rem; }
+    .public-record__media { aspect-ratio: 4 / 3; }
+    .public-record__content { padding-block: var(--space-8); }
   }
 
-  @media (max-width: 520px) {
-    .board-hero__figure { height: 16rem; }
-    .board-hero__copy { padding-block: var(--space-7); }
-    .board-hero h1 { font-size: clamp(2.7rem, 13vw, 3.7rem); }
-    .board-hero .button, .accountability .button { width: 100%; }
-    .responsibilities { gap: var(--space-7); }
-    .responsibilities li { grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); }
-    .responsibilities li > :global(svg) { width: 1.55rem; height: 1.55rem; }
-    .accountability__content { padding-block: var(--space-8); }
+  @media (prefers-reduced-motion: reduce) {
+    .member__media img,
+    .member__stage,
+    .member__toggle :global(svg) { transition: none; }
+  }
+
+  @media (hover: none) {
+    .member__stage,
+    .member[data-flipped] .member__stage { transform: none; }
+    .member__face { transform: none; }
+    .member__face[aria-hidden="true"] { opacity: 0; }
+    .member__face[aria-hidden="false"] { opacity: 1; }
   }
 </style>

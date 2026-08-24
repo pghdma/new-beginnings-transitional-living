@@ -1,0 +1,473 @@
+---
+import { Icon } from 'astro-icon/components';
+import MainLayout from '../layouts/MainLayout.astro';
+import CtaBand from './CtaBand.astro';
+import { site } from '../data/site';
+
+interface ImageAsset {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+interface Feature {
+  icon: string;
+  title: string;
+  copy: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface FaqGroup {
+  title: string;
+  items: FaqItem[];
+}
+
+interface Props {
+  audience: 'men' | 'women';
+  title: string;
+  description: string;
+  heroTitle: string;
+  heroLead: string;
+  heroImage: ImageAsset;
+  householdImage: ImageAsset;
+  householdLead: string;
+  householdFeatures: Feature[];
+  supportFeatures: Feature[];
+  galleryImages: [ImageAsset, ImageAsset, ImageAsset];
+  publicAreas: string;
+  faqs: FaqGroup[];
+}
+
+const {
+  audience,
+  title,
+  description,
+  heroTitle,
+  heroLead,
+  heroImage,
+  householdImage,
+  householdLead,
+  householdFeatures,
+  supportFeatures,
+  galleryImages,
+  publicAreas,
+  faqs,
+} = Astro.props;
+
+const audienceLabel = audience === 'men' ? 'men' : 'women';
+const audienceTitle = audience === 'men' ? 'Men’s' : 'Women’s';
+
+const decisionItems: Feature[] = [
+  {
+    icon: 'circle-dollar-sign',
+    title: 'Current Rent and Fees',
+    copy: 'Current charges are provided directly. Ask what is due before move in, what is included, and when payments are expected.',
+  },
+  {
+    icon: 'calendar-days',
+    title: 'Availability and Timing',
+    copy: `Availability changes by house. Calling ${site.phone} is the most direct way to ask about an opening and the next intake step.`,
+  },
+  {
+    icon: 'clipboard-check',
+    title: 'House Rules and Schedule',
+    copy: 'Ask about curfew, visitors, passes, chores, testing, return times, employment, school, and required house activities.',
+  },
+  {
+    icon: 'users-round',
+    title: 'Meetings and Recovery',
+    copy: 'New Beginnings follows an AA and NA based recovery culture. Confirm the current meeting schedule and whether 90 meetings in 90 days applies.',
+  },
+];
+
+const galleryCopy = [
+  {
+    title: 'Rooms and Shared Spaces',
+    copy: 'Ask whether the available room is shared, what furnishings are provided, and which common areas residents use together.',
+  },
+  {
+    title: 'Meals and Personal Items',
+    copy: 'Staff can explain what residents supply themselves, what the house provides, and what to bring on move in day.',
+  },
+  {
+    title: 'Work and Transportation',
+    copy: 'Discuss work, school, appointments, vehicle policies, public transportation, curfew, and schedule compatibility before admission.',
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <section class="housing-hero">
+    <div class="container housing-hero__grid">
+      <div class="housing-hero__copy">
+        <p class="eyebrow">Recovery Housing for Adult {audienceTitle}</p>
+        <h1>{heroTitle}</h1>
+        <p class="lead">{heroLead}</p>
+        <div class="actions housing-hero__actions">
+          <a class="button button--light" href="/admissions/">Ask About Availability<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button housing-hero__secondary" href="#frequently-asked-questions">Read Common Questions</a>
+        </div>
+        <div class="housing-hero__facts" aria-label="Housing overview">
+          <span><Icon name="lucide:users-round" aria-hidden="true" />Adult {audienceLabel}</span>
+          <span><Icon name="lucide:house-heart" aria-hidden="true" />Shared recovery residence</span>
+          <span><Icon name="lucide:map-pin" aria-hidden="true" />Pittsburgh area</span>
+        </div>
+      </div>
+      <figure class="housing-hero__media">
+        <img src={heroImage.src} alt={heroImage.alt} width={heroImage.width} height={heroImage.height} fetchpriority="high" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="household-section">
+    <div class="container">
+      <header class="household-intro split-intro">
+        <div>
+          <p class="eyebrow">A Practical Look at Daily Life</p>
+          <h2>What Living Here Is Designed to Support</h2>
+        </div>
+        <p class="lead">A recovery residence should help you understand the home, its expectations, and how ordinary life fits around recovery before you decide to move in.</p>
+      </header>
+
+      <div class="household-stage">
+        <figure class="household-photo">
+          <img src={householdImage.src} alt={householdImage.alt} width={householdImage.width} height={householdImage.height} loading="lazy" />
+        </figure>
+        <div class="household-copy">
+          <p class="eyebrow">Inside the Household</p>
+          <h2>A Home With Structure, Privacy, and Shared Responsibility</h2>
+          <p class="household-copy__lead">{householdLead}</p>
+          <div class="household-features" role="list">
+            {householdFeatures.map((feature) => (
+              <article role="listitem">
+                <span class="icon-medallion icon-medallion--dark"><Icon name={`lucide:${feature.icon}`} aria-hidden="true" /></span>
+                <div><h3>{feature.title}</h3><p>{feature.copy}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="decision-section">
+    <div class="container decision-layout">
+      <div class="decision-intro">
+        <p class="eyebrow">Before You Decide</p>
+        <h2>Get the Practical Details Before You Commit</h2>
+        <p class="lead">Costs, schedules, rules, and availability can change. The current details should be clear before a resident signs an agreement or pays money.</p>
+        <aside class="written-information">
+          <Icon name="lucide:file-check-2" aria-hidden="true" />
+          <div>
+            <h3>Written Information Matters</h3>
+            <p>Pennsylvania licensed recovery houses provide residents with house rules, a fee schedule, financial policies, medication policies, available supports, and beginning and ending residency criteria.</p>
+          </div>
+        </aside>
+      </div>
+      <div class="decision-grid" role="list">
+        {decisionItems.map((item) => (
+          <article role="listitem">
+            <span class="icon-medallion"><Icon name={`lucide:${item.icon}`} aria-hidden="true" /></span>
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="supports-section">
+    <div class="container">
+      <header class="supports-heading">
+        <p class="eyebrow">What Supports the Home</p>
+        <h2>Recovery Is Practiced in Ordinary Life</h2>
+        <p class="lead">The residence provides the setting. Recovery also depends on the choices, relationships, responsibilities, and outside services that continue beyond the home.</p>
+      </header>
+      <div class="supports-grid" role="list">
+        {supportFeatures.map((feature) => (
+          <article role="listitem">
+            <span class="icon-medallion icon-medallion--lg icon-medallion--dark"><Icon name={`lucide:${feature.icon}`} aria-hidden="true" /></span>
+            <h3>{feature.title}</h3>
+            <p>{feature.copy}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="questions-section">
+    <div class="container">
+      <header class="questions-heading split-intro">
+        <div>
+          <p class="eyebrow">Questions About the Houses</p>
+          <h2>Know What to Ask Before Moving In</h2>
+        </div>
+        <p class="lead">Room arrangements and household policies can differ. These are the practical topics to discuss when you ask about a current opening.</p>
+      </header>
+      <div class="question-gallery">
+        {galleryImages.map((image, index) => (
+          <article class="question-panel">
+            <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
+            <div class="question-panel__shade"></div>
+            <div class="question-panel__copy">
+              <span class="question-panel__number">0{index + 1}</span>
+              <h3>{galleryCopy[index].title}</h3>
+              <p>{galleryCopy[index].copy}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="frequently-asked-questions">
+    <div class="container faq-layout">
+      <div class="faq-intro">
+        <p class="eyebrow">Frequently Asked Questions</p>
+        <h2>Answers for Residents, Families, and Referral Partners</h2>
+        <p>These answers explain what is known now and identify the house specific details to confirm directly. For current availability, call <a href={site.phoneHref}>{site.phone}</a>.</p>
+      </div>
+      <div class="faq-groups">
+        {faqs.map((group) => (
+          <section class="faq-group" aria-labelledby={`faq-${group.title.toLowerCase().replaceAll(' ', '-')}`}>
+            <h3 id={`faq-${group.title.toLowerCase().replaceAll(' ', '-')}`}>{group.title}</h3>
+            <div class="faq-list">
+              {group.items.map((item) => (
+                <details>
+                  <summary>{item.question}<Icon name="lucide:plus" aria-hidden="true" /></summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="location-section">
+    <div class="container location-stage">
+      <div class="location-copy">
+        <span class="icon-medallion icon-medallion--solid"><Icon name="lucide:map-pin" aria-hidden="true" /></span>
+        <p class="eyebrow">Pittsburgh Area Housing</p>
+        <h2>Neighborhood Information Without Publishing Someone’s Home</h2>
+        <p class="lead">Public records currently reference {publicAreas}. New Beginnings also serves other Pittsburgh area communities.</p>
+      </div>
+      <div class="location-privacy">
+        <Icon name="lucide:lock-keyhole" aria-hidden="true" />
+        <div>
+          <h3>Exact Locations Stay Private</h3>
+          <p>Individual house addresses, maps, and identifying exterior photographs are not published. Exact location information is shared privately when it is relevant to an admissions or referral conversation.</p>
+        </div>
+        <a class="button button--outline" href="/admissions/">Review the Admissions Process<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={`Ask About ${audienceTitle} Recovery Housing`}
+    label="Begin With Admissions"
+    text="Start with a general conversation about availability, fit, costs, and the current house expectations."
+  />
+</MainLayout>
+
+<script>
+  const faqItems = Array.from(document.querySelectorAll<HTMLDetailsElement>('.faq-list details'));
+
+  faqItems.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item) otherItem.open = false;
+      });
+    });
+  });
+</script>
+
+<style>
+  .housing-hero { color: var(--white); background: var(--navy-950); }
+  .housing-hero__grid { display: grid; min-height: clamp(35rem, 51vw, 43rem); grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: stretch; }
+  .housing-hero__copy { display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
+  .housing-hero .eyebrow { color: #9ed7d2; }
+  .housing-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(3.1rem, 5.5vw, 5.25rem); }
+  .housing-hero .lead { max-width: 35rem; margin-top: var(--space-5); color: var(--sky-100); }
+  .housing-hero__actions { margin-top: var(--space-6); }
+  .housing-hero__actions .button { gap: .6rem; }
+  .housing-hero__actions :global(svg) { width: 1rem; height: 1rem; }
+  .housing-hero__secondary { border-color: rgba(255, 255, 255, .72); color: var(--white); background: transparent; }
+  .housing-hero__secondary:hover { color: var(--navy-950); background: var(--white); }
+  .housing-hero__facts { display: flex; margin-top: var(--space-7); flex-wrap: wrap; gap: var(--space-3) var(--space-5); color: var(--sky-100); font-size: .92rem; font-weight: 600; }
+  .housing-hero__facts span { display: inline-flex; align-items: center; gap: .55rem; }
+  .housing-hero__facts :global(svg) { width: 1.1rem; height: 1.1rem; color: #9ed7d2; stroke-width: 1.65; }
+  .housing-hero__media { margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
+  .housing-hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(.98); }
+
+  .household-section { padding-block: var(--section-standard); background: var(--canvas); }
+  .household-intro { margin-bottom: var(--space-7); }
+  .household-intro h2 { margin-top: var(--space-4); }
+  .household-stage { display: grid; min-height: 39rem; grid-template-columns: minmax(17rem, .72fr) minmax(0, 1.28fr); box-shadow: var(--shadow-raised); }
+  .household-photo { margin: 0; overflow: hidden; background: var(--slate-200); }
+  .household-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(.98); }
+  .household-copy { display: flex; padding: clamp(2.5rem, 5vw, 4.5rem); color: var(--white); background: var(--navy-900); flex-direction: column; justify-content: center; }
+  .household-copy .eyebrow { color: #9ed7d2; }
+  .household-copy h2 { max-width: 17ch; margin-top: var(--space-4); color: var(--white); font-size: clamp(2rem, 3.2vw, 3rem); }
+  .household-copy__lead { max-width: 43rem; margin-top: var(--space-5); color: var(--sky-100); font-size: 1.12rem; line-height: 1.55; }
+  .household-features { display: grid; margin-top: clamp(2.5rem, 5vw, 4rem); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 3rem); }
+  .household-features article { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .household-features h3 { color: var(--white); font-size: 1.15rem; }
+  .household-features p { margin-top: .45rem; color: var(--sky-200); font-size: .94rem; line-height: 1.5; }
+
+  .decision-section { padding-block: var(--section-standard); background: var(--sky-50); }
+  .decision-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: var(--gap-columns); align-items: start; }
+  .decision-intro { position: sticky; top: 8rem; }
+  .decision-intro h2 { max-width: 13ch; margin-top: var(--space-4); }
+  .decision-intro .lead { margin-top: var(--space-5); }
+  .written-information { display: grid; margin-top: var(--space-6); padding: var(--space-5); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); color: var(--sky-100); background: var(--navy-900); box-shadow: var(--shadow); }
+  .written-information > :global(svg) { width: 1.7rem; height: 1.7rem; color: #9ed7d2; stroke-width: 1.55; }
+  .written-information h3 { color: var(--white); font-size: 1.12rem; }
+  .written-information p { margin-top: .45rem; font-size: .92rem; line-height: 1.5; }
+  .decision-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--paper); box-shadow: var(--shadow-raised); }
+  .decision-grid article { min-height: 18rem; padding: clamp(1.75rem, 4vw, 2.75rem); }
+  .decision-grid article:nth-child(odd) { border-right: 1px solid var(--slate-200); }
+  .decision-grid article:nth-child(-n + 2) { border-bottom: 1px solid var(--slate-200); }
+  .decision-grid h3 { margin-top: var(--space-5); }
+  .decision-grid p { margin-top: var(--space-3); color: var(--slate-600); font-size: .96rem; line-height: 1.55; }
+
+  .supports-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
+  .supports-heading { max-width: 48rem; margin-inline: auto; text-align: center; }
+  .supports-heading .eyebrow { color: #9ed7d2; }
+  .supports-heading h2 { margin-top: var(--space-4); color: var(--white); }
+  .supports-heading .lead { margin: var(--space-5) auto 0; color: var(--sky-100); }
+  .supports-grid { display: grid; margin-top: var(--space-8); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.75rem, 4vw, 3rem); text-align: center; }
+  .supports-grid article { display: flex; align-items: center; flex-direction: column; }
+  .supports-grid h3 { margin-top: var(--space-5); color: var(--white); font-size: 1.18rem; }
+  .supports-grid p { max-width: 17rem; margin-top: var(--space-3); color: var(--sky-200); font-size: .94rem; line-height: 1.5; }
+
+  .questions-section { padding-block: var(--section-standard); background: var(--paper); }
+  .questions-heading { margin-bottom: var(--space-7); }
+  .questions-heading h2 { margin-top: var(--space-4); }
+  .question-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
+  .question-panel { position: relative; min-height: clamp(27rem, 36vw, 34rem); overflow: hidden; background: var(--navy-900); box-shadow: var(--shadow-raised); }
+  .question-panel img { position: absolute; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; inset: 0; filter: saturate(.72) contrast(.98); }
+  .question-panel__shade { position: absolute; background: linear-gradient(0deg, rgba(10, 38, 50, .96) 0%, rgba(10, 38, 50, .7) 42%, rgba(10, 38, 50, .08) 75%); inset: 0; }
+  .question-panel__copy { position: absolute; padding: clamp(1.5rem, 3vw, 2.25rem); inset: auto 0 0; color: var(--white); }
+  .question-panel__number { color: #9ed7d2; font-size: .82rem; font-weight: 650; letter-spacing: .12em; }
+  .question-panel h3 { margin-top: var(--space-3); color: var(--white); }
+  .question-panel p { margin-top: var(--space-3); color: var(--sky-100); font-size: .94rem; line-height: 1.5; }
+  .question-panel:hover img { transform: scale(1.035); }
+
+  .faq-section { padding-block: var(--section-standard); background: var(--sky-50); scroll-margin-top: 7rem; }
+  .faq-layout { display: grid; grid-template-columns: minmax(0, .68fr) minmax(0, 1.32fr); gap: var(--gap-columns); align-items: start; }
+  .faq-intro { position: sticky; top: 8rem; }
+  .faq-intro h2 { max-width: 12ch; margin-top: var(--space-4); }
+  .faq-intro > p:last-child { max-width: 35rem; margin-top: var(--space-5); }
+  .faq-intro a { font-weight: 650; }
+  .faq-groups { display: grid; gap: var(--space-7); }
+  .faq-group h3 { margin-bottom: var(--space-4); color: var(--teal-800); font-size: .85rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+  .faq-list { border-top: 1px solid var(--slate-300); }
+  .faq-list details { border-bottom: 1px solid var(--slate-300); }
+  .faq-list summary { display: grid; min-height: 4.75rem; padding: var(--space-5) 0; cursor: pointer; list-style: none; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--navy-900); font-size: 1.12rem; font-weight: 600; line-height: 1.35; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary :global(svg) { width: 1.2rem; height: 1.2rem; color: var(--teal-700); transition: transform .2s ease; }
+  .faq-list details[open] summary :global(svg) { transform: rotate(45deg); }
+  .faq-list details p { max-width: 60ch; padding: 0 3rem var(--space-5) 0; color: var(--slate-600); }
+
+  .location-section { padding-block: var(--section-standard); background: var(--canvas); }
+  .location-stage { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: var(--gap-columns); align-items: center; }
+  .location-copy .eyebrow { margin-top: var(--space-5); }
+  .location-copy h2 { max-width: 15ch; margin-top: var(--space-4); }
+  .location-copy .lead { margin-top: var(--space-5); }
+  .location-privacy { display: grid; padding: clamp(2rem, 5vw, 3.5rem); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); background: var(--paper); box-shadow: var(--shadow-raised); }
+  .location-privacy > :global(svg) { width: 1.7rem; height: 1.7rem; color: var(--teal-700); stroke-width: 1.55; }
+  .location-privacy p { margin-top: var(--space-3); }
+  .location-privacy .button { width: fit-content; margin-top: var(--space-5); grid-column: 2; gap: .6rem; }
+  .location-privacy .button :global(svg) { width: 1rem; height: 1rem; }
+
+  @media (max-width: 960px) {
+    .housing-hero__grid { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
+    .household-stage { grid-template-columns: minmax(15rem, .62fr) minmax(0, 1.38fr); }
+    .decision-intro, .faq-intro { position: static; }
+    .decision-layout, .faq-layout { grid-template-columns: 1fr; }
+    .decision-intro, .faq-intro { max-width: 48rem; }
+  }
+
+  @media (max-width: 760px) {
+    .housing-hero__grid, .household-stage, .location-stage { min-height: 0; grid-template-columns: 1fr; }
+    .household-section,
+    .decision-section,
+    .supports-section,
+    .questions-section,
+    .faq-section,
+    .location-section { padding-block: var(--space-8); }
+
+    .housing-hero__media { order: -1; height: clamp(13.5rem, 48vw, 20rem); margin: 0 calc(var(--gutter) * -1); }
+    .housing-hero__copy { padding-block: 2.5rem; }
+    .housing-hero h1 { max-width: 15ch; margin-top: var(--space-3); font-size: clamp(2.5rem, 7vw, 3.25rem); line-height: 1.04; }
+    .housing-hero .lead { margin-top: var(--space-4); font-size: 1.05rem; line-height: 1.5; }
+    .housing-hero__actions { margin-top: var(--space-5); }
+    .housing-hero__actions { display: grid; }
+    .housing-hero__actions .button { width: 100%; }
+    .housing-hero__facts { display: grid; margin-top: var(--space-5); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); font-size: .84rem; }
+    .housing-hero__facts span:last-child { grid-column: 1 / -1; }
+
+    .household-intro { margin-bottom: var(--space-6); }
+    .household-intro h2,
+    .questions-heading h2 { margin-top: var(--space-3); }
+    .household-photo { height: 14rem; }
+    .household-copy { padding: 2.5rem var(--space-6); }
+    .household-copy h2 { margin-top: var(--space-3); font-size: 2rem; }
+    .household-copy__lead { margin-top: var(--space-4); font-size: 1rem; }
+    .household-features { margin-top: var(--space-6); grid-template-columns: 1fr; gap: var(--space-6); }
+    .household-features article { display: flex; text-align: center; align-items: center; flex-direction: column; gap: var(--space-3); }
+    .household-features h3 { font-size: 1rem; }
+    .household-features p { font-size: .86rem; }
+
+    .decision-intro h2 { max-width: 15ch; margin-top: var(--space-3); }
+    .decision-intro .lead { margin-top: var(--space-4); }
+    .written-information { margin-top: var(--space-5); padding: var(--space-5); }
+    .decision-grid { grid-template-columns: 1fr; }
+    .decision-grid article { display: grid; min-height: 0; padding: var(--space-5); grid-template-columns: var(--icon-medallion-size-sm) minmax(0, 1fr); gap: var(--space-2) var(--space-4); align-items: start; }
+    .decision-grid .icon-medallion { width: var(--icon-medallion-size-sm); height: var(--icon-medallion-size-sm); grid-row: 1 / 3; }
+    .decision-grid h3 { margin-top: 0; font-size: 1.08rem; }
+    .decision-grid p { margin-top: 0; font-size: .9rem; }
+    .decision-grid article:nth-child(odd) { border-right: 0; }
+    .decision-grid article:not(:last-child) { border-bottom: 1px solid var(--slate-200); }
+
+    .supports-heading h2 { margin-top: var(--space-3); }
+    .supports-heading .lead { margin-top: var(--space-4); }
+    .supports-grid { margin-top: var(--space-7); grid-template-columns: 1fr; gap: var(--space-7); }
+    .supports-grid .icon-medallion--lg { width: var(--icon-medallion-size-md); height: var(--icon-medallion-size-md); }
+    .supports-grid h3 { margin-top: var(--space-4); font-size: 1rem; }
+    .supports-grid p { margin-top: var(--space-2); font-size: .84rem; }
+
+    .questions-heading { margin-bottom: var(--space-6); }
+    .question-gallery { grid-template-columns: 1fr; gap: var(--space-4); }
+    .question-panel { min-height: 16.5rem; }
+    .question-panel__copy { padding: var(--space-5); }
+    .question-panel p { margin-top: var(--space-2); font-size: .88rem; }
+
+    .faq-intro h2 { max-width: 15ch; margin-top: var(--space-3); }
+    .faq-intro > p:last-child { margin-top: var(--space-4); }
+    .faq-groups { gap: var(--space-6); }
+    .faq-list { border: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
+    .faq-list details { padding-inline: var(--space-5); border-color: var(--slate-200); }
+    .faq-list details[open] { background: var(--white); }
+    .faq-list summary { min-height: 4.5rem; padding: var(--space-4) 0; font-size: 1rem; }
+    .faq-list summary :global(svg) { width: 2rem; height: 2rem; padding: .4rem; border: 1px solid var(--icon-medallion-border); border-radius: 50%; background: var(--sky-100); }
+    .faq-list details p { padding: 0 0 var(--space-5); }
+
+    .location-copy .eyebrow { margin-top: var(--space-4); }
+    .location-copy h2 { margin-top: var(--space-3); font-size: 2.15rem; }
+    .location-copy .lead { margin-top: var(--space-4); }
+    .location-privacy { padding: var(--space-6); }
+    .location-privacy { grid-template-columns: 1fr; }
+    .location-privacy .button { width: 100%; grid-column: 1; }
+  }
+
+</style>

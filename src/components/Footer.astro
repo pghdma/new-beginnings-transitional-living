@@ -37,11 +37,11 @@ const trustItems = [
 
       <div class="footer-contact-list">
         <a href={site.phoneHref}>
-          <span class="footer-contact-icon"><Icon name="lucide:phone" aria-hidden="true" /></span>
+          <span class="footer-contact-icon icon-medallion icon-medallion--sm"><Icon name="lucide:phone" aria-hidden="true" /></span>
           <span><small>Call New Beginnings</small><strong>{site.phone}</strong></span>
         </a>
         <a href="/contact/">
-          <span class="footer-contact-icon"><Icon name="lucide:mail" aria-hidden="true" /></span>
+          <span class="footer-contact-icon icon-medallion icon-medallion--sm"><Icon name="lucide:mail" aria-hidden="true" /></span>
           <span><small>Send a general message</small><strong>Contact our team</strong></span>
         </a>
       </div>
@@ -123,7 +123,7 @@ const trustItems = [
   .footer-contact-list > a { display: grid; padding-block: var(--space-4); grid-template-columns: auto 1fr; gap: var(--space-4); align-items: center; color: var(--white); }
   .footer-contact-list > a + a { border-top: 1px solid rgba(255,255,255,.18); }
   .footer-contact-list > a:hover { color: #b7e5e1; }
-  .footer-contact-icon { display: grid; width: 2.7rem; height: 2.7rem; border-radius: 50%; color: var(--navy-950); background: #9ed7d2; place-items: center; }
+  .footer-contact-icon { width: 2.7rem; height: 2.7rem; color: var(--navy-950); background: #9ed7d2; }
   .footer-contact-icon :global(svg) { width: 1.25rem; height: 1.25rem; stroke-width: 1.9; }
   .footer-contact-list a > span:last-child { display: grid; }
   .footer-contact-list small { color: var(--slate-300); font-size: .72rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
@@ -150,12 +150,12 @@ const trustItems = [
     .footer-contact { max-width: 42rem; }
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 760px) {
     .footer-links { grid-template-columns: 1fr 1fr; }
     .footer-trust { grid-template-columns: 1fr; }
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 480px) {
     .footer-service { padding-block: var(--space-8); gap: var(--space-7); }
     .footer-map { grid-template-rows: 18rem auto; }
     .footer-map iframe { min-height: 18rem; }

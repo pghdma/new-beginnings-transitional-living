@@ -60,7 +60,7 @@ const workflow = [
 
       <div class="role-detail">
         <article class="role-primary">
-          <div class="role-icon"><Icon name="lucide:house" aria-hidden="true" /></div>
+          <div class="role-icon icon-medallion icon-medallion--dark"><Icon name="lucide:house" aria-hidden="true" /></div>
           <div>
             <p class="eyebrow">New Beginnings provides</p>
             <h3>Recovery-focused housing</h3>
@@ -101,7 +101,7 @@ const workflow = [
 
   <section class="records-section" aria-labelledby="records-title">
     <figure class="records-photo">
-      <img src="/images/contact.jpg" alt="A phone, notebook, and pencil arranged on a desk" width="1880" height="1253" loading="lazy" />
+      <img src="/images/credentials.jpg" alt="A person reviewing documents at a meeting table" width="1880" height="1253" loading="lazy" />
     </figure>
 
     <div class="records-copy">
@@ -112,14 +112,14 @@ const workflow = [
 
         <div class="records-guidance">
           <article>
-            <div class="records-icon"><Icon name="lucide:message-square-text" aria-hidden="true" /></div>
+            <div class="records-icon icon-medallion"><Icon name="lucide:message-square-text" aria-hidden="true" /></div>
             <div>
               <h3>Appropriate for the first message</h3>
               <p>Your name, organization, role, preferred contact method, and a general description of the housing inquiry.</p>
             </div>
           </article>
           <article>
-            <div class="records-icon"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></div>
+            <div class="records-icon icon-medallion"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></div>
             <div>
               <h3>Keep sensitive information private</h3>
               <p>Do not submit treatment records, diagnoses, medication lists, court documents, Social Security numbers, or other sensitive client information.</p>
@@ -176,7 +176,6 @@ const workflow = [
   .role-composition > figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.76) contrast(.98); }
   .role-detail { display: flex; padding: clamp(2.25rem, 5vw, 4rem); color: var(--white); background: var(--navy-900); flex-direction: column; justify-content: center; }
   .role-primary { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .role-icon, .records-icon { display: grid; width: 3.25rem; height: 3.25rem; border-radius: 50%; color: var(--teal-700); background: var(--sky-100); place-items: center; }
   .role-detail .role-icon { color: #b9e5e1; background: rgba(255, 255, 255, .1); }
   .role-icon :global(svg), .records-icon :global(svg) { width: 1.55rem; height: 1.55rem; stroke-width: 1.55; }
   .role-detail .eyebrow { color: #9ed7d2; }
@@ -230,7 +229,7 @@ const workflow = [
     .records-copy__inner { width: min(100%, 46rem); margin-inline: auto; }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 760px) {
     .referral-hero__photo { height: 17rem; }
     .referral-hero__photo figcaption { font-size: .98rem; }
     .referral-hero__copy { padding-block: var(--space-7); }
