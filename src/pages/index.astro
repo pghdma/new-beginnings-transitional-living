@@ -405,4 +405,9 @@ const trustPoints = [
     .conversation-actions { display: grid; }
     .conversation-actions .button { width: 100%; }
   }
+
+  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
+  @media (max-width: 900px) {
+    .home-hero__location, .housing-fact p, .daily-scope, .conversation-steps p, .conversation-secondary { font-size: 1rem; line-height: 1.55; }
+  }
 </style>

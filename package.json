@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "seo-check": "node scripts/seo-check.mjs",
-    "predeploy-check": "npm run check && npm run build && npx tsc -p worker/tsconfig.json --noEmit && node scripts/predeploy-check.mjs && npm run seo-check"
+    "predeploy-check": "npm run check && npm run build && npx tsc -p worker/tsconfig.json --noEmit && node scripts/predeploy-check.mjs && npm run seo-check",
+    "mobile-audit": "node scripts/mobile-audit.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "puppeteer-core": "^25.9.0",
     "typescript": "^5.9.2",
     "wrangler": "^4.32.0"
   }

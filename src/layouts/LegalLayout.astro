@@ -510,6 +510,13 @@ const lastReviewed = Number.isNaN(parsedReviewDate.getTime())
       transition: none;
     }
   }
+
+  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
+  @media (max-width: 900px) {
+    .legal-toc-link { min-height: 2.75rem; }
+    .legal-metadata dd { font-size: 1rem; }
+    .legal-content :global(.legal-entity) { font-size: 1rem; }
+  }
 </style>
 
 <script>

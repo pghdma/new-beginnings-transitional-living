@@ -13,7 +13,7 @@ const { variant = 'header' } = Astro.props;
 <style>
   /* The logo is inline SVG filled with currentColor, so `color` sets the mark. */
   .brand-lockup { display: inline-flex; min-width: 0; color: var(--brand-ink); line-height: 0; }
-  .brand-lockup :global(svg) { display: block; width: auto; height: var(--brand-lockup-height); }
+  .brand-lockup :global(svg) { display: block; width: calc(var(--brand-lockup-height) * var(--brand-lockup-ratio)); height: var(--brand-lockup-height); max-width: 100%; }
   .brand-lockup--footer { color: var(--white); }
-  .brand-lockup--footer :global(svg) { height: var(--brand-lockup-height-footer); }
+  .brand-lockup--footer :global(svg) { width: calc(var(--brand-lockup-height-footer) * var(--brand-lockup-ratio)); height: var(--brand-lockup-height-footer); }
 </style>

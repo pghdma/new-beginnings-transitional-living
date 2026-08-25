@@ -372,20 +372,18 @@ const galleryCopy = [
     .housing-hero__actions { margin-top: var(--space-5); }
     .housing-hero__actions { display: grid; }
     .housing-hero__actions .button { width: 100%; }
-    .housing-hero__facts { display: grid; margin-top: var(--space-5); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); font-size: .84rem; }
-    .housing-hero__facts span:last-child { grid-column: 1 / -1; }
+    .housing-hero__facts { display: grid; margin-top: var(--space-5); grid-template-columns: 1fr; gap: var(--space-2); font-size: .9rem; }
 
     .household-intro { margin-bottom: var(--space-6); }
     .household-intro h2,
     .questions-heading h2 { margin-top: var(--space-3); }
-    .household-photo { height: 14rem; }
+    .household-photo { display: none; }
     .household-copy { padding: 2.5rem var(--space-6); }
     .household-copy h2 { margin-top: var(--space-3); font-size: 2rem; }
     .household-copy__lead { margin-top: var(--space-4); font-size: 1rem; }
     .household-features { margin-top: var(--space-6); grid-template-columns: 1fr; gap: var(--space-6); }
-    .household-features article { display: flex; text-align: center; align-items: center; flex-direction: column; gap: var(--space-3); }
-    .household-features h3 { font-size: 1rem; }
-    .household-features p { font-size: .86rem; }
+    .household-features h3 { font-size: 1.1rem; }
+    .household-features p { font-size: .92rem; }
 
     .decision-intro h2 { max-width: 21ch; margin-top: var(--space-3); }
     .decision-intro .lead { margin-top: var(--space-4); }
@@ -400,10 +398,13 @@ const galleryCopy = [
 
     .supports-heading h2 { margin-top: var(--space-3); }
     .supports-heading .lead { margin-top: var(--space-4); }
-    .supports-grid { margin-top: var(--space-7); grid-template-columns: 1fr; gap: var(--space-7); }
+    .supports-heading { margin-inline: 0; text-align: left; }
+    .supports-heading .lead { margin-inline: 0; }
+    .supports-grid { margin-top: var(--space-7); grid-template-columns: 1fr; gap: var(--space-6); text-align: left; }
+    .supports-grid article { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); row-gap: .3rem; align-items: start; }
     .supports-grid .icon-medallion--lg { width: var(--icon-medallion-size-md); height: var(--icon-medallion-size-md); }
-    .supports-grid h3 { margin-top: var(--space-4); font-size: 1rem; }
-    .supports-grid p { margin-top: var(--space-2); font-size: .84rem; }
+    .supports-grid h3 { margin-top: .4rem; font-size: 1.1rem; }
+    .supports-grid p { max-width: none; margin-top: 0; grid-column: 2; font-size: .92rem; }
 
     .questions-heading { margin-bottom: var(--space-6); }
     .question-gallery { grid-template-columns: 1fr; gap: var(--space-4); }
@@ -414,13 +415,16 @@ const galleryCopy = [
     .faq-intro h2 { max-width: 21ch; margin-top: var(--space-3); }
     .faq-intro > p:last-child { margin-top: var(--space-4); }
     .faq-groups { gap: var(--space-6); }
-    .faq-list { border: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
-    .faq-list details { padding-inline: var(--space-5); border-color: var(--slate-200); }
-    .faq-list details[open] { background: var(--white); }
     .faq-list summary { min-height: 4.5rem; padding: var(--space-4) 0; font-size: 1rem; }
     .faq-list summary :global(svg) { width: 2rem; height: 2rem; padding: .4rem; border: 1px solid var(--icon-medallion-border); border-radius: 50%; background: var(--sky-100); }
     .faq-list details p { padding: 0 0 var(--space-5); }
 
   }
 
+
+  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
+  @media (max-width: 900px) {
+    .household-features p, .decision-grid p, .supports-grid p, .question-panel p { font-size: 1rem; line-height: 1.55; }
+    .written-information p { font-size: 1rem; }
+  }
 </style>

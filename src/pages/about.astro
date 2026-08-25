@@ -460,4 +460,10 @@ const accountabilityProof = [
   @media (prefers-reduced-motion: reduce) {
     .purpose-gallery__scene, .purpose-gallery__scene img, .purpose-gallery__scene figcaption p { transition: none; }
   }
+
+  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
+  @media (max-width: 900px) {
+    .about-hero__origin, .purpose-section__details p, .founder-profile__highlights li { font-size: 1rem; line-height: 1.55; }
+    .purpose-gallery__scene figcaption p { font-size: 1rem; }
+  }
 </style>

@@ -244,4 +244,11 @@ const dailyRhythm = [
     .pathway-links a { padding: 1rem; grid-template-columns: 2.35rem minmax(0, 1fr) auto; gap: .8rem; }
     .pathways-content { padding: var(--space-7) var(--space-5); }
   }
+
+  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
+  @media (max-width: 900px) {
+    .housing-hero__scope, .definition-copy p, .rhythm-list p, .crisis-note p, .pathways-location { font-size: 1rem; line-height: 1.55; }
+    .scope-note p { font-size: 1rem; }
+    .scope-note div > p:not(.scope-note__label) { font-size: 1rem; line-height: 1.55; }
+  }
 </style>

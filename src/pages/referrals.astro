@@ -256,4 +256,11 @@ const questions = [
   }
 
   @media (prefers-reduced-motion: reduce) { .faq-list summary :global(svg) { transition: none; } }
+
+  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
+  @media (max-width: 900px) {
+    .audience-grid li { align-items: flex-start; text-align: left; }
+    .professional-hero__note, .audience-grid p, .scope-comparison p, .credential-grid p, .coordination-steps p { font-size: 1rem; line-height: 1.55; }
+    .credential-grid li { align-items: flex-start; text-align: left; }
+  }
 </style>

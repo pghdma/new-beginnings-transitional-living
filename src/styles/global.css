@@ -8,8 +8,9 @@
   --font-body: 'Source Sans 3 Variable', 'Open Sans', Arial, sans-serif;
   --font-display: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
   --brand-ink: #08234a;
-  --brand-lockup-height: 3rem;
-  --brand-lockup-height-footer: 3.6rem;
+  --brand-lockup-ratio: 6.983;
+  --brand-lockup-height: 2.5rem;
+  --brand-lockup-height-footer: 2.75rem;
   --display-tracking: -.01em;
   --display-line-height: 1.02;
   --navy-950: #173746;
@@ -181,8 +182,16 @@ ul, ol { margin-block: 0; }
   .cta-band__inner { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 900px) {
+  :root { --form-help-size: 1rem; --form-label-size: 1rem; --form-status-size: 1rem; }
+  .section-head--center { margin-inline: 0; text-align: left; }
+  .text-link { min-height: 2.75rem; }
+}
+
 @media (max-width: 760px) {
   :root {
+    --brand-lockup-height: 2rem;
+    --brand-lockup-height-footer: 2.25rem;
     --section-standard: clamp(4rem, 11vw, 4.75rem);
     --section-compact: clamp(3rem, 9vw, 3.75rem);
     --section-hero: clamp(3.75rem, 10vw, 4.5rem);
@@ -203,7 +212,7 @@ ul, ol { margin-block: 0; }
 }
 
 @media (max-width: 480px) {
-  :root { --gutter: 1.5rem; }
+  :root { --gutter: 1.5rem; --brand-lockup-height: 1.7rem; --brand-lockup-height-footer: 2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

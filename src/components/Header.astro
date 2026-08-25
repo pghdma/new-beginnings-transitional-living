@@ -138,7 +138,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .utility-call :global(svg) { width: .9rem; height: .9rem; color: var(--accent-on-dark); stroke-width: 2; }
   .nav-wrap { background: var(--paper); }
   .nav-inner { display: flex; min-height: var(--header-nav-height); align-items: center; justify-content: space-between; gap: 2rem; }
-  .wordmark { display: inline-flex; color: var(--navy-950); text-decoration: none; }
+  .wordmark { display: inline-flex; min-width: 0; flex: 0 1 auto; color: var(--navy-950); text-decoration: none; }
   nav { display: flex; align-items: center; gap: clamp(.65rem, 1vw, 1.15rem); }
   nav a { color: var(--navy-950); font-size: .9rem; font-weight: var(--weight-heading); text-decoration: none; }
   nav > a[aria-current='page'], .nav-group.is-current > a, .nav-group > a[aria-current='page'] { color: var(--teal-700); }
@@ -161,6 +161,8 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   @media (max-width: 1080px) {
     .utility-inner { justify-content: center; }
     .utility-claims { display: none; }
+    .utility-call { min-height: 2.8rem; margin-block: -.4rem; padding-inline: .75rem; }
+    .wordmark { min-height: 2.8rem; align-items: center; }
     .menu-button { display: block; }
     nav { position: absolute; inset: var(--header-total-height) 0 auto; display: none; max-height: calc(100vh - var(--header-total-height)); padding: 1.5rem; overflow-y: auto; border-top: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
     nav.is-open { display: grid; }
