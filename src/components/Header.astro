@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import BrandLockup from './BrandLockup.astro';
 import { nav, site } from '../data/site';
 const current = Astro.url.pathname;
@@ -7,8 +8,17 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
 <header class="site-header">
   <div class="utility">
     <div class="container utility-inner">
-      <span>501(c)(3) Pittsburgh nonprofit <i aria-hidden="true">·</i> DDAP-licensed residences <i aria-hidden="true">·</i> WestPARR inspected</span>
-      <a href={site.phoneHref}>Call {site.phone}</a>
+      <div class="utility-claims">
+        <span>501(c)(3) Pittsburgh nonprofit</span>
+        <i aria-hidden="true">·</i>
+        <span>DDAP-licensed residences</span>
+        <i aria-hidden="true">·</i>
+        <span>WestPARR inspected</span>
+      </div>
+      <a class="utility-call" href={site.phoneHref}>
+        <Icon name="lucide:phone" aria-hidden="true" />
+        <span>Call {site.phone}</span>
+      </a>
     </div>
   </div>
   <div class="nav-wrap">
@@ -122,9 +132,10 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .site-header { position: sticky; z-index: 100; top: 0; box-shadow: 0 1px 0 rgba(23,55,70,.08); }
   .utility { color: var(--white); background: var(--navy-950); font-size: .86rem; }
   .utility-inner { display: flex; min-height: var(--header-utility-height); align-items: center; justify-content: space-between; gap: 1rem; }
-  .utility-inner span { display: flex; align-items: center; gap: .55rem; }
-  .utility-inner i { color: var(--slate-300); font-style: normal; }
-  .utility a { color: var(--white); font-weight: var(--weight-semibold); }
+  .utility-claims { display: flex; align-items: center; gap: .55rem; }
+  .utility-claims i { color: var(--slate-300); font-style: normal; }
+  .utility-call { display: inline-flex; align-items: center; gap: .45rem; color: var(--white); font-weight: var(--weight-semibold); text-decoration: none; }
+  .utility-call :global(svg) { width: .9rem; height: .9rem; color: var(--accent-on-dark); stroke-width: 2; }
   .nav-wrap { background: var(--paper); }
   .nav-inner { display: flex; min-height: var(--header-nav-height); align-items: center; justify-content: space-between; gap: 2rem; }
   .wordmark { display: inline-flex; color: var(--navy-950); text-decoration: none; }
@@ -148,6 +159,8 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .menu-button[aria-expanded='true'] .menu-icon i:nth-child(2) { opacity: 0; }
   .menu-button[aria-expanded='true'] .menu-icon i:last-child { transform: translateY(-.44rem) rotate(-45deg); }
   @media (max-width: 1080px) {
+    .utility-inner { justify-content: center; }
+    .utility-claims { display: none; }
     .menu-button { display: block; }
     nav { position: absolute; inset: var(--header-total-height) 0 auto; display: none; max-height: calc(100vh - var(--header-total-height)); padding: 1.5rem; overflow-y: auto; border-top: 1px solid var(--slate-200); background: var(--paper); box-shadow: var(--shadow); }
     nav.is-open { display: grid; }
@@ -161,9 +174,4 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
     .nav-group.is-open .submenu { display: grid; }
     .submenu a { padding: .7rem .8rem; }
   }
-  @media (max-width: 760px) {
-    .utility-inner span { display: none; }
-    .utility-inner { justify-content: flex-end; }
-  }
-
 </style>
