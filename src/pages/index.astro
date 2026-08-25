@@ -7,12 +7,12 @@ const foundations = [
   {
     icon: 'shield-check',
     title: 'A House Where Nobody Uses',
-    copy: 'Every home is substance free, with random drug screens. That is not a threat. It is what makes the house safe for everyone in it.',
+    copy: 'Every house is substance free, with random drug screens. That’s what keeps the house safe for everyone living in it.',
   },
   {
     icon: 'users-round',
     title: 'People Who Get It',
-    copy: 'Your housemates are in recovery too. Peer support is not a program. It is the person at the kitchen table who has been where you are.',
+    copy: 'Your housemates are in recovery too. The person across the kitchen table has been where you are, and that counts for a lot.',
   },
   {
     icon: 'list-checks',
@@ -29,9 +29,9 @@ const dailyLife = [
 ];
 
 const firstConversation = [
-  { number: '01', title: 'Call or Apply', copy: `Call ${site.phone} or send the short application. Tell us whether you are asking about the men’s houses or the women’s house.` },
-  { number: '02', title: 'We Talk', copy: 'We call you back, ask a few questions, and tell you what is open, what it costs, and what the house expects.' },
-  { number: '03', title: 'Move In', copy: 'If it is a fit and a bed is open, you get the address, the move-in list, and a date.' },
+  { number: '01', title: 'Call or Apply', copy: `Call ${site.phone} or send the short application. Tell us whether you’re asking about the men’s houses or the women’s house.` },
+  { number: '02', title: 'We Talk', copy: 'We call you back, ask a few questions, and tell you what’s open, what it costs, and what the house expects.' },
+  { number: '03', title: 'Move In', copy: 'If it’s a fit and a bed is open, you get the address, the move-in list, and a date.' },
 ];
 
 const trustPoints = [
@@ -52,7 +52,7 @@ const trustPoints = [
       <div class="home-hero__copy">
         <p class="eyebrow">Nonprofit Sober Living in Pittsburgh</p>
         <h1>Recovery Housing in Pittsburgh for Men and Women</h1>
-        <p class="lead">Safe, substance-free homes where staying sober is the normal thing to do. Licensed by Pennsylvania, run by a counselor who has done this since 1999. You do not need to have it all figured out to call.</p>
+        <p class="lead">Safe, substance-free homes where staying sober is the normal thing to do. Licensed by Pennsylvania, run by a counselor who has done this since 1999. You don’t need to have it all figured out to call.</p>
         <div class="actions home-hero__actions">
           <a class="button" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
           <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
@@ -72,7 +72,7 @@ const trustPoints = [
         </figure>
       </header>
       <div class="purpose-content">
-        <p class="lead">Treatment ends. Then you need somewhere to live where staying clean is the normal thing to do. That is what a recovery house is for.</p>
+        <p class="lead">Treatment ends. Then you need somewhere to live where staying clean is the normal thing to do. That’s what a recovery house is for.</p>
         <p>New Beginnings runs sober living homes for adults in Pittsburgh who are done using and want a real shot at keeping it that way. The houses are AA and NA based. You live with other people doing the same work, you go to meetings, you keep a job or go to school, and you come home to a house where nobody is using.</p>
         <ul class="foundation-list">
           {foundations.map((item) => (
@@ -142,7 +142,7 @@ const trustPoints = [
           <div>
             <span class="housing-fact__label">Residence privacy</span>
             <h3>We Don’t Post Street Addresses</h3>
-            <p>Our residents are your neighbors. You get the address when we talk about a bed, not from a search engine.</p>
+            <p>Our residents live there. We give out the address when we’re talking with you about a bed.</p>
           </div>
         </div>
       </aside>
@@ -154,14 +154,14 @@ const trustPoints = [
       <div class="daily-content">
         <div class="daily-content__inner">
           <p class="eyebrow">A Normal Week</p>
-          <h2>Recovery Happens on a Tuesday Afternoon</h2>
-          <p class="lead">The house gives you a place to come back to. What you do with the day is up to you: work, school, meetings, court dates, family, and the small routines that hold a life together.</p>
+          <h2>Most of Recovery Is Just a Normal Week</h2>
+          <p class="lead">The house gives you a place to come back to. The rest of the day is yours: work, school, meetings, court dates, family, and everything else that goes into a normal week.</p>
           <ul class="daily-list">
             {dailyLife.map((item) => (
               <li><Icon name={`lucide:${item.icon}`} aria-hidden="true" /><span>{item.title}</span></li>
             ))}
           </ul>
-          <p class="daily-scope">New Beginnings is housing, not treatment. If you are in counseling, on medication, or seeing a doctor, you keep doing that with your own providers. We make sure you have a stable place to live while you do.</p>
+          <p class="daily-scope">New Beginnings is housing, not treatment. If you’re in counseling, on medication, or seeing a doctor, you keep doing that with your own providers. We make sure you have a stable place to live while you do.</p>
         </div>
       </div>
       <figure class="daily-photo">
@@ -178,7 +178,7 @@ const trustPoints = [
           <h2>Run by a Counselor Who Has Done This Since 1999</h2>
         </header>
         <div class="trust-intro__copy">
-          <p class="lead">I’m Susan Rua. I have worked in addiction counseling since 1999, and I have owned and run sober living homes in Pittsburgh for more than ten years. I started New Beginnings because people leaving treatment needed somewhere decent to go, and there were not enough of those places.</p>
+          <p class="lead">I’m Susan Rua. I’ve worked in addiction counseling since 1999, and I’ve owned and run sober living homes in Pittsburgh for more than ten years. I started New Beginnings because people leaving treatment needed somewhere decent to go, and there weren’t enough of those places.</p>
           <p>New Beginnings is a Pittsburgh 501(c)(3) public charity. Our houses are licensed by Pennsylvania DDAP and certified by WestPARR, and you can check all of that yourself.</p>
           <div class="actions trust-section__actions">
             <a class="button" href="/about/board/#susan-rua">Meet Susan<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
@@ -207,7 +207,7 @@ const trustPoints = [
       <div class="conversation-content">
         <p class="eyebrow">Getting In</p>
         <h2>Start With a Phone Call</h2>
-        <p>You do not need a referral, a treatment discharge, or the perfect story. Call, or send the short application, and we will talk. Keep medical and legal details off the website. We will ask for what we need.</p>
+        <p>You don’t need a referral, and you don’t need to be coming straight from treatment. Call, or send the short application, and we’ll talk. Keep medical and legal details off the website. We’ll ask for what we need.</p>
         <ol class="conversation-steps">
           {firstConversation.map((step) => (
             <li>

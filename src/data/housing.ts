@@ -43,12 +43,12 @@ const sharedHouseholdFeatures: Feature[] = [
   {
     icon: 'shield-check',
     title: 'Substance Free, Always',
-    copy: 'No alcohol, no drugs, no prescription narcotics. Random drug screens throughout your stay. That is what makes the house safe for everyone in it.',
+    copy: 'No alcohol, no drugs, no prescription narcotics. Random drug screens throughout your stay. That’s what keeps the house safe.',
   },
   {
     icon: 'users-round',
     title: 'Housemates in Recovery',
-    copy: 'Everyone in the house is doing the same work you are. That is not a feature of the program. It is the program.',
+    copy: 'Everyone in the house is doing the same work you are, and that’s a big part of what makes it work.',
   },
   {
     icon: 'clipboard-check',
@@ -76,12 +76,12 @@ const sharedSupportFeatures: Feature[] = [
   {
     icon: 'stethoscope',
     title: 'Your Providers Stay Yours',
-    copy: 'Counseling, medication, and medical care stay with your own doctor, counselor, or treatment program. We are the house, not the treatment.',
+    copy: 'Counseling, medication, and medical care stay with your own doctor, counselor, or treatment program.',
   },
   {
     icon: 'bus',
     title: 'Close to the City',
-    copy: 'The houses are in established Pittsburgh neighborhoods on bus lines, near jobs, meetings, and the people you are rebuilding with.',
+    copy: 'The houses are in established Pittsburgh neighborhoods on bus lines, near jobs, meetings, and family.',
   },
 ];
 
@@ -95,27 +95,27 @@ function buildFaqs(audience: Audience): FaqGroup[] {
       items: [
         {
           question: `Who is ${audience === 'men' ? 'men’s' : 'women’s'} recovery housing for?`,
-          answer: `Adult ${people} who are done using and willing to live by house rules: substance free, meetings, curfew, chores, and drug screens. You do not need to be fresh out of treatment, and you do not need a referral. You need to want this.`,
+          answer: `Adult ${people} who are done using and willing to live by house rules: substance free, meetings, curfew, chores, and drug screens. You don’t need to be fresh out of treatment, and you don’t need a referral.`,
         },
         {
           question: 'Do I need to come straight from treatment?',
-          answer: 'No. Some residents come straight from rehab or detox. Some come from jail or parole. Some just know they cannot stay sober where they are living now. Call and tell us where you are. We will tell you honestly whether a recovery house is the right next step.',
+          answer: 'No. Some residents come straight from rehab or detox. Some come from jail or parole. Some just know they can’t stay sober where they’re living now. Call and tell us where things stand. We’ll tell you straight whether a recovery house is the right next step.',
         },
         {
           question: 'Is this a halfway house?',
-          answer: 'Not in the licensing sense. In Pennsylvania a halfway house is a treatment program. New Beginnings is a licensed recovery house, which most people call sober living: a substance-free home with rules, drug screens, and housemates in recovery, but no clinical treatment on site. If someone told you to find a halfway house, a recovery house may be what you actually need. Call and we will sort it out.',
+          answer: 'Not in the licensing sense. In Pennsylvania a halfway house is a treatment program. New Beginnings is a licensed recovery house, which most people call sober living: a substance-free home with rules, drug screens, and housemates in recovery, but no clinical treatment on site. If someone told you to find a halfway house, a recovery house may be what you actually need. Call and we’ll figure out which one you need.',
         },
         {
           question: 'How do I find out if a bed is open?',
-          answer: `Call 412-628-0403. That is the fastest way. You can also send the application and we will call you back. Openings in ${houseNoun} change week to week, so a call today is worth more than a form from last month.`,
+          answer: `Call 412-628-0403. That’s the fastest way. You can also send the application and we’ll call you back. Openings in ${houseNoun} change week to week, so it’s best to call.`,
         },
         {
           question: 'Can a family member or a probation officer call for me?',
-          answer: 'Yes. Family, counselors, discharge planners, and probation and parole officers call us all the time. Just keep medical records, court records, and other private details off the website form. We will ask for what we need directly.',
+          answer: 'Yes. Family, counselors, discharge planners, and probation and parole officers call us all the time. Just keep medical records, court records, and other private details off the website form. We’ll ask for what we need directly.',
         },
         {
           question: 'Can I see the house before I decide?',
-          answer: 'Usually, yes. Ask when you call. We do not post house addresses online, so a visit is arranged privately.',
+          answer: 'Usually, yes. Ask when you call. We don’t post house addresses online, so a visit is arranged privately.',
         },
       ],
     },
@@ -124,19 +124,19 @@ function buildFaqs(audience: Audience): FaqGroup[] {
       items: [
         {
           question: 'How much is rent?',
-          answer: 'Rent is set per house and is not posted online because it changes. When you call, you will get the current amount, what is due before move-in, and the payment schedule. Pennsylvania licensing requires a written fee schedule, and you will have it before you pay anything.',
+          answer: 'Rent is set per house and isn’t posted online because it changes. When you call, you’ll get the current amount, what’s due before move-in, and the payment schedule. Pennsylvania licensing requires a written fee schedule, and you’ll have it before you pay anything.',
         },
         {
-          question: 'What is included?',
+          question: 'What’s included?',
           answer: 'A furnished bed with bedding, and shared kitchen, bathrooms, and living space. You buy and keep your own food and hygiene items. Ask about anything specific when you call.',
         },
         {
           question: 'Are bedrooms shared?',
-          answer: 'Some rooms are shared. What is open when you move in determines the room, so ask when you call. Either way, your bed and your space are yours.',
+          answer: 'Some rooms are shared. It depends on what’s open when you move in, so ask when you call.',
         },
         {
           question: 'What should I bring?',
-          answer: 'Photo ID, your insurance card, up to three bags of clothing, up to five pairs of shoes, your hygiene items, and your own food. Bedding is provided. Bags are checked at move-in, so do not bring anything you would not want found.',
+          answer: 'Photo ID, your insurance card, up to three bags of clothing, up to five pairs of shoes, your hygiene items, and your own food. Bedding is provided. Bags are checked at move-in.',
         },
         {
           question: 'Are meals provided?',
@@ -144,7 +144,7 @@ function buildFaqs(audience: Audience): FaqGroup[] {
         },
         {
           question: 'Can I work or go to school while I live there?',
-          answer: 'Yes, and it is expected. Residents work, look for work, go to school, or volunteer. Curfew and the weekly house meeting are the fixed points in the week. Everything else fits around your schedule.',
+          answer: 'Yes, and it’s expected. Residents work, look for work, go to school, or volunteer. Curfew and the weekly house meeting are the fixed points in the week. Everything else fits around your schedule.',
         },
         {
           question: 'Can I bring a car or take the bus?',
@@ -157,19 +157,19 @@ function buildFaqs(audience: Audience): FaqGroup[] {
       items: [
         {
           question: 'What meetings are required?',
-          answer: 'Our houses are AA and NA based. You are expected to go to outside 12-step meetings, get a sponsor, and work the steps, on top of the mandatory weekly in-house meeting. The exact meeting expectations are covered at intake.',
+          answer: 'Our houses are AA and NA based. You’re expected to go to outside 12-step meetings, get a sponsor, and work the steps, on top of the mandatory weekly in-house meeting. The exact meeting expectations are covered at intake.',
         },
         {
           question: 'Is there a curfew?',
-          answer: 'Yes. Every house sets its own curfew, and it depends on your situation and where you are in your stay. If you are on probation or parole, your supervision curfew is your curfew. Work schedules and court obligations are worked out ahead of time, not the night of.',
+          answer: 'Yes. Every house sets its own curfew, and it depends on your situation and where you are in your stay. If you’re on probation or parole, your supervision curfew is your curfew. Work schedules and court obligations are worked out ahead of time, not the night of.',
         },
         {
           question: 'Are visitors or overnight passes allowed?',
-          answer: 'Visitors and overnights follow the house rules and need approval ahead of time. You will have the written rules before you move in, so there are no surprises.',
+          answer: 'Visitors and overnights follow the house rules and need approval ahead of time. You’ll have the written rules before you move in, so there are no surprises.',
         },
         {
           question: 'Are there chores and house meetings?',
-          answer: 'Yes. Everyone keeps their own space and shares the common chores. The weekly in-house meeting is mandatory. It is where the house sorts out problems, schedules, and plans.',
+          answer: 'Yes. Everyone keeps their own space and shares the common chores. The weekly in-house meeting is mandatory. It’s where the house sorts out problems, schedules, and plans.',
         },
         {
           question: 'Is there drug testing?',
@@ -177,19 +177,19 @@ function buildFaqs(audience: Audience): FaqGroup[] {
         },
         {
           question: 'What about prescriptions or medication for addiction treatment?',
-          answer: 'Prescription narcotics are not permitted in the house. For any other prescription, including medication for addiction treatment, talk to us before you move in. Medication policies are explained in writing at intake. Never stop or change a medication because of something you read on a website.',
+          answer: 'Prescription narcotics aren’t permitted in the house. For any other prescription, including medication for addiction treatment, talk to us before you move in. Medication policies are explained in writing at intake. Don’t stop or change a medication based on what you read here. Talk to your doctor.',
         },
         {
           question: 'What happens if I use or break a serious rule?',
-          answer: 'Using, refusing a drug screen, or threatening anyone can end your stay. That policy is in writing and you will see it before you move in. If you are asked to leave, you can talk to us later about coming back.',
+          answer: 'Using, refusing a drug screen, or threatening anyone can end your stay. That policy is in writing and you’ll see it before you move in. If you’re asked to leave, you can talk to us later about coming back.',
         },
         {
           question: 'How long can I stay?',
-          answer: 'There is no fixed exit date on the calendar. Residents stay as long as they are working a program, paying rent, and following house rules, and move on when they are steady, working, and ready to live on their own. For most people that is months, not weeks.',
+          answer: 'There’s no fixed exit date on the calendar. Residents stay as long as they’re working a program, paying rent, and following house rules, and move on when they’re steady, working, and ready to live on their own. Most people stay several months or longer.',
         },
         {
           question: 'Does New Beginnings provide counseling or medical treatment?',
-          answer: 'No. New Beginnings is housing. Our founder, Susan Rua, is a licensed counselor who runs a separate practice, but living here does not require you to see her or anyone in particular. You keep your own counselor, doctor, or program.',
+          answer: 'No. New Beginnings is housing. Our founder, Susan Rua, is a licensed counselor who runs a separate practice, but living here doesn’t require you to see her or anyone in particular. You keep your own counselor, doctor, or program.',
         },
       ],
     },

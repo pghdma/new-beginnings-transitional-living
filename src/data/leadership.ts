@@ -31,7 +31,7 @@ export const organizationalLeadership: LeadershipProfile[] = [
     biography: [
       'Susan has worked in addiction counseling since 1999. Before counseling she was a nurse, and for more than ten years she has owned and directed sober living homes in Pittsburgh.',
       'She started New Beginnings because too many people finish treatment and have nowhere safe to go. The houses are built on what she has seen work: a substance-free home, clear rules, a weekly house meeting, AA and NA, and housemates who are doing the same thing.',
-      'Susan also runs Step By Step Support (stepbystepsupport.net), a licensed counseling practice in Mt. Washington. The two are separate organizations. Living at New Beginnings does not require seeing Susan or any particular provider for counseling.',
+      'Susan also runs Step By Step Support (stepbystepsupport.net), a licensed counseling practice in Mt. Washington. The two are separate organizations. Living at New Beginnings doesn’t require seeing Susan or any particular provider for counseling.',
     ],
     credentials: ['CADC', 'MSPC', 'LPC'],
     education: [
@@ -46,7 +46,7 @@ export const organizationalLeadership: LeadershipProfile[] = [
   },
 ];
 
-// Biographical details belong here only after they are cleared for public use.
+// Biographical details belong here only after they’re cleared for public use.
 export const boardMembers: LeadershipProfile[] = [
   {
     slug: 'theresa-rem-canofari',

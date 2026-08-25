@@ -39,7 +39,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/about/': {
     documentTitle: 'About New Beginnings | Nonprofit Sober Living in Pittsburgh',
-    description: 'New Beginnings is a Pittsburgh 501(c)(3) founded in 2016 by counselor Susan Rua to run safe, licensed recovery housing for men and women. Here is who we are.',
+    description: 'New Beginnings is a Pittsburgh 501(c)(3) founded in 2016 by counselor Susan Rua to run safe, licensed recovery housing for men and women. Here’s who we are.',
     pageName: 'About New Beginnings',
     pageType: 'AboutPage',
     image: '/images/social/about.jpg',
