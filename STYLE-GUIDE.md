@@ -6,7 +6,9 @@ This section is the source of truth for the current New Beginnings site. The bro
 
 ### Visual System
 
-- Use Source Sans 3, institutional navy and teal, pale sky, paper, and off white surfaces.
+- Type pairing: headings (`h1`, `h2`, `h3`) use Cormorant Garamond SemiBold via `--font-display`; body, UI, buttons, eyebrows, and small labels use Source Sans 3 via `--font-body`. Do not set headings in the sans or body copy in the serif.
+- Logo: the vector lockup and symbol live in `src/assets/brand/` and are inlined by `BrandLockup.astro`, filled with `currentColor`. Set the mark's color with `color`, its size with `--brand-lockup-height` / `--brand-lockup-height-footer`. Never recreate the logo in live text.
+- Palette: institutional navy and teal, pale sky, paper, and off white surfaces. Brand ink for the logo is `--brand-ink`.
 - Use the shared tokens in `src/styles/global.css` for color, weight, type roles, spacing, controls, header geometry, medallions, focus, and common depth.
 - Use `--shadow` for a subtle surface and `--shadow-raised` for a meaningful raised panel. Unique image and interaction shadows may remain scoped when they communicate a deliberate depth level.
 - Use modest radii. Circles are reserved for medallions and real portraits.
