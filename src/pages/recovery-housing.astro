@@ -133,23 +133,6 @@ const dailyRhythm = [
     </div>
   </section>
 
-  <section class="privacy-section" id="residence-privacy">
-    <div class="container privacy-layout">
-      <div class="privacy-content">
-        <span class="privacy-content__icon icon-medallion icon-medallion--solid"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></span>
-        <p class="eyebrow">Residence Privacy</p>
-        <h2>Why We Don’t Post the Addresses</h2>
-        <p>Our residents live in these houses. Posting a street address or a photo of the front porch would put their privacy at risk. You’ll get the address when we talk about a bed. If you want to verify us first, the state licensing records are public.</p>
-        <a class="button button--outline" href="/about/transparency/">
-          See Our Credentials
-          <Icon name="lucide:arrow-right" aria-hidden="true" />
-        </a>
-      </div>
-      <figure class="privacy-photo">
-        <img src="/images/front-door.webp" alt="A welcoming residential front door viewed from inside" width="2200" height="3481" loading="lazy" />
-      </figure>
-    </div>
-  </section>
 
   <CtaBand text={`Call ${site.phone} or send the application. Tell us which house you’re asking about and we’ll tell you what’s open, what it costs, and what the house expects.`} />
 </MainLayout>
@@ -221,20 +204,8 @@ const dailyRhythm = [
   .pathways-location { display: flex; max-width: 34rem; margin-top: var(--space-5); align-items: flex-start; gap: var(--button-gap); color: var(--sky-200); font-size: .9rem; line-height: 1.5; }
   .pathways-location :global(svg) { width: 1rem; height: 1rem; margin-top: .2rem; flex: 0 0 auto; }
 
-  .privacy-section { padding-block: var(--section-standard); background: var(--paper); }
-  .privacy-layout { display: grid; min-height: 31rem; grid-template-areas: 'photo content'; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: stretch; box-shadow: 0 1.15rem 3rem rgba(23,55,70,.12); }
-  .privacy-photo { min-height: 31rem; margin: 0; overflow: hidden; background: var(--slate-200); grid-area: photo; }
-  .privacy-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(.98); }
-  .privacy-content { display: flex; padding: clamp(var(--space-7), 6vw, var(--space-9)); background: var(--sky-50); flex-direction: column; align-items: flex-start; justify-content: center; grid-area: content; }
-  .privacy-content__icon { margin-bottom: var(--space-6); }
-  .privacy-content__icon :global(svg) { width: 1.55rem; height: 1.55rem; }
-  .privacy-content h2 { max-width: 21ch; margin-top: var(--space-3); font-size: var(--type-section-medium); }
-  .privacy-content > p:not(.eyebrow) { max-width: 38rem; margin-top: var(--space-5); }
-  .privacy-content .button { margin-top: var(--space-6); gap: var(--space-2); }
-  .privacy-content .button :global(svg) { width: 1rem; height: 1rem; }
-
   @media (max-width: 900px) {
-    .definition-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
+    .definition-layout, .pathways-layout { grid-template-columns: 1fr; }
     .housing-hero { position: relative; overflow: hidden; border-bottom: 0; color: var(--white); background: var(--navy-950); }
     .housing-hero__grid { display: block; min-height: 0; }
     .housing-hero__photo { position: absolute; z-index: 0; margin: 0; inset: 0; }
@@ -255,8 +226,6 @@ const dailyRhythm = [
     .rhythm-photo { min-height: 0; aspect-ratio: 16 / 8.5; }
     .pathways-layout { grid-template-areas: 'content' 'photo'; box-shadow: var(--shadow-raised); }
     .pathways-photo { height: clamp(18rem, 48vw, 26rem); min-height: 0; }
-    .privacy-layout { min-height: 0; grid-template-areas: 'content' 'photo'; }
-    .privacy-photo { min-height: 0; aspect-ratio: 16 / 9; }
   }
 
   @media (max-width: 760px) {
@@ -274,7 +243,5 @@ const dailyRhythm = [
     .crisis-note { padding: var(--space-4); }
     .pathway-links a { padding: 1rem; grid-template-columns: 2.35rem minmax(0, 1fr) auto; gap: .8rem; }
     .pathways-content { padding: var(--space-7) var(--space-5); }
-    .privacy-content { padding: var(--space-7) var(--space-5); }
-    .privacy-content .button { width: 100%; }
   }
 </style>

@@ -89,7 +89,6 @@ const publicSources = [
         <p class="eyebrow">Public Records</p>
         <h2>Look Us Up</h2>
         <p>These records are kept by the IRS, the Commonwealth of Pennsylvania, and WestPARR, not by us. You don’t have to take our word for any of it.</p>
-        <p class="records-privacy"><Icon name="lucide:eye-off" aria-hidden="true" /> Some public directories list licensed house addresses. We don’t repeat them here, for our residents’ sake.</p>
       </div>
       <div class="record-directory" aria-label="Independent public records">
         {publicSources.map((source) => (
@@ -123,24 +122,6 @@ const publicSources = [
     </div>
   </section>
 
-  <section class="privacy-section">
-    <div class="privacy-content">
-      <div class="privacy-content__inner">
-        <p class="eyebrow">Residence Privacy</p>
-        <h2>Why the Addresses Are Not Here</h2>
-        <p class="privacy-lede">We tell you the neighborhoods so you know where you would be living. We don’t publish the street addresses because our residents live there.</p>
-        <p>The same goes for photos: you won’t find a front porch on this site. If you need to verify a license, the state directory is public. If you need the address, call and we’ll talk.</p>
-        <div class="neighborhoods">
-          <div class="neighborhoods__label"><Icon name="lucide:map-pin" aria-hidden="true" /><span>Our neighborhoods</span></div>
-          <ul>{site.neighborhoods.map((neighborhood) => <li>{neighborhood}</li>)}</ul>
-          <p class="neighborhoods__note">Administrative office in Mt. Washington.</p>
-        </div>
-      </div>
-    </div>
-    <figure class="privacy-photo">
-      <img src="/images/house-living-room.webp" alt="A comfortable residential living room" width="2200" height="1467" loading="lazy" />
-    </figure>
-  </section>
 
   <section class="records-cta">
     <img class="records-cta__image" src="/images/admissions.jpg" alt="" width="1880" height="1245" loading="lazy" />
@@ -193,8 +174,6 @@ const publicSources = [
   .records-intro .eyebrow { color: var(--accent-on-dark); }
   .records-intro h2 { max-width: 20ch; margin-top: var(--space-4); color: var(--white); }
   .records-intro > h2 + p { max-width: 31rem; margin-top: var(--space-5); color: var(--sky-100); }
-  .records-privacy { display: flex; margin-top: var(--space-6); align-items: flex-start; gap: .8rem; font-size: .95rem; line-height: 1.5; }
-  .records-privacy :global(svg) { width: 1.25rem; height: 1.25rem; margin-top: .15rem; color: var(--accent-on-dark); flex: 0 0 auto; }
   .record-directory { background: var(--paper); color: var(--slate-700); }
   .record-entry { display: grid; grid-template-columns: auto minmax(0,1fr) auto; padding: clamp(1.8rem,4vw,2.7rem); gap: var(--space-5); align-items: center; }
   .record-entry + .record-entry { border-top: 1px solid var(--slate-200); }
@@ -212,22 +191,6 @@ const publicSources = [
   .meaning-item > :global(svg) { width: 2rem; height: 2rem; color: var(--accent-on-dark); stroke-width: 1.55; }
   .meaning-item h3 { color: var(--white); font-size: 1.25rem; }
   .meaning-item p { margin-top: .55rem; color: var(--sky-100); font-size: .96rem; line-height: 1.55; }
-
-  .privacy-section { display: grid; min-height: 43rem; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,1fr) minmax(0,1fr); background: var(--paper); }
-  .privacy-photo { min-height: 43rem; margin: 0; overflow: hidden; grid-area: photo; }
-  .privacy-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .privacy-content { display: grid; grid-area: content; align-items: center; }
-  .privacy-content__inner { width: min(100%,43rem); padding: clamp(3rem,6vw,5rem); }
-  .privacy-content h2 { max-width: 20ch; margin-top: var(--space-4); }
-  .privacy-lede { margin-top: var(--space-5); color: var(--slate-800); font-size: clamp(1.15rem,1.7vw,1.35rem); line-height: 1.55; }
-  .privacy-content__inner > p + p { margin-top: var(--space-5); }
-  .neighborhoods { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--slate-200); }
-  .neighborhoods__label { display: flex; align-items: center; gap: var(--button-gap); color: var(--teal-700); font-size: .77rem; font-weight: var(--weight-semibold); letter-spacing: .1em; text-transform: uppercase; }
-  .neighborhoods__label :global(svg) { width: 1.25rem; height: 1.25rem; stroke-width: 1.8; }
-  .neighborhoods ul { display: flex; flex-wrap: wrap; margin: var(--space-4) 0 0; padding: 0; gap: .4rem 1.5rem; list-style: none; }
-  .neighborhoods li { position: relative; color: var(--navy-900); font-weight: var(--weight-heading); }
-  .neighborhoods li + li::before { position: absolute; left: -.9rem; color: var(--teal-700); content: '•'; }
-  .neighborhoods__note { max-width: 34rem; margin-top: var(--space-3); color: var(--slate-600); font-size: .92rem; }
 
   .records-cta { position: relative; display: grid; min-height: 26rem; overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
   .records-cta__image, .records-cta__shade { position: absolute; width: 100%; height: 100%; inset: 0; }
@@ -257,16 +220,13 @@ const publicSources = [
     .transparency-hero { min-height: 37rem; }
     .transparency-hero__image { object-position: 66% center; }
     .transparency-hero__shade { background: linear-gradient(90deg, rgba(11,40,52,.96) 0%, rgba(11,40,52,.86) 62%, rgba(11,40,52,.58) 100%); }
-    .identity-layout, .records-layout, .privacy-section { grid-template-columns: 1fr; }
+    .identity-layout, .records-layout { grid-template-columns: 1fr; }
     .identity-layout { grid-template-areas: 'content' 'photo'; }
-    .privacy-section { grid-template-areas: 'content' 'photo'; }
     .identity-photo { min-height: 26rem; }
     .identity-content { padding: var(--section-standard) var(--gutter); }
     .standing-list { grid-template-columns: 1fr 1fr; }
     .records-intro { position: static; }
     .record-directory { margin-top: var(--space-2); }
-    .privacy-photo { min-height: 28rem; }
-    .privacy-content__inner { padding: var(--section-standard) var(--gutter); }
     .records-cta__inner { grid-template-columns: 1fr; }
     .records-cta__actions { grid-template-columns: repeat(2,minmax(0,1fr)); justify-self: start; }
   }
@@ -286,9 +246,6 @@ const publicSources = [
     .meaning-strip { grid-template-columns: 1fr; }
     .meaning-heading { grid-column: auto; }
     .meaning-item { padding-top: var(--space-5); border-top: 1px solid rgba(255,255,255,.16); }
-    .privacy-photo { min-height: 22rem; }
-    .neighborhoods ul { display: grid; gap: .35rem; }
-    .neighborhoods li + li::before { display: none; }
     .records-cta { min-height: 33rem; }
     .records-cta__shade { background: rgba(11,40,52,.84); }
     .records-cta__inner { min-height: 33rem; align-content: center; }

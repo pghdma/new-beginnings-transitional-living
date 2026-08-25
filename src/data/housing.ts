@@ -114,7 +114,7 @@ function buildFaqs(audience: Audience): FaqGroup[] {
         },
         {
           question: 'Can I see the house before I decide?',
-          answer: 'Usually, yes. Ask when you call. We don’t post house addresses online, so a visit is arranged privately.',
+          answer: 'Usually, yes. Ask when you call and we’ll set it up.',
         },
       ],
     },
