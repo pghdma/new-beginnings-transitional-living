@@ -258,7 +258,7 @@ const galleryCopy = [
         <span class="icon-medallion icon-medallion--solid"><Icon name="lucide:map-pin" aria-hidden="true" /></span>
         <p class="eyebrow">Where the Houses Are</p>
         <h2>Pittsburgh Neighborhoods, Not Street Addresses</h2>
-        <p class="lead">{publicAreas} The houses are on bus lines and a short ride from downtown.</p>
+        <p class="location-copy__text">{publicAreas} The houses are on bus lines and a short ride from downtown.</p>
       </div>
       <div class="location-privacy">
         <Icon name="lucide:lock-keyhole" aria-hidden="true" />
@@ -367,10 +367,10 @@ const galleryCopy = [
   .location-stage { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: var(--gap-columns); align-items: center; }
   .location-copy .eyebrow { margin-top: var(--space-5); }
   .location-copy h2 { max-width: 21ch; margin-top: var(--space-4); }
-  .location-copy .lead { margin-top: var(--space-5); }
+  .location-copy__text { max-width: 36rem; margin-top: var(--space-5); color: var(--slate-600); line-height: 1.6; }
   .location-privacy { display: grid; padding: clamp(2rem, 5vw, 3.5rem); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); background: var(--paper); box-shadow: var(--shadow-raised); }
   .location-privacy > :global(svg) { width: 1.7rem; height: 1.7rem; color: var(--teal-700); stroke-width: 1.55; }
-  .location-privacy p { margin-top: var(--space-3); }
+  .location-privacy p { margin-top: var(--space-3); color: var(--slate-600); line-height: 1.6; }
   .location-privacy .button { width: fit-content; margin-top: var(--space-5); grid-column: 2; gap: var(--button-gap); }
   .location-privacy .button :global(svg) { width: 1rem; height: 1rem; }
 
@@ -454,7 +454,7 @@ const galleryCopy = [
 
     .location-copy .eyebrow { margin-top: var(--space-4); }
     .location-copy h2 { margin-top: var(--space-3); font-size: 2.15rem; }
-    .location-copy .lead { margin-top: var(--space-4); }
+    .location-copy__text { margin-top: var(--space-4); }
     .location-privacy { padding: var(--space-6); }
     .location-privacy { grid-template-columns: 1fr; }
     .location-privacy .button { width: 100%; grid-column: 1; }
