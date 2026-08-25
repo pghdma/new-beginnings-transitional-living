@@ -1,9 +1,9 @@
 ---
 const options = [
-  'Housing availability',
-  'Professional question',
-  'Donation or partnership',
-  'Organization or public records',
+  'Housing for myself or someone else',
+  'Referring a client',
+  'Donating or partnering',
+  'Records, credentials, or policies',
   'Something else',
 ];
 
@@ -14,7 +14,7 @@ const buttonLabel = 'Send Message';
   <header class="inquiry-form__header">
     <p class="eyebrow">Send a Message</p>
     <h2 id="inquiry-title">How Can We Help?</h2>
-    <p class="inquiry-form__intro">Use this form for a general question. Please keep medical, legal, and other sensitive information out of your message.</p>
+    <p class="inquiry-form__intro">For general questions. Keep medical, legal, and treatment details off this form. We will ask for what we need by phone.</p>
     <p class="form-required-note">All fields are required unless marked optional.</p>
   </header>
 
@@ -46,7 +46,7 @@ const buttonLabel = 'Send Message';
     <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
     <input type="hidden" name="startedAt" value="" />
 
-    <p class="privacy-note">Do not send medical records, diagnoses, medication information, Social Security numbers, or other sensitive information. <a href="/privacy/">Read the Privacy Policy.</a></p>
+    <p class="privacy-note">Please do not send medical records, diagnoses, medication details, Social Security numbers, or other sensitive information. <a href="/privacy/">Read the privacy policy.</a></p>
 
     <div class="verification">
       <p>Security Check</p>

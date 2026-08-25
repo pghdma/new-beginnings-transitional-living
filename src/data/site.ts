@@ -11,11 +11,12 @@ export const site = {
     city: 'Pittsburgh',
     state: 'PA',
     zip: '15211',
+    neighborhood: 'Mt. Washington',
     directionsHref: 'https://www.google.com/maps/dir/?api=1&destination=20%20Bailey%20Avenue%20Suite%20300%20Pittsburgh%20PA%2015211',
   },
   ein: '81-2901849',
-  neighborhoods: ['Sheraden', 'Brighton Heights', 'McKees Rocks'],
-  description: 'Structured recovery housing for men and women in Pittsburgh, grounded in peer support, accountability, and connection to recovery services.'
+  neighborhoods: ['Sheraden', 'Observatory Hill', 'Brighton Heights', 'McKees Rocks', 'Bellevue'],
+  description: 'Nonprofit sober living homes for men and women in Pittsburgh. DDAP-licensed, WestPARR-certified recovery housing on Pittsburgh’s North Side and West End and in nearby McKees Rocks and Bellevue, run by a counselor who has done this work since 1999.'
 };
 
 export const nav = [
@@ -25,14 +26,14 @@ export const nav = [
     children: [
       { label: 'About New Beginnings', href: '/about/' },
       { label: 'Board of Directors', href: '/about/board/' },
-      { label: 'Credentials & Transparency', href: '/about/transparency/' }
+      { label: 'Credentials & Licensing', href: '/about/transparency/' }
     ]
   },
   {
     label: 'Recovery Housing',
     href: '/recovery-housing/',
     children: [
-      { label: 'Recovery Housing Overview', href: '/recovery-housing/' },
+      { label: 'How Our Houses Work', href: '/recovery-housing/' },
       { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/' },
       { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/' }
     ]

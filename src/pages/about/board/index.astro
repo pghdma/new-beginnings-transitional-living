@@ -6,42 +6,42 @@ import { currentBoardMembers } from '../../../data/leadership';
 const responsibilities = [
   {
     icon: 'compass',
-    title: 'Mission Direction',
-    copy: 'Keep the work centered on responsible recovery housing and the long term needs of the people and communities New Beginnings serves.',
+    title: 'Mission',
+    copy: 'Keep New Beginnings focused on one thing: safe, licensed recovery housing for people in Pittsburgh who are done using.',
   },
   {
     icon: 'landmark',
-    title: 'Financial Stewardship',
-    copy: 'Exercise care over nonprofit resources so they continue to support stable housing and responsible operations.',
+    title: 'Money',
+    copy: 'Watch over the nonprofit’s finances so the houses stay open, the bills get paid, and the books stay clean.',
   },
   {
     icon: 'badge-check',
-    title: 'Public Accountability',
-    copy: 'Support ethical governance, legal compliance, and clear public information about the organization and its standing.',
+    title: 'Accountability',
+    copy: 'Make sure the organization follows the law, keeps its license, files with the IRS, and tells the public the truth about itself.',
   },
 ];
 
 const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   if (person.slug === 'susan-rua') {
-    return 'Susan founded New Beginnings and connects organizational leadership with the board’s work of mission stewardship and nonprofit accountability.';
+    return 'Susan founded New Beginnings in 2016 and serves as its president. She is a licensed professional counselor who has worked in addiction treatment since 1999 and has run sober living homes in Pittsburgh for more than a decade.';
   }
 
-  return 'Theresa is listed as a volunteer board member supporting governance, mission stewardship, and nonprofit accountability.';
+  return 'Theresa serves as a volunteer board member, helping oversee the nonprofit’s governance, finances, and accountability.';
 };
 ---
 
 <MainLayout
   title="Board of Directors"
-  description="Meet the volunteer Board of Directors providing governance and stewardship for New Beginnings Transitional Living Foundation."
+  description="Meet the board responsible for New Beginnings Transitional Living Foundation, a Pittsburgh nonprofit that runs licensed recovery housing for men and women."
 >
   <section class="board-hero">
     <div class="container board-hero__inner">
       <div class="board-hero__copy">
         <p class="eyebrow">Board of Directors</p>
-        <h1>Volunteer Leadership for the Mission</h1>
+        <h1>The People Responsible for New Beginnings</h1>
         <p class="lead">
-          The board provides governance, oversight, and long term stewardship for New
-          Beginnings Transitional Living Foundation.
+          New Beginnings is a public charity, which means it answers to a board, files with
+          the IRS, and keeps its standing public. These are the people who hold that responsibility.
         </p>
         <a class="button button--light" href="#meet-the-board">
           Meet the Board
@@ -65,10 +65,10 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     <div class="container">
       <header class="board-role__intro">
         <p class="eyebrow">What the Board Does</p>
-        <h2 id="board-role-title">Purposeful Stewardship</h2>
+        <h2 id="board-role-title">Keep It Honest, Solvent, and On Mission</h2>
         <p>
-          Organizational leadership manages the daily work. The board helps protect the
-          mission, steward resources, and maintain accountable nonprofit governance.
+          Susan and staff run the houses day to day. The board makes sure the organization
+          stays true to its purpose, spends money responsibly, and meets its legal obligations.
         </p>
       </header>
 
@@ -91,10 +91,10 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
       <div class="container">
         <header class="board-directory__intro">
           <p class="eyebrow">Meet the Board</p>
-          <h2 id="board-directory-title">People Providing Oversight</h2>
+          <h2 id="board-directory-title">Our Board</h2>
           <p>
-            New Beginnings publishes its board roster so residents, families,
-            professionals, and supporters can see who is entrusted with governance.
+            We publish our board so residents, families, referral partners, and donors
+            know exactly who is accountable for this organization.
           </p>
         </header>
 
@@ -168,14 +168,14 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   <section class="public-record" aria-labelledby="public-record-title">
     <div class="public-record__content">
       <div class="public-record__inner">
-        <p class="eyebrow">Governance and Accountability</p>
-        <h2 id="public-record-title">Public Standing You Can Review</h2>
+        <p class="eyebrow">Accountability</p>
+        <h2 id="public-record-title">Check Our Standing Yourself</h2>
         <p>
-          Nonprofit status, state licensing information, and recovery housing credentials
-          are collected in one place for independent review.
+          Our nonprofit status, state license, and WestPARR certification are all public
+          record. We have put the links in one place.
         </p>
         <a class="button" href="/about/transparency/">
-          Review Credentials and Records
+          See Credentials and Records
           <Icon name="lucide:arrow-right" aria-hidden="true" />
         </a>
       </div>
@@ -191,43 +191,6 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     </div>
   </section>
 </MainLayout>
-
-<script>
-  const memberCards = document.querySelectorAll<HTMLElement>('[data-member-card]');
-
-  memberCards.forEach((card) => {
-    const toggle = card.querySelector<HTMLButtonElement>('[data-member-toggle]');
-    const label = card.querySelector<HTMLElement>('[data-member-toggle-label]');
-    const front = card.querySelector<HTMLElement>('[data-member-front]');
-    const back = card.querySelector<HTMLElement>('[data-member-back]');
-
-    if (!toggle || !label || !front || !back) return;
-
-    const memberName = toggle.dataset.memberName ?? 'Board Member';
-    const memberFirstName = toggle.dataset.memberFirstName ?? memberName;
-
-    const setExpanded = (expanded: boolean) => {
-      toggle.setAttribute('aria-expanded', String(expanded));
-      front.setAttribute('aria-hidden', String(expanded));
-      back.setAttribute('aria-hidden', String(!expanded));
-      card.toggleAttribute('data-flipped', expanded);
-      label.textContent = expanded ? 'Show Front' : `About ${memberFirstName}`;
-      toggle.setAttribute('aria-label', expanded ? `Show the front of ${memberName}'s card` : `About ${memberName}`);
-    };
-
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      setExpanded(!expanded);
-    });
-
-    const memberId = card.closest('li')?.id;
-    const requestedMember = new URLSearchParams(window.location.search).get('member');
-    if (window.location.hash === `#${memberId}` || requestedMember === memberId) {
-      setExpanded(true);
-    }
-  });
-</script>
-
 <style>
   .board-hero {
     overflow: hidden;

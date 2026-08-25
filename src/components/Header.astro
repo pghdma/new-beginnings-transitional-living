@@ -9,11 +9,11 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   <div class="utility">
     <div class="container utility-inner">
       <div class="utility-claims">
-        <span>501(c)(3) Pittsburgh nonprofit</span>
+        <span>Pittsburgh nonprofit sober living</span>
         <i aria-hidden="true">·</i>
-        <span>DDAP-licensed residences</span>
+        <span>DDAP licensed</span>
         <i aria-hidden="true">·</i>
-        <span>WestPARR inspected</span>
+        <span>WestPARR certified</span>
       </div>
       <a class="utility-call" href={site.phoneHref}>
         <Icon name="lucide:phone" aria-hidden="true" />
@@ -56,7 +56,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
         ) : (
           <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
         ))}
-        <a class="nav-cta" href="/admissions/#inquiry">Ask About Housing</a>
+        <a class="nav-cta" href="/admissions/#inquiry">Ask About a Bed</a>
       </nav>
     </div>
   </div>

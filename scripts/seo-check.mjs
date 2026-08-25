@@ -98,7 +98,7 @@ for (const route of routes) {
   if (schema['@context'] !== 'https://schema.org') errors.push(`${route}: incorrect JSON-LD context`);
   if (!Array.isArray(schema['@graph'])) errors.push(`${route}: JSON-LD graph missing`);
   const graph = schema['@graph'] || [];
-  const webpage = graph.find((item) => ['WebPage', 'AboutPage', 'ContactPage', 'ProfilePage', 'CollectionPage'].includes(item['@type']));
+  const webpage = graph.find((item) => ['WebPage', 'AboutPage', 'ContactPage', 'ProfilePage', 'CollectionPage', 'FAQPage'].includes(item['@type']));
   if (!webpage) errors.push(`${route}: WebPage-family entity missing`);
   if (webpage?.url !== `${origin}${route}`) errors.push(`${route}: WebPage URL mismatch`);
   if (webpage?.description !== description) errors.push(`${route}: schema and meta descriptions differ`);

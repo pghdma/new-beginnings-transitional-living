@@ -6,12 +6,12 @@ import { site } from '../data/site';
   <div class="container application-shell">
     <header class="application-heading">
       <p class="eyebrow">Housing Application</p>
-      <h2 id="application-title">Start With the Practical Details</h2>
+      <h2 id="application-title">Tell Us a Little About What You Need</h2>
       <p>
-        This three step form begins the conversation about housing and current availability.
-        It does not replace the private admissions process or guarantee a room.
+        Three short steps. General answers are fine. We ask the detailed questions on the
+        phone, not on a public website.
       </p>
-      <p class="call-option">Prefer to speak with someone? <a class="inline-link" href={site.phoneHref}>Call {site.phone}.</a></p>
+      <p class="call-option">Rather just talk? <a class="inline-link" href={site.phoneHref}>Call {site.phone}.</a></p>
       <p class="form-required-note">All fields are required unless marked optional.</p>
     </header>
 
@@ -27,7 +27,7 @@ import { site } from '../data/site';
 
       <fieldset class="form-section" data-form-step="1">
         <legend tabindex="-1"><strong>Primary Contact</strong></legend>
-        <p class="section-intro">Tell us who should receive the response to this application.</p>
+        <p class="section-intro">Who should we call back?</p>
         <div class="form-grid">
           <label>First Name<input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
           <label>Last Name<input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
@@ -38,8 +38,8 @@ import { site } from '../data/site';
           <legend>Who Is Completing This Application?</legend>
           <div class="choice-grid choice-grid--three">
             <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applicant</strong><small>I am applying for myself.</small></span></label>
-            <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or Support Person</strong><small>I am helping someone apply.</small></span></label>
-            <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional Assisting an Applicant</strong><small>I am helping someone begin a housing inquiry.</small></span></label>
+            <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or Friend</strong><small>I am helping someone I care about apply.</small></span></label>
+            <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional</strong><small>I am a counselor, case manager, PO, or other professional.</small></span></label>
           </div>
         </fieldset>
         <fieldset class="choice-group">
@@ -57,7 +57,7 @@ import { site } from '../data/site';
 
       <fieldset class="form-section" data-form-step="2" hidden>
         <legend tabindex="-1"><strong>Applicant and Housing</strong></legend>
-        <p class="section-intro">General answers are enough. Sensitive records are not needed on this public form.</p>
+        <p class="section-intro">General answers are enough. Keep medical, legal, and treatment details off this form.</p>
         <div class="form-grid applicant-fields" data-applicant-fields hidden>
           <label>Applicant First Name<input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
           <label>Applicant Last Name<input name="applicantLastName" maxlength="100" data-applicant-required /></label>
@@ -65,8 +65,8 @@ import { site } from '../data/site';
         <fieldset class="choice-group">
           <legend>Housing Requested</legend>
           <div class="choice-grid choice-grid--two">
-            <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men's Recovery Housing</strong><small>Shared recovery housing for adult men.</small></span></label>
-            <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women's Recovery Housing</strong><small>Shared recovery housing for adult women.</small></span></label>
+            <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men's Recovery Housing</strong><small>Houses in four neighborhoods, including one for men on parole.</small></span></label>
+            <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women's Recovery Housing</strong><small>One house for women.</small></span></label>
           </div>
         </fieldset>
         <fieldset class="choice-group">
@@ -85,7 +85,7 @@ import { site } from '../data/site';
           </div>
         </fieldset>
         <fieldset class="choice-group">
-          <legend>Is the Applicant Willing to Live in a Substance Free Shared Home and Follow House Expectations?</legend>
+          <legend>Is the Applicant Willing to Live Substance Free and Follow the House Rules?</legend>
           <div class="choice-grid choice-grid--two compact-choices">
             <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span><strong>Yes</strong></span></label>
             <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="No" /><span><strong>No</strong></span></label>
@@ -99,24 +99,24 @@ import { site } from '../data/site';
 
       <fieldset class="form-section" data-form-step="3" hidden>
         <legend tabindex="-1"><strong>Final Details</strong></legend>
-        <p class="section-intro">Add any general information that would help staff prepare for the first conversation.</p>
+        <p class="section-intro">Anything else that would help us prepare for the call.</p>
         <label class="select-field">Primary Referral Source <small>(optional)</small><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
-        <label>Questions or General Information <small>(optional)</small><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
-        <p class="field-guidance" id="message-guidance">Do not include diagnoses, medications, treatment records, legal records, Social Security numbers, or other sensitive information.</p>
+        <label>Anything You Want Us to Know <small>(optional)</small><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
+        <p class="field-guidance" id="message-guidance">Please leave out diagnoses, medications, treatment records, legal records, and Social Security numbers. We will ask for what we need by phone.</p>
         <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I would like to discuss accessibility or accommodation needs privately.</span></label>
-        <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand that submitting this application starts a review and does not guarantee availability or admission.</span></label>
+        <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand this application starts a conversation and does not guarantee a bed.</span></label>
         <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
         <input type="hidden" name="startedAt" value="" />
         <div class="submission-area">
           <div>
-            <p class="privacy-note">This public form is not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the Privacy Policy.</a></p>
+            <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
             <div class="verification">
               <p>Security Check</p>
               <div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div>
             </div>
           </div>
           <div class="submit-block">
-            <button class="button" type="submit" data-submit-button data-default-label="Submit Application">Submit Application</button>
+            <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application</button>
             <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
           </div>
         </div>

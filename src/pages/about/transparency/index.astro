@@ -5,9 +5,9 @@ import { site } from '../../../data/site';
 
 const standing = [
   { icon: 'landmark', label: 'Federal status', value: '501(c)(3) public charity' },
-  { icon: 'calendar-check', label: 'IRS ruling', value: 'Tax-exempt since February 2019' },
-  { icon: 'badge-check', label: 'Pennsylvania oversight', value: 'DDAP-licensed recovery residences' },
-  { icon: 'shield-check', label: 'Independent inspection', value: 'WestPARR-inspected recovery housing' },
+  { icon: 'calendar-check', label: 'IRS ruling', value: 'Tax exempt since February 2019' },
+  { icon: 'badge-check', label: 'Pennsylvania oversight', value: 'DDAP-licensed recovery houses' },
+  { icon: 'shield-check', label: 'Independent inspection', value: 'WestPARR certified member' },
 ];
 
 const publicSources = [
@@ -15,7 +15,7 @@ const publicSources = [
     icon: 'landmark',
     category: 'Federal nonprofit record',
     title: 'IRS Nonprofit Filings',
-    text: `Review available Form 990 filings and tax-exempt organization information for EIN ${site.ein}.`,
+    text: `Form 990 filings and tax-exempt status for EIN ${site.ein}, through ProPublica’s Nonprofit Explorer.`,
     label: 'View Public Filings',
     href: 'https://projects.propublica.org/nonprofits/organizations/812901849',
   },
@@ -23,7 +23,7 @@ const publicSources = [
     icon: 'badge-check',
     category: 'Pennsylvania licensing',
     title: 'Department of Drug and Alcohol Programs',
-    text: 'Search Pennsylvania’s public directory for recovery residences operated by New Beginnings.',
+    text: 'Pennsylvania’s directory of licensed recovery houses. Search for New Beginnings Transitional Living.',
     label: 'Search DDAP Records',
     href: 'https://www.pa.gov/services/ddap/locate-licensed-recovery-or-halfway-housing',
   },
@@ -31,7 +31,7 @@ const publicSources = [
     icon: 'shield-check',
     category: 'Independent inspection',
     title: 'WestPARR Directory',
-    text: 'Review New Beginnings’ inspected, AA/NA-based recovery-housing listing.',
+    text: 'The Western Pennsylvania Alliance of Recovery Residences lists New Beginnings as a certified, AA and NA based member with three men’s houses and one women’s house.',
     label: 'View WestPARR Listing',
     href: 'https://westparr.org/search-homes/',
   },
@@ -39,19 +39,19 @@ const publicSources = [
 ---
 
 <MainLayout
-  title="Credentials and Transparency"
-  description="Review New Beginnings nonprofit status, recovery-housing credentials, public records, and residence-privacy approach."
+  title="Credentials and Licensing"
+  description="Check New Beginnings yourself: 501(c)(3) status, Pennsylvania DDAP recovery house license, WestPARR certification, and IRS filings, with links to each public record."
 >
   <section class="transparency-hero">
     <img class="transparency-hero__image" src="/images/home-entry.webp" alt="" width="2200" height="1467" fetchpriority="high" />
     <div class="transparency-hero__shade"></div>
     <div class="container transparency-hero__inner">
       <div class="transparency-hero__copy">
-        <p class="eyebrow">Accountability</p>
-        <h1>Credentials and Public Accountability</h1>
-        <p>Residents, families, professionals, and supporters should be able to confirm who operates recovery housing and understand the standards connected to it.</p>
+        <p class="eyebrow">Credentials</p>
+        <h1>Licensed, Inspected, and On the Record</h1>
+        <p>Anyone can call themselves a sober house. Before you or someone you love moves in, you should be able to check who is running it. Here is everything you need to check us.</p>
         <a class="button button--light hero-button" href="#public-records">
-          Review Independent Sources
+          See the Public Records
           <Icon name="lucide:arrow-down" aria-hidden="true" />
         </a>
       </div>
@@ -61,9 +61,9 @@ const publicSources = [
   <section class="identity-section">
     <div class="container identity-layout">
       <div class="identity-content">
-        <p class="eyebrow">Organization Identity</p>
-        <h2>A Pittsburgh Nonprofit With Public Standing</h2>
-        <p class="identity-lede">New Beginnings Transitional Living Foundation is an independent Pennsylvania public charity providing structured recovery housing in Pittsburgh and surrounding Allegheny County communities.</p>
+        <p class="eyebrow">Who We Are</p>
+        <h2>A Pittsburgh Nonprofit With Nothing to Hide</h2>
+        <p class="identity-lede">New Beginnings Transitional Living Foundation is an independent Pennsylvania public charity that runs DDAP-licensed recovery housing for men and women in Pittsburgh.</p>
         <dl class="standing-list">
           {standing.map((item) => (
             <div class="standing-item">
@@ -86,10 +86,10 @@ const publicSources = [
   <section class="records-section" id="public-records">
     <div class="container records-layout">
       <div class="records-intro">
-        <p class="eyebrow">Independent Sources</p>
-        <h2>Confirm the Record Directly</h2>
-        <p>These sources are maintained by government agencies or independent organizations. They provide a direct way to review New Beginnings’ nonprofit and recovery-housing standing.</p>
-        <p class="records-privacy"><Icon name="lucide:eye-off" aria-hidden="true" /> Public directories may display licensed-facility addresses. This website does not reproduce them.</p>
+        <p class="eyebrow">Public Records</p>
+        <h2>Look Us Up</h2>
+        <p>These records are kept by the IRS, the Commonwealth of Pennsylvania, and WestPARR, not by us. That is the point. You do not have to take our word for any of it.</p>
+        <p class="records-privacy"><Icon name="lucide:eye-off" aria-hidden="true" /> Some public directories list licensed house addresses. We do not repeat them here, for our residents’ sake.</p>
       </div>
       <div class="record-directory" aria-label="Independent public records">
         {publicSources.map((source) => (
@@ -114,11 +114,11 @@ const publicSources = [
       </div>
       <div class="meaning-item">
         <Icon name="lucide:clipboard-check" aria-hidden="true" />
-        <div><h3>Standards and Oversight</h3><p>Licensing and inspection establish independent standards for recovery-housing operations.</p></div>
+        <div><h3>DDAP License</h3><p>The Commonwealth reviewed our houses and our written policies on drug screens, medication, fees, and discharge. Licensed houses are the only ones state agencies and courts can refer to first.</p></div>
       </div>
       <div class="meaning-item">
         <Icon name="lucide:house-heart" aria-hidden="true" />
-        <div><h3>Housing, Not Clinical Treatment</h3><p>Counseling, medical care, and medication management remain with independent licensed providers.</p></div>
+        <div><h3>WestPARR Certification</h3><p>An independent Pittsburgh alliance of recovery residences inspected our homes against recognized recovery housing standards and lists us as a certified member.</p></div>
       </div>
     </div>
   </section>
@@ -127,13 +127,13 @@ const publicSources = [
     <div class="privacy-content">
       <div class="privacy-content__inner">
         <p class="eyebrow">Residence Privacy</p>
-        <h2>Accountability Without Publishing Someone’s Home</h2>
-        <p class="privacy-lede">Neighborhood-level information gives residents, families, and referral partners useful context while protecting the privacy of the people who live in each residence.</p>
-        <p>Exact location details are shared privately when appropriate. The same standard applies to photography: New Beginnings does not use exterior images to identify individual residences.</p>
+        <h2>Why the Addresses Are Not Here</h2>
+        <p class="privacy-lede">We tell you the neighborhoods so you know where you would be living. We do not publish the street addresses because our residents live there.</p>
+        <p>The same goes for photos: you will not find a front porch on this site. If you need to verify a license, the state directory is public. If you need the address, call and we will talk.</p>
         <div class="neighborhoods">
-          <div class="neighborhoods__label"><Icon name="lucide:map-pin" aria-hidden="true" /><span>Examples in public records</span></div>
+          <div class="neighborhoods__label"><Icon name="lucide:map-pin" aria-hidden="true" /><span>Our neighborhoods</span></div>
           <ul>{site.neighborhoods.map((neighborhood) => <li>{neighborhood}</li>)}</ul>
-          <p class="neighborhoods__note">Additional homes serve other Pittsburgh-area communities.</p>
+          <p class="neighborhoods__note">Administrative office in Mt. Washington.</p>
         </div>
       </div>
     </div>
@@ -147,9 +147,9 @@ const publicSources = [
     <div class="records-cta__shade"></div>
     <div class="container records-cta__inner">
       <div>
-        <p class="eyebrow">Need More Information?</p>
-        <h2>Ask Us for a Record or Policy</h2>
-        <p>For questions about credentials, governance, or public information, contact New Beginnings directly.</p>
+        <p class="eyebrow">Questions?</p>
+        <h2>Ask Us for Any Policy or Record</h2>
+        <p>Want to see the house rules, the fee schedule, or a copy of our license? Call or email and we will send it.</p>
       </div>
       <div class="records-cta__actions">
         <a class="button button--light" href="/contact/"><Icon name="lucide:mail" aria-hidden="true" />Contact New Beginnings</a>
@@ -158,7 +158,6 @@ const publicSources = [
     </div>
   </section>
 </MainLayout>
-
 <style>
   .transparency-hero { position: relative; display: grid; min-height: clamp(35rem, 72vh, 48rem); overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
   .transparency-hero__image, .transparency-hero__shade { position: absolute; width: 100%; height: 100%; inset: 0; }

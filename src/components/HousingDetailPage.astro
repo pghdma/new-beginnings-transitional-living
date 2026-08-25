@@ -61,61 +61,63 @@ const {
 
 const audienceLabel = audience === 'men' ? 'men' : 'women';
 const audienceTitle = audience === 'men' ? 'Men’s' : 'Women’s';
+const houseLabel = audience === 'men' ? 'the Men’s Houses' : 'the Women’s House';
+const faqSchema = faqs.flatMap((group) => group.items);
 
 const decisionItems: Feature[] = [
   {
     icon: 'circle-dollar-sign',
-    title: 'Current Rent and Fees',
-    copy: 'Current charges are provided directly. Ask what is due before move in, what is included, and when payments are expected.',
+    title: 'Rent and What Is Due',
+    copy: 'The current rent, what is due before move-in, and when payments are expected. Rent is set per house, so we give you the number on the phone.',
   },
   {
     icon: 'calendar-days',
-    title: 'Availability and Timing',
-    copy: `Availability changes by house. Calling ${site.phone} is the most direct way to ask about an opening and the next intake step.`,
+    title: 'Availability',
+    copy: `Beds open week to week. Calling ${site.phone} is the fastest way to find out what is open right now.`,
   },
   {
     icon: 'clipboard-check',
-    title: 'House Rules and Schedule',
-    copy: 'Ask about curfew, visitors, passes, chores, testing, return times, employment, school, and required house activities.',
+    title: 'House Rules',
+    copy: 'Curfew, visitors, overnight passes, chores, drug screens, and the weekly house meeting. You get them in writing before you move in.',
   },
   {
     icon: 'users-round',
-    title: 'Meetings and Recovery',
-    copy: 'New Beginnings follows an AA and NA based recovery culture. Confirm the current meeting schedule and whether 90 meetings in 90 days applies.',
+    title: 'Meetings',
+    copy: 'Our houses are AA and NA based. Outside meetings, a sponsor, and working the steps are part of living here.',
   },
 ];
 
 const galleryCopy = [
   {
-    title: 'Rooms and Shared Spaces',
-    copy: 'Ask whether the available room is shared, what furnishings are provided, and which common areas residents use together.',
+    title: 'Rooms and Shared Space',
+    copy: 'Some bedrooms are shared. The kitchen, bathrooms, and living room are common space that everyone keeps up.',
   },
   {
-    title: 'Meals and Personal Items',
-    copy: 'Staff can explain what residents supply themselves, what the house provides, and what to bring on move in day.',
+    title: 'What to Bring',
+    copy: 'Photo ID, insurance card, up to three bags of clothes, five pairs of shoes, hygiene items, and your own food. Bedding is provided.',
   },
   {
-    title: 'Work and Transportation',
-    copy: 'Discuss work, school, appointments, vehicle policies, public transportation, curfew, and schedule compatibility before admission.',
+    title: 'Work and Getting Around',
+    copy: 'Residents work or go to school. The houses sit on city bus lines, and curfew is worked around your schedule ahead of time.',
   },
 ];
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title} description={description} faq={faqSchema}>
   <section class="housing-hero">
     <div class="container housing-hero__grid">
       <div class="housing-hero__copy">
-        <p class="eyebrow">Recovery Housing for Adult {audienceTitle}</p>
+        <p class="eyebrow">Sober Living for {audienceTitle === 'Men’s' ? 'Men' : 'Women'} in Pittsburgh</p>
         <h1>{heroTitle}</h1>
         <p class="lead">{heroLead}</p>
         <div class="actions housing-hero__actions">
-          <a class="button button--light" href="/admissions/">Ask About Availability<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button button--outline-light" href="#frequently-asked-questions">Read Common Questions</a>
+          <a class="button button--light" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button button--outline-light" href="#frequently-asked-questions">Read the FAQ</a>
         </div>
         <div class="housing-hero__facts" aria-label="Housing overview">
           <span><Icon name="lucide:users-round" aria-hidden="true" />Adult {audienceLabel}</span>
-          <span><Icon name="lucide:house-heart" aria-hidden="true" />Shared recovery residence</span>
-          <span><Icon name="lucide:map-pin" aria-hidden="true" />Pittsburgh area</span>
+          <span><Icon name="lucide:house-heart" aria-hidden="true" />Substance-free shared house</span>
+          <span><Icon name="lucide:map-pin" aria-hidden="true" />Pittsburgh</span>
         </div>
       </div>
       <figure class="housing-hero__media">
@@ -128,16 +130,16 @@ const galleryCopy = [
     <div class="container">
       <header class="household-intro split-intro">
         <div>
-          <p class="eyebrow">A Practical Look at Daily Life</p>
-          <h2>What Living Here Is Designed to Support</h2>
+          <p class="eyebrow">Daily Life</p>
+          <h2>What Living Here Is Like</h2>
         </div>
-        <p class="lead">A recovery residence should help you understand the home, its expectations, and how ordinary life fits around recovery before you decide to move in.</p>
+        <p class="lead">A sober house should be easy to understand before you move in. No mystery, no fine print. Here is how ours run.</p>
       </header>
 
       <div class="household-stage">
         <div class="household-copy">
-          <p class="eyebrow">Inside the Household</p>
-          <h2>A Home With Structure, Privacy, and Shared Responsibility</h2>
+          <p class="eyebrow">Inside the House</p>
+          <h2>Structure, Privacy, and a Household You Are Part Of</h2>
           <p class="household-copy__lead">{householdLead}</p>
           <div class="household-features" role="list">
             {householdFeatures.map((feature) => (
@@ -158,14 +160,14 @@ const galleryCopy = [
   <section class="decision-section">
     <div class="container decision-layout">
       <div class="decision-intro">
-        <p class="eyebrow">Before You Decide</p>
-        <h2>Get the Practical Details Before You Commit</h2>
-        <p class="lead">Costs, schedules, rules, and availability can change. The current details should be clear before a resident signs an agreement or pays money.</p>
+        <p class="eyebrow">Before You Move In</p>
+        <h2>What You Will Get in Writing</h2>
+        <p class="lead">Pennsylvania licensed recovery houses give every resident the rules, the fee schedule, and the medication and discharge policies in writing before move-in. So do we. Here is what to expect.</p>
         <aside class="written-information">
           <Icon name="lucide:file-check-2" aria-hidden="true" />
           <div>
-            <h3>Written Information Matters</h3>
-            <p>Pennsylvania licensed recovery houses provide residents with house rules, a fee schedule, financial policies, medication policies, available supports, and beginning and ending residency criteria.</p>
+            <h3>It Is in Writing</h3>
+            <p>House rules, fee schedule, medication policy, and the criteria for staying or leaving. You have them before you sign anything or pay anything.</p>
           </div>
         </aside>
       </div>
@@ -184,9 +186,9 @@ const galleryCopy = [
   <section class="supports-section">
     <div class="container">
       <header class="supports-heading">
-        <p class="eyebrow">What Supports the Home</p>
-        <h2>Recovery Is Practiced in Ordinary Life</h2>
-        <p class="lead">The residence provides the setting. Recovery also depends on the choices, relationships, responsibilities, and outside services that continue beyond the home.</p>
+        <p class="eyebrow">What Holds It Together</p>
+        <h2>The House Is the Setting. The Work Is Yours</h2>
+        <p class="lead">We give you a safe place to live and rules you can count on. Your meetings, your sponsor, your job, and your own providers do the rest.</p>
       </header>
       <div class="supports-grid" role="list">
         {supportFeatures.map((feature) => (
@@ -204,10 +206,10 @@ const galleryCopy = [
     <div class="container">
       <header class="questions-heading split-intro">
         <div>
-          <p class="eyebrow">Questions About the Houses</p>
-          <h2>Know What to Ask Before Moving In</h2>
+          <p class="eyebrow">Practical Questions</p>
+          <h2>Know Before You Move In</h2>
         </div>
-        <p class="lead">Room arrangements and household policies can differ. These are the practical topics to discuss when you ask about a current opening.</p>
+        <p class="lead">The things people actually want to know: rooms, what to bring, work, and getting around.</p>
       </header>
       <div class="question-gallery">
         {galleryImages.map((image, index) => (
@@ -229,8 +231,8 @@ const galleryCopy = [
     <div class="container faq-layout">
       <div class="faq-intro">
         <p class="eyebrow">Frequently Asked Questions</p>
-        <h2>Answers for Residents, Families, and Referral Partners</h2>
-        <p>These answers explain what is known now and identify the house specific details to confirm directly. For current availability, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>.</p>
+        <h2>Straight Answers for Residents, Families, and Referral Partners</h2>
+        <p>If your question is about a specific bed or a specific person, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>. Everything else is here.</p>
       </div>
       <div class="faq-groups">
         {faqs.map((group) => (
@@ -254,42 +256,27 @@ const galleryCopy = [
     <div class="container location-stage">
       <div class="location-copy">
         <span class="icon-medallion icon-medallion--solid"><Icon name="lucide:map-pin" aria-hidden="true" /></span>
-        <p class="eyebrow">Pittsburgh Area Housing</p>
-        <h2>Neighborhood Information Without Publishing Someone’s Home</h2>
-        <p class="lead">Public records currently reference {publicAreas}. New Beginnings also serves other Pittsburgh area communities.</p>
+        <p class="eyebrow">Where the Houses Are</p>
+        <h2>Pittsburgh Neighborhoods, Not Street Addresses</h2>
+        <p class="lead">{publicAreas} The houses are on bus lines and a short ride from downtown.</p>
       </div>
       <div class="location-privacy">
         <Icon name="lucide:lock-keyhole" aria-hidden="true" />
         <div>
-          <h3>Exact Locations Stay Private</h3>
-          <p>Individual house addresses, maps, and identifying exterior photographs are not published. Exact location information is shared privately when it is relevant to an admissions or referral conversation.</p>
+          <h3>Why We Keep the Address Private</h3>
+          <p>Our residents live here. You will get the address when we talk about a bed, and the state licensing records are public if you need to verify us first.</p>
         </div>
-        <a class="button button--outline" href="/admissions/">Review the Admissions Process<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+        <a class="button button--outline" href="/admissions/">Apply for Housing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
       </div>
     </div>
   </section>
 
   <CtaBand
-    title={`Ask About ${audienceTitle} Recovery Housing`}
-    label="Begin With Admissions"
-    text="Start with a general conversation about availability, fit, costs, and the current house expectations."
+    title={`Ask About ${houseLabel}`}
+    label="Apply for Housing"
+    text={`Call ${site.phone} or send the application. We will tell you what is open, what it costs, and what the house expects.`}
   />
 </MainLayout>
-
-<script>
-  const faqItems = Array.from(document.querySelectorAll<HTMLDetailsElement>('.faq-list details'));
-
-  faqItems.forEach((item) => {
-    item.addEventListener('toggle', () => {
-      if (!item.open) return;
-
-      faqItems.forEach((otherItem) => {
-        if (otherItem !== item) otherItem.open = false;
-      });
-    });
-  });
-</script>
-
 <style>
   .housing-hero { color: var(--white); background: var(--navy-950); }
   .housing-hero__grid { display: grid; min-height: clamp(35rem, 51vw, 43rem); grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: stretch; }

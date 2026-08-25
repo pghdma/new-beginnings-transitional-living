@@ -13,40 +13,40 @@ const impactLevels = [
   {
     amount: '25',
     icon: 'package-open',
-    title: 'Support Everyday Essentials',
-    copy: 'Helps with practical household needs in a shared recovery home.',
+    title: 'Stock the House',
+    copy: 'Cleaning supplies, paper goods, and the everyday things a shared kitchen runs through.',
   },
   {
     amount: '50',
     icon: 'house-heart',
-    title: 'Strengthen a Shared Home',
-    copy: 'Helps sustain the ordinary resources that make daily routines possible.',
+    title: 'Make Up a Bed',
+    copy: 'Sheets, blankets, and towels for a resident who arrives with nothing.',
   },
   {
     amount: '100',
     icon: 'key-round',
-    title: 'Sustain Recovery Housing',
-    copy: 'Helps offset the ongoing costs behind dependable, substance free shared housing.',
+    title: 'Keep the Lights On',
+    copy: 'Helps cover utilities and upkeep in a house full of people rebuilding their lives.',
   },
   {
     amount: '250',
     icon: 'heart-handshake',
-    title: 'Invest in Lasting Stability',
-    copy: 'Provides meaningful support for the recovery housing mission across Pittsburgh area residences.',
+    title: 'Carry a Hard Week',
+    copy: 'Helps the house absorb the weeks when a resident is between jobs and the bills do not wait.',
   },
 ];
 ---
 
-<MainLayout title="Donate" description="Make a financial contribution to support nonprofit recovery housing for adult men and women in Pittsburgh.">
+<MainLayout title="Donate" description="Help keep a sober house open in Pittsburgh. Give once or monthly to New Beginnings, a 501(c)(3) that runs licensed recovery housing for men and women.">
   <section class="donate-hero" aria-labelledby="donate-title">
     <div class="container donate-hero__grid">
       <div class="donate-hero__copy">
         <p class="eyebrow">Support New Beginnings</p>
-        <h1 id="donate-title">Help Make Recovery Housing Possible</h1>
-        <p class="lead">Choose a one time or monthly gift to support New Beginnings and its recovery housing mission for adults in Pittsburgh.</p>
+        <h1 id="donate-title">Help Keep a Sober House Open in Pittsburgh</h1>
+        <p class="lead">Rent covers some of it. Donations cover the rest: repairs, furniture, and a made-up bed for someone who arrives with nothing. Give once or monthly.</p>
         <p class="donate-hero__reassurance">
           <Icon name="lucide:badge-check" aria-hidden="true" />
-          New Beginnings is a 501(c)(3) public charity.
+          New Beginnings is a 501(c)(3) public charity. Gifts are tax deductible as allowed by law.
         </p>
       </div>
 
@@ -60,9 +60,9 @@ const impactLevels = [
       >
         <input type="hidden" name="topic" value="Donation" />
         <div class="donation-planner__heading">
-          <p class="eyebrow">Make a Donation</p>
+          <p class="eyebrow">Make a Gift</p>
           <h2 id="gift-title">Choose Your Gift</h2>
-          <p>Select a giving schedule and an amount. You will confirm your choices before completing your gift.</p>
+          <p>Pick how often and how much. You will confirm before anything is charged.</p>
         </div>
 
         <fieldset class="choice-group frequency-group">
@@ -113,7 +113,7 @@ const impactLevels = [
         <p class="donation-planner__note">
           {paypalReady
             ? 'You will review and complete your gift securely through PayPal.'
-            : 'Online PayPal giving is being connected. Until it is active, staff can help with a one time or monthly gift through the contact page.'}
+            : 'Online giving is being set up. Until then, send us a note or call and we will arrange a one-time or monthly gift with you directly.'}
         </p>
       </form>
     </div>
@@ -122,18 +122,18 @@ const impactLevels = [
   <section class="gift-impact" aria-labelledby="impact-title">
     <div class="container">
       <header class="section-head section-head--center">
-        <p class="eyebrow">Your Gift at Work</p>
-        <h2 id="impact-title">See What Your Gift Can Help Support</h2>
-        <p class="lead">Every contribution helps sustain the work behind stable shared homes and everyday recovery routines.</p>
+        <p class="eyebrow">Where It Goes</p>
+        <h2 id="impact-title">What Your Gift Actually Pays For</h2>
+        <p class="lead">New Beginnings is small. There is no marketing budget and no big staff. Money goes into the houses and the people living in them.</p>
       </header>
 
       <div class="gift-impact__composition">
         <figure class="gift-impact__media">
           <img src="/images/household-linens.webp" alt="Freshly folded household linens" width="2200" height="1236" loading="lazy" />
-          <figcaption>Practical support for the work behind a stable home.</figcaption>
+          <figcaption>The ordinary things that make a house a home.</figcaption>
         </figure>
 
-        <div class="impact-directory" aria-label="Illustrative giving levels">
+        <div class="impact-directory" aria-label="Giving levels">
           {impactLevels.map((level) => (
             <button class="impact-level" type="button" data-impact-amount={level.amount} aria-label={`Choose a $${level.amount} gift`}>
               <span class="impact-level__amount">${level.amount}</span>
@@ -150,7 +150,7 @@ const impactLevels = [
         </div>
       </div>
 
-      <p class="impact-disclaimer">Giving levels illustrate ways a contribution can support the mission. They are not the price of a specific item, service, or guaranteed result. Actual needs and costs vary.</p>
+      <p class="impact-disclaimer">These examples show the kinds of costs gifts help cover. They are not the price of a specific item or a promise of a specific result. Real needs and costs vary.</p>
     </div>
   </section>
 
@@ -162,7 +162,7 @@ const impactLevels = [
       </div>
 
       <div class="donation-trust__details">
-        <p>New Beginnings Transitional Living Foundation is a tax exempt 501(c)(3) public charity. Contributions may be tax deductible to the extent allowed by law.</p>
+        <p>New Beginnings Transitional Living Foundation is a 501(c)(3) public charity, tax exempt since 2019. Contributions are deductible to the extent the law allows. Our IRS filings, state license, and WestPARR certification are all public.</p>
         <div class="donation-trust__facts" aria-label="Nonprofit information">
           <div>
             <Icon name="lucide:badge-check" aria-hidden="true" />
@@ -175,7 +175,7 @@ const impactLevels = [
         </div>
         <div class="actions">
           <a class="button button--light" href="/about/transparency/">
-            Review Credentials and Public Records
+            See Our Credentials
             <Icon name="lucide:arrow-right" aria-hidden="true" />
           </a>
           <a class="button donation-trust__phone" href={site.phoneHref}>
@@ -187,58 +187,6 @@ const impactLevels = [
     </div>
   </section>
 </MainLayout>
-
-<script>
-  const planner = document.querySelector<HTMLFormElement>('#donation-planner');
-
-  if (planner) {
-    const amountInputs = Array.from(planner.querySelectorAll<HTMLInputElement>('input[name="amount"]'));
-    const frequencyInputs = Array.from(planner.querySelectorAll<HTMLInputElement>('input[name="frequency"]'));
-    const customAmount = planner.querySelector<HTMLElement>('#custom-amount');
-    const customAmountInput = planner.querySelector<HTMLInputElement>('#custom-gift-amount');
-    const summary = planner.querySelector<HTMLElement>('#gift-summary');
-    const impactButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-impact-amount]'));
-
-    const updatePlanner = () => {
-      const selectedAmount = amountInputs.find((input) => input.checked)?.value ?? '50';
-      const selectedFrequency = frequencyInputs.find((input) => input.checked)?.value ?? 'One Time';
-      const isOther = selectedAmount === 'Other';
-
-      if (customAmount) customAmount.hidden = !isOther;
-      if (customAmountInput) customAmountInput.required = isOther;
-
-      const customValue = customAmountInput?.value.trim();
-      const amountLabel = isOther && customValue ? `$${customValue}` : isOther ? 'a Custom Amount' : `$${selectedAmount}`;
-      if (summary) summary.textContent = `Your Planned Gift: ${amountLabel} ${selectedFrequency}`;
-    };
-
-    amountInputs.forEach((input) => input.addEventListener('change', updatePlanner));
-    frequencyInputs.forEach((input) => input.addEventListener('change', updatePlanner));
-    customAmountInput?.addEventListener('input', updatePlanner);
-
-    impactButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const amount = button.dataset.impactAmount;
-        const matchingInput = amountInputs.find((input) => input.value === amount);
-        if (!matchingInput) return;
-        matchingInput.checked = true;
-        updatePlanner();
-        planner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        window.setTimeout(() => matchingInput.focus({ preventScroll: true }), 450);
-      });
-    });
-
-    planner.addEventListener('submit', (event) => {
-      const paypalUrl = planner.dataset.paypalUrl;
-      if (!paypalUrl) return;
-      event.preventDefault();
-      window.open(paypalUrl, '_blank', 'noopener,noreferrer');
-    });
-
-    updatePlanner();
-  }
-</script>
-
 <style>
   .donate-hero {
     padding-block: var(--section-hero);

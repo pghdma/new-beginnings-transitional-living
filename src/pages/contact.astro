@@ -7,7 +7,7 @@ import { site } from '../data/site';
 const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}`;
 ---
 
-<MainLayout title="Contact" description="Call, email, or send a message to New Beginnings about recovery housing, professional questions, donations, or the organization.">
+<MainLayout title="Contact" description="Call 412-628-0403 or send a message to New Beginnings about a bed in one of our Pittsburgh sober living houses, a client referral, a donation, or anything else.">
   <section class="contact-intro" aria-labelledby="contact-title">
     <img
       class="contact-intro__image"
@@ -21,20 +21,20 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     <div class="contact-intro__shade" aria-hidden="true"></div>
     <div class="container contact-intro__inner">
       <div class="contact-intro__copy">
-        <p class="eyebrow">Get in Touch</p>
-        <h1 id="contact-title">Contact New Beginnings</h1>
-        <p class="lead">Questions about recovery housing, professional information, donations, or the organization can begin with a call, an email, or a message.</p>
+        <p class="eyebrow">Contact</p>
+        <h1 id="contact-title">Call, Email, or Send a Message</h1>
+        <p class="lead">Looking for a bed, referring a client, or just have a question? The fastest answer is a phone call. The form works too, and we will get back to you.</p>
       </div>
     </div>
   </section>
 
-  <section class="contact-main" aria-label="Contact Details and Message Form">
+  <section class="contact-main" aria-label="Contact details and message form">
     <div class="container contact-shell">
       <div class="contact-details">
         <header>
-          <p class="eyebrow">Contact Details</p>
-          <h2>Ways to Reach Us</h2>
-          <p>Choose the contact option that works best for you.</p>
+          <p class="eyebrow">Reach Us</p>
+          <h2>Ways to Reach New Beginnings</h2>
+          <p>Phone is best for anything about housing. Openings change week to week.</p>
         </header>
 
         <ul class="contact-list">
@@ -71,7 +71,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
                 href={site.office.directionsHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Get Directions, opens in a new tab"
+                aria-label="Get directions, opens in a new tab"
               >
                 Get Directions
                 <Icon name="lucide:external-link" aria-hidden="true" />
@@ -80,7 +80,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
           </li>
         </ul>
 
-        <p class="office-note"><Icon name="lucide:info" aria-hidden="true" />This is the administrative office, not a recovery residence. Please call before visiting.</p>
+        <p class="office-note"><Icon name="lucide:info" aria-hidden="true" />This is our office in Mt. Washington, not one of the houses. Please call before stopping by.</p>
       </div>
 
       <InquiryForm />
@@ -93,13 +93,12 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
         <Icon name="lucide:heart-pulse" />
       </span>
       <div>
-        <h2 id="contact-safety-title">Need Immediate Help?</h2>
+        <h2 id="contact-safety-title">Need Help Right Now?</h2>
         <p>New Beginnings is not an emergency or crisis service. Call 911 for an emergency. Call or text 988 for crisis support.</p>
       </div>
     </div>
   </section>
 </MainLayout>
-
 <style>
   .contact-intro {
     position: relative;

@@ -5,43 +5,45 @@ import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
 
 const audiences = [
-  { icon: 'lucide:hospital', title: 'Hospital and Treatment Teams', copy: 'Discharge planners, social workers, counselors, and other providers helping an adult plan the next step after treatment or stabilization.' },
-  { icon: 'lucide:scale', title: 'Courts and Supervision', copy: 'Probation officers, parole officers, court staff, and other justice partners looking for accountable recovery housing information.' },
-  { icon: 'lucide:briefcase-business', title: 'Case Management and Reentry', copy: 'Case managers, housing navigators, and reentry professionals coordinating practical support in the community.' },
-  { icon: 'lucide:landmark', title: 'Community Organizations', copy: 'County teams, nonprofit partners, and community programs that need a clear picture of New Beginnings and its role.' },
+  { icon: 'lucide:hospital', title: 'Treatment and Hospital Teams', copy: 'Discharge planners, counselors, and social workers lining up a safe place for a client to go after detox, inpatient, or a hospital stay.' },
+  { icon: 'lucide:scale', title: 'Courts, Probation, and Parole', copy: 'One of our men’s houses works specifically with men on parole. All of our houses are DDAP licensed, which Pennsylvania courts are required to consider first.' },
+  { icon: 'lucide:briefcase-business', title: 'Case Managers and Reentry', copy: 'Housing navigators and reentry workers who need a licensed sober house that answers the phone and returns the call.' },
+  { icon: 'lucide:landmark', title: 'Community Partners', copy: 'County teams, nonprofits, churches, and community programs that want to know who we are before they send someone our way.' },
 ];
 
 const credentials = [
-  { icon: 'lucide:badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed recovery residences' },
-  { icon: 'lucide:shield-check', title: 'WestPARR', copy: 'Inspected recovery housing' },
-  { icon: 'lucide:landmark', title: '501(c)(3)', copy: 'Pennsylvania public charity' },
+  { icon: 'lucide:badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed recovery houses' },
+  { icon: 'lucide:shield-check', title: 'WestPARR', copy: 'Certified member, inspected' },
+  { icon: 'lucide:landmark', title: '501(c)(3)', copy: 'Pittsburgh public charity' },
 ];
 
 const questions = [
-  { question: 'Is New Beginnings a Treatment Provider?', answer: 'No. New Beginnings provides recovery housing. Counseling, medical care, medication management, and other clinical services remain with independent licensed providers.' },
-  { question: 'How Can I Verify the Organization and Its Housing?', answer: 'The Credentials and Transparency page links to public nonprofit information, Pennsylvania DDAP licensing information, and the WestPARR directory. New Beginnings operates licensed residences and WestPARR inspected recovery housing.' },
-  { question: 'How Do I Ask About Current Availability?', answer: 'Use the Admissions page for a current housing inquiry. A professional may help an applicant complete it. Availability can change, and submitting the form does not guarantee admission or placement.' },
-  { question: 'Can I Send Records Through the Website?', answer: 'No. Do not submit treatment records, diagnoses, medication details, court records, supervision records, Social Security numbers, or other sensitive information through a public website form. Begin with limited contact and housing information.' },
-  { question: 'Are House Addresses Published Online?', answer: 'No. New Beginnings publishes neighborhood level information rather than individual house addresses or identifying exterior photographs. Exact locations are discussed privately when appropriate.' },
-  { question: 'Does New Beginnings Provide Emergency Placement?', answer: 'New Beginnings is not an emergency shelter or crisis service. Call 911 for an emergency. Call or text 988 for crisis support.' },
+  { question: 'Is New Beginnings a Treatment Provider?', answer: 'No. We are licensed recovery housing. Counseling, medical care, and medication stay with the client’s own providers. Our founder, Susan Rua, is a licensed counselor who runs a separate practice, but residency does not depend on it.' },
+  { question: 'Do You Take Clients on Parole or Probation?', answer: 'Yes. One of our men’s houses works specifically with men on parole, and all of our houses accept court-involved residents who are ready to live sober and follow the house rules. Supervision requirements are coordinated by phone.' },
+  { question: 'What About Medication?', answer: 'Prescription narcotics are not permitted in the house. For other prescriptions, including medication for addiction treatment, call us before placement so we can go over the written medication policy with you and your client.' },
+  { question: 'How Do I Verify the License?', answer: 'Pennsylvania’s DDAP directory and the WestPARR directory both list New Beginnings. Our credentials page links to each, along with our IRS record.' },
+  { question: 'Can I Send Records Through the Website?', answer: 'No. Keep diagnoses, medications, treatment records, court and supervision records, and Social Security numbers off the web form. Call and we will arrange the right way to share what is needed.' },
+  { question: 'Do You Publish House Addresses?', answer: 'No. Residents live there. You will get the address when a placement is being arranged.' },
+  { question: 'Can You Do Emergency Placement?', answer: 'We are not a shelter or crisis service and cannot place someone the same hour. Call 911 for an emergency or 988 for crisis support. For a bed in the coming days, call us.' },
 ];
 ---
 
 <MainLayout
   title="For Professionals"
-  description="Information for probation officers, social workers, case managers, treatment providers, courts, and community partners exploring New Beginnings recovery housing."
+  description="For discharge planners, counselors, case managers, and probation and parole officers: how to place a client in DDAP-licensed sober living in Pittsburgh."
+  faq={questions}
 >
   <section class="professional-hero" aria-labelledby="professional-title">
     <div class="container professional-hero__grid">
       <div class="professional-hero__copy">
-        <p class="eyebrow">Information for Professionals</p>
-        <h1 id="professional-title">A Clear Place to Start</h1>
-        <p class="lead">Practical information for professionals helping an adult explore recovery housing in the Pittsburgh area.</p>
+        <p class="eyebrow">For Professionals</p>
+        <h1 id="professional-title">Referring a Client to Recovery Housing in Pittsburgh</h1>
+        <p class="lead">Discharge planners, counselors, case managers, and probation and parole officers: here is what you need to know about New Beginnings and how to get someone placed.</p>
         <div class="actions">
-          <a class="button button--light" href="/recovery-housing/">Review Housing Options<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button button--outline-light" href="/contact/">Contact New Beginnings</a>
+          <a class="button button--light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
+          <a class="button button--outline-light" href="/recovery-housing/">See the Houses</a>
         </div>
-        <p class="professional-hero__note"><Icon name="lucide:lock-keyhole" aria-hidden="true" />Please keep medical, treatment, court, and supervision records out of public website forms.</p>
+        <p class="professional-hero__note"><Icon name="lucide:lock-keyhole" aria-hidden="true" />Please keep medical, treatment, court, and supervision records off the web form. We will get what we need directly.</p>
       </div>
       <figure class="professional-hero__photo">
         <img src="/images/shared-bedroom.webp" alt="A representative shared bedroom with two beds and a desk" width="2200" height="1466" fetchpriority="high" />
@@ -53,7 +55,7 @@ const questions = [
     <div class="container">
       <header class="section-head section-head--center">
         <p class="eyebrow">Who This Page Is For</p>
-        <h2 id="audience-title">Information for the People Coordinating Care and Support</h2>
+        <h2 id="audience-title">The People Trying to Find Someone a Safe Place to Go</h2>
       </header>
       <ul class="audience-grid">
         {audiences.map((audience) => (
@@ -70,13 +72,13 @@ const questions = [
   <section class="role-section" aria-labelledby="role-title">
     <div class="container role-layout">
       <div class="role-copy">
-        <p class="eyebrow">A Defined Role</p>
-        <h2 id="role-title">Recovery Housing Supports Daily Life</h2>
-        <p class="lead">New Beginnings provides a substance free shared living environment with peer community and household expectations.</p>
-        <p>Residents can continue building connections to treatment, recovery meetings, employment, education, family, supervision, and community resources outside the home.</p>
+        <p class="eyebrow">Scope</p>
+        <h2 id="role-title">What We Are and What We Are Not</h2>
+        <p class="lead">New Beginnings is DDAP-licensed recovery housing: substance-free, AA and NA based sober living homes with random drug screens, curfew, and a weekly house meeting.</p>
+        <p>We are not a treatment provider, a halfway house in the licensing sense, or a shelter. Clients keep their own counselor, prescriber, and program. If a client is on medication for addiction treatment or has other medication needs, talk to us before placement.</p>
         <div class="scope-comparison">
-          <article><Icon name="lucide:house" aria-hidden="true" /><h3>New Beginnings Provides</h3><p>Recovery housing, a shared household, peer community, and a dependable residential setting.</p></article>
-          <article><Icon name="lucide:stethoscope" aria-hidden="true" /><h3>Independent Providers Handle</h3><p>Counseling, medical care, medication management, and other clinical treatment.</p></article>
+          <article><Icon name="lucide:house" aria-hidden="true" /><h3>New Beginnings Provides</h3><p>A licensed, substance-free house, housemates in recovery, house rules, random drug screens, and a director who returns calls.</p></article>
+          <article><Icon name="lucide:stethoscope" aria-hidden="true" /><h3>Your Client Keeps</h3><p>Counseling, medical care, medication, supervision, and treatment with their existing providers.</p></article>
         </div>
       </div>
       <figure class="role-photo"><img src="/images/rustic-dining-room.webp" alt="An empty dining room with a shared table and natural light" width="1600" height="2133" loading="lazy" /></figure>
@@ -86,12 +88,12 @@ const questions = [
   <section class="verification-section" aria-labelledby="verification-title">
     <div class="container verification-layout">
       <div class="verification-copy">
-        <p class="eyebrow">Independent Verification</p>
-        <h2 id="verification-title">Credentials Matter When You Help Someone Choose Housing</h2>
-        <p>Pennsylvania requires recovery houses to be licensed before they accept referrals from state agencies or state funded facilities. Courts must give first consideration to licensed recovery houses when making residential recommendations for people under their supervision.</p>
+        <p class="eyebrow">Licensing</p>
+        <h2 id="verification-title">Licensed Means You Can Refer With Confidence</h2>
+        <p>Pennsylvania requires recovery houses to be DDAP licensed before they can take referrals from state agencies or state-funded facilities, and courts must give first consideration to licensed houses. New Beginnings is licensed, WestPARR certified, and a 501(c)(3). Check us at the links below.</p>
         <div class="actions">
           <a class="button button--light" href="/about/transparency/">Verify Our Standing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="text-link verification-guidance" href="https://www.pa.gov/services/ddap/apply-to-become-a-licensed-recovery-house">Review Pennsylvania Guidance</a>
+          <a class="text-link verification-guidance" href="https://www.pa.gov/services/ddap/apply-to-become-a-licensed-recovery-house">Pennsylvania’s licensing rules</a>
         </div>
       </div>
       <ul class="credential-grid">
@@ -105,13 +107,13 @@ const questions = [
   <section class="coordination-section" aria-labelledby="coordination-title">
     <div class="container">
       <header class="coordination-heading split-intro">
-        <div><p class="eyebrow">How to Coordinate</p><h2 id="coordination-title">One Housing Inquiry Path. Clear Professional Support</h2></div>
-        <p>Professionals do not need a separate referral form. Use Admissions for a housing request and Contact for general coordination questions.</p>
+        <div><p class="eyebrow">How to Refer</p><h2 id="coordination-title">Call First. It Is Faster Than Any Form</h2></div>
+        <p>There is no separate referral form. Call {site.phone} with the basics, or have your client send the application. We will tell you what is open and what we need to move forward.</p>
       </header>
       <ol class="coordination-steps">
-        <li><span>01</span><Icon name="lucide:search" aria-hidden="true" /><h3>Review the Housing</h3><p>Start with the recovery housing overview and the pages for adult men and women.</p><a class="button button--outline" href="/recovery-housing/">Explore Housing</a></li>
-        <li><span>02</span><Icon name="lucide:clipboard-list" aria-hidden="true" /><h3>Begin an Availability Inquiry</h3><p>The applicant or a person assisting them can use the Admissions application.</p><a class="button button--outline" href="/admissions/">Go to Admissions</a></li>
-        <li><span>03</span><Icon name="lucide:messages-square" aria-hidden="true" /><h3>Ask Professional Questions</h3><p>Call or use Contact for general questions about coordination, credentials, and service scope.</p><a class="button button--outline" href="/contact/">Contact New Beginnings</a></li>
+        <li><span>01</span><Icon name="lucide:phone" aria-hidden="true" /><h3>Call About a Bed</h3><p>Tell us men’s or women’s, roughly when, and anything we need to know up front.</p><a class="button button--outline" href={site.phoneHref}>Call {site.phone}</a></li>
+        <li><span>02</span><Icon name="lucide:clipboard-list" aria-hidden="true" /><h3>Send the Application</h3><p>Your client can fill it out, or you can do it with them. It takes a few minutes and we call back.</p><a class="button button--outline" href="/admissions/">Go to Admissions</a></li>
+        <li><span>03</span><Icon name="lucide:messages-square" aria-hidden="true" /><h3>Coordinate Directly</h3><p>Records, supervision requirements, and move-in details are handled by phone, not through the website.</p><a class="button button--outline" href="/contact/">Contact Us</a></li>
       </ol>
     </div>
   </section>
@@ -120,8 +122,8 @@ const questions = [
     <div class="container faq-layout">
       <header class="faq-heading">
         <p class="eyebrow">Professional Questions</p>
-        <h2 id="professional-faq-title">What Partners Often Need to Know</h2>
-        <p>For a question specific to one person or a current opening, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>.</p>
+        <h2 id="professional-faq-title">What Referral Partners Usually Ask</h2>
+        <p>For a question about one person or one opening, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>.</p>
       </header>
       <div class="faq-list" data-single-accordion>
         {questions.map((item, index) => (
@@ -131,18 +133,8 @@ const questions = [
     </div>
   </section>
 
-  <CtaBand eyebrow="Professional Questions" title="Need to Talk Through the Right Next Step?" text="Call New Beginnings for a general professional question, or use Admissions when someone is ready to ask about current housing availability." href="/contact/" label="Contact New Beginnings" />
+  <CtaBand eyebrow="For Professionals" title="Have a Client Who Needs a Bed?" text={`Call ${site.phone}. Susan or staff will tell you what is open and what we need to move forward.`} href="/contact/" label="Contact Us" />
 </MainLayout>
-
-<script>
-  document.querySelectorAll<HTMLElement>('[data-single-accordion]').forEach((accordion) => {
-    const items = Array.from(accordion.querySelectorAll<HTMLDetailsElement>('details'));
-    items.forEach((item) => item.addEventListener('toggle', () => {
-      if (item.open) items.forEach((other) => { if (other !== item) other.removeAttribute('open'); });
-    }));
-  });
-</script>
-
 <style>
   .professional-hero { color: var(--white); background: var(--navy-950); }
   .professional-hero__grid { display: grid; min-height: clamp(35rem, 54vw, 44rem); grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); align-items: stretch; }

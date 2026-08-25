@@ -13,9 +13,14 @@ interface Feature {
   copy: string;
 }
 
-interface FaqGroup {
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface FaqGroup {
   title: string;
-  items: Array<{ question: string; answer: string }>;
+  items: FaqItem[];
 }
 
 export interface HousingDetailConfig {
@@ -37,76 +42,80 @@ export interface HousingDetailConfig {
 const sharedHouseholdFeatures: Feature[] = [
   {
     icon: 'shield-check',
-    title: 'A Substance Free Home',
-    copy: 'Alcohol and other drug use do not belong in the residence. Current testing and response policies are reviewed during admission.',
+    title: 'Substance Free, Always',
+    copy: 'No alcohol, no drugs, no prescription narcotics. Random drug screens throughout your stay. That is what makes the house safe for everyone in it.',
   },
   {
     icon: 'users-round',
-    title: 'Peer Community',
-    copy: 'Residents share space with other adults who are working to build stable lives in recovery.',
+    title: 'Housemates in Recovery',
+    copy: 'Everyone in the house is doing the same work you are. That is not a feature of the program. It is the program.',
   },
   {
     icon: 'clipboard-check',
-    title: 'Shared Expectations',
-    copy: 'House rules, responsibilities, schedules, and communication help make daily life more predictable.',
+    title: 'Rules That Hold',
+    copy: 'Curfew, chores, a weekly house meeting, and a search policy. Simple, consistent, and the same for everyone.',
   },
   {
     icon: 'briefcase-business',
-    title: 'Life Beyond the House',
-    copy: 'Work, education, appointments, family, meetings, and independent services remain part of everyday life.',
+    title: 'Your Life Keeps Going',
+    copy: 'Work, school, court dates, family, doctor’s appointments, and outside meetings are all part of a normal week here.',
   },
 ];
 
 const sharedSupportFeatures: Feature[] = [
   {
     icon: 'house-heart',
-    title: 'A Dependable Place',
-    copy: 'A consistent home gives each day a place to begin and return to.',
-  },
-  {
-    icon: 'handshake',
-    title: 'Respect and Responsibility',
-    copy: 'Residents contribute to the household and respect the privacy and recovery of others.',
+    title: 'A Bed That Is Yours',
+    copy: 'Bedding is provided. Bring your clothes, your hygiene items, and your own food. The kitchen and living space are shared.',
   },
   {
     icon: 'calendar-check',
-    title: 'Recovery Participation',
-    copy: 'New Beginnings follows an AA and NA based culture. Current meeting expectations are explained before admission.',
+    title: '12-Step Based',
+    copy: 'Our houses are AA and NA based. Outside meetings, a sponsor, and working the steps are expected. The in-house meeting is weekly and mandatory.',
   },
   {
     icon: 'stethoscope',
-    title: 'Independent Care',
-    copy: 'Counseling, medical care, and medication management remain with independent licensed providers.',
+    title: 'Your Providers Stay Yours',
+    copy: 'Counseling, medication, and medical care stay with your own doctor, counselor, or treatment program. We are the house, not the treatment.',
+  },
+  {
+    icon: 'bus',
+    title: 'Close to the City',
+    copy: 'The houses are in established Pittsburgh neighborhoods on bus lines, near jobs, meetings, and the people you are rebuilding with.',
   },
 ];
 
 function buildFaqs(audience: Audience): FaqGroup[] {
-  const audienceLabel = audience === 'men' ? 'men' : 'women';
-  const possessive = audience === 'men' ? 'men’s' : 'women’s';
+  const people = audience === 'men' ? 'men' : 'women';
+  const houseNoun = audience === 'men' ? 'the men’s houses' : 'the women’s house';
 
   return [
     {
       title: 'Getting Started',
       items: [
         {
-          question: `Who is ${possessive} recovery housing for?`,
-          answer: `New Beginnings provides shared recovery housing for adult ${audienceLabel} who are committed to substance free living and willing to participate in a structured household. Staff can explain the current admission criteria during a general conversation.`,
+          question: `Who is ${audience === 'men' ? 'men’s' : 'women’s'} recovery housing for?`,
+          answer: `Adult ${people} who are done using and willing to live by house rules: substance free, meetings, curfew, chores, and drug screens. You do not need to be fresh out of treatment, and you do not need a referral. You need to want this.`,
         },
         {
-          question: 'Do I need to come directly from treatment?',
-          answer: 'This website does not publish a treatment completion requirement. Call to discuss your current situation and whether recovery housing is an appropriate next step. Recovery housing is not detoxification, inpatient care, or clinical treatment.',
+          question: 'Do I need to come straight from treatment?',
+          answer: 'No. Some residents come straight from rehab or detox. Some come from jail or parole. Some just know they cannot stay sober where they are living now. Call and tell us where you are. We will tell you honestly whether a recovery house is the right next step.',
         },
         {
-          question: 'How do I find out whether a bed is available?',
-          answer: 'Availability changes by house. Call 412-628-0403 or send a general admissions inquiry. Staff can discuss current openings and the next step without requiring sensitive medical information through the website.',
+          question: 'Is this a halfway house?',
+          answer: 'Not in the licensing sense. In Pennsylvania a halfway house is a treatment program. New Beginnings is a licensed recovery house, which most people call sober living: a substance-free home with rules, drug screens, and housemates in recovery, but no clinical treatment on site. If someone told you to find a halfway house, a recovery house may be what you actually need. Call and we will sort it out.',
         },
         {
-          question: 'Can a family member or professional call for me?',
-          answer: 'A family member, treatment provider, probation officer, case manager, or other referral partner can begin with a general question. Private information and records should only be shared through an approved process after staff explains what is needed.',
+          question: 'How do I find out if a bed is open?',
+          answer: `Call 412-628-0403. That is the fastest way. You can also send the application and we will call you back. Openings in ${houseNoun} change week to week, so a call today is worth more than a form from last month.`,
         },
         {
-          question: 'Can I see the house before deciding?',
-          answer: 'Ask staff how visits or tours are handled. Exact locations are not published online so that the privacy of current residents is protected.',
+          question: 'Can a family member or a probation officer call for me?',
+          answer: 'Yes. Family, counselors, discharge planners, and probation and parole officers call us all the time. Just keep medical records, court records, and other private details off the website form. We will ask for what we need directly.',
+        },
+        {
+          question: 'Can I see the house before I decide?',
+          answer: 'Usually, yes. Ask when you call. We do not post house addresses online, so a visit is arranged privately.',
         },
       ],
     },
@@ -115,72 +124,72 @@ function buildFaqs(audience: Audience): FaqGroup[] {
       items: [
         {
           question: 'How much is rent?',
-          answer: 'Current rent and fees are not published because they may change. Ask staff for the complete current amount, what is due before move in, the payment schedule, and the refund policy. A written fee schedule is part of the information provided by a licensed recovery house.',
+          answer: 'Rent is set per house and is not posted online because it changes. When you call, you will get the current amount, what is due before move-in, and the payment schedule. Pennsylvania licensing requires a written fee schedule, and you will have it before you pay anything.',
         },
         {
-          question: 'What is included in the cost?',
-          answer: 'Ask which utilities, furnishings, household supplies, internet, laundry, meals, and other items are included at the available house. Do not assume that the arrangement is the same at every residence.',
+          question: 'What is included?',
+          answer: 'A furnished bed with bedding, and shared kitchen, bathrooms, and living space. You buy and keep your own food and hygiene items. Ask about anything specific when you call.',
         },
         {
           question: 'Are bedrooms shared?',
-          answer: 'Room arrangements can differ by house and current opening. Ask whether the available placement is shared, what furniture is provided, and how personal belongings are stored.',
+          answer: 'Some rooms are shared. What is open when you move in determines the room, so ask when you call. Either way, your bed and your space are yours.',
         },
         {
           question: 'What should I bring?',
-          answer: 'Request the current move in list before arriving. Ask specifically about bedding, towels, toiletries, clothing, groceries, identification, medications, storage limits, and items that are not permitted.',
+          answer: 'Photo ID, your insurance card, up to three bags of clothing, up to five pairs of shoes, your hygiene items, and your own food. Bedding is provided. Bags are checked at move-in, so do not bring anything you would not want found.',
         },
         {
           question: 'Are meals provided?',
-          answer: 'Meal and grocery arrangements are not published on this site. Staff can explain whether residents buy and prepare their own food and what kitchen equipment or household staples are available.',
+          answer: 'No. Residents buy and cook their own food. The kitchen is shared and everyone helps keep it clean.',
         },
         {
-          question: 'Can I work or attend school while living there?',
-          answer: 'Recovery housing is intended to support ordinary responsibilities outside the home. Confirm the current employment, education, volunteer, appointment, and daytime schedule expectations before admission.',
+          question: 'Can I work or go to school while I live there?',
+          answer: 'Yes, and it is expected. Residents work, look for work, go to school, or volunteer. Curfew and the weekly house meeting are the fixed points in the week. Everything else fits around your schedule.',
         },
         {
-          question: 'Can I bring a car or use public transportation?',
-          answer: 'Ask about parking, vehicle documentation, ride sharing, nearby transit, and whether your work or appointment schedule fits the house curfew and return time policy.',
+          question: 'Can I bring a car or take the bus?',
+          answer: 'The houses are in city neighborhoods on Pittsburgh Regional Transit bus lines. If you have a car, ask about parking at the specific house when you call.',
         },
       ],
     },
     {
-      title: 'Recovery and House Policies',
+      title: 'Recovery and House Rules',
       items: [
         {
-          question: 'What recovery meetings are required?',
-          answer: 'New Beginnings follows an AA and NA based recovery culture. Ask staff to confirm the current number and type of meetings, documentation requirements, sponsor or home group expectations, and whether 90 meetings in 90 days applies.',
+          question: 'What meetings are required?',
+          answer: 'Our houses are AA and NA based. You are expected to go to outside 12-step meetings, get a sponsor, and work the steps, on top of the mandatory weekly in-house meeting. The exact meeting expectations are covered at intake.',
         },
         {
           question: 'Is there a curfew?',
-          answer: 'Ask for the current curfew and return time policy, including how work schedules, appointments, court requirements, recovery activities, and approved exceptions are handled.',
+          answer: 'Yes. Every house sets its own curfew, and it depends on your situation and where you are in your stay. If you are on probation or parole, your supervision curfew is your curfew. Work schedules and court obligations are worked out ahead of time, not the night of.',
         },
         {
           question: 'Are visitors or overnight passes allowed?',
-          answer: 'Visitor hours, approved visitors, overnight passes, notice requirements, and time away from the residence are governed by current house rules. Review those rules before making plans.',
+          answer: 'Visitors and overnights follow the house rules and need approval ahead of time. You will have the written rules before you move in, so there are no surprises.',
         },
         {
           question: 'Are there chores and house meetings?',
-          answer: 'Shared recovery housing normally includes responsibility for personal and common spaces. Ask about the current chore schedule, weekly house meetings, quiet hours, and how household concerns are resolved.',
+          answer: 'Yes. Everyone keeps their own space and shares the common chores. The weekly in-house meeting is mandatory. It is where the house sorts out problems, schedules, and plans.',
         },
         {
-          question: 'Is drug or alcohol testing part of the program?',
-          answer: 'Confirm the current testing policy, how tests are requested, any related costs, and what happens after a positive or refused test. The written policy should be understood before residency begins.',
+          question: 'Is there drug testing?',
+          answer: 'Yes. Random drug screens throughout your stay. Refusing a screen, tampering with one, or arguing your way out of one counts as a failed test.',
         },
         {
-          question: 'What is the policy for prescriptions or medication for addiction treatment?',
-          answer: 'Medication policies can be house specific and should be discussed privately before admission. Ask about prescribed medications, medication for addiction treatment, storage, self administration, documentation, and any prohibited products. Do not stop or change a prescription based on website information.',
+          question: 'What about prescriptions or medication for addiction treatment?',
+          answer: 'Prescription narcotics are not permitted in the house. For any other prescription, including medication for addiction treatment, talk to us before you move in. Medication policies are explained in writing at intake. Never stop or change a medication because of something you read on a website.',
         },
         {
-          question: 'What happens after substance use or a serious rule violation?',
-          answer: 'Ask staff to explain the current relapse, safety, discharge, and reconsideration policies. Pennsylvania licensed recovery houses provide written criteria for beginning and ending residency.',
+          question: 'What happens if I use or break a serious rule?',
+          answer: 'Using, refusing a drug screen, or threatening anyone can end your stay. That policy is in writing and you will see it before you move in. If you are asked to leave, you can talk to us later about coming back.',
         },
         {
-          question: 'How long can someone stay?',
-          answer: 'A fixed minimum or maximum stay is not published on this site. Ask how length of residence is determined, what progress or financial expectations apply, and how transition planning is handled.',
+          question: 'How long can I stay?',
+          answer: 'There is no fixed exit date on the calendar. Residents stay as long as they are working a program, paying rent, and following house rules, and move on when they are steady, working, and ready to live on their own. For most people that is months, not weeks.',
         },
         {
           question: 'Does New Beginnings provide counseling or medical treatment?',
-          answer: 'No. New Beginnings provides recovery housing. Counseling, medical services, medication management, and other treatment remain with independent licensed providers.',
+          answer: 'No. New Beginnings is housing. Our founder, Susan Rua, is a licensed counselor who runs a separate practice, but living here does not require you to see her or anyone in particular. You keep your own counselor, doctor, or program.',
         },
       ],
     },
@@ -190,9 +199,9 @@ function buildFaqs(audience: Audience): FaqGroup[] {
 export const mensHousing: HousingDetailConfig = {
   audience: 'men',
   title: 'Men’s Recovery Housing',
-  description: 'Practical information about New Beginnings recovery housing for adult men in Pittsburgh, including costs, expectations, daily life, meetings, and admissions.',
-  heroTitle: 'A Pittsburgh Recovery Home for Men',
-  heroLead: 'A substance free shared home for adult men, with peer community, clear expectations, and an AA and NA based recovery culture.',
+  description: 'DDAP-licensed recovery houses for men in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one for men on parole. Call 412-628-0403.',
+  heroTitle: 'Men’s Recovery Housing in Pittsburgh',
+  heroLead: 'Substance-free sober living houses for men in four Pittsburgh neighborhoods, including one that works with men on parole. AA and NA based, licensed by Pennsylvania, and run by people who know the work.',
   heroImage: {
     src: '/images/home-entry.webp',
     alt: 'A residential entry and shared living area',
@@ -205,7 +214,7 @@ export const mensHousing: HousingDetailConfig = {
     width: 1600,
     height: 2133,
   },
-  householdLead: 'Residents share a recovery focused home while continuing to build work, education, family, treatment, and community connections outside the residence.',
+  householdLead: 'You live with other men in recovery, go to meetings, keep up with work or school, and come home to a house where staying clean is the normal thing to do.',
   householdFeatures: sharedHouseholdFeatures,
   supportFeatures: sharedSupportFeatures,
   galleryImages: [
@@ -213,16 +222,16 @@ export const mensHousing: HousingDetailConfig = {
     { src: '/images/household-linens.webp', alt: 'Clean folded household linens', width: 2200, height: 1236 },
     { src: '/images/pittsburgh-rowhouses.webp', alt: 'Pittsburgh row houses near public streets', width: 1800, height: 1204 },
   ],
-  publicAreas: 'Sheraden and McKees Rocks for men’s housing',
+  publicAreas: 'Our men’s houses are in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, on Pittsburgh’s North Side and West End.',
   faqs: buildFaqs('men'),
 };
 
 export const womensHousing: HousingDetailConfig = {
   audience: 'women',
   title: 'Women’s Recovery Housing',
-  description: 'Practical information about New Beginnings recovery housing for adult women in Pittsburgh, including costs, expectations, daily life, meetings, and admissions.',
-  heroTitle: 'A Pittsburgh Recovery Home for Women',
-  heroLead: 'A substance free shared home for adult women, with peer community, privacy, clear expectations, and an AA and NA based recovery culture.',
+  description: 'A DDAP-licensed recovery house for women in Bellevue, just north of Pittsburgh, with privacy, structure, and housemates in recovery. AA and NA based. Call 412-628-0403.',
+  heroTitle: 'Women’s Recovery Housing in Pittsburgh',
+  heroLead: 'A substance-free sober living house for women in Pittsburgh, with the privacy, structure, and support that make staying sober possible.',
   heroImage: {
     src: '/images/shared-bedroom.webp',
     alt: 'A bright shared bedroom with two beds',
@@ -235,7 +244,7 @@ export const womensHousing: HousingDetailConfig = {
     width: 2200,
     height: 1467,
   },
-  householdLead: 'Residents share a recovery focused home with other women while continuing to build work, education, family, treatment, and community connections outside the residence.',
+  householdLead: 'You live with other women in recovery, keep up with work, school, family, and appointments, and come home to a house where staying clean is the normal thing to do.',
   householdFeatures: sharedHouseholdFeatures,
   supportFeatures: sharedSupportFeatures,
   galleryImages: [
@@ -243,6 +252,6 @@ export const womensHousing: HousingDetailConfig = {
     { src: '/images/household-linens.webp', alt: 'Clean folded household linens', width: 2200, height: 1236 },
     { src: '/images/pittsburgh-rowhouses.webp', alt: 'Pittsburgh row houses near public streets', width: 1800, height: 1204 },
   ],
-  publicAreas: 'Brighton Heights for women’s housing',
+  publicAreas: 'Our women’s house is in Bellevue, just north of the city.',
   faqs: buildFaqs('women'),
 };

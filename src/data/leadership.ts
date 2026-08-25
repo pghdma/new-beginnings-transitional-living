@@ -27,26 +27,25 @@ export const organizationalLeadership: LeadershipProfile[] = [
     published: true,
     servesOnBoard: true,
     summary:
-      'Susan Rua founded New Beginnings and brings decades of substance-use, counseling, and sober-living experience to its recovery-housing mission.',
+      'Susan Rua is a licensed professional counselor who has worked in addiction treatment since 1999 and has owned and run sober living homes in Pittsburgh for more than a decade. She founded New Beginnings in 2016.',
     biography: [
-      'Susan Rua is a professional counselor who has specialized in substance use and recovery since 1999. Her work has included counseling, nursing, and more than a decade owning and directing sober-living homes.',
-      'That combination of clinical knowledge and day-to-day housing experience helped shape New Beginnings: stable homes, clear expectations, peer connection, and respect for each resident as an adult building a life in recovery.',
-      'New Beginnings is a separate nonprofit recovery-housing organization. Residents can remain connected to independent treatment providers and community recovery resources as appropriate to their individual needs.',
+      'Susan has worked in addiction counseling since 1999. Before counseling she was a nurse, and for more than ten years she has owned and directed sober living homes in Pittsburgh.',
+      'She started New Beginnings because too many people finish treatment and have nowhere safe to go. The houses are built on what she has seen work: a substance-free home, clear rules, a weekly house meeting, AA and NA, and housemates who are doing the same thing.',
+      'Susan also runs Step By Step Support (stepbystepsupport.net), a licensed counseling practice in Mt. Washington. The two are separate organizations. Living at New Beginnings does not require seeing Susan or any particular provider for counseling.',
     ],
     credentials: ['CADC', 'MSPC', 'LPC'],
     education: [
       "Master's in Professional Counseling, Carlow University",
-      'Background in nursing',
+      'Associate degree in nursing',
     ],
     experience: [
-      'Specializing in substance use and recovery since 1999',
-      'More than a decade owning and directing sober-living homes',
-      'Experience connecting recovery housing with independent clinical and community support',
+      'Addiction counseling since 1999',
+      'More than ten years owning and directing sober living homes',
+      'Licensed Professional Counselor and Certified Alcohol and Drug Counselor',
     ],
   },
 ];
 
-// The published roster follows the current direction provided for this site.
 // Biographical details belong here only after they are cleared for public use.
 export const boardMembers: LeadershipProfile[] = [
   {

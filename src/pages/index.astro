@@ -5,59 +5,59 @@ import { site } from '../data/site';
 
 const foundations = [
   {
-    icon: 'house',
-    title: 'A Dependable Home',
-    copy: 'A substance-free shared environment creates a consistent place to return to each day.',
+    icon: 'shield-check',
+    title: 'A House Where Nobody Uses',
+    copy: 'Every home is substance free, with random drug screens. That is not a threat. It is what makes the house safe for everyone in it.',
   },
   {
     icon: 'users-round',
-    title: 'Shared Accountability',
-    copy: 'Clear expectations and peer community support the everyday responsibility recovery requires.',
+    title: 'People Who Get It',
+    copy: 'Your housemates are in recovery too. Peer support is not a program. It is the person at the kitchen table who has been where you are.',
   },
   {
-    icon: 'heart-handshake',
-    title: 'Connected Support',
-    copy: 'Residents can remain connected to independent treatment and community recovery resources.',
+    icon: 'list-checks',
+    title: 'Structure You Can Lean On',
+    copy: 'House rules, a weekly house meeting, chores, and a curfew give your days a shape while you rebuild the rest.',
   },
 ];
 
 const dailyLife = [
-  { icon: 'briefcase-business', title: 'Work and Education' },
-  { icon: 'calendar-check', title: 'Appointments and Meetings' },
-  { icon: 'list-checks', title: 'Shared Responsibilities' },
-  { icon: 'users', title: 'Peer Connection' },
+  { icon: 'briefcase-business', title: 'Work and School' },
+  { icon: 'users', title: 'Meetings and Sponsors' },
+  { icon: 'list-checks', title: 'Chores and House Meeting' },
+  { icon: 'calendar-check', title: 'Appointments and Court' },
 ];
 
 const firstConversation = [
-  { number: '01', title: 'Reach Out', copy: 'Call New Beginnings to begin a private, general conversation.' },
-  { number: '02', title: 'Talk Through the Fit', copy: 'Discuss current availability and what you are looking for.' },
-  { number: '03', title: 'Receive Private Next Steps', copy: 'If appropriate, location and process details are shared directly.' },
+  { number: '01', title: 'Call or Apply', copy: `Call ${site.phone} or send the short application. Tell us whether you are asking about the men’s houses or the women’s house.` },
+  { number: '02', title: 'We Talk', copy: 'We call you back, ask a few questions, and tell you what is open, what it costs, and what the house expects.' },
+  { number: '03', title: 'Move In', copy: 'If it is a fit and a bed is open, you get the address, the move-in list, and a date.' },
 ];
 
 const trustPoints = [
-  { icon: 'heart-handshake', title: '501(c)(3)', copy: 'Public charity' },
-  { icon: 'badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed residences' },
-  { icon: 'shield-check', title: 'WestPARR', copy: 'Inspected recovery housing' },
+  { icon: 'heart-handshake', title: '501(c)(3)', copy: 'Pittsburgh public charity' },
+  { icon: 'badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed recovery houses' },
+  { icon: 'shield-check', title: 'WestPARR', copy: 'Certified member' },
 ];
 ---
 
 <MainLayout
   title={site.shortName}
-  description="Nonprofit recovery housing for adult men and women in Pittsburgh, grounded in peer support, accountability, and connection to independent recovery resources."
+  description={site.description}
 >
   <section class="home-hero">
     <img class="home-hero__image" src="/images/house-living-room.webp" alt="" width="2200" height="1467" fetchpriority="high" />
     <div class="home-hero__shade" aria-hidden="true"></div>
     <div class="container home-hero__inner">
       <div class="home-hero__copy">
-        <p class="eyebrow">Nonprofit Recovery Housing in Pittsburgh</p>
-        <h1>A Stable Place to Build What Comes Next</h1>
-        <p class="lead">Structured recovery residences for adult men and women, grounded in peer support, accountability, and connection to independent recovery resources.</p>
+        <p class="eyebrow">Nonprofit Sober Living in Pittsburgh</p>
+        <h1>Recovery Housing in Pittsburgh for Men and Women</h1>
+        <p class="lead">Safe, substance-free homes where staying sober is the normal thing to do. Licensed by Pennsylvania, run by a counselor who has done this since 1999. You do not need to have it all figured out to call.</p>
         <div class="actions home-hero__actions">
-          <a class="button" href="/admissions/">Ask About Housing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button button--outline" href="/referrals/">For Professionals</a>
+          <a class="button" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
         </div>
-        <p class="home-hero__location"><Icon name="lucide:map-pin" aria-hidden="true" />Serving Pittsburgh and surrounding Allegheny County communities</p>
+        <p class="home-hero__location"><Icon name="lucide:map-pin" aria-hidden="true" />Houses in Sheraden, Observatory Hill, Brighton Heights, McKees Rocks, and Bellevue. Office in Mt. Washington.</p>
       </div>
     </div>
   </section>
@@ -65,15 +65,15 @@ const trustPoints = [
   <section class="purpose-section" id="purpose">
     <div class="container purpose-layout">
       <header class="purpose-heading">
-        <p class="eyebrow">Recovery Happens in Daily Life</p>
-        <h2>A Home That Supports <span>What Happens Next</span></h2>
+        <p class="eyebrow">Why Recovery Housing</p>
+        <h2>Getting Sober Is One Thing. <span>Staying Sober Is Another</span></h2>
         <figure class="purpose-photo">
           <img src="/images/home-entry.webp" alt="A welcoming home entry and staircase" width="2200" height="1467" loading="lazy" />
         </figure>
       </header>
       <div class="purpose-content">
-        <p class="lead">Recovery takes more than a roof. A dependable home can make room for routines, responsibility, connection, and the work of moving forward.</p>
-        <p>New Beginnings provides substance-free shared housing shaped by an AA/NA-based recovery culture. Residents can live alongside peers while continuing work, education, appointments, independent treatment, meetings, and responsibilities beyond the home.</p>
+        <p class="lead">Treatment ends. Then you need somewhere to live where staying clean is the normal thing to do. That is what a recovery house is for.</p>
+        <p>New Beginnings runs sober living homes for adults in Pittsburgh who are done using and want a real shot at keeping it that way. The houses are AA and NA based. You live with other people doing the same work, you go to meetings, you keep a job or go to school, and you come home to a house where nobody is using.</p>
         <ul class="foundation-list">
           {foundations.map((item) => (
             <li>
@@ -82,7 +82,7 @@ const trustPoints = [
             </li>
           ))}
         </ul>
-        <a class="button button--outline purpose-action" href="/recovery-housing/">How Recovery Housing Works<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+        <a class="button button--outline purpose-action" href="/recovery-housing/">How Our Houses Work<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
       </div>
     </div>
   </section>
@@ -91,10 +91,10 @@ const trustPoints = [
     <div class="container">
       <header class="housing-heading">
         <div>
-          <p class="eyebrow">Homes for Men and Women</p>
-          <h2>Two Housing Paths. One Commitment to Stability</h2>
+          <p class="eyebrow">Our Homes</p>
+          <h2>Houses for Men in Four Neighborhoods. One House for Women</h2>
         </div>
-        <p>New Beginnings operates separate recovery residences for adult men and women in established Pittsburgh-area communities. Each offers stable shared living shaped by peer support, accountability, and everyday recovery routines.</p>
+        <p>New Beginnings runs separate sober living homes for men and women in established Pittsburgh neighborhoods. Every house is licensed by the Pennsylvania Department of Drug and Alcohol Programs and certified by WestPARR.</p>
       </header>
 
       <div class="housing-paths">
@@ -102,47 +102,47 @@ const trustPoints = [
           <img src="/images/home-entry.webp" alt="" width="2200" height="1467" loading="lazy" />
           <span class="housing-path__shade"></span>
           <span class="housing-path__content">
-            <span class="housing-path__label">For adult men</span>
+            <span class="housing-path__label">For men</span>
             <h3>Men’s Recovery Housing</h3>
-            <span class="housing-path__copy">Structured shared living in Pittsburgh-area communities.</span>
-            <span class="housing-path__action">Explore Men’s Housing<Icon name="lucide:arrow-up-right" aria-hidden="true" /></span>
+            <span class="housing-path__copy">Houses in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one that works with men on parole.</span>
+            <span class="housing-path__action">See the Men’s Houses<Icon name="lucide:arrow-up-right" aria-hidden="true" /></span>
           </span>
         </a>
         <a class="housing-path" href="/recovery-housing/women/">
           <img src="/images/shared-bedroom.webp" alt="" width="2200" height="1466" loading="lazy" />
           <span class="housing-path__shade"></span>
           <span class="housing-path__content">
-            <span class="housing-path__label">For adult women</span>
+            <span class="housing-path__label">For women</span>
             <h3>Women’s Recovery Housing</h3>
-            <span class="housing-path__copy">A stable shared environment for continuing the work of recovery.</span>
-            <span class="housing-path__action">Explore Women’s Housing<Icon name="lucide:arrow-up-right" aria-hidden="true" /></span>
+            <span class="housing-path__copy">One house in Bellevue, with the privacy and support that matter.</span>
+            <span class="housing-path__action">See the Women’s House<Icon name="lucide:arrow-up-right" aria-hidden="true" /></span>
           </span>
         </a>
       </div>
 
-      <aside class="housing-facts" aria-label="Service area and residence privacy">
+      <aside class="housing-facts" aria-label="Where we serve and who we serve">
         <div class="housing-fact">
           <span class="housing-fact__icon icon-medallion icon-medallion--sm icon-medallion--dark"><Icon name="lucide:map-pin" aria-hidden="true" /></span>
           <div>
-            <span class="housing-fact__label">Where we serve</span>
-            <h3>Pittsburgh Area Communities</h3>
-            <p>Homes serve established neighborhoods across the Pittsburgh area.</p>
+            <span class="housing-fact__label">Where</span>
+            <h3>Pittsburgh’s North Side and West End</h3>
+            <p>Houses in Sheraden, Observatory Hill, Brighton Heights, McKees Rocks, and Bellevue, on bus lines and a short ride from downtown.</p>
           </div>
         </div>
         <div class="housing-fact">
-          <span class="housing-fact__icon icon-medallion icon-medallion--sm icon-medallion--dark"><Icon name="lucide:landmark" aria-hidden="true" /></span>
+          <span class="housing-fact__icon icon-medallion icon-medallion--sm icon-medallion--dark"><Icon name="lucide:users-round" aria-hidden="true" /></span>
           <div>
-            <span class="housing-fact__label">Examples in public records</span>
-            <h3>{site.neighborhoods.join(' · ')}</h3>
-            <p>Additional homes serve other Pittsburgh-area communities.</p>
+            <span class="housing-fact__label">Who</span>
+            <h3>Adults 18 and Older</h3>
+            <p>Men and women who are done using and willing to live by the house rules. No referral required.</p>
           </div>
         </div>
         <div class="housing-fact">
           <span class="housing-fact__icon icon-medallion icon-medallion--sm icon-medallion--dark"><Icon name="lucide:lock-keyhole" aria-hidden="true" /></span>
           <div>
             <span class="housing-fact__label">Residence privacy</span>
-            <h3>Exact Locations Stay Private</h3>
-            <p>Identifying exterior photographs and individual house addresses are not published.</p>
+            <h3>We Don’t Post Street Addresses</h3>
+            <p>Our residents are your neighbors. You get the address when we talk about a bed, not from a search engine.</p>
           </div>
         </div>
       </aside>
@@ -153,15 +153,15 @@ const trustPoints = [
     <div class="daily-layout">
       <div class="daily-content">
         <div class="daily-content__inner">
-          <p class="eyebrow">Life Beyond the Front Door</p>
-          <h2>Recovery Continues Through Ordinary Days</h2>
-          <p class="lead">Ordinary routines matter: getting to work, keeping appointments, sharing household responsibilities, and making time for recovery meetings.</p>
+          <p class="eyebrow">A Normal Week</p>
+          <h2>Recovery Happens on a Tuesday Afternoon</h2>
+          <p class="lead">The house gives you a place to come back to. What you do with the day is up to you: work, school, meetings, court dates, family, and the small routines that hold a life together.</p>
           <ul class="daily-list">
             {dailyLife.map((item) => (
               <li><Icon name={`lucide:${item.icon}`} aria-hidden="true" /><span>{item.title}</span></li>
             ))}
           </ul>
-          <p class="daily-scope">New Beginnings provides housing, not clinical treatment. Counseling, medical care, and medication management remain with independent licensed providers.</p>
+          <p class="daily-scope">New Beginnings is housing, not treatment. If you are in counseling, on medication, or seeing a doctor, you keep doing that with your own providers. We make sure you have a stable place to live while you do.</p>
         </div>
       </div>
       <figure class="daily-photo">
@@ -174,21 +174,21 @@ const trustPoints = [
     <div class="container">
       <div class="trust-intro">
         <header>
-          <p class="eyebrow">Founded Here. Accountable Here.</p>
-          <h2>A Pittsburgh Nonprofit Built Around Recovery Housing</h2>
+          <p class="eyebrow">Who Is Behind This</p>
+          <h2>Run by a Counselor Who Has Done This Since 1999</h2>
         </header>
         <div class="trust-intro__copy">
-          <p class="lead">Founded in Pittsburgh by Susan Rua, New Beginnings combines practical sober-living experience with public nonprofit accountability.</p>
-          <p>Its standing can be checked independently through nonprofit records, state licensing, and recovery-residence inspection.</p>
+          <p class="lead">I’m Susan Rua. I have worked in addiction counseling since 1999, and I have owned and run sober living homes in Pittsburgh for more than ten years. I started New Beginnings because people leaving treatment needed somewhere decent to go, and there were not enough of those places.</p>
+          <p>New Beginnings is a Pittsburgh 501(c)(3) public charity. Our houses are licensed by Pennsylvania DDAP and certified by WestPARR, and you can check all of that yourself.</p>
           <div class="actions trust-section__actions">
-            <a class="button" href="/about/board/#susan-rua">Meet Susan Rua<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-            <a class="button button--outline" href="/about/transparency/">Verify Our Standing</a>
+            <a class="button" href="/about/board/#susan-rua">Meet Susan<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+            <a class="button button--outline" href="/about/transparency/">Check Our Credentials</a>
           </div>
         </div>
       </div>
 
       <figure class="trust-panorama">
-        <img src="/images/pittsburgh-point-panorama.webp" alt="Point State Park and the complete Pittsburgh skyline viewed across the three rivers" width="2400" height="680" loading="lazy" />
+        <img src="/images/pittsburgh-point-panorama.webp" alt="Point State Park and the Pittsburgh skyline viewed across the three rivers" width="2400" height="680" loading="lazy" />
       </figure>
 
       <ul class="trust-points" aria-label="New Beginnings credentials">
@@ -205,9 +205,9 @@ const trustPoints = [
   <section class="conversation-section" id="start-a-conversation">
     <div class="container conversation-layout">
       <div class="conversation-content">
-        <p class="eyebrow">Your First Conversation</p>
-        <h2>Start Simply. Keep It Private</h2>
-        <p>Begin with a general conversation about housing. Please do not send medical records or other sensitive information.</p>
+        <p class="eyebrow">Getting In</p>
+        <h2>Start With a Phone Call</h2>
+        <p>You do not need a referral, a treatment discharge, or the perfect story. Call, or send the short application, and we will talk. Keep medical and legal details off the website. We will ask for what we need.</p>
         <ol class="conversation-steps">
           {firstConversation.map((step) => (
             <li>
@@ -217,10 +217,10 @@ const trustPoints = [
           ))}
         </ol>
         <div class="actions conversation-actions">
-          <a class="button button--light" href="/admissions/">Admissions Information<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button button--light" href="/admissions/">Apply for Housing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
           <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
         </div>
-        <p class="conversation-secondary">Supporting someone professionally? <a class="inline-link" href="/referrals/">Review professional information</a>. Looking to help? <a class="inline-link" href="/support-us/">Support the work</a>.</p>
+        <p class="conversation-secondary">Referring a client? <a class="inline-link" href="/referrals/">See the professionals page</a>. Want to help? <a class="inline-link" href="/support-us/">Support the houses</a>.</p>
       </div>
       <figure class="conversation-photo">
         <img src="/images/admissions.jpg" alt="Notebooks and coffee arranged around a shared table" width="1880" height="1245" loading="lazy" />
@@ -228,7 +228,6 @@ const trustPoints = [
     </div>
   </section>
 </MainLayout>
-
 <style>
   .home-hero { position: relative; display: grid; min-height: clamp(42rem,calc(100svh - var(--header-total-height)),50rem); overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
   .home-hero__image, .home-hero__shade { position: absolute; width: 100%; height: 100%; inset: 0; }
@@ -237,7 +236,7 @@ const trustPoints = [
   .home-hero__inner { position: relative; z-index: 1; padding-block: clamp(5rem,9vw,8rem); }
   .home-hero__copy { max-width: 48rem; }
   .home-hero .eyebrow { color: var(--accent-on-image); }
-  .home-hero h1 { max-width: 10.5ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-home); font-weight: var(--weight-heading); }
+  .home-hero h1 { max-width: 12ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-home); font-weight: var(--weight-heading); }
   .home-hero .lead { max-width: 39rem; margin-top: var(--space-5); color: var(--text-on-dark); }
   .home-hero__actions { margin-top: var(--space-6); }
   .home-hero__actions .button { gap: var(--button-gap); }

@@ -3,13 +3,14 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
-import { buildStructuredData, normalizePathname, seoRoutes } from '../data/seo';
+import { buildStructuredData, normalizePathname, seoRoutes, type FaqEntry } from '../data/seo';
 
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
   lastReviewed?: string;
+  faq?: FaqEntry[];
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   description: suppliedDescription = site.description,
   noindex = false,
   lastReviewed,
+  faq,
 } = Astro.props;
 
 const pathname = normalizePathname(Astro.url.pathname);
@@ -29,7 +31,7 @@ const socialImagePath = routeSeo?.image ?? '/images/og-default.jpg';
 const socialImage = new URL(socialImagePath, site.url).toString();
 const socialImageAlt = routeSeo?.imageAlt ?? 'New Beginnings recovery housing website in Pittsburgh';
 const structuredData = routeSeo && !noindex
-  ? buildStructuredData(routeSeo, canonicalUrl, lastReviewed)
+  ? buildStructuredData(routeSeo, canonicalUrl, lastReviewed, faq)
   : null;
 ---
 <!doctype html>

@@ -7,8 +7,8 @@ const purposeScenes = [
   {
     src: '/images/home-entry.webp',
     alt: 'A welcoming residential entry and staircase',
-    label: 'A Dependable Home',
-    description: 'Stable surroundings support consistent routines and provide a reliable place to return each day.',
+    label: 'A Real Home',
+    description: 'Ordinary houses in ordinary neighborhoods. A kitchen, a living room, and a bed that is yours.',
     className: 'purpose-gallery__scene--primary',
     width: 2200,
     height: 1467,
@@ -16,8 +16,8 @@ const purposeScenes = [
   {
     src: '/images/house-kitchen.webp',
     alt: 'A shared kitchen and dining table prepared for everyday routines',
-    label: 'Daily Routines',
-    description: 'Meals, household responsibilities, appointments, and recovery meetings give each week a practical rhythm.',
+    label: 'A Real Routine',
+    description: 'Meetings, chores, work, and a weekly house meeting give the week a shape you can count on.',
     className: '',
     width: 2200,
     height: 1467,
@@ -25,8 +25,8 @@ const purposeScenes = [
   {
     src: '/images/pittsburgh.jpg',
     alt: 'The Pittsburgh skyline and rivers',
-    label: 'Connected to Pittsburgh',
-    description: 'The homes are part of established Pittsburgh area communities near work, services, and recovery resources.',
+    label: 'A Real City',
+    description: 'Our houses sit in established Pittsburgh neighborhoods near bus lines, jobs, and meetings.',
     className: '',
     width: 1880,
     height: 1253,
@@ -36,37 +36,37 @@ const purposeScenes = [
 const commitments = [
   {
     icon: 'heart-handshake',
-    title: 'Dignity',
-    copy: 'People in recovery deserve to be treated as adults, neighbors, and whole human beings.',
+    title: 'Respect',
+    copy: 'You are an adult and a neighbor, not a case number. We expect you to treat the house and the people in it the same way.',
   },
   {
     icon: 'scale',
     title: 'Accountability',
-    copy: 'Clear expectations and shared responsibility help protect the stability of each home.',
+    copy: 'House rules, random drug screens, and a weekly house meeting are not there to catch you. They keep the house safe for the person who moved in yesterday.',
   },
   {
     icon: 'users-round',
     title: 'Community',
-    copy: 'Peer connection and outside partnerships help recovery extend beyond the walls of a residence.',
+    copy: 'Recovery is easier next to someone who is also doing it. Housemates, sponsors, home groups, and family are all part of the plan.',
   },
 ];
 
 const founderHighlights = [
   { icon: 'badge-check', label: 'CADC · MSPC · LPC' },
-  { icon: 'heart-pulse', label: 'Counseling and nursing background' },
-  { icon: 'house-heart', label: 'Sober-living leadership experience' },
+  { icon: 'heart-pulse', label: 'Addiction counselor since 1999' },
+  { icon: 'house-heart', label: 'Ten plus years running sober homes' },
 ];
 
 const accountabilityProof = [
-  { icon: 'landmark', label: '501(c)(3)', detail: 'Public charity' },
-  { icon: 'badge-check', label: 'Pennsylvania DDAP', detail: 'Licensed residences' },
-  { icon: 'shield-check', label: 'WestPARR', detail: 'Inspected housing' },
+  { icon: 'landmark', label: '501(c)(3)', detail: 'Public charity since 2019' },
+  { icon: 'badge-check', label: 'Pennsylvania DDAP', detail: 'Licensed recovery houses' },
+  { icon: 'shield-check', label: 'WestPARR', detail: 'Certified member' },
 ];
 ---
 
 <MainLayout
   title="About"
-  description="Learn about the mission, leadership, nonprofit governance, and recovery-housing purpose of New Beginnings Transitional Living Foundation."
+  description="New Beginnings is a Pittsburgh 501(c)(3) founded in 2016 by counselor Susan Rua to run safe, licensed recovery housing for men and women."
 >
   <section class="about-hero">
     <img
@@ -81,10 +81,11 @@ const accountabilityProof = [
     <div class="container about-hero__inner">
       <div class="about-hero__copy">
         <p class="eyebrow">About New Beginnings</p>
-        <h1>A Pittsburgh Nonprofit With a Practical Purpose</h1>
+        <h1>A Pittsburgh Nonprofit That Runs Sober Houses the Right Way</h1>
         <p class="lead">
-          New Beginnings gives adults in recovery a stable place to strengthen the routines,
-          skills, and connections that support lasting change.
+          New Beginnings Transitional Living Foundation gives adults in recovery a safe,
+          substance-free home and the structure to stay that way. Licensed, inspected,
+          and run by people who know the work.
         </p>
         <p class="about-hero__origin">
           <Icon name="lucide:map-pin" aria-hidden="true" />
@@ -97,35 +98,36 @@ const accountabilityProof = [
   <section class="purpose-section">
     <div class="container purpose-section__intro">
       <header>
-        <p class="eyebrow">Our Purpose</p>
-        <h2>Housing, Support, and a Foundation for Independence</h2>
+        <p class="eyebrow">Why We Exist</p>
+        <h2>The Hardest Part Often Starts the Day Treatment Ends</h2>
       </header>
       <div class="purpose-section__copy">
         <p class="purpose-section__statement">
-          New Beginnings Transitional Living Foundation provides transitional sober housing
-          in a supportive, peer-driven environment.
+          Plenty of people get sober. Fewer stay sober, and the difference is usually where
+          they go home to. New Beginnings exists to make sure that home is safe.
         </p>
         <div class="purpose-section__details">
           <div>
-            <span>Recovery in Daily Life</span>
+            <span>What we do</span>
             <p>
-              Residents work on establishing a solid foundation of recovery, developing positive
-              life skills, and staying connected to independent licensed drug, alcohol, and
-              mental-health providers.
+              We run sober living homes in Pittsburgh for men and women. Residents live
+              substance free, go to AA or NA, keep up with work or school, and share the
+              responsibilities of a household with people who understand.
             </p>
           </div>
           <div>
-            <span>Housing, Not Treatment</span>
+            <span>What we do not do</span>
             <p>
-              Recovery housing is the stable daily environment where routines, responsibilities,
-              relationships, and individual goals continue to take shape.
+              We are not a treatment center, a detox, or a shelter. Counseling, medical care,
+              and medication stay with your own providers. We give you the stable home that
+              makes all of that easier to keep up with.
             </p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container purpose-gallery" role="list" aria-label="The purpose in daily life">
+    <div class="container purpose-gallery" role="list" aria-label="What the houses provide">
       {purposeScenes.map((scene) => (
         <figure
           class:list={['purpose-gallery__scene', scene.className]}
@@ -151,11 +153,11 @@ const accountabilityProof = [
   <section class="principles-band">
     <div class="principles-band__content">
       <header>
-        <p class="eyebrow">What Guides the Work</p>
-        <h2>Principles Carried Into Daily Life</h2>
+        <p class="eyebrow">How We Run the Houses</p>
+        <h2>What We Ask of Everyone, Including Ourselves</h2>
         <p>
-          A stable residence is shaped by how people are treated, what everyone can count on,
-          and how responsibility is shared.
+          A good sober house comes down to how people are treated, what everyone can count
+          on, and who is responsible for what.
         </p>
       </header>
       <ul>
@@ -189,11 +191,21 @@ const accountabilityProof = [
         <div class="founder-profile__content">
           <p class="eyebrow">President and Founder</p>
           <h2>{susanRua.name}</h2>
-          {susanRua.summary && <p class="lead">{susanRua.summary}</p>}
+          <p class="lead">
+            I have been a counselor since 1999 and a nurse before that, and I have owned and
+            run sober living homes in Pittsburgh for more than ten years.
+          </p>
           <p>
-            Her background connects professional counseling, nursing, and the practical work
-            of operating sober-living homes. That perspective informs an organization built
-            around stable housing, clear expectations, and connection to recovery support.
+            I started New Beginnings as a nonprofit because this city needed more decent,
+            licensed recovery housing, and because I had watched too many people do the hard
+            work of treatment and then have nowhere safe to go. The houses are built on what I
+            have seen work: clear rules, a weekly house meeting, AA and NA, and housemates who
+            are doing the same thing you are.
+          </p>
+          <p>
+            I also run <a class="inline-link" href="https://stepbystepsupport.net/" rel="external">Step By Step Support</a>,
+            my counseling practice in Mt. Washington. It is a separate organization, and living
+            at New Beginnings does not require seeing me or anyone in particular for counseling.
           </p>
           <ul class="founder-profile__highlights" aria-label="Susan Rua’s professional background">
             {founderHighlights.map((item) => (
@@ -204,7 +216,7 @@ const accountabilityProof = [
             ))}
           </ul>
           <a class="button" href="/about/board/#susan-rua">
-            Meet Susan Rua
+            More About Susan
             <Icon name="lucide:arrow-right" aria-hidden="true" />
           </a>
         </div>
@@ -225,25 +237,25 @@ const accountabilityProof = [
     <div class="container governance-section__intro">
       <div>
         <p class="eyebrow">Nonprofit Governance</p>
-        <h2>Stewardship Beyond the Homes</h2>
+        <h2>Accountable to a Board, Not Just an Owner</h2>
       </div>
       <p class="lead">
-        A volunteer Board of Directors provides mission stewardship, nonprofit oversight,
-        and organizational accountability. This supports the work inside each residence
-        with responsible leadership beyond it.
+        New Beginnings is a public charity with a volunteer Board of Directors. That means
+        the organization answers to more than one person, files with the IRS every year,
+        and keeps its standing public.
       </p>
     </div>
 
     <div class="container governance-section__stage">
       <article class="board-preview">
         <div class="board-preview__content">
-          <p class="eyebrow">People and Stewardship</p>
-          <h3>Board Leadership Grounded in the Mission</h3>
+          <p class="eyebrow">Leadership</p>
+          <h3>The People Responsible for the Mission</h3>
           <p>
-            The published board roster brings organizational leadership and volunteer
-            oversight together around the work of New Beginnings.
+            Susan and staff run the houses day to day. The board keeps the organization
+            honest, solvent, and focused on housing.
           </p>
-          <div class="board-preview__roster" aria-label="Published board roster">
+          <div class="board-preview__roster" aria-label="Board of Directors">
             {currentBoardMembers.map((member) => (
               <div>
                 <strong>{member.name}</strong>
@@ -264,15 +276,15 @@ const accountabilityProof = [
             height="1253"
             loading="lazy"
           />
-          <figcaption>Volunteer Governance</figcaption>
+          <figcaption>Volunteer Board</figcaption>
         </figure>
       </article>
 
       <article class="records-preview">
         <div class="records-preview__content">
           <header>
-            <p class="eyebrow">Independent Verification</p>
-            <h3>Public Standing You Can Check</h3>
+            <p class="eyebrow">Check for Yourself</p>
+            <h3>Licensed, Inspected, and On the Record</h3>
           </header>
           <div class="records-preview__proof" aria-label="Public credentials">
             {accountabilityProof.map((item) => (
@@ -283,7 +295,7 @@ const accountabilityProof = [
             ))}
           </div>
           <a class="button" href="/about/transparency/">
-            Review Our Standing
+            See Our Credentials
             <Icon name="lucide:arrow-right" aria-hidden="true" />
           </a>
         </div>
@@ -291,7 +303,6 @@ const accountabilityProof = [
     </div>
   </section>
 </MainLayout>
-
 <style>
   .about-hero { position: relative; display: grid; min-height: clamp(29rem, 48vw, 34rem); overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
   .about-hero__image, .about-hero__shade { position: absolute; width: 100%; height: 100%; inset: 0; }
