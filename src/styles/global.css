@@ -72,13 +72,14 @@
   --gap-columns: clamp(2rem, 5vw, 4rem);
   --split-intro-gap: clamp(2.5rem, 7vw, 6rem);
   --split-intro-heading-size: clamp(2rem, 3.2vw, 3rem);
-  --split-intro-heading-measure: 18ch;
+  --split-intro-heading-measure: 25ch;
   --type-display-home: clamp(3.5rem, 6.25vw, 5.75rem);
   --type-display-feature: clamp(3.25rem, 5.9vw, 5.5rem);
   --type-display-interior: clamp(3.1rem, 5.5vw, 5.25rem);
   --type-display-narrative: clamp(3.25rem, 5.1vw, 4.65rem);
   --type-display-centered: clamp(3rem, 6vw, 5.35rem);
   --type-display-editorial: clamp(3.4rem, 6.2vw, 5.7rem);
+  --type-display-split: clamp(2.9rem, 4.4vw, 4.4rem);
   --type-display-donation: clamp(3.2rem, 5.4vw, 5.15rem);
   --type-display-banner: clamp(3.1rem, 5vw, 4.75rem);
   --type-display-compact: clamp(2.65rem, 5vw, 4.5rem);
@@ -170,7 +171,7 @@ ul, ol { margin-block: 0; }
 .text-link:hover::after { transform: translateX(.2rem); }
 .cta-band { padding-block: var(--section-compact); color: var(--white); background: var(--navy-900); }
 .cta-band__inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-6); align-items: center; }
-.cta-band h2 { max-width: 20ch; color: var(--white); font-size: clamp(1.9rem, 3vw, 2.8rem); }
+.cta-band h2 { max-width: 27ch; color: var(--white); font-size: clamp(1.9rem, 3vw, 2.8rem); }
 .cta-band p { max-width: 45rem; margin-top: var(--space-3); color: var(--sky-100); }
 .skip-link { position: fixed; z-index: 1000; top: .5rem; left: .5rem; padding: .65rem 1rem; transform: translateY(-150%); background: var(--white); color: var(--navy-950); }
 .skip-link:focus { transform: none; }
@@ -189,7 +190,7 @@ ul, ol { margin-block: 0; }
     --gap-columns: var(--space-6);
     --split-intro-gap: var(--space-5);
     --split-intro-heading-size: clamp(2rem, 6vw, 2.55rem);
-    --split-intro-heading-measure: 16ch;
+    --split-intro-heading-measure: 22ch;
     --icon-medallion-size-md: 3rem;
     --icon-medallion-size-lg: 3.5rem;
   }
