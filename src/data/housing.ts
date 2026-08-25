@@ -35,7 +35,6 @@ export interface HousingDetailConfig {
   householdFeatures: Feature[];
   supportFeatures: Feature[];
   galleryImages: [ImageAsset, ImageAsset, ImageAsset];
-  publicAreas: string;
   faqs: FaqGroup[];
 }
 
@@ -201,7 +200,7 @@ export const mensHousing: HousingDetailConfig = {
   title: 'Men’s Recovery Housing',
   description: 'DDAP-licensed recovery houses for men in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one for men on parole. Call 412-628-0403.',
   heroTitle: 'Men’s Recovery Housing in Pittsburgh',
-  heroLead: 'Substance-free sober living houses for men in four Pittsburgh neighborhoods, including one that works with men on parole. AA and NA based, licensed by Pennsylvania, and run by people who know the work.',
+  heroLead: 'Substance-free sober living houses for men in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one that works with men on parole. AA and NA based, licensed by Pennsylvania, and run by people who know the work.',
   heroImage: {
     src: '/images/home-entry.webp',
     alt: 'A residential entry and shared living area',
@@ -222,7 +221,6 @@ export const mensHousing: HousingDetailConfig = {
     { src: '/images/household-linens.webp', alt: 'Clean folded household linens', width: 2200, height: 1236 },
     { src: '/images/pittsburgh-rowhouses.webp', alt: 'Pittsburgh row houses near public streets', width: 1800, height: 1204 },
   ],
-  publicAreas: 'Our men’s houses are in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, on Pittsburgh’s North Side and West End.',
   faqs: buildFaqs('men'),
 };
 
@@ -231,7 +229,7 @@ export const womensHousing: HousingDetailConfig = {
   title: 'Women’s Recovery Housing',
   description: 'A DDAP-licensed recovery house for women in Bellevue, just north of Pittsburgh, with privacy, structure, and housemates in recovery. AA and NA based. Call 412-628-0403.',
   heroTitle: 'Women’s Recovery Housing in Pittsburgh',
-  heroLead: 'A substance-free sober living house for women in Pittsburgh, with the privacy, structure, and support that make staying sober possible.',
+  heroLead: 'A substance-free sober living house for women in Bellevue, just north of Pittsburgh, with the privacy, structure, and support that make staying sober possible.',
   heroImage: {
     src: '/images/shared-bedroom.webp',
     alt: 'A bright shared bedroom with two beds',
@@ -252,6 +250,5 @@ export const womensHousing: HousingDetailConfig = {
     { src: '/images/household-linens.webp', alt: 'Clean folded household linens', width: 2200, height: 1236 },
     { src: '/images/pittsburgh-rowhouses.webp', alt: 'Pittsburgh row houses near public streets', width: 1800, height: 1204 },
   ],
-  publicAreas: 'Our women’s house is in Bellevue, just north of the city.',
   faqs: buildFaqs('women'),
 };

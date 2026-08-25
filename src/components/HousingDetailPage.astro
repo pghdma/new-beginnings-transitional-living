@@ -39,7 +39,6 @@ interface Props {
   householdFeatures: Feature[];
   supportFeatures: Feature[];
   galleryImages: [ImageAsset, ImageAsset, ImageAsset];
-  publicAreas: string;
   faqs: FaqGroup[];
 }
 
@@ -55,7 +54,6 @@ const {
   householdFeatures,
   supportFeatures,
   galleryImages,
-  publicAreas,
   faqs,
 } = Astro.props;
 
@@ -252,24 +250,6 @@ const galleryCopy = [
     </div>
   </section>
 
-  <section class="location-section">
-    <div class="container location-stage">
-      <div class="location-copy">
-        <span class="icon-medallion icon-medallion--solid"><Icon name="lucide:map-pin" aria-hidden="true" /></span>
-        <p class="eyebrow">Where the Houses Are</p>
-        <h2>Pittsburgh Neighborhoods, Not Street Addresses</h2>
-        <p class="location-copy__text">{publicAreas} The houses are on bus lines and a short ride from downtown.</p>
-      </div>
-      <div class="location-privacy">
-        <Icon name="lucide:lock-keyhole" aria-hidden="true" />
-        <div>
-          <h3>Why We Keep the Address Private</h3>
-          <p>Our residents live here. You’ll get the address when we talk about a bed, and the state licensing records are public if you need to verify us first.</p>
-        </div>
-        <a class="button button--outline" href="/admissions/">Apply for Housing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-      </div>
-    </div>
-  </section>
 
   <CtaBand
     title={`Ask About ${houseLabel}`}
@@ -363,16 +343,6 @@ const galleryCopy = [
   .faq-list details[open] summary :global(svg) { transform: rotate(45deg); }
   .faq-list details p { max-width: 60ch; padding: 0 3rem var(--space-5) 0; color: var(--slate-600); }
 
-  .location-section { padding-block: var(--section-standard); background: var(--canvas); }
-  .location-stage { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: var(--gap-columns); align-items: center; }
-  .location-copy .eyebrow { margin-top: var(--space-5); }
-  .location-copy h2 { max-width: 21ch; margin-top: var(--space-4); }
-  .location-copy__text { max-width: 36rem; margin-top: var(--space-5); color: var(--slate-600); line-height: 1.6; }
-  .location-privacy { display: grid; padding: clamp(2rem, 5vw, 3.5rem); grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-4); background: var(--paper); box-shadow: var(--shadow-raised); }
-  .location-privacy > :global(svg) { width: 1.7rem; height: 1.7rem; color: var(--teal-700); stroke-width: 1.55; }
-  .location-privacy p { margin-top: var(--space-3); color: var(--slate-600); line-height: 1.6; }
-  .location-privacy .button { width: fit-content; margin-top: var(--space-5); grid-column: 2; gap: var(--button-gap); }
-  .location-privacy .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 960px) {
     .housing-hero__grid { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
@@ -383,14 +353,13 @@ const galleryCopy = [
   }
 
   @media (max-width: 760px) {
-    .housing-hero__grid, .household-stage, .location-stage { min-height: 0; grid-template-columns: 1fr; }
+    .housing-hero__grid, .household-stage { min-height: 0; grid-template-columns: 1fr; }
     .household-stage { grid-template-areas: 'copy' 'photo'; }
     .household-section,
     .decision-section,
     .supports-section,
     .questions-section,
     .faq-section,
-    .location-section { padding-block: var(--space-8); }
 
     .housing-hero { position: relative; overflow: hidden; }
     .housing-hero__grid { display: block; }
@@ -452,12 +421,6 @@ const galleryCopy = [
     .faq-list summary :global(svg) { width: 2rem; height: 2rem; padding: .4rem; border: 1px solid var(--icon-medallion-border); border-radius: 50%; background: var(--sky-100); }
     .faq-list details p { padding: 0 0 var(--space-5); }
 
-    .location-copy .eyebrow { margin-top: var(--space-4); }
-    .location-copy h2 { margin-top: var(--space-3); font-size: 2.15rem; }
-    .location-copy__text { margin-top: var(--space-4); }
-    .location-privacy { padding: var(--space-6); }
-    .location-privacy { grid-template-columns: 1fr; }
-    .location-privacy .button { width: 100%; grid-column: 1; }
   }
 
 </style>
