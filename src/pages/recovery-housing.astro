@@ -234,9 +234,20 @@ const dailyRhythm = [
   .privacy-content .button :global(svg) { width: 1rem; height: 1rem; }
 
   @media (max-width: 900px) {
-    .housing-hero__grid, .definition-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
-    .housing-hero__photo { height: clamp(20rem, 52vw, 28rem); margin: 0 calc(var(--gutter) * -1); }
-    .housing-hero__copy { padding: var(--space-8) 0; }
+    .definition-layout, .pathways-layout, .privacy-layout { grid-template-columns: 1fr; }
+    .housing-hero { position: relative; overflow: hidden; border-bottom: 0; color: var(--white); background: var(--navy-950); }
+    .housing-hero__grid { display: block; min-height: 0; }
+    .housing-hero__photo { position: absolute; z-index: 0; margin: 0; inset: 0; }
+    .housing-hero__photo img { object-position: center 40%; filter: saturate(.75) contrast(.98); }
+    .housing-hero__photo::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.97) 0%, rgba(9,34,45,.84) 55%, rgba(9,34,45,.5) 100%); content: ''; inset: 0; }
+    .housing-hero__copy { position: relative; z-index: 1; min-height: clamp(30rem, 82svh, 38rem); padding: 4rem 0 2.75rem; justify-content: flex-end; }
+    .housing-hero .eyebrow { color: var(--accent-on-dark); }
+    .housing-hero h1 { color: var(--white); }
+    .housing-hero .lead { color: var(--sky-100); }
+    .housing-hero__actions .button--outline { border-color: rgba(255,255,255,.78); color: var(--white); background: rgba(9,34,45,.24); }
+    .housing-hero__actions .button--outline:hover { border-color: var(--white); color: var(--navy-950); background: var(--white); }
+    .housing-hero__scope { color: var(--sky-100); background: rgba(255,255,255,.1); }
+    .housing-hero__scope :global(svg) { color: var(--accent-on-dark); }
     .definition-layout { grid-template-areas: 'copy' 'photo'; gap: var(--space-7); }
     .definition-photo { height: auto; aspect-ratio: 16 / 10; }
     .rhythm-composition { grid-template-columns: 1fr; }
@@ -249,8 +260,6 @@ const dailyRhythm = [
   }
 
   @media (max-width: 760px) {
-    .housing-hero__photo { height: 16rem; }
-    .housing-hero__copy { padding-block: var(--space-7); }
     .housing-hero h1 { font-size: clamp(2.7rem, 12vw, 3.55rem); }
     .housing-hero__actions { display: grid; }
     .housing-hero__actions .button { width: 100%; }
