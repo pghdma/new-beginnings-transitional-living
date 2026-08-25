@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import BrandLockup from './BrandLockup.astro';
 import { site } from '../data/site';
 
 const trustItems = [
@@ -29,10 +30,7 @@ const trustItems = [
     </div>
 
     <div class="footer-contact">
-      <div class="footer-brand">
-        <strong>New Beginnings</strong>
-        <span>Transitional Living Foundation</span>
-      </div>
+      <a class="footer-brand" href="/" aria-label="New Beginnings Transitional Living home"><BrandLockup variant="footer" /></a>
       <p class="footer-summary">Structured recovery housing for men and women, grounded in accountability, peer support, and connection to independent recovery resources.</p>
 
       <div class="footer-contact-list">
@@ -114,9 +112,7 @@ const trustItems = [
   .map-caption p { margin-top: .4rem; color: var(--slate-300); font-size: .88rem; line-height: 1.45; }
 
   .footer-contact { display: flex; flex-direction: column; justify-content: center; }
-  .footer-brand { display: grid; line-height: 1.05; }
-  .footer-brand strong { color: var(--white); font-size: clamp(2rem,4vw,3rem); font-weight: var(--weight-semibold); letter-spacing: -.025em; }
-  .footer-brand span { margin-top: .55rem; color: var(--accent-on-dark); font-size: .78rem; font-weight: var(--weight-bold); letter-spacing: .12em; text-transform: uppercase; }
+  .footer-brand { display: inline-flex; align-self: flex-start; text-decoration: none; }
   .footer-summary { max-width: 34rem; margin-top: var(--space-5); color: var(--slate-300); font-size: 1.06rem; line-height: 1.55; }
 
   .footer-contact-list { display: grid; margin-top: var(--space-7); border-block: 1px solid var(--border-on-dark); }

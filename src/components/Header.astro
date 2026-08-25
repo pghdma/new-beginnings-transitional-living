@@ -1,4 +1,5 @@
 ---
+import BrandLockup from './BrandLockup.astro';
 import { nav, site } from '../data/site';
 const current = Astro.url.pathname;
 const isCurrent = (href: string) => current === href || (href !== '/' && current.startsWith(href));
@@ -12,9 +13,8 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   </div>
   <div class="nav-wrap">
     <div class="container nav-inner">
-      <a class="wordmark" href="/" aria-label="New Beginnings home">
-        <span>New Beginnings</span>
-        <small>Transitional Living Foundation</small>
+      <a class="wordmark" href="/" aria-label="New Beginnings Transitional Living home">
+        <BrandLockup />
       </a>
       <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav">
         <span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -127,9 +127,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   .utility a { color: var(--white); font-weight: var(--weight-semibold); }
   .nav-wrap { background: var(--paper); }
   .nav-inner { display: flex; min-height: var(--header-nav-height); align-items: center; justify-content: space-between; gap: 2rem; }
-  .wordmark { display: grid; color: var(--navy-950); line-height: 1; text-decoration: none; }
-  .wordmark span { font-size: 1.45rem; font-weight: 720; letter-spacing: -.025em; }
-  .wordmark small { margin-top: .3rem; color: var(--slate-600); font-size: .71rem; font-weight: var(--weight-heading); letter-spacing: .075em; text-transform: uppercase; }
+  .wordmark { display: inline-flex; color: var(--navy-950); text-decoration: none; }
   nav { display: flex; align-items: center; gap: clamp(.65rem, 1vw, 1.15rem); }
   nav a { color: var(--navy-950); font-size: .9rem; font-weight: var(--weight-heading); text-decoration: none; }
   nav > a[aria-current='page'], .nav-group.is-current > a, .nav-group > a[aria-current='page'] { color: var(--teal-700); }
@@ -163,10 +161,9 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
     .nav-group.is-open .submenu { display: grid; }
     .submenu a { padding: .7rem .8rem; }
   }
-  @media (max-width: 480px) {
+  @media (max-width: 760px) {
     .utility-inner span { display: none; }
     .utility-inner { justify-content: flex-end; }
-    .wordmark span { font-size: 1.2rem; }
-    .wordmark small { font-size: .62rem; }
   }
+
 </style>

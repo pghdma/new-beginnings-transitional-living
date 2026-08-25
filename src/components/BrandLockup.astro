@@ -1,0 +1,110 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  variant?: 'header' | 'footer';
+}
+
+const { variant = 'header' } = Astro.props;
+---
+
+<span class:list={['brand-lockup', `brand-lockup--${variant}`]}>
+  <Icon name="lucide:sunrise" aria-hidden="true" />
+  <span class="brand-lockup__type">
+    <strong>New Beginnings</strong>
+    <small>Transitional Living</small>
+  </span>
+</span>
+
+<style>
+  .brand-lockup {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: .7rem;
+    line-height: 1;
+  }
+
+  .brand-lockup :global(svg) {
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    color: var(--teal-700);
+    stroke-width: 1.7;
+  }
+
+  .brand-lockup__type {
+    display: grid;
+    min-width: 0;
+  }
+
+  .brand-lockup__type strong {
+    color: var(--navy-950);
+    font-size: 1.45rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: -.025em;
+    white-space: nowrap;
+  }
+
+  .brand-lockup__type small {
+    margin-top: .3rem;
+    color: var(--slate-600);
+    font-size: .68rem;
+    font-weight: var(--weight-heading);
+    letter-spacing: .085em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .brand-lockup--footer {
+    gap: .9rem;
+  }
+
+  .brand-lockup--footer :global(svg) {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--accent-on-dark);
+  }
+
+  .brand-lockup--footer .brand-lockup__type strong {
+    color: var(--white);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: var(--weight-semibold);
+  }
+
+  .brand-lockup--footer .brand-lockup__type small {
+    margin-top: .55rem;
+    color: var(--accent-on-dark);
+    font-size: .78rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: .12em;
+  }
+
+  @media (max-width: 480px) {
+    .brand-lockup {
+      gap: .6rem;
+    }
+
+    .brand-lockup :global(svg) {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .brand-lockup__type strong {
+      font-size: 1.2rem;
+    }
+
+    .brand-lockup__type small {
+      font-size: .6rem;
+    }
+
+    .brand-lockup--footer :global(svg) {
+      width: 2.15rem;
+      height: 2.15rem;
+    }
+
+    .brand-lockup--footer .brand-lockup__type strong {
+      font-size: 2rem;
+    }
+  }
+</style>
