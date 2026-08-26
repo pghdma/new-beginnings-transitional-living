@@ -69,7 +69,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/recovery-housing/': {
     documentTitle: 'How Recovery Housing Works | Sober Living in Pittsburgh',
-    description: 'What a sober living house is and how New Beginnings’ Pittsburgh recovery houses run: substance free, AA and NA based, drug screens, curfew, and a weekly house meeting.',
+    description: 'What a recovery house is and how New Beginnings’ Pittsburgh recovery houses run: substance free, AA and NA based, drug screens, curfew, and a weekly house meeting.',
     pageName: 'Recovery Housing',
     pageType: 'WebPage',
     image: '/images/social/recovery-housing.jpg',
@@ -99,7 +99,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/admissions/': {
     documentTitle: 'Apply for Recovery Housing in Pittsburgh | New Beginnings',
-    description: 'Apply for a bed in a New Beginnings sober living house for men or women in Pittsburgh, or call 412-628-0403. No referral needed. We call you back.',
+    description: 'Apply for a bed in a New Beginnings recovery house for men or women in Pittsburgh, or call 412-628-0403. No referral needed. We call you back.',
     pageName: 'Admissions',
     pageType: 'WebPage',
     image: '/images/social/admissions.jpg',
@@ -117,7 +117,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/support-us/': {
     documentTitle: 'Donate to Recovery Housing in Pittsburgh | New Beginnings',
-    description: 'Help keep a sober house open in Pittsburgh. Give once or monthly to New Beginnings, a 501(c)(3) that runs licensed recovery housing for men and women.',
+    description: 'Help keep a recovery house open in Pittsburgh. Give once or monthly to New Beginnings, a 501(c)(3) that runs licensed recovery housing for men and women.',
     pageName: 'Support New Beginnings',
     pageType: 'WebPage',
     image: '/images/social/support.jpg',
@@ -126,7 +126,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/contact/': {
     documentTitle: 'Contact New Beginnings | Recovery Housing in Pittsburgh',
-    description: 'Call 412-628-0403 or send a message to New Beginnings about a bed in one of our Pittsburgh sober living houses, a client referral, a donation, or anything else.',
+    description: 'Call 412-628-0403 or send a message to New Beginnings about a bed in one of our Pittsburgh recovery houses, a client referral, a donation, or anything else.',
     pageName: 'Contact New Beginnings',
     pageType: 'ContactPage',
     image: '/images/social/contact.jpg',
