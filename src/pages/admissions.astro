@@ -29,8 +29,8 @@ import { site } from '../data/site';
 
 <style>
   .admissions-hero { color: var(--white); background: var(--navy-950); }
-  .admissions-hero__grid { display: grid; min-height: clamp(28rem, 42vw, 36rem); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
-  .admissions-hero__copy { display: flex; padding: var(--section-hero) clamp(2.5rem, 6vw, 5rem) var(--section-hero) 0; flex-direction: column; justify-content: center; }
+  .admissions-hero__grid { display: grid; min-height: clamp(20rem, 28vw, 26rem); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .admissions-hero__copy { display: flex; padding: var(--section-compact) clamp(2.5rem, 6vw, 5rem) var(--section-compact) 0; flex-direction: column; justify-content: center; }
   .admissions-hero .eyebrow { color: var(--accent-on-image); }
   .admissions-hero h1 { max-width: 24ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-split); }
   .admissions-hero .lead { max-width: 36rem; margin-top: var(--space-5); color: var(--sky-100); }
@@ -48,7 +48,7 @@ import { site } from '../data/site';
     .admissions-hero__photo { position: absolute; z-index: 0; margin: 0; inset: 0; }
     .admissions-hero__photo img { object-position: center 35%; }
     .admissions-hero__photo::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.97) 0%, rgba(9,34,45,.84) 55%, rgba(9,34,45,.5) 100%); content: ''; inset: 0; }
-    .admissions-hero__copy { position: relative; z-index: 1; min-height: clamp(28rem, 78svh, 36rem); padding: 4rem 0 2.75rem; justify-content: flex-end; }
+    .admissions-hero__copy { position: relative; z-index: 1; min-height: clamp(24rem, 62svh, 30rem); padding: 3.5rem 0 2.5rem; justify-content: flex-end; }
   }
 
   @media (max-width: 760px) {
