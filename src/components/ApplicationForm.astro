@@ -313,7 +313,7 @@ const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
   .apply-form__seg.is-current, .apply-form__seg.is-complete { background: var(--teal-700); }
   .apply-form__counter { margin-top: calc(var(--space-2) * -1); color: var(--teal-800); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .08em; text-transform: uppercase; }
 
-  .form-section { display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-4); align-content: start; }
+  .form-section { display: flex; min-width: 0; margin: 0; padding: 0; border: 0; flex-direction: column; gap: var(--space-4); }
   .form-section[hidden] { display: none; }
   .form-section > legend { padding: var(--space-1) 0 var(--space-1); color: var(--navy-900); font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.2; }
   .form-section > legend:focus { outline: 0; }
