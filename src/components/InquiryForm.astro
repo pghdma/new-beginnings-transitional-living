@@ -155,34 +155,34 @@ const buttonLabel = 'Send Message';
 </script>
 
 <style>
-  .inquiry-form {
+  .inquiry-form{
     min-width: 0;
     padding: clamp(var(--space-6), 4vw, var(--space-8));
     background: var(--paper);
   }
 
-  .inquiry-form__header {
+  .inquiry-form__header{
     display: grid;
     max-width: 38rem;
     margin-bottom: var(--space-6);
     gap: var(--space-3);
   }
 
-  .inquiry-form__header h2 {
-    font-size: var(--type-section-medium);
+  .inquiry-form__header h2{
+    font-size: var(--type-section-md);
   }
 
-  .inquiry-form__intro {
+  .inquiry-form__intro{
     color: var(--slate-600);
   }
 
-  form {
+  form{
     display: grid;
     min-width: 0;
     gap: var(--space-4);
   }
 
-  label {
+  label{
     display: grid;
     gap: var(--space-2);
     color: var(--navy-900);
@@ -190,12 +190,12 @@ const buttonLabel = 'Send Message';
     font-weight: var(--weight-semibold);
   }
 
-  .field-label {
+  .field-label{
     color: inherit;
     font: inherit;
   }
 
-  .field-label small {
+  .field-label small{
     color: var(--slate-500);
     font-size: .84rem;
     font-weight: var(--weight-medium);
@@ -203,7 +203,7 @@ const buttonLabel = 'Send Message';
 
   input,
   select,
-  textarea {
+  textarea{
     width: 100%;
     min-height: var(--control-min-height);
     padding: .78rem .9rem;
@@ -213,91 +213,91 @@ const buttonLabel = 'Send Message';
     color: var(--slate-700);
   }
 
-  textarea {
+  textarea{
     min-height: 9rem;
     resize: vertical;
   }
 
   input:focus,
   select:focus,
-  textarea:focus {
+  textarea:focus{
     border-color: var(--teal-700);
     box-shadow: var(--focus-ring-soft);
     outline: 0;
   }
 
-  .privacy-note {
+  .privacy-note{
     max-width: 62ch;
     color: var(--slate-600);
     font-size: var(--form-help-size);
     line-height: 1.5;
   }
 
-  .privacy-note a {
+  .privacy-note a{
     color: var(--blue-700);
     font-weight: var(--weight-semibold);
     text-decoration: underline;
   }
 
-  .verification {
+  .verification{
     display: grid;
     min-width: 0;
     gap: var(--space-2);
   }
 
-  .verification > p {
+  .verification > p{
     color: var(--navy-900);
     font-size: .92rem;
     font-weight: var(--weight-semibold);
   }
 
-  .cf-turnstile {
+  .cf-turnstile{
     width: 100%;
     min-height: 65px;
   }
 
-  button {
+  button{
     width: fit-content;
     min-width: 10.5rem;
   }
 
-  button:disabled {
+  button:disabled{
     cursor: wait;
     opacity: .72;
   }
 
-  .trap {
+  .trap{
     position: absolute;
     left: -9999px;
   }
 
-  .status {
+  .status{
     min-height: 1.5em;
     color: var(--navy-800);
     font-size: var(--form-status-size);
     font-weight: var(--weight-heading);
   }
 
-  .status[data-state="error"] {
+  .status[data-state="error"]{
     color: var(--error);
   }
 
-  .status[data-state="success"] {
+  .status[data-state="success"]{
     color: var(--success);
   }
 
-  @media (max-width: 560px) {
-    .inquiry-form {
+  @media (max-width: 480px) {
+    .inquiry-form{
       padding: var(--space-6) var(--space-5);
     }
 
-    button {
+    button{
       width: 100%;
     }
   }
 
-  @media (max-width: 420px) {
-    .cf-turnstile {
+  @media (max-width: 480px) {
+    .cf-turnstile{
       width: 150px;
       min-height: 140px;
     }

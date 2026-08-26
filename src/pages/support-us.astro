@@ -188,35 +188,35 @@ const impactLevels = [
   </section>
 </MainLayout>
 <style>
-  .donate-hero {
+  .donate-hero{
     padding-block: var(--section-hero);
     color: var(--white);
     background: var(--navy-950);
   }
 
-  .donate-hero__grid {
+  .donate-hero__grid{
     display: grid;
     grid-template-columns: minmax(0, .82fr) minmax(32rem, 1.18fr);
     gap: clamp(3rem, 8vw, 7rem);
     align-items: center;
   }
 
-  .donate-hero .eyebrow { color: var(--accent-on-dark); }
+  .donate-hero .eyebrow{ color: var(--accent-on-dark); }
 
-  .donate-hero h1 {
+  .donate-hero h1{
     max-width: 26ch;
     margin-top: var(--space-4);
     color: var(--white);
-    font-size: var(--type-display-donation);
+    font-size: var(--type-display-md);
   }
 
-  .donate-hero .lead {
+  .donate-hero .lead{
     max-width: 34rem;
     margin-top: var(--space-5);
     color: var(--sky-100);
   }
 
-  .donate-hero__reassurance {
+  .donate-hero__reassurance{
     display: flex;
     margin-top: var(--space-6);
     align-items: center;
@@ -225,29 +225,29 @@ const impactLevels = [
     font-weight: var(--weight-heading);
   }
 
-  .donate-hero__reassurance :global(svg) {
+  .donate-hero__reassurance :global(svg){
     width: 1.55rem;
     height: 1.55rem;
     color: var(--accent-on-dark);
   }
 
-  .donation-planner {
+  .donation-planner{
     display: grid;
     padding: clamp(2rem, 4vw, 3rem);
-    border: 1px solid rgba(255, 255, 255, .5);
+    border: 1px solid var(--outline-on-dark);
     border-radius: var(--radius-lg);
     color: var(--slate-700);
     background: var(--paper);
-    box-shadow: 0 26px 70px rgba(4, 25, 35, .32);
+    box-shadow: var(--shadow-deep);
     gap: var(--space-6);
   }
 
-  .donation-planner__heading { display: grid; gap: var(--space-3); }
-  .donation-planner__heading .eyebrow { color: var(--teal-700); }
-  .donation-planner__heading h2 { font-size: var(--type-section-medium); }
-  .donation-planner__heading p:last-child { max-width: 38rem; }
+  .donation-planner__heading{ display: grid; gap: var(--space-3); }
+  .donation-planner__heading .eyebrow{ color: var(--teal-700); }
+  .donation-planner__heading h2{ font-size: var(--type-section-md); }
+  .donation-planner__heading p:last-child{ max-width: 38rem; }
 
-  .choice-group {
+  .choice-group{
     min-width: 0;
     margin: 0;
     padding: 0;
@@ -255,7 +255,7 @@ const impactLevels = [
   }
 
   .choice-group legend,
-  .custom-amount > label {
+  .custom-amount > label{
     margin-bottom: var(--space-3);
     color: var(--navy-900);
     font-size: .92rem;
@@ -263,15 +263,15 @@ const impactLevels = [
   }
 
   .frequency-options,
-  .amount-options { display: grid; gap: var(--space-2); }
-  .frequency-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .amount-options { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .amount-options{ display: grid; gap: var(--space-2); }
+  .frequency-options{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .amount-options{ grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
   .frequency-options label,
-  .amount-options label { position: relative; cursor: pointer; }
+  .amount-options label{ position: relative; cursor: pointer; }
 
   .frequency-options input,
-  .amount-options input {
+  .amount-options input{
     position: absolute;
     width: 1px;
     height: 1px;
@@ -280,7 +280,7 @@ const impactLevels = [
   }
 
   .frequency-options span,
-  .amount-options span {
+  .amount-options span{
     display: flex;
     min-height: 3.4rem;
     border: 1px solid var(--slate-300);
@@ -294,12 +294,12 @@ const impactLevels = [
     transition: border-color .15s ease, color .15s ease, background .15s ease;
   }
 
-  .frequency-options span :global(svg) { width: 1.2rem; height: 1.2rem; }
+  .frequency-options span :global(svg){ width: 1.2rem; height: 1.2rem; }
   .frequency-options label:hover span,
-  .amount-options label:hover span { border-color: var(--teal-700); }
+  .amount-options label:hover span{ border-color: var(--teal-700); }
 
   .frequency-options input:checked + span,
-  .amount-options input:checked + span {
+  .amount-options input:checked + span{
     border-color: var(--teal-700);
     color: var(--white);
     background: var(--teal-700);
@@ -307,15 +307,15 @@ const impactLevels = [
   }
 
   .frequency-options input:focus-visible + span,
-  .amount-options input:focus-visible + span {
+  .amount-options input:focus-visible + span{
     outline: 3px solid var(--focus);
     outline-offset: 3px;
   }
 
-  .custom-amount[hidden] { display: none; }
-  .custom-amount { margin-top: var(--space-4); }
+  .custom-amount[hidden]{ display: none; }
+  .custom-amount{ margin-top: var(--space-4); }
 
-  .custom-amount__control {
+  .custom-amount__control{
     display: grid;
     min-height: 3.5rem;
     border: 1px solid var(--slate-300);
@@ -325,9 +325,9 @@ const impactLevels = [
     background: var(--white);
   }
 
-  .custom-amount__control span { padding-left: var(--space-4); color: var(--navy-900); font-weight: var(--weight-semibold); }
+  .custom-amount__control span{ padding-left: var(--space-4); color: var(--navy-900); font-weight: var(--weight-semibold); }
 
-  .custom-amount__control input {
+  .custom-amount__control input{
     width: 100%;
     min-width: 0;
     height: 100%;
@@ -338,9 +338,9 @@ const impactLevels = [
     background: transparent;
   }
 
-  .custom-amount__control:focus-within { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .custom-amount__control:focus-within{ outline: 3px solid var(--focus); outline-offset: 3px; }
 
-  .gift-summary {
+  .gift-summary{
     padding: var(--space-4);
     color: var(--navy-900);
     background: var(--sky-100);
@@ -348,7 +348,7 @@ const impactLevels = [
     text-align: center;
   }
 
-  .donation-planner__submit {
+  .donation-planner__submit{
     width: 100%;
     min-height: 3.75rem;
     gap: var(--space-3);
@@ -356,26 +356,26 @@ const impactLevels = [
     cursor: pointer;
   }
 
-  .donation-planner__submit :global(svg) { width: 1.15rem; height: 1.15rem; }
+  .donation-planner__submit :global(svg){ width: 1.15rem; height: 1.15rem; }
 
-  .donation-planner__note {
+  .donation-planner__note{
     color: var(--slate-600);
     font-size: .92rem;
     line-height: 1.5;
     text-align: center;
   }
 
-  .gift-impact { padding-block: var(--section-standard); background: var(--canvas); }
+  .gift-impact{ padding-block: var(--section-standard); background: var(--canvas); }
 
-  .gift-impact .section-head {
+  .gift-impact .section-head{
     max-width: 51rem;
     margin-bottom: clamp(3rem, 6vw, 5rem);
   }
 
-  .gift-impact .section-head h2 { max-width: 30ch; margin-inline: auto; }
-  .gift-impact .section-head .lead { margin-inline: auto; }
+  .gift-impact .section-head h2{ max-width: 30ch; margin-inline: auto; }
+  .gift-impact .section-head .lead{ margin-inline: auto; }
 
-  .gift-impact__composition { border-radius: var(--radius-lg); overflow: hidden;
+  .gift-impact__composition{ border-radius: var(--radius-lg); overflow: hidden;
     display: grid;
     grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
     align-items: stretch;
@@ -383,28 +383,28 @@ const impactLevels = [
     box-shadow: var(--shadow-raised);
   }
 
-  .gift-impact__media {
+  .gift-impact__media{
     position: relative;
     min-height: 36rem;
     margin: 0;
     overflow: hidden;
   }
 
-  .gift-impact__media::after {
+  .gift-impact__media::after{
     position: absolute;
-    background: linear-gradient(180deg, transparent 45%, rgba(23, 55, 70, .82));
+    background: linear-gradient(180deg, transparent 45%, rgba(var(--ink-rgb), .82));
     content: '';
     inset: 0;
   }
 
-  .gift-impact__media img {
+  .gift-impact__media img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: 51% center;
   }
 
-  .gift-impact__media figcaption {
+  .gift-impact__media figcaption{
     position: absolute;
     z-index: 1;
     right: var(--space-6);
@@ -416,9 +416,9 @@ const impactLevels = [
     font-weight: var(--weight-heading);
   }
 
-  .impact-directory { display: grid; align-content: stretch; }
+  .impact-directory{ display: grid; align-content: stretch; }
 
-  .impact-level {
+  .impact-level{
     display: grid;
     min-height: 9rem;
     padding: clamp(1.5rem, 3vw, 2rem);
@@ -434,31 +434,31 @@ const impactLevels = [
     transition: background .15s ease;
   }
 
-  .impact-level:last-child { border-bottom: 0; }
+  .impact-level:last-child{ border-bottom: 0; }
   .impact-level:hover,
-  .impact-level:focus-visible { background: var(--sky-50); }
+  .impact-level:focus-visible{ background: var(--sky-50); }
 
-  .impact-level__amount { color: var(--teal-700); font-size: 1.55rem; font-weight: var(--weight-bold); }
-  .impact-level__copy { display: grid; gap: var(--space-1); }
+  .impact-level__amount{ color: var(--teal-700); font-size: 1.55rem; font-weight: var(--weight-bold); }
+  .impact-level__copy{ display: grid; gap: var(--space-1); }
 
-  .impact-level__copy strong {
+  .impact-level__copy strong{
     color: var(--navy-900);
     font-size: 1.15rem;
     font-weight: var(--weight-semibold);
   }
 
-  .impact-level__copy span { color: var(--slate-600); }
+  .impact-level__copy span{ color: var(--slate-600); }
 
-  .impact-level__arrow {
+  .impact-level__arrow{
     width: 1.2rem;
     height: 1.2rem;
     color: var(--teal-700);
     transition: transform .15s ease;
   }
 
-  .impact-level:hover .impact-level__arrow { transform: translateY(-.2rem); }
+  .impact-level:hover .impact-level__arrow{ transform: translateY(-.2rem); }
 
-  .impact-disclaimer {
+  .impact-disclaimer{
     max-width: 68rem;
     margin: var(--space-5) auto 0;
     color: var(--slate-600);
@@ -467,32 +467,32 @@ const impactLevels = [
     text-align: center;
   }
 
-  .donation-trust { padding-block: var(--section-standard); }
+  .donation-trust{ padding-block: var(--section-standard); }
 
-  .donation-trust__grid {
+  .donation-trust__grid{
     display: grid;
     grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
     gap: clamp(3rem, 8vw, 7.5rem);
     align-items: start;
   }
 
-  .donation-trust__heading { display: grid; gap: var(--space-4); }
-  .donation-trust__heading h2 { max-width: 24ch; color: var(--white); }
+  .donation-trust__heading{ display: grid; gap: var(--space-4); }
+  .donation-trust__heading h2{ max-width: 24ch; color: var(--white); }
 
-  .donation-trust__details > p {
+  .donation-trust__details > p{
     max-width: 44rem;
     color: var(--sky-100);
     font-size: 1.12rem;
   }
 
-  .donation-trust__facts {
+  .donation-trust__facts{
     display: grid;
     margin-top: var(--space-7);
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-5);
   }
 
-  .donation-trust__facts > div {
+  .donation-trust__facts > div{
     display: grid;
     grid-template-columns: 2rem minmax(0, 1fr);
     gap: var(--space-3);
@@ -500,16 +500,16 @@ const impactLevels = [
     color: var(--sky-100);
   }
 
-  .donation-trust__facts :global(svg) {
+  .donation-trust__facts :global(svg){
     width: 1.65rem;
     height: 1.65rem;
     color: var(--accent-on-dark);
     stroke-width: 1.65;
   }
 
-  .donation-trust__facts span { display: grid; gap: var(--space-1); }
+  .donation-trust__facts span{ display: grid; gap: var(--space-1); }
 
-  .donation-trust__facts strong {
+  .donation-trust__facts strong{
     color: var(--white);
     font-size: .8rem;
     font-weight: var(--weight-semibold);
@@ -517,75 +517,75 @@ const impactLevels = [
     text-transform: uppercase;
   }
 
-  .donation-trust__details .actions { margin-top: var(--space-7); }
-  .donation-trust__details .button { gap: var(--button-gap); }
-  .donation-trust__details .button :global(svg) { width: 1.05rem; height: 1.05rem; }
+  .donation-trust__details .actions{ margin-top: var(--space-7); }
+  .donation-trust__details .button{ gap: var(--button-gap); }
+  .donation-trust__details .button :global(svg){ width: 1.05rem; height: 1.05rem; }
 
-  .donation-trust__phone {
-    border-color: rgba(255, 255, 255, .72);
+  .donation-trust__phone{
+    border-color: var(--outline-on-dark);
     color: var(--white);
     background: transparent;
   }
 
-  .donation-trust__phone:hover { color: var(--navy-950); background: var(--white); }
+  .donation-trust__phone:hover{ color: var(--navy-950); background: var(--white); }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1080px) {
     .donate-hero__grid,
-    .donation-trust__grid { grid-template-columns: 1fr; }
-    .donate-hero__grid { max-width: 47rem; }
-    .donate-hero__copy { max-width: 40rem; }
-    .donation-trust__grid { gap: var(--space-7); }
-    .donation-trust__heading h2 { max-width: 25ch; }
+    .donation-trust__grid{ grid-template-columns: 1fr; }
+    .donate-hero__grid{ max-width: 47rem; }
+    .donate-hero__copy{ max-width: 40rem; }
+    .donation-trust__grid{ gap: var(--space-7); }
+    .donation-trust__heading h2{ max-width: 25ch; }
   }
 
   @media (max-width: 760px) {
-    .donate-hero { padding-block: var(--space-8); }
-    .donate-hero__grid { gap: var(--space-7); }
-    .donate-hero h1 { font-size: clamp(2.65rem, 12.2vw, 3.55rem); }
-    .donation-planner { padding: var(--space-5); gap: var(--space-5); }
-    .amount-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .amount-options__other { grid-column: 1 / -1; }
-    .gift-impact__composition { grid-template-columns: 1fr; }
-    .gift-impact__media {
+    .donate-hero{ padding-block: var(--space-8); }
+    .donate-hero__grid{ gap: var(--space-7); }
+    .donate-hero h1{ font-size: clamp(2.65rem, 12.2vw, 3.55rem); }
+    .donation-planner{ padding: var(--space-5); gap: var(--space-5); }
+    .amount-options{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .amount-options__other{ grid-column: 1 / -1; }
+    .gift-impact__composition{ grid-template-columns: 1fr; }
+    .gift-impact__media{
       min-width: 0;
       min-height: 0;
       aspect-ratio: 4 / 3;
     }
 
-    .impact-level {
+    .impact-level{
       min-height: auto;
       grid-template-columns: 3.5rem 3.25rem minmax(0, 1fr);
     }
 
-    .impact-level__amount { font-size: 1.3rem; }
-    .impact-level__arrow { display: none; }
-    .donation-trust__facts { grid-template-columns: 1fr; }
-    .donation-trust__details .actions { display: grid; }
-    .donation-trust__details .button { width: 100%; }
+    .impact-level__amount{ font-size: 1.3rem; }
+    .impact-level__arrow{ display: none; }
+    .donation-trust__facts{ grid-template-columns: 1fr; }
+    .donation-trust__details .actions{ display: grid; }
+    .donation-trust__details .button{ width: 100%; }
   }
 
-  @media (max-width: 430px) {
-    .donation-planner {
+  @media (max-width: 480px) {
+    .donation-planner{
       margin-inline: calc(var(--gutter) * -.25);
       padding: var(--space-5) var(--space-4);
     }
 
-    .frequency-options span { padding-inline: .65rem; font-size: .95rem; }
+    .frequency-options span{ padding-inline: .65rem; font-size: .95rem; }
 
-    .impact-level {
+    .impact-level{
       grid-template-columns: 3.25rem minmax(0, 1fr);
       gap: var(--space-3);
     }
 
-    .impact-level .icon-medallion { grid-column: 1; grid-row: 2; }
-    .impact-level__amount { grid-column: 1 / -1; }
-    .impact-level__copy { grid-column: 2; grid-row: 2; }
+    .impact-level .icon-medallion{ grid-column: 1; grid-row: 2; }
+    .impact-level__amount{ grid-column: 1 / -1; }
+    .impact-level__copy{ grid-column: 2; grid-row: 2; }
   }
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .gift-summary, .donation-planner__note { text-align: left; }
-    .donation-planner__note, .impact-disclaimer { font-size: 1rem; line-height: 1.55; }
-    .impact-disclaimer { margin-inline: 0; text-align: left; }
+    .gift-summary, .donation-planner__note{ text-align: left; }
+    .donation-planner__note, .impact-disclaimer{ font-size: 1rem; line-height: 1.55; }
+    .impact-disclaimer{ margin-inline: 0; text-align: left; }
   }
 </style>

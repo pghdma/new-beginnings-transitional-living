@@ -100,7 +100,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
   </section>
 </MainLayout>
 <style>
-  .contact-intro {
+  .contact-intro{
     position: relative;
     display: grid;
     min-height: clamp(25rem, 31vw, 29rem);
@@ -112,7 +112,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
   }
 
   .contact-intro__image,
-  .contact-intro__shade {
+  .contact-intro__shade{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -120,25 +120,25 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     inset: 0;
   }
 
-  .contact-intro__image {
+  .contact-intro__image{
     z-index: 0;
     object-fit: cover;
     object-position: center 52%;
-    filter: saturate(.72) contrast(1.02);
+    filter: var(--photo-filter);
   }
 
-  .contact-intro__shade {
+  .contact-intro__shade{
     z-index: 1;
-    background: linear-gradient(180deg, rgba(9, 34, 45, .72), rgba(9, 34, 45, .86));
+    background: var(--hero-shade-center);
   }
 
-  .contact-intro__inner {
+  .contact-intro__inner{
     position: relative;
     z-index: 2;
     padding-block: clamp(4.25rem, 7vw, 6rem);
   }
 
-  .contact-intro__copy {
+  .contact-intro__copy{
     display: grid;
     max-width: 52rem;
     margin-inline: auto;
@@ -146,29 +146,29 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     text-align: center;
   }
 
-  .contact-intro .eyebrow {
+  .contact-intro .eyebrow{
     color: var(--accent-on-image);
   }
 
-  .contact-intro h1 {
+  .contact-intro h1{
     max-width: 26ch;
     margin-inline: auto;
     color: var(--white);
-    font-size: var(--type-display-banner);
+    font-size: var(--type-display-md);
   }
 
-  .contact-intro .lead {
+  .contact-intro .lead{
     max-width: 45rem;
     margin-inline: auto;
     color: var(--text-on-dark);
   }
 
-  .contact-main {
+  .contact-main{
     padding-block: var(--section-compact);
     background: var(--sky-50);
   }
 
-  .contact-shell { border-radius: var(--radius-lg);
+  .contact-shell{ border-radius: var(--radius-lg);
     display: grid;
     grid-template-columns: minmax(18rem, .78fr) minmax(0, 1.22fr);
     overflow: hidden;
@@ -176,7 +176,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     box-shadow: var(--shadow-raised);
   }
 
-  .contact-details {
+  .contact-details{
     display: flex;
     min-width: 0;
     padding: clamp(var(--space-6), 4vw, var(--space-8));
@@ -185,31 +185,31 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     flex-direction: column;
   }
 
-  .contact-details header {
+  .contact-details header{
     display: grid;
     gap: var(--space-3);
   }
 
-  .contact-details .eyebrow {
+  .contact-details .eyebrow{
     color: var(--accent-on-image);
   }
 
   .contact-details h2,
-  .contact-details h3 {
+  .contact-details h3{
     color: var(--white);
   }
 
-  .contact-details h2 {
+  .contact-details h2{
     max-width: 24ch;
-    font-size: var(--type-section-medium);
+    font-size: var(--type-section-md);
   }
 
-  .contact-details header > p:last-child {
+  .contact-details header > p:last-child{
     max-width: 28rem;
     color: var(--sky-200);
   }
 
-  .contact-list {
+  .contact-list{
     display: grid;
     margin: var(--space-7) 0 0;
     padding: 0;
@@ -217,46 +217,46 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     list-style: none;
   }
 
-  .contact-list li {
+  .contact-list li{
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: var(--space-4);
     align-items: start;
   }
 
-  .contact-list h3 {
+  .contact-list h3{
     margin-bottom: var(--space-2);
     font-size: 1.15rem;
   }
 
   .contact-list a,
-  .contact-list address {
+  .contact-list address{
     color: var(--sky-100);
     font-style: normal;
     line-height: 1.55;
   }
 
-  .contact-list a {
+  .contact-list a{
     font-weight: var(--weight-heading);
   }
 
-  .contact-list a:hover {
+  .contact-list a:hover{
     color: var(--white);
   }
 
-  .directions-link {
+  .directions-link{
     display: inline-flex;
     margin-top: var(--space-3);
     align-items: center;
     gap: var(--space-2);
   }
 
-  .directions-link :global(svg) {
+  .directions-link :global(svg){
     width: 1rem;
     height: 1rem;
   }
 
-  .office-note {
+  .office-note{
     display: grid;
     margin-top: auto;
     padding-top: var(--space-7);
@@ -267,94 +267,94 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
     line-height: 1.5;
   }
 
-  .office-note :global(svg) {
+  .office-note :global(svg){
     width: 1.15rem;
     height: 1.15rem;
     margin-top: .15rem;
     color: var(--accent-on-image);
   }
 
-  .contact-safety {
+  .contact-safety{
     padding-block: var(--section-compact);
     background: var(--paper);
   }
 
-  .contact-safety__inner {
+  .contact-safety__inner{
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: var(--space-5);
     align-items: center;
   }
 
-  .contact-safety h2 {
+  .contact-safety h2{
     font-size: clamp(1.6rem, 2.5vw, 2.15rem);
   }
 
-  .contact-safety p {
+  .contact-safety p{
     max-width: 48rem;
     margin-top: var(--space-2);
   }
 
-  @media (max-width: 860px) {
-    .contact-shell {
+  @media (max-width: 900px) {
+    .contact-shell{
       grid-template-columns: 1fr;
     }
 
-    .contact-details {
+    .contact-details{
       min-height: 0;
     }
 
-    .office-note {
+    .office-note{
       margin-top: var(--space-7);
     }
 
-    .contact-safety__inner {
+    .contact-safety__inner{
       grid-template-columns: auto minmax(0, 1fr);
     }
 
   }
 
-  @media (max-width: 720px) {
-    .contact-intro {
+  @media (max-width: 760px) {
+    .contact-intro{
       min-height: 25rem;
     }
 
-    .contact-intro__inner {
+    .contact-intro__inner{
       padding-block: 3.5rem;
     }
 
-    .contact-intro__image {
+    .contact-intro__image{
       object-position: 68% center;
     }
 
-    .contact-intro__shade {
-      background: linear-gradient(180deg, rgba(9, 34, 45, .78), rgba(9, 34, 45, .92));
+    .contact-intro__shade{
+      background: var(--hero-shade-center-narrow);
     }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 480px) {
 
-    .contact-intro h1 {
+    .contact-intro h1{
       font-size: clamp(2.65rem, 12vw, 3.35rem);
     }
 
-    .contact-main {
+    .contact-main{
       padding-block: var(--space-7);
     }
 
-    .contact-details {
+    .contact-details{
       padding: var(--space-6) var(--space-5);
     }
 
-    .contact-list {
+    .contact-list{
       gap: var(--space-5);
     }
 
-    .contact-safety__inner {
+    .contact-safety__inner{
       grid-template-columns: 1fr;
     }
 
-    .contact-safety__inner > .icon-medallion {
+    .contact-safety__inner > .icon-medallion{
       margin-bottom: var(--space-1);
     }
 
@@ -362,7 +362,7 @@ const officeLine = `${site.office.city}, ${site.office.state} ${site.office.zip}
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .office-note { font-size: 1rem; line-height: 1.55; }
-    .contact-list a, .directions-link { display: inline-flex; min-height: 2.75rem; align-items: center; }
+    .office-note{ font-size: 1rem; line-height: 1.55; }
+    .contact-list a, .directions-link{ display: inline-flex; min-height: 2.75rem; align-items: center; }
   }
 </style>

@@ -6,6 +6,20 @@
   --font-display: 'Libre Franklin Variable', 'Libre Franklin', 'Franklin Gothic Medium', Arial, sans-serif;
   --weight-display: 650;
   --brand-ink: #08234a;
+  --ink-rgb: 9, 34, 45;                         /* navy base for overlays and shadows */
+  --hero-shade-side: linear-gradient(90deg, rgba(var(--ink-rgb), .97) 0%, rgba(var(--ink-rgb), .91) 35%, rgba(var(--ink-rgb), .69) 57%, rgba(var(--ink-rgb), .26) 82%, rgba(var(--ink-rgb), .12) 100%);
+  --hero-shade-side-narrow: linear-gradient(90deg, rgba(var(--ink-rgb), .96) 0%, rgba(var(--ink-rgb), .88) 49%, rgba(var(--ink-rgb), .5) 78%, rgba(var(--ink-rgb), .28) 100%);
+  --hero-shade-bottom: linear-gradient(0deg, rgba(var(--ink-rgb), .97) 0%, rgba(var(--ink-rgb), .84) 55%, rgba(var(--ink-rgb), .5) 100%);
+  --hero-shade-center: linear-gradient(180deg, rgba(var(--ink-rgb), .72), rgba(var(--ink-rgb), .86));
+  --hero-shade-center-narrow: linear-gradient(180deg, rgba(var(--ink-rgb), .78), rgba(var(--ink-rgb), .92));
+  --card-shade: linear-gradient(0deg, rgba(var(--ink-rgb), .96) 0%, rgba(var(--ink-rgb), .7) 40%, rgba(var(--ink-rgb), .1) 76%);
+  --card-shade-hover: linear-gradient(0deg, rgba(var(--ink-rgb), .95), rgba(var(--ink-rgb), .24) 72%);
+  --card-shade-soft: linear-gradient(0deg, rgba(var(--ink-rgb), .82), rgba(var(--ink-rgb), .03) 58%);
+  --photo-filter: saturate(.8) contrast(.98);
+  --photo-filter-hover: saturate(.85) contrast(1.02);
+  --outline-on-dark: rgba(255, 255, 255, .75);
+  --accent-border-on-dark: rgba(158, 215, 210, .55);
+  --focus-ring: 0 0 0 3px rgba(20, 116, 111, .22);
   --brand-lockup-ratio: 6.983;
   --brand-lockup-height: 2.5rem;
   --brand-lockup-height-footer: 2.75rem;
@@ -24,7 +38,7 @@
   --text-muted-on-dark: #dcebea;
   --text-soft-on-dark: #d7e9e7;
   --border-on-dark: rgba(255, 255, 255, .18);
-  --surface-on-dark: rgba(255, 255, 255, .055);
+  --surface-on-dark: rgba(255, 255, 255, .07);
   --sky-200: #d8e7e6;
   --sky-100: #eaf2f2;
   --sky-50: #f2f6f5;
@@ -53,8 +67,11 @@
   --radius-md: .75rem;  /* cards, contained photos, tiles */
   --radius-lg: 1rem;    /* large composed panels */
   --radius: var(--radius-sm);
-  --shadow: 0 12px 30px rgba(23, 55, 70, .075);
-  --shadow-raised: 0 2px 4px rgba(23, 55, 70, .04), 0 18px 42px rgba(23, 55, 70, .09);
+  --shadow: 0 12px 30px rgba(var(--ink-rgb), .075);
+  --shadow-raised: 0 2px 4px rgba(var(--ink-rgb), .04), 0 18px 42px rgba(var(--ink-rgb), .09);
+  --shadow-soft: 0 .8rem 2rem rgba(var(--ink-rgb), .08);
+  --shadow-photo: 0 1.4rem 3.5rem rgba(var(--ink-rgb), .16);
+  --shadow-deep: 0 1.5rem 3.5rem rgba(var(--ink-rgb), .28);
   --focus-ring-soft: 0 0 0 3px rgba(20, 116, 111, .14);
   --space-1: .25rem;
   --space-2: .5rem;
@@ -74,20 +91,13 @@
   --split-intro-gap: clamp(2.5rem, 7vw, 6rem);
   --split-intro-heading-size: clamp(2rem, 3.2vw, 3rem);
   --split-intro-heading-measure: 30ch;
-  --type-display-home: clamp(3.5rem, 6.25vw, 5.75rem);
-  --type-display-feature: clamp(3.25rem, 5.9vw, 5.5rem);
-  --type-display-interior: clamp(3.1rem, 5.5vw, 5.25rem);
-  --type-display-narrative: clamp(3.25rem, 5.1vw, 4.65rem);
-  --type-display-centered: clamp(3rem, 6vw, 5.35rem);
-  --type-display-editorial: clamp(3.4rem, 6.2vw, 5.7rem);
-  --type-display-split: clamp(2.7rem, 4vw, 4rem);
-  --type-display-donation: clamp(3.2rem, 5.4vw, 5.15rem);
-  --type-display-banner: clamp(3.1rem, 5vw, 4.75rem);
-  --type-display-compact: clamp(2.65rem, 5vw, 4.5rem);
-  --type-display-document: clamp(2.75rem, 5vw, 4.65rem);
-  --type-section-feature: clamp(2rem, 3.2vw, 3rem);
-  --type-section-medium: clamp(2rem, 3.2vw, 2.8rem);
-  --type-section-compact: clamp(1.65rem, 2.8vw, 2.25rem);
+  --type-display-xl: clamp(3.5rem, 6.25vw, 5.75rem);   /* home hero */
+  --type-display-lg: clamp(3.25rem, 5.9vw, 5.5rem);    /* full-width image heroes */
+  --type-display-md: clamp(3.1rem, 5.2vw, 5rem);       /* narrative and banner heroes */
+  --type-display-sm: clamp(2.7rem, 4vw, 4rem);         /* split heroes, mastheads, documents */
+  --type-section-lg: clamp(2rem, 3.2vw, 3rem);
+  --type-section-md: clamp(2rem, 3.2vw, 2.8rem);
+  --type-section-sm: clamp(1.65rem, 2.8vw, 2.25rem);
   --button-gap: .65rem;
   --button-icon-size: 1rem;
   --control-min-height: 3.2rem;
@@ -147,7 +157,7 @@ ul, ol { margin-block: 0; }
 .icon-medallion--lg { width: var(--icon-medallion-size-lg); height: var(--icon-medallion-size-lg); }
 .icon-medallion--xl { width: var(--icon-medallion-size-xl); height: var(--icon-medallion-size-xl); }
 .icon-medallion--solid { border-color: transparent; color: var(--white); background: var(--teal-700); }
-.icon-medallion--dark { border-color: rgba(166, 221, 216, .48); color: var(--accent-on-image); background: var(--surface-on-dark); }
+.icon-medallion--dark { border-color: var(--accent-border-on-dark); color: var(--accent-on-image); background: var(--surface-on-dark); }
 .icon-medallion > svg { width: 1.5rem; height: 1.5rem; stroke-width: 1.65; }
 .icon-medallion--sm > svg { width: 1.25rem; height: 1.25rem; }
 .icon-medallion--lg > svg { width: 1.85rem; height: 1.85rem; }
@@ -159,7 +169,7 @@ ul, ol { margin-block: 0; }
 .button--light:hover { color: var(--navy-950); background: var(--sky-100); }
 .button--outline { border-color: var(--navy-950); background: transparent; color: var(--navy-950); }
 .button--outline:hover { background: var(--navy-950); color: var(--white); }
-.button--outline-light { border-color: rgba(255, 255, 255, .72); background: transparent; color: var(--white); }
+.button--outline-light { border-color: var(--outline-on-dark); background: transparent; color: var(--white); }
 .button--outline-light:hover { border-color: var(--white); background: var(--white); color: var(--navy-950); }
 .button--ghost { min-height: auto; padding: .4rem 0; border: 0; background: transparent; color: var(--navy-950); }
 .button--ghost:hover { background: transparent; color: var(--teal-800); }
@@ -177,7 +187,7 @@ ul, ol { margin-block: 0; }
 .skip-link { position: fixed; z-index: 1000; top: .5rem; left: .5rem; padding: .65rem 1rem; transform: translateY(-150%); background: var(--white); color: var(--navy-950); }
 .skip-link:focus { transform: none; }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .split-intro { grid-template-columns: 1fr; gap: var(--space-5); align-items: start; }
   .cta-band__inner { grid-template-columns: 1fr; }
 }
