@@ -1,24 +1,27 @@
 ---
 /**
- * ApplicationForm — the three-step housing application card. Posts to the contact worker.
- * Drop it into a Hero `aside` slot or any container; it carries its own styles and script.
+ * ApplicationForm — the housing application, five short steps that each fit on a laptop
+ * screen. Field names and values match the contact worker's validation. Posts to the worker.
  */
 import { Icon } from 'astro-icon/components';
 import { site } from '../data/site';
+
+const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
 ---
 
-<form class="form" id="inquiry" data-housing-application novalidate>
-  <nav class="form-progress" aria-label="Application progress">
-    <ol>
-      <li class="is-current" data-progress-step="1" aria-current="step"><span>1</span><strong>Primary Contact</strong></li>
-      <li data-progress-step="2"><span>2</span><strong>Applicant and Housing</strong></li>
-      <li data-progress-step="3"><span>3</span><strong>Final Details</strong></li>
-    </ol>
-  </nav>
+<form class="form apply-form" id="inquiry" data-housing-application novalidate aria-labelledby="apply-title">
+  <header class="apply-form__head">
+    <h1 id="apply-title">Apply for Recovery Housing</h1>
+    <p class="apply-form__call">Rather just talk? <a class="inline-link" href={site.phoneHref}>Call {site.phone}</a></p>
+  </header>
+
+  <div class="apply-form__progress" aria-hidden="true">
+    {steps.map((label, index) => <span class:list={['apply-form__seg', { 'is-current': index === 0 }]} data-progress-step={index + 1} title={label}></span>)}
+  </div>
+  <p class="apply-form__counter" data-progress-summary aria-live="polite">Step 1 of {steps.length}: {steps[0]}</p>
 
   <fieldset class="form-section" data-form-step="1">
-    <legend tabindex="-1"><span class="step-label">Step 1 of 3</span><strong>Primary Contact</strong></legend>
-    <p class="section-intro">Who should we call back? Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+    <legend tabindex="-1">Who should we call back?</legend>
     <div class="form-grid">
       <label><span class="field-label">First name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
       <label><span class="field-label">Last name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
@@ -26,62 +29,32 @@ import { site } from '../data/site';
       <label><span class="field-label">Phone <span class="req" aria-hidden="true">*</span></span><input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
     </div>
     <fieldset class="choice-group">
-      <legend>Who is completing this application? <span class="req" aria-hidden="true">*</span></legend>
+      <legend>I am <span class="req" aria-hidden="true">*</span></legend>
       <div class="choice-grid choice-grid--three">
-        <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applicant</strong><small>I’m applying for myself.</small></span></label>
-        <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or friend</strong><small>I’m helping someone I care about apply.</small></span></label>
-        <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional</strong><small>I’m a counselor, case manager, PO, or other professional.</small></span></label>
+        <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applying for myself</strong></span></label>
+        <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Helping a family member or friend</strong></span></label>
+        <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>A counselor, case manager, or PO</strong></span></label>
       </div>
     </fieldset>
-    <fieldset class="choice-group">
-      <legend>Preferred contact method <span class="req" aria-hidden="true">*</span></legend>
-      <div class="choice-grid choice-grid--two compact-choices">
-        <label class="choice"><input required type="radio" name="preferredContact" value="Phone" /><span><strong>Phone</strong></span></label>
-        <label class="choice"><input required type="radio" name="preferredContact" value="Email" /><span><strong>Email</strong></span></label>
-      </div>
-    </fieldset>
-    <label class="select-field"><span class="field-label">Best time to reach you <small>(optional)</small></span><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
     <div class="step-actions">
       <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
+      <span class="step-actions__hint">Fields marked <span class="req" aria-hidden="true">*</span> are required</span>
     </div>
   </fieldset>
 
   <fieldset class="form-section" data-form-step="2" hidden>
-    <legend tabindex="-1"><span class="step-label">Step 2 of 3</span><strong>Applicant and Housing</strong></legend>
-    <p class="section-intro">General answers are enough. Keep medical, legal, and treatment details off this form.</p>
-    <div class="form-grid applicant-fields" data-applicant-fields hidden>
-      <label><span class="field-label">Applicant first name <span class="req" aria-hidden="true">*</span></span><input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
-      <label><span class="field-label">Applicant last name <span class="req" aria-hidden="true">*</span></span><input name="applicantLastName" maxlength="100" data-applicant-required /></label>
-    </div>
+    <legend tabindex="-1">Which housing?</legend>
     <fieldset class="choice-group">
       <legend>Housing requested <span class="req" aria-hidden="true">*</span></legend>
       <div class="choice-grid choice-grid--two">
-        <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men’s recovery housing</strong><small>Houses in four neighborhoods, including one for men on parole.</small></span></label>
-        <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women’s recovery housing</strong><small>One house for women.</small></span></label>
+        <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men’s recovery housing</strong><small>Houses in four neighborhoods, including one for men on parole</small></span></label>
+        <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women’s recovery housing</strong><small>One house in Bellevue</small></span></label>
       </div>
     </fieldset>
-    <fieldset class="choice-group">
-      <legend>Is the applicant 18 or older? <span class="req" aria-hidden="true">*</span></legend>
-      <div class="choice-grid choice-grid--two compact-choices">
-        <label class="choice"><input required type="radio" name="adultStatus" value="Yes" /><span><strong>Yes</strong></span></label>
-        <label class="choice"><input required type="radio" name="adultStatus" value="No" /><span><strong>No</strong></span></label>
-      </div>
-    </fieldset>
-    <label class="select-field"><span class="field-label">Desired move timing <span class="req" aria-hidden="true">*</span></span><select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
-    <fieldset class="choice-group">
-      <legend>Has the applicant lived with New Beginnings before? <span class="req" aria-hidden="true">*</span></legend>
-      <div class="choice-grid choice-grid--two compact-choices">
-        <label class="choice"><input required type="radio" name="previousResident" value="Yes" /><span><strong>Yes</strong></span></label>
-        <label class="choice"><input required type="radio" name="previousResident" value="No" /><span><strong>No</strong></span></label>
-      </div>
-    </fieldset>
-    <fieldset class="choice-group">
-      <legend>Is the applicant willing to live substance free and follow the house rules? <span class="req" aria-hidden="true">*</span></legend>
-      <div class="choice-grid choice-grid--two compact-choices">
-        <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span><strong>Yes</strong></span></label>
-        <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="No" /><span><strong>No</strong></span></label>
-      </div>
-    </fieldset>
+    <div class="form-grid applicant-fields" data-applicant-fields hidden>
+      <label><span class="field-label">Applicant’s first name <span class="req" aria-hidden="true">*</span></span><input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
+      <label><span class="field-label">Applicant’s last name <span class="req" aria-hidden="true">*</span></span><input name="applicantLastName" maxlength="100" data-applicant-required /></label>
+    </div>
     <div class="step-actions">
       <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
       <button class="button button-secondary" type="button" data-previous-step>Back</button>
@@ -89,25 +62,61 @@ import { site } from '../data/site';
   </fieldset>
 
   <fieldset class="form-section" data-form-step="3" hidden>
-    <legend tabindex="-1"><span class="step-label">Step 3 of 3</span><strong>Final Details</strong></legend>
-    <p class="section-intro">Anything else that would help us prepare for the call.</p>
+    <legend tabindex="-1">About the applicant</legend>
+    <div class="pill-rows">
+      <fieldset class="choice-group pill-row">
+        <legend>18 or older? <span class="req" aria-hidden="true">*</span></legend>
+        <div class="pills"><label class="pill"><input required type="radio" name="adultStatus" value="Yes" /><span>Yes</span></label><label class="pill"><input required type="radio" name="adultStatus" value="No" /><span>No</span></label></div>
+      </fieldset>
+      <fieldset class="choice-group pill-row">
+        <legend>Lived with New Beginnings before? <span class="req" aria-hidden="true">*</span></legend>
+        <div class="pills"><label class="pill"><input required type="radio" name="previousResident" value="Yes" /><span>Yes</span></label><label class="pill"><input required type="radio" name="previousResident" value="No" /><span>No</span></label></div>
+      </fieldset>
+      <fieldset class="choice-group pill-row">
+        <legend>Willing to live substance free and follow the house rules? <span class="req" aria-hidden="true">*</span></legend>
+        <div class="pills"><label class="pill"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span>Yes</span></label><label class="pill"><input required type="radio" name="sharedLivingAgreement" value="No" /><span>No</span></label></div>
+      </fieldset>
+    </div>
+    <label class="select-field"><span class="field-label">When would the applicant like to move? <span class="req" aria-hidden="true">*</span></span><select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
+    <div class="step-actions">
+      <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
+      <button class="button button-secondary" type="button" data-previous-step>Back</button>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-section" data-form-step="4" hidden>
+    <legend tabindex="-1">Anything else?</legend>
     <label class="select-field"><span class="field-label">How did you hear about us? <small>(optional)</small></span><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
-    <label><span class="field-label">Anything you want us to know <small>(optional)</small></span><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
-    <p class="field-guidance" id="message-guidance">Please leave out diagnoses, medications, treatment records, legal records, and Social Security numbers. We’ll ask for what we need by phone.</p>
+    <label><span class="field-label">Anything you want us to know <small>(optional)</small></span><textarea name="message" rows="3" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
+    <p class="field-guidance" id="message-guidance">Leave out diagnoses, medications, treatment, and legal records. We’ll ask for what we need by phone.</p>
+    <div class="step-actions">
+      <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
+      <button class="button button-secondary" type="button" data-previous-step>Back</button>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-section" data-form-step="5" hidden>
+    <legend tabindex="-1">How should we reach you?</legend>
+    <div class="form-grid">
+      <fieldset class="choice-group pill-row pill-row--stack">
+        <legend>Preferred contact <span class="req" aria-hidden="true">*</span></legend>
+        <div class="pills"><label class="pill"><input required type="radio" name="preferredContact" value="Phone" /><span>Phone</span></label><label class="pill"><input required type="radio" name="preferredContact" value="Email" /><span>Email</span></label></div>
+      </fieldset>
+      <label class="select-field"><span class="field-label">Best time <small>(optional)</small></span><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
+    </div>
+    <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+    <input type="hidden" name="startedAt" value="" />
     <div class="check-list">
       <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I’d like to discuss accessibility or accommodation needs privately.</span></label>
       <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand this application starts a conversation and doesn’t guarantee a bed. <span class="req" aria-hidden="true">*</span></span></label>
     </div>
-    <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
-    <input type="hidden" name="startedAt" value="" />
-    <div class="submission-area">
+    <div class="step-actions step-actions--submit">
       <div class="verification"><div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div></div>
-      <div class="step-actions step-actions--submit">
-        <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application<Icon name="lucide:send" aria-hidden="true" /></button>
-        <button class="button button-secondary" type="button" data-previous-step>Back</button>
-      </div>
-      <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application<Icon name="lucide:send" aria-hidden="true" /></button>
+      <button class="button button-secondary" type="button" data-previous-step>Back</button>
     </div>
+    <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
   </fieldset>
 </form>
 
@@ -126,8 +135,10 @@ import { site } from '../data/site';
   };
 </script>
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onNbtsApplicationTurnstileReady&render=explicit" async defer></script>
+
 <script>
   const APPLICATION_ENDPOINT = 'https://nbts-contact.pghdma.workers.dev/api/contact';
+  const STEP_NAMES = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
   const ERROR_TEXT: Record<string, string> = {
     firstName: 'Enter your first name.',
     lastName: 'Enter your last name.',
@@ -149,6 +160,7 @@ import { site } from '../data/site';
   document.querySelectorAll<HTMLFormElement>('[data-housing-application]').forEach((form) => {
     const sections = Array.from(form.querySelectorAll<HTMLElement>('[data-form-step]'));
     const progressItems = Array.from(form.querySelectorAll<HTMLElement>('[data-progress-step]'));
+    const progressSummary = form.querySelector<HTMLElement>('[data-progress-summary]');
     const started = form.querySelector<HTMLInputElement>('[name="startedAt"]');
     const status = form.querySelector<HTMLElement>('.status');
     const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
@@ -159,7 +171,6 @@ import { site } from '../data/site';
 
     const restartTimer = () => { if (started) started.value = String(Date.now()); };
 
-    // Inline errors: a message beside the field (or below a radio group), aria-invalid on the control.
     const errorHost = (control: Control) => control.type === 'radio' || control.type === 'checkbox'
       ? (control.closest('.choice-group') || control.closest('.check-choice')) as HTMLElement | null
       : (control.closest('label') as HTMLElement | null);
@@ -201,12 +212,10 @@ import { site } from '../data/site';
       currentStep = Math.min(Math.max(step, 1), sections.length);
       sections.forEach((section, index) => { section.hidden = index + 1 !== currentStep; });
       progressItems.forEach((item, index) => {
-        const itemStep = index + 1;
-        item.classList.toggle('is-current', itemStep === currentStep);
-        item.classList.toggle('is-complete', itemStep < currentStep);
-        if (itemStep === currentStep) item.setAttribute('aria-current', 'step');
-        else item.removeAttribute('aria-current');
+        item.classList.toggle('is-current', index + 1 === currentStep);
+        item.classList.toggle('is-complete', index + 1 < currentStep);
       });
+      if (progressSummary) progressSummary.textContent = `Step ${currentStep} of ${sections.length}: ${STEP_NAMES[currentStep - 1]}`;
       if (moveFocus) {
         sections[currentStep - 1]?.querySelector<HTMLElement>(':scope > legend')?.focus({ preventScroll: true });
         form.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -296,62 +305,69 @@ import { site } from '../data/site';
 </script>
 
 <style>
+  .apply-form { display: grid; width: 100%; max-width: 52rem; margin-inline: auto; padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(var(--space-5), 4vw, var(--space-8)) clamp(1.5rem, 3vw, 2rem); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); gap: var(--space-3); scroll-margin-top: calc(var(--header-total-height) + 1rem); }
+  .apply-form__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-5); }
+  .apply-form__head h1 { max-width: none; margin-top: 0; font-size: clamp(1.45rem, 2.2vw, 1.85rem); }
+  .apply-form__call { color: var(--slate-600); font-size: .95rem; white-space: nowrap; }
+  .apply-form__progress { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .3rem; }
+  .apply-form__seg { height: .35rem; border-radius: 999px; background: var(--slate-200); transition: background .15s ease; }
+  .apply-form__seg.is-current, .apply-form__seg.is-complete { background: var(--teal-700); }
+  .apply-form__counter { margin-top: calc(var(--space-2) * -1); color: var(--teal-800); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .08em; text-transform: uppercase; }
 
-  /* Form card */
-  form{ overflow: hidden; border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); scroll-margin-top: 7rem; }
-  .form-progress{ padding: var(--space-5) clamp(var(--space-6), 5vw, var(--space-8)); border-bottom: 1px solid var(--slate-200); background: var(--white); }
-  .form-progress ol{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
-  .form-progress li{ position: relative; display: grid; grid-template-columns: 2rem minmax(0, 1fr); color: var(--slate-500); align-items: center; gap: var(--space-3); }
-  .form-progress li:not(:last-child)::after{ position: absolute; top: 50%; right: var(--space-4); left: calc(2rem + var(--space-4)); height: 1px; background: var(--slate-300); content: ''; }
-  .form-progress li span{ display: grid; width: 2rem; height: 2rem; border: 1px solid var(--slate-400); border-radius: 50%; background: var(--white); font-size: .9rem; font-weight: var(--weight-semibold); place-items: center; }
-  .form-progress li strong{ position: relative; z-index: 1; width: fit-content; padding-right: var(--space-3); background: var(--white); font-size: .9rem; font-weight: var(--weight-heading); }
-  .form-progress li.is-current{ color: var(--navy-900); }
-  .form-progress li.is-current span{ border-color: var(--teal-700); background: var(--teal-700); color: var(--white); }
-  .form-progress li.is-complete{ color: var(--teal-800); }
-  .form-progress li.is-complete span{ border-color: var(--teal-700); color: var(--teal-700); }
+  .form-section { display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-3); }
+  .form-section[hidden] { display: none; }
+  .form-section > legend { padding: var(--space-1) 0 var(--space-2); color: var(--navy-900); font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.2; }
+  .form-section > legend:focus { outline: 0; }
+  .section-intro { max-width: 58ch; margin-top: calc(var(--space-3) * -1); color: var(--slate-600); font-size: .95rem; }
+  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3) var(--space-4); align-items: start; }
+  .form-grid > label { align-content: start; }
+  .applicant-fields[hidden] { display: none; }
+  .apply-form :global(input:not([type="radio"]):not([type="checkbox"])), .apply-form :global(select) { min-height: 2.9rem; padding-block: .6rem; }
+  .apply-form :global(textarea) { min-height: 5.5rem; }
+  .apply-form :global(.choice) { min-height: 0; padding: .7rem .85rem; align-items: center; }
+  .apply-form :global(.choice small) { font-size: .86rem; }
+  .apply-form :global(.check-choice) { padding: .6rem .85rem; }
+  .apply-form :global(.check-list) { gap: var(--space-2); }
+  .apply-form :global(.privacy-note) { font-size: .84rem; }
 
-  /* Step */
-  .form-section{ display: grid; min-width: 0; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); border: 0; gap: var(--space-6); }
-  .form-section[hidden]{ display: none; }
-  /* A fieldset's top padding does not apply above its legend, so the legend carries its own. */
-  .form-section > legend{ display: grid; width: 100%; padding: clamp(var(--space-6), 5vw, var(--space-8)) 0 0; gap: var(--space-2); color: var(--navy-900); }
-  .form-section > legend:focus{ outline: 0; }
-  .step-label{ color: var(--teal-700); font-size: .8rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
-  .form-section > legend strong{ font-family: var(--font-display); font-size: var(--type-section-sm); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.15; }
-  .section-intro{ max-width: 58ch; margin-top: calc(var(--space-4) * -1); color: var(--slate-600); }
+  /* Compact yes/no pills */
+  .pill-rows { display: grid; gap: var(--space-2); }
+  .pill-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; padding-bottom: var(--space-2); border-bottom: 1px solid var(--slate-200); }
+  .pill-row:last-child { padding-bottom: 0; border-bottom: 0; }
+  .pill-row > legend { float: left; padding: 0; font-size: 1rem; font-weight: var(--weight-medium); }
+  .pill-row--stack { display: grid; grid-template-columns: 1fr; gap: var(--space-2); padding: 0; border: 0; }
+  .pill-row--stack > legend { font-weight: var(--weight-semibold); }
+  .pills { display: inline-flex; padding: .2rem; border: var(--control-border); border-radius: 999px; background: var(--white); gap: .2rem; }
+  .pill { position: relative; cursor: pointer; }
+  .pill input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .pill span { display: inline-flex; min-width: 4.5rem; min-height: 2.35rem; padding: .35rem 1rem; border-radius: 999px; align-items: center; justify-content: center; color: var(--navy-900); font-weight: var(--weight-semibold); transition: background .12s ease, color .12s ease; }
+  .pill input:checked + span { color: var(--white); background: var(--teal-700); }
+  .pill input:focus-visible + span { box-shadow: var(--focus-ring); }
+  .pill-row.has-error { padding-left: var(--space-4); border-left: 3px solid var(--error); }
+  .pill-row :global(.field-error) { grid-column: 1 / -1; }
 
-  .form-grid{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
-  .form-grid > label{ align-content: start; }
-  .applicant-fields[hidden]{ display: none; }
+  .step-actions { display: flex; margin-top: var(--space-1); padding-top: var(--space-3); border-top: 1px solid var(--slate-200); align-items: center; gap: var(--space-3); }
+  .step-actions .button { gap: var(--button-gap); }
+  .step-actions .button :global(svg) { width: 1rem; height: 1rem; }
+  .step-actions__hint { margin-left: auto; color: var(--slate-600); font-size: .88rem; }
+  .button-secondary { border: 1px solid var(--navy-900); background: transparent; color: var(--navy-900); }
+  .button-secondary:hover { background: var(--sky-100); color: var(--navy-900); }
+  .step-actions--submit { flex-wrap: wrap; }
+  .step-actions--submit .verification { margin: 0 auto 0 0; }
+  .apply-form :global(.cf-turnstile) { max-width: 19rem; min-height: 65px; }
 
-  /* Actions */
-  .step-actions{ display: flex; padding-top: var(--space-6); border-top: 1px solid var(--slate-200); align-items: center; gap: var(--space-3); }
-  .step-actions .button{ gap: var(--button-gap); }
-  .step-actions .button :global(svg){ width: 1rem; height: 1rem; }
-  .button-secondary{ border: 1px solid var(--navy-900); background: transparent; color: var(--navy-900); }
-  .button-secondary:hover{ background: var(--sky-100); color: var(--navy-900); }
-  .submission-area{ display: grid; gap: var(--space-5); }
-  .step-actions--submit{ flex-wrap: wrap; }
-
-  
-
-  
+  @media (max-width: 900px) {
+    .apply-form__call, .section-intro, .step-actions__hint, .apply-form :global(.choice small), .apply-form :global(.privacy-note), .field-guidance { font-size: 1rem; }
+  }
 
   @media (max-width: 760px) {
-    .form-progress{ padding: var(--space-5) var(--space-6); }
-    .form-progress ol{ gap: var(--space-2); }
-    .form-progress li:not(:last-child)::after{ display: none; }
-    .form-progress li strong{ padding-right: 0; font-size: .85rem; }
-    .form-section{ padding: var(--space-6); gap: var(--space-5); }
+    .apply-form { padding: var(--space-5) var(--space-4); gap: var(--space-4); }
+    .apply-form__head { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+    .form-grid { grid-template-columns: 1fr; }
+    .pill-row { grid-template-columns: 1fr; gap: var(--space-2); }
+    .step-actions { display: grid; grid-template-columns: 1fr; }
+    .step-actions--submit .verification { margin: 0; }
+    .step-actions .button { width: 100%; }
+    .step-actions__hint { margin-left: 0; }
   }
-
-  @media (max-width: 480px) {
-    .form-progress{ display: none; }
-    .form-section{ padding: var(--space-5); }
-    .form-section > legend{ padding-top: var(--space-5); }
-    .form-grid, .choice-grid--two{ grid-template-columns: 1fr; }
-    .step-actions{ display: grid; grid-template-columns: 1fr; }
-    .step-actions .button{ width: 100%; }
-  }
-  
 </style>
