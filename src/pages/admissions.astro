@@ -16,7 +16,6 @@ import { site } from '../data/site';
           <a class="button button--light" href="#inquiry">Start the Application<Icon name="lucide:arrow-down" aria-hidden="true" /></a>
           <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
         </div>
-        <p class="admissions-hero__note"><Icon name="lucide:info" aria-hidden="true" />This is the first step, not a guarantee of a bed. Openings change week to week, so the sooner we talk, the better.</p>
       </div>
       <figure class="admissions-hero__photo">
         <img src="/images/admissions-hero.webp" alt="A sunlit living room sofa with cushions beside open windows" width="1467" height="2200" fetchpriority="high" />
@@ -29,18 +28,17 @@ import { site } from '../data/site';
 
 <style>
   .admissions-hero { color: var(--white); background: var(--navy-950); }
-  .admissions-hero__grid { display: grid; min-height: clamp(20rem, 28vw, 26rem); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
-  .admissions-hero__copy { display: flex; padding: var(--section-compact) clamp(2.5rem, 6vw, 5rem) var(--section-compact) 0; flex-direction: column; justify-content: center; }
+  .admissions-hero__grid { display: grid; min-height: clamp(16rem, 22vw, 21rem); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .admissions-hero__copy { display: flex; padding: var(--space-7) clamp(2.5rem, 6vw, 5rem) var(--space-7) 0; flex-direction: column; justify-content: center; }
   .admissions-hero .eyebrow { color: var(--accent-on-image); }
   .admissions-hero h1 { max-width: 24ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-split); }
   .admissions-hero .lead { max-width: 36rem; margin-top: var(--space-5); color: var(--sky-100); }
   .admissions-hero__actions { margin-top: var(--space-6); }
   .admissions-hero__actions .button { gap: var(--button-gap); }
   .admissions-hero__actions :global(svg) { width: 1rem; height: 1rem; }
-  .admissions-hero__note { display: flex; max-width: 38rem; margin-top: var(--space-6); align-items: flex-start; gap: .7rem; color: var(--sky-200); font-size: 1rem; line-height: 1.5; }
-  .admissions-hero__note :global(svg) { width: 1.1rem; height: 1.1rem; margin-top: .2rem; color: var(--accent-on-image); flex: 0 0 auto; }
   .admissions-hero__photo { position: relative; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
-  .admissions-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 62%; filter: saturate(.85) contrast(.98); }
+  /* Absolute so the portrait photo's aspect ratio cannot set the hero height; the copy column does. */
+  .admissions-hero__photo img { position: absolute; width: 100%; height: 100%; inset: 0; object-fit: cover; object-position: center 62%; filter: saturate(.85) contrast(.98); }
 
   @media (max-width: 900px) {
     .admissions-hero { position: relative; overflow: hidden; }
@@ -48,7 +46,7 @@ import { site } from '../data/site';
     .admissions-hero__photo { position: absolute; z-index: 0; margin: 0; inset: 0; }
     .admissions-hero__photo img { object-position: center 35%; }
     .admissions-hero__photo::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.97) 0%, rgba(9,34,45,.84) 55%, rgba(9,34,45,.5) 100%); content: ''; inset: 0; }
-    .admissions-hero__copy { position: relative; z-index: 1; min-height: clamp(24rem, 62svh, 30rem); padding: 3.5rem 0 2.5rem; justify-content: flex-end; }
+    .admissions-hero__copy { position: relative; z-index: 1; min-height: clamp(20rem, 52svh, 26rem); padding: 3rem 0 2.25rem; justify-content: flex-end; }
   }
 
   @media (max-width: 760px) {
