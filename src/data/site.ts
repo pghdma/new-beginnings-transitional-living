@@ -38,8 +38,14 @@ export const nav = [
       { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/', icon: 'heart-handshake', description: 'One house in Bellevue, just north of the city' }
     ]
   },
-  { label: 'Admissions', href: '/admissions/' },
-  { label: 'For Professionals', href: '/referrals/' },
-  { label: 'Support Us', href: '/support-us/' },
+  {
+    label: 'Admissions',
+    href: '/admissions/',
+    children: [
+      { label: 'Apply for Housing', href: '/admissions/', icon: 'clipboard-list', description: 'Three short steps, or just call' },
+      { label: 'For Professionals', href: '/referrals/', icon: 'briefcase-business', description: 'Referring a client from treatment, court, or case management' }
+    ]
+  },
+  { label: 'Donate', href: '/support-us/' },
   { label: 'Contact', href: '/contact/' }
 ] as const;
