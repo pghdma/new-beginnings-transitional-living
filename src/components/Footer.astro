@@ -1,159 +1,129 @@
 ---
 import { Icon } from 'astro-icon/components';
-import TrustPoints from './TrustPoints.astro';
 import BrandLockup from './BrandLockup.astro';
+import TrustPoints from './TrustPoints.astro';
 import { site } from '../data/site';
 
+const columns = [
+  {
+    title: 'Recovery Housing',
+    links: [
+      { label: 'How Our Houses Work', href: '/recovery-housing/' },
+      { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/' },
+      { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/' },
+      { label: 'Apply for Housing', href: '/admissions/' },
+      { label: 'For Professionals', href: '/referrals/' },
+    ],
+  },
+  {
+    title: 'About',
+    links: [
+      { label: 'About New Beginnings', href: '/about/' },
+      { label: 'Board of Directors', href: '/about/board/' },
+      { label: 'Credentials & Licensing', href: '/about/transparency/' },
+      { label: 'Donate', href: '/support-us/' },
+      { label: 'Contact', href: '/contact/' },
+    ],
+  },
+];
+const year = new Date().getFullYear();
 ---
 
-<footer>
-  <div class="container footer-service">
-    <div class="footer-map">
-      <iframe
-        title="Map of Pittsburgh and surrounding Allegheny County communities"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-80.145%2C40.385%2C-79.900%2C40.555&amp;layer=mapnik"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      ></iframe>
-      <div class="map-caption">
-        <Icon name="lucide:map" aria-hidden="true" />
-        <div>
-          <span>Service area</span>
-          <strong>Pittsburgh &amp; surrounding Allegheny County</strong>
-          <p>Our houses are in Pittsburgh’s North Side and West End and in nearby McKees Rocks and Bellevue.</p>
-        </div>
-      </div>
+<footer class="footer">
+  <div class="container footer__main">
+    <div class="footer__brand">
+      <a class="footer__logo" href="/" aria-label="New Beginnings Transitional Living home"><BrandLockup variant="footer" /></a>
+      <p class="footer__mission">Nonprofit sober living homes for men and women in Pittsburgh. Licensed, inspected, and run by a counselor who has done this work since 1999.</p>
+      <div class="footer__trust"><TrustPoints variant="compact" label="Organization credentials" /></div>
+      <p class="footer__ein">New Beginnings Transitional Living Foundation · EIN {site.ein}</p>
     </div>
 
-    <div class="footer-contact">
-      <a class="footer-brand" href="/" aria-label="New Beginnings Transitional Living home"><BrandLockup variant="footer" /></a>
-      <p class="footer-summary">Nonprofit sober living homes for men and women in Pittsburgh. Licensed, inspected, and run by a counselor who has done this work since 1999.</p>
+    {columns.map((column) => (
+      <nav class="footer__column" aria-label={column.title}>
+        <h2>{column.title}</h2>
+        <ul>
+          {column.links.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    ))}
 
-      <div class="footer-contact-list">
-        <a href={site.phoneHref}>
-          <span class="footer-contact-icon icon-medallion icon-medallion--sm"><Icon name="lucide:phone" aria-hidden="true" /></span>
-          <span><small>Call New Beginnings</small><strong>{site.phone}</strong></span>
-        </a>
-        <a href="/contact/">
-          <span class="footer-contact-icon icon-medallion icon-medallion--sm"><Icon name="lucide:mail" aria-hidden="true" /></span>
-          <span><small>Send a message</small><strong>Contact New Beginnings</strong></span>
-        </a>
-      </div>
-
-      <div class="footer-trust"><TrustPoints variant="compact" label="Organization credentials" /></div>
-
-      <p class="footer-nonprofit">New Beginnings Transitional Living Foundation · EIN {site.ein}</p>
+    <div class="footer__column footer__contact">
+      <h2>Contact</h2>
+      <ul class="footer__details">
+        <li>
+          <Icon name="lucide:phone" aria-hidden="true" />
+          <span><small>Call</small><a href={site.phoneHref}>{site.phone}</a></span>
+        </li>
+        <li>
+          <Icon name="lucide:mail" aria-hidden="true" />
+          <span><small>Email</small><a href={site.emailHref}>{site.email}</a></span>
+        </li>
+        <li>
+          <Icon name="lucide:map-pin" aria-hidden="true" />
+          <span><small>Office</small><address>{site.office.street}<br />{site.office.city}, {site.office.state} {site.office.zip}</address><em>Not a residence. Please call before visiting.</em></span>
+        </li>
+        <li>
+          <Icon name="lucide:map" aria-hidden="true" />
+          <span><small>Service area</small>Pittsburgh and surrounding Allegheny County</span>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <div class="container footer-links">
-    <div>
-      <h2>About</h2>
-      <ul>
-        <li><a href="/about/">About New Beginnings</a></li>
-        <li><a href="/about/board/">Board of Directors</a></li>
-        <li><a href="/about/transparency/">Credentials &amp; Licensing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Recovery Housing</h2>
-      <ul>
-        <li><a href="/recovery-housing/">How Our Houses Work</a></li>
-        <li><a href="/recovery-housing/men/">Men’s Recovery Housing</a></li>
-        <li><a href="/recovery-housing/women/">Women’s Recovery Housing</a></li>
-        <li><a href="/admissions/">Admissions</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Connect</h2>
-      <ul>
-        <li><a href="/referrals/">Information for Professionals</a></li>
-        <li><a href="/support-us/">Support the Houses</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Information</h2>
-      <ul>
+  <div class="footer__bar">
+    <div class="container footer__bar-inner">
+      <p>© {year} New Beginnings Transitional Living Foundation. All rights reserved.</p>
+      <ul class="footer__legal">
         <li><a href="/privacy/">Privacy</a></li>
-        <li><a href="/accessibility/">Accessibility</a></li>
         <li><a href="/terms/">Terms</a></li>
+        <li><a href="/accessibility/">Accessibility</a></li>
+        <li><a href="https://pghdma.com" rel="external">Site by PGHDMA</a></li>
       </ul>
     </div>
-  </div>
-
-  <div class="container copyright">
-    <span>© {new Date().getFullYear()} New Beginnings Transitional Living Foundation. All rights reserved.</span>
-    <a href="https://pghdma.com" rel="external">Site by PGHDMA</a>
   </div>
 </footer>
 
 <style>
-  footer{ flex: 0 0 auto; color: var(--white); background: var(--navy-950); }
-  .footer-service{ display: grid; padding-block: var(--section-standard); grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr); gap: clamp(3rem,7vw,7rem); align-items: stretch; }
-  .footer-map{ border-radius: var(--radius-md); overflow: hidden; display: grid; background: var(--navy-900); grid-template-rows: minmax(20rem,1fr) auto; }
-  .footer-map iframe{ display: block; width: 100%; min-height: 22rem; border: 0; filter: var(--photo-filter); }
-  .map-caption{ display: grid; padding: var(--space-5); grid-template-columns: auto 1fr; gap: var(--space-4); align-items: start; }
-  .map-caption > :global(svg){ width: 2rem; height: 2rem; color: var(--accent-on-dark); stroke-width: 1.55; }
-  .map-caption div{ display: grid; }
-  .map-caption span{ color: var(--accent-on-dark); font-size: .72rem; font-weight: var(--weight-bold); letter-spacing: .12em; text-transform: uppercase; }
-  .map-caption strong{ margin-top: .35rem; color: var(--white); font-size: 1.2rem; line-height: 1.25; }
-  .map-caption p{ margin-top: .4rem; color: var(--slate-300); font-size: .88rem; line-height: 1.45; }
+  .footer { color: var(--sky-100); background: var(--navy-950); }
+  .footer__main { display: grid; padding-block: clamp(3.5rem, 6vw, 5.5rem) clamp(3rem, 5vw, 4.5rem); grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, .9fr)) minmax(0, 1.2fr); gap: clamp(2.5rem, 5vw, 5rem); }
+  .footer__brand { display: grid; align-content: start; gap: var(--space-5); }
+  .footer__logo { display: inline-flex; width: fit-content; min-height: 2.75rem; align-items: center; text-decoration: none; }
+  .footer__mission { max-width: 30rem; color: var(--sky-100); font-size: 1rem; line-height: 1.6; }
+  .footer__trust :global(.trust--compact) { grid-template-columns: 1fr; gap: var(--space-3); }
+  .footer__ein { color: var(--slate-400); font-size: .84rem; line-height: 1.5; }
 
-  .footer-contact{ display: flex; flex-direction: column; justify-content: center; }
-  .footer-brand{ display: inline-flex; align-self: flex-start; text-decoration: none; }
-  .footer-summary{ max-width: 34rem; margin-top: var(--space-5); color: var(--slate-300); font-size: 1.06rem; line-height: 1.55; }
+  .footer__column h2 { margin-bottom: var(--space-4); color: var(--accent-on-dark); font-family: var(--font-display); font-size: .7rem; font-weight: 650; letter-spacing: .12em; line-height: 1.2; text-transform: uppercase; }
+  .footer__column ul { display: grid; margin: 0; padding: 0; gap: .35rem; list-style: none; }
+  .footer__column li a { display: inline-flex; min-height: 2.2rem; align-items: center; color: var(--sky-100); font-size: .98rem; text-decoration: none; }
+  .footer__column li a:hover { color: var(--white); text-decoration: underline; text-underline-offset: .2em; }
 
-  .footer-contact-list{ display: grid; margin-top: var(--space-7); border-block: 1px solid var(--border-on-dark); }
-  .footer-contact-list > a{ display: grid; padding-block: var(--space-4); grid-template-columns: auto 1fr; gap: var(--space-4); align-items: center; color: var(--white); }
-  .footer-contact-list > a + a{ border-top: 1px solid var(--border-on-dark); }
-  .footer-contact-list > a:hover{ color: var(--accent-on-dark-soft); }
-  .footer-contact-icon{ width: 2.7rem; height: 2.7rem; color: var(--navy-950); background: var(--accent-on-dark); }
-  .footer-contact-icon :global(svg){ width: 1.25rem; height: 1.25rem; stroke-width: 1.9; }
-  .footer-contact-list a > span:last-child{ display: grid; }
-  .footer-contact-list small{ color: var(--slate-300); font-size: .72rem; font-weight: var(--weight-semibold); letter-spacing: .1em; text-transform: uppercase; }
-  .footer-contact-list strong{ margin-top: .15rem; color: inherit; font-size: 1.2rem; font-weight: var(--weight-heading); }
+  .footer__details { gap: var(--space-4) !important; }
+  .footer__details li { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: .7rem; align-items: start; color: var(--sky-100); font-size: .98rem; line-height: 1.45; }
+  .footer__details :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: var(--accent-on-dark); stroke-width: 1.8; }
+  .footer__details li > span { display: grid; gap: .15rem; }
+  .footer__details small { color: var(--slate-400); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .08em; text-transform: uppercase; }
+  .footer__details a { color: var(--white); font-weight: var(--weight-semibold); text-decoration: none; }
+  .footer__details a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  .footer__details address { font-style: normal; color: var(--white); }
+  .footer__details em { color: var(--slate-400); font-size: .86rem; font-style: normal; }
 
-  .footer-trust { margin-top: var(--space-6); }
-  .footer-nonprofit{ margin-top: var(--space-5); color: var(--slate-400); font-size: .82rem; }
+  .footer__bar { border-top: 1px solid var(--border-on-dark); }
+  .footer__bar-inner { display: flex; padding-block: var(--space-5); align-items: center; justify-content: space-between; gap: var(--space-4); color: var(--slate-400); font-size: .84rem; }
+  .footer__legal { display: flex; margin: 0; padding: 0; flex-wrap: wrap; gap: var(--space-4) var(--space-5); list-style: none; }
+  .footer__legal a { display: inline-flex; min-height: 2.2rem; align-items: center; color: var(--sky-100); text-decoration: none; }
+  .footer__legal a:hover { color: var(--white); text-decoration: underline; text-underline-offset: .2em; }
 
-  .footer-links{ display: grid; padding-block: var(--space-7); border-top: 1px solid var(--border-on-dark); grid-template-columns: repeat(4,1fr); gap: var(--space-7); }
-  .footer-links h2{ margin-bottom: 1rem; color: var(--accent-on-dark); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
-  .footer-links ul{ margin: 0; padding: 0; list-style: none; }
-  .footer-links li + li{ margin-top: .55rem; }
-  .footer-links a{ color: var(--white); }
-  .footer-links a:hover{ color: var(--accent-on-dark-soft); }
-  .copyright{ display: flex; padding-block: var(--space-5); border-top: 1px solid var(--border-on-dark); color: var(--slate-300); font-size: .84rem; justify-content: space-between; gap: var(--space-4); }
-  .copyright a{ color: var(--slate-300); }
-  .copyright a:hover{ color: var(--white); }
-
-  @media (max-width: 900px) {
-    .footer-service{ grid-template-columns: 1fr; }
-    .footer-map iframe{ min-height: 25rem; }
-    .footer-contact{ max-width: 42rem; }
+  @media (max-width: 1080px) {
+    .footer__main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer__brand { grid-column: 1 / -1; }
   }
 
   @media (max-width: 760px) {
-    .footer-links{ grid-template-columns: 1fr 1fr; }
-    .footer-trust { margin-top: var(--space-6); }
-  }
-
-  @media (max-width: 480px) {
-    .footer-service{ padding-block: var(--space-8); gap: var(--space-7); }
-    .footer-map{ grid-template-rows: 18rem auto; }
-    .footer-map iframe{ min-height: 18rem; }
-    .map-caption{ padding: var(--space-5); }
-    .footer-summary{ font-size: 1rem; }
-    .footer-contact-list strong{ font-size: 1.05rem; }
-    .footer-links{ padding-block: var(--space-6); gap: var(--space-6) var(--space-4); }
-    .footer-links a{ font-size: .92rem; }
-    .copyright{ display: grid; }
-  }
-
-  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
-  @media (max-width: 900px) {
-    .footer-links li + li{ margin-top: 0; }
-    .footer-links a{ display: inline-flex; min-height: 2.75rem; align-items: center; }
-    .footer-brand{ min-height: 2.75rem; align-items: center; }
+    .footer__main { grid-template-columns: 1fr; gap: var(--space-7); padding-block: var(--space-8) var(--space-7); }
+    .footer__column li a, .footer__details li { min-height: 2.75rem; font-size: 1rem; }
+    .footer__bar-inner { flex-direction: column; align-items: flex-start; }
+    .footer__legal a { min-height: 2.75rem; }
   }
 </style>
