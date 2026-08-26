@@ -116,7 +116,6 @@ const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
       <button class="button button-secondary" type="button" data-previous-step>Back</button>
     </div>
     <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
-    <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
   </fieldset>
 </form>
 
@@ -305,7 +304,7 @@ const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
 </script>
 
 <style>
-  .apply-form { display: grid; width: 100%; max-width: 52rem; margin-inline: auto; padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(var(--space-5), 4vw, var(--space-8)) clamp(1.5rem, 3vw, 2rem); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); gap: var(--space-3); scroll-margin-top: calc(var(--header-total-height) + 1rem); }
+  .apply-form { display: grid; width: 100%; padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(var(--space-5), 4vw, var(--space-8)) clamp(1.5rem, 2.5vw, 2rem); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); gap: var(--space-4); scroll-margin-top: calc(var(--header-total-height) + 1rem); }
   .apply-form__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-5); }
   .apply-form__head h1 { max-width: none; margin-top: 0; font-size: clamp(1.45rem, 2.2vw, 1.85rem); }
   .apply-form__call { color: var(--slate-600); font-size: .95rem; white-space: nowrap; }
@@ -314,12 +313,12 @@ const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
   .apply-form__seg.is-current, .apply-form__seg.is-complete { background: var(--teal-700); }
   .apply-form__counter { margin-top: calc(var(--space-2) * -1); color: var(--teal-800); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .08em; text-transform: uppercase; }
 
-  .form-section { display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-3); }
+  .form-section { display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-4); }
   .form-section[hidden] { display: none; }
-  .form-section > legend { padding: var(--space-1) 0 var(--space-2); color: var(--navy-900); font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.2; }
+  .form-section > legend { padding: var(--space-1) 0 var(--space-1); color: var(--navy-900); font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.2; }
   .form-section > legend:focus { outline: 0; }
   .section-intro { max-width: 58ch; margin-top: calc(var(--space-3) * -1); color: var(--slate-600); font-size: .95rem; }
-  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3) var(--space-4); align-items: start; }
+  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); align-items: start; }
   .form-grid > label { align-content: start; }
   .applicant-fields[hidden] { display: none; }
   .apply-form :global(input:not([type="radio"]):not([type="checkbox"])), .apply-form :global(select) { min-height: 2.9rem; padding-block: .6rem; }
@@ -331,8 +330,8 @@ const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
   .apply-form :global(.privacy-note) { font-size: .84rem; }
 
   /* Compact yes/no pills */
-  .pill-rows { display: grid; gap: var(--space-2); }
-  .pill-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; padding-bottom: var(--space-2); border-bottom: 1px solid var(--slate-200); }
+  .pill-rows { display: grid; gap: var(--space-3); }
+  .pill-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; padding-bottom: var(--space-3); border-bottom: 1px solid var(--slate-200); }
   .pill-row:last-child { padding-bottom: 0; border-bottom: 0; }
   .pill-row > legend { float: left; padding: 0; font-size: 1rem; font-weight: var(--weight-medium); }
   .pill-row--stack { display: grid; grid-template-columns: 1fr; gap: var(--space-2); padding: 0; border: 0; }
@@ -346,7 +345,7 @@ const steps = ['About you', 'Housing', 'The applicant', 'Details', 'Send'];
   .pill-row.has-error { padding-left: var(--space-4); border-left: 3px solid var(--error); }
   .pill-row :global(.field-error) { grid-column: 1 / -1; }
 
-  .step-actions { display: flex; margin-top: var(--space-1); padding-top: var(--space-3); border-top: 1px solid var(--slate-200); align-items: center; gap: var(--space-3); }
+  .step-actions { display: flex; margin-top: 0; padding-top: var(--space-3); border-top: 1px solid var(--slate-200); align-items: center; gap: var(--space-3); }
   .step-actions .button { gap: var(--button-gap); }
   .step-actions .button :global(svg) { width: 1rem; height: 1rem; }
   .step-actions__hint { margin-left: auto; color: var(--slate-600); font-size: .88rem; }
