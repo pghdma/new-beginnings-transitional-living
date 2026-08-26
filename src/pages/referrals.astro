@@ -1,6 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
+import TrustPoints from '../components/TrustPoints.astro';
+import StepList from '../components/StepList.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
@@ -12,10 +15,11 @@ const audiences = [
   { icon: 'lucide:landmark', title: 'Community Partners', copy: 'County teams, nonprofits, churches, and community programs that want to know who we are before they send someone our way.' },
 ];
 
-const credentials = [
-  { icon: 'lucide:badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed recovery houses' },
-  { icon: 'lucide:shield-check', title: 'WestPARR', copy: 'Certified member, inspected' },
-  { icon: 'lucide:landmark', title: '501(c)(3)', copy: 'Pittsburgh public charity' },
+
+const coordinationSteps = [
+  { icon: 'phone', title: 'Call About a Bed', copy: 'Tell us men’s or women’s, roughly when, and anything we need to know up front.', href: site.phoneHref, label: `Call ${site.phone}` },
+  { icon: 'clipboard-list', title: 'Send the Application', copy: 'Your client can fill it out, or you can do it with them. It takes a few minutes and we call back.', href: '/admissions/', label: 'Go to Admissions' },
+  { icon: 'messages-square', title: 'Coordinate Directly', copy: 'Records, supervision requirements, and move-in details are handled by phone, not through the website.', href: '/contact/', label: 'Contact Us' },
 ];
 
 const questions = [
@@ -93,11 +97,7 @@ const questions = [
           <a class="text-link verification-guidance" href="https://www.pa.gov/services/ddap/apply-to-become-a-licensed-recovery-house">Pennsylvania’s licensing rules</a>
         </div>
       </div>
-      <ul class="credential-grid">
-        {credentials.map((credential) => (
-          <li><span class="icon-medallion icon-medallion--dark"><Icon name={credential.icon} aria-hidden="true" /></span><div><h3>{credential.title}</h3><p>{credential.copy}</p></div></li>
-        ))}
-      </ul>
+      <TrustPoints variant="panel" />
     </div>
   </section>
 
@@ -107,11 +107,7 @@ const questions = [
         <div><p class="eyebrow">How to Refer</p><h2 id="coordination-title">Call First. It’s Faster Than Any Form</h2></div>
         <p>There’s no separate referral form. Call {site.phone} with the basics, or have your client send the application. We’ll tell you what’s open and what we need to move forward.</p>
       </header>
-      <ol class="coordination-steps">
-        <li><span>01</span><Icon name="lucide:phone" aria-hidden="true" /><h3>Call About a Bed</h3><p>Tell us men’s or women’s, roughly when, and anything we need to know up front.</p><a class="button button--outline" href={site.phoneHref}>Call {site.phone}</a></li>
-        <li><span>02</span><Icon name="lucide:clipboard-list" aria-hidden="true" /><h3>Send the Application</h3><p>Your client can fill it out, or you can do it with them. It takes a few minutes and we call back.</p><a class="button button--outline" href="/admissions/">Go to Admissions</a></li>
-        <li><span>03</span><Icon name="lucide:messages-square" aria-hidden="true" /><h3>Coordinate Directly</h3><p>Records, supervision requirements, and move-in details are handled by phone, not through the website.</p><a class="button button--outline" href="/contact/">Contact Us</a></li>
-      </ol>
+      <div class="coordination-steps"><StepList variant="cards" items={coordinationSteps} /></div>
     </div>
   </section>
 
@@ -122,11 +118,7 @@ const questions = [
         <h2 id="professional-faq-title">What Referral Partners Usually Ask</h2>
         <p>For a question about one person or one opening, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>.</p>
       </header>
-      <div class="faq-list" data-single-accordion>
-        {questions.map((item, index) => (
-          <details open={index === 0}><summary><span>{item.question}</span><Icon name="lucide:plus" aria-hidden="true" /></summary><div class="faq-answer"><p>{item.answer}</p></div></details>
-        ))}
-      </div>
+      <FaqAccordion items={questions} variant="card" single openFirst />
     </div>
   </section>
 
@@ -169,29 +161,11 @@ const questions = [
   .verification-copy .button :global(svg){ width: 1rem; height: 1rem; }
   .verification-guidance{ color: var(--white); }
   .verification-guidance:hover{ color: var(--accent-on-dark); }
-  .credential-grid{ border-radius: var(--radius-lg); display: grid; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); gap: var(--space-6); color: var(--white); background: var(--surface-on-dark); box-shadow: var(--shadow-photo); list-style: none; }
-  .credential-grid li{ display: grid; grid-template-columns: var(--icon-medallion-size-md) minmax(0, 1fr); gap: var(--space-4); align-items: center; }
-  .credential-grid h3{ color: var(--white); font-size: 1.1rem; }
-  .credential-grid p{ margin-top: .2rem; color: var(--sky-200); font-size: .9rem; }
 
   .coordination-section{ padding-block: var(--section-standard); background: var(--paper); }
   .coordination-heading h2{ margin-top: var(--space-4); }
   .coordination-heading > p{ color: var(--slate-600); font-size: 1.05rem; }
-  .coordination-steps{ display: grid; margin: clamp(3rem, 6vw, 4.5rem) 0 0; padding: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); list-style: none; }
-  .coordination-steps li{ border-radius: var(--radius-lg); position: relative; display: flex; min-height: 25rem; padding: clamp(var(--space-6), 4vw, var(--space-7)); overflow: hidden; background: var(--sky-50); flex-direction: column; align-items: flex-start; }
-  .coordination-steps li:nth-child(2){ color: var(--white); background: var(--teal-700); }
-  .coordination-steps li:nth-child(3){ color: var(--white); background: var(--navy-900); }
-  .coordination-steps li > span{ position: absolute; top: var(--space-5); right: var(--space-5); color: rgba(var(--ink-rgb), .15); font-size: 3.25rem; font-weight: var(--weight-semibold); line-height: 1; }
-  .coordination-steps li:nth-child(n + 2) > span{ color: var(--border-on-dark); }
-  .coordination-steps li > :global(svg){ width: 2rem; height: 2rem; color: var(--teal-700); stroke-width: 1.55; }
-  .coordination-steps li:nth-child(n + 2) > :global(svg){ color: var(--accent-on-dark); }
-  .coordination-steps h3{ max-width: 14rem; margin-top: var(--space-6); }
-  .coordination-steps li:nth-child(n + 2) h3{ color: var(--white); }
-  .coordination-steps p{ margin-top: var(--space-4); color: var(--slate-600); font-size: .95rem; line-height: 1.55; }
-  .coordination-steps li:nth-child(n + 2) p{ color: var(--sky-100); }
-  .coordination-steps .button{ width: 100%; margin-top: auto; padding-top: .8rem; padding-bottom: .8rem; }
-  .coordination-steps li:nth-child(n + 2) .button{ border-color: var(--outline-on-dark); color: var(--white); }
-  .coordination-steps li:nth-child(n + 2) .button:hover{ color: var(--navy-950); background: var(--white); }
+  .coordination-steps { margin-top: clamp(3rem, 6vw, 4.5rem); }
 
   .professional-faq{ padding-block: var(--section-standard); background: var(--sky-50); }
   .faq-layout{ display: grid; grid-template-columns: minmax(17rem, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
@@ -199,14 +173,6 @@ const questions = [
   .faq-heading h2{ max-width: 24ch; }
   .faq-heading > p:not(.eyebrow){ max-width: 27rem; color: var(--slate-600); }
   .faq-heading a{ font-weight: var(--weight-semibold); }
-  .faq-list{ border-radius: var(--radius-lg); overflow: hidden; background: var(--paper); box-shadow: var(--shadow-raised); }
-  .faq-list details + details{ border-top: 1px solid var(--slate-200); }
-  .faq-list summary{ display: grid; padding: var(--space-5) var(--space-6); grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-5); align-items: center; color: var(--navy-900); cursor: pointer; font-size: 1.08rem; font-weight: var(--weight-semibold); list-style: none; }
-  .faq-list summary::-webkit-details-marker{ display: none; }
-  .faq-list summary :global(svg){ width: 1.25rem; height: 1.25rem; color: var(--teal-700); transition: transform .18s ease; }
-  .faq-list details[open] summary :global(svg){ transform: rotate(45deg); }
-  .faq-answer{ padding: 0 var(--space-6) var(--space-6); }
-  .faq-answer p{ max-width: 60ch; color: var(--slate-600); }
 
   @media (max-width: 900px) {
     .role-layout, .verification-layout, .faq-layout{ grid-template-columns: 1fr; }
@@ -214,28 +180,20 @@ const questions = [
     .role-layout{ grid-template-areas: 'copy' 'photo'; gap: var(--space-7); }
     .role-photo{ height: auto; aspect-ratio: 16 / 10; }
     .verification-layout{ gap: var(--space-7); }
-    .credential-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .credential-grid li{ grid-template-columns: 1fr; justify-items: center; text-align: center; }
   }
 
   @media (max-width: 760px) {
-    .audience-grid, .credential-grid, .coordination-steps, .scope-comparison{ grid-template-columns: 1fr; }
+    .audience-grid, .scope-comparison{ grid-template-columns: 1fr; }
     .audience-grid{ gap: var(--space-7); }
     .role-photo{ aspect-ratio: 4 / 3; }
     .scope-comparison article{ padding: var(--space-5); }
-    .credential-grid li{ grid-template-columns: var(--icon-medallion-size-md) minmax(0, 1fr); justify-items: start; text-align: left; }
-    .coordination-steps{ gap: var(--space-4); }
-    .coordination-steps li{ min-height: 21rem; }
-    .faq-list summary{ padding: var(--space-5); }
-    .faq-answer{ padding: 0 var(--space-5) var(--space-5); }
+    .coordination-steps { margin-top: clamp(3rem, 6vw, 4.5rem); }
   }
 
-  @media (prefers-reduced-motion: reduce) { .faq-list summary :global(svg){ transition: none; } }
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .audience-grid p, .scope-comparison p, .credential-grid p, .coordination-steps p { font-size: 1rem; line-height: 1.55; }
+    .audience-grid p, .scope-comparison p { font-size: 1rem; line-height: 1.55; }
     .audience-grid li{ align-items: flex-start; text-align: left; }
-    .credential-grid li{ align-items: flex-start; text-align: left; }
   }
 </style>

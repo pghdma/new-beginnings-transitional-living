@@ -1,0 +1,85 @@
+---
+/**
+ * FaqAccordion — the only accordion on the site.
+ *
+ * Pass `items` for a flat list or `groups` for titled groups.
+ * variant="list"  hairline rows (housing pages)
+ * variant="card"  rounded paper card (Professionals)
+ * `single` keeps one item open at a time; `openFirst` opens the first item on load.
+ */
+import { Icon } from 'astro-icon/components';
+
+interface FaqItem { question: string; answer: string }
+interface FaqGroup { title: string; items: FaqItem[] }
+interface Props {
+  items?: FaqItem[];
+  groups?: FaqGroup[];
+  variant?: 'list' | 'card';
+  single?: boolean;
+  openFirst?: boolean;
+}
+const { items = [], groups, variant = 'list', single = false, openFirst = false } = Astro.props;
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+
+<div class:list={['faq', `faq--${variant}`]} data-faq={single ? 'single' : undefined}>
+  {groups ? groups.map((group) => (
+    <section class="faq__group" aria-labelledby={`faq-${slug(group.title)}`}>
+      <h3 id={`faq-${slug(group.title)}`}>{group.title}</h3>
+      <div class="faq__list">
+        {group.items.map((item) => (
+          <details><summary><span>{item.question}</span><Icon name="lucide:plus" aria-hidden="true" /></summary><div class="faq__answer"><p>{item.answer}</p></div></details>
+        ))}
+      </div>
+    </section>
+  )) : (
+    <div class="faq__list">
+      {items.map((item, index) => (
+        <details open={openFirst && index === 0}><summary><span>{item.question}</span><Icon name="lucide:plus" aria-hidden="true" /></summary><div class="faq__answer"><p>{item.answer}</p></div></details>
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-faq="single"]').forEach((accordion) => {
+    const items = Array.from(accordion.querySelectorAll<HTMLDetailsElement>('details'));
+    items.forEach((item) => item.addEventListener('toggle', () => {
+      if (item.open) items.forEach((other) => { if (other !== item) other.removeAttribute('open'); });
+    }));
+  });
+</script>
+
+<style>
+  .faq { display: grid; gap: var(--space-7); }
+  .faq__group h3 { margin-bottom: var(--space-4); color: var(--teal-800); font-family: var(--font-body); font-size: .85rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
+  .faq summary { display: grid; cursor: pointer; list-style: none; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--navy-900); font-weight: var(--weight-heading); line-height: 1.35; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary :global(svg) { width: 1.2rem; height: 1.2rem; color: var(--teal-700); transition: transform .2s ease; }
+  .faq details[open] summary :global(svg) { transform: rotate(45deg); }
+  .faq__answer p { max-width: 60ch; color: var(--slate-600); }
+
+  /* list */
+  .faq--list .faq__list { border-top: 1px solid var(--slate-300); }
+  .faq--list details { border-bottom: 1px solid var(--slate-300); }
+  .faq--list summary { min-height: 4.75rem; padding: var(--space-5) 0; font-size: 1.12rem; }
+  .faq--list .faq__answer { padding: 0 3rem var(--space-5) 0; }
+
+  /* card */
+  .faq--card .faq__list { overflow: hidden; border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); }
+  .faq--card details + details { border-top: 1px solid var(--slate-200); }
+  .faq--card summary { padding: var(--space-5) var(--space-6); gap: var(--space-5); font-size: 1.08rem; font-weight: var(--weight-semibold); }
+  .faq--card summary :global(svg) { width: 1.25rem; height: 1.25rem; }
+  .faq--card .faq__answer { padding: 0 var(--space-6) var(--space-6); }
+
+  @media (max-width: 760px) {
+    .faq { gap: var(--space-6); }
+    .faq--list summary { min-height: 4.5rem; padding: var(--space-4) 0; font-size: 1rem; }
+    .faq--list summary :global(svg) { width: 2rem; height: 2rem; padding: .4rem; border: 1px solid var(--icon-medallion-border); border-radius: 50%; background: var(--sky-100); }
+    .faq--list .faq__answer { padding: 0 0 var(--space-5); }
+    .faq--card summary { padding: var(--space-5); }
+    .faq--card .faq__answer { padding: 0 var(--space-5) var(--space-5); }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .faq summary :global(svg) { transition: none; } }
+</style>

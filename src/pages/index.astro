@@ -1,6 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
+import TrustPoints from '../components/TrustPoints.astro';
+import StepList from '../components/StepList.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -35,11 +37,6 @@ const firstConversation = [
   { number: '03', title: 'Move In', copy: 'If it’s a fit and a bed is open, you get the address, the move-in list, and a date.' },
 ];
 
-const trustPoints = [
-  { icon: 'heart-handshake', title: '501(c)(3)', copy: 'Pittsburgh public charity' },
-  { icon: 'badge-check', title: 'Pennsylvania DDAP', copy: 'Licensed recovery houses' },
-  { icon: 'shield-check', title: 'WestPARR', copy: 'Certified member' },
-];
 ---
 
 <MainLayout
@@ -191,14 +188,7 @@ const trustPoints = [
         <img src="/images/pittsburgh-point-panorama.webp" alt="Point State Park and the Pittsburgh skyline viewed across the three rivers" width="2400" height="680" loading="lazy" />
       </figure>
 
-      <ul class="trust-points" aria-label="New Beginnings credentials">
-        {trustPoints.map((item) => (
-          <li>
-            <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
-            <span><strong>{item.title}</strong><small>{item.copy}</small></span>
-          </li>
-        ))}
-      </ul>
+      <TrustPoints variant="band" />
     </div>
   </section>
 
@@ -208,14 +198,7 @@ const trustPoints = [
         <p class="eyebrow">Getting In</p>
         <h2>Start With a Phone Call</h2>
         <p>You don’t need a referral, and you don’t need to be coming straight from treatment. Call, or send the short application, and we’ll talk. Keep medical and legal details off the website. We’ll ask for what we need.</p>
-        <ol class="conversation-steps">
-          {firstConversation.map((step) => (
-            <li>
-              <span>{step.number}</span>
-              <div><h3>{step.title}</h3><p>{step.copy}</p></div>
-            </li>
-          ))}
-        </ol>
+        <div class="conversation-steps"><StepList items={firstConversation} tone="dark" /></div>
         <div class="actions conversation-actions">
           <a class="button button--light" href="/admissions/">Apply for Housing<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
           <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
@@ -302,12 +285,6 @@ const trustPoints = [
   .trust-section__actions :global(svg){ width: 1.05rem; height: 1.05rem; }
   .trust-panorama{ border-radius: var(--radius-md); aspect-ratio: 60 / 17; margin: var(--space-8) 0 0; overflow: hidden; background: var(--slate-200); }
   .trust-panorama img{ display: block; width: 100%; height: 100%; object-fit: cover; filter: var(--photo-filter); }
-  .trust-points{ display: grid; margin: 0; padding: var(--space-6) 0; border-block: 1px solid var(--slate-300); grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(1.25rem,3vw,2.5rem); list-style: none; }
-  .trust-points li{ display: flex; justify-content: center; align-items: center; gap: .8rem; }
-  .trust-points :global(svg){ width: 1.75rem; height: 1.75rem; color: var(--teal-700); stroke-width: 1.6; }
-  .trust-points strong, .trust-points small{ display: block; }
-  .trust-points strong{ color: var(--navy-900); font-size: 1rem; font-weight: var(--weight-heading); line-height: 1.25; }
-  .trust-points small{ margin-top: .2rem; color: var(--slate-600); font-size: .84rem; line-height: 1.3; }
 
   .conversation-section{ padding-block: var(--section-standard); background: var(--canvas); }
   .conversation-layout{ border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); align-items: stretch; box-shadow: var(--shadow-raised); }
@@ -318,10 +295,6 @@ const trustPoints = [
   .conversation-content h2{ max-width: 24ch; margin-top: var(--space-4); color: var(--white); }
   .conversation-content > p:not(.eyebrow):not(.conversation-secondary){ max-width: 37rem; margin-top: var(--space-4); color: var(--text-on-dark); }
   .conversation-steps{ display: grid; margin: var(--space-6) 0 0; padding: 0; gap: var(--space-5); list-style: none; }
-  .conversation-steps li{ display: grid; grid-template-columns: 2.4rem minmax(0,1fr); gap: var(--space-3); }
-  .conversation-steps > li > span{ padding-top: .15rem; color: var(--accent-on-dark-soft); font-size: .82rem; font-weight: var(--weight-bold); letter-spacing: .08em; }
-  .conversation-steps h3{ color: var(--white); font-size: 1.2rem; }
-  .conversation-steps p{ max-width: 33rem; margin-top: .35rem; color: var(--text-soft-on-dark); font-size: .96rem; line-height: 1.45; }
   .conversation-actions{ margin-top: var(--space-6); }
   .conversation-actions .button{ gap: var(--button-gap); }
   .conversation-actions :global(svg){ width: 1.05rem; height: 1.05rem; }
@@ -368,8 +341,6 @@ const trustPoints = [
     .daily-list li{ align-items: start; font-size: .9rem; }
     .daily-list :global(svg){ width: 1.35rem; height: 1.35rem; }
     .trust-panorama{ aspect-ratio: 2.25 / 1; margin-top: var(--space-7); }
-    .trust-points{ grid-template-columns: 1fr; gap: var(--space-4); }
-    .trust-points li{ justify-content: flex-start; }
     .trust-section__actions{ display: grid; }
     .trust-section__actions .button{ width: 100%; }
     .conversation-photo{ min-height: 21rem; }
@@ -380,6 +351,6 @@ const trustPoints = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .housing-fact p, .daily-scope, .conversation-steps p, .conversation-secondary { font-size: 1rem; line-height: 1.55; }
+    .housing-fact p, .daily-scope, .conversation-secondary { font-size: 1rem; line-height: 1.55; }
   }
 </style>

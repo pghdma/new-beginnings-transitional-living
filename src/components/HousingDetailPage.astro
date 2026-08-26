@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Hero from './Hero.astro';
+import FaqAccordion from './FaqAccordion.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from './CtaBand.astro';
 import { site } from '../data/site';
@@ -229,21 +230,7 @@ const galleryCopy = [
         <h2>Straight Answers for Residents, Families, and Referral Partners</h2>
         <p>If your question is about a specific bed or a specific person, call <a class="inline-link" href={site.phoneHref}>{site.phone}</a>. Everything else is here.</p>
       </div>
-      <div class="faq-groups">
-        {faqs.map((group) => (
-          <section class="faq-group" aria-labelledby={`faq-${group.title.toLowerCase().replaceAll(' ', '-')}`}>
-            <h3 id={`faq-${group.title.toLowerCase().replaceAll(' ', '-')}`}>{group.title}</h3>
-            <div class="faq-list">
-              {group.items.map((item) => (
-                <details>
-                  <summary>{item.question}<Icon name="lucide:plus" aria-hidden="true" /></summary>
-                  <p>{item.answer}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+      <FaqAccordion groups={faqs} />
     </div>
   </section>
 
@@ -320,15 +307,6 @@ const galleryCopy = [
   .faq-intro h2{ max-width: 24ch; margin-top: var(--space-4); }
   .faq-intro > p:last-child{ max-width: 35rem; margin-top: var(--space-5); }
   .faq-intro a{ font-weight: var(--weight-semibold); }
-  .faq-groups{ display: grid; gap: var(--space-7); }
-  .faq-group h3{ margin-bottom: var(--space-4); color: var(--teal-800); font-size: .85rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
-  .faq-list{ border-top: 1px solid var(--slate-300); }
-  .faq-list details{ border-bottom: 1px solid var(--slate-300); }
-  .faq-list summary{ display: grid; min-height: 4.75rem; padding: var(--space-5) 0; cursor: pointer; list-style: none; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--navy-900); font-size: 1.12rem; font-weight: var(--weight-heading); line-height: 1.35; }
-  .faq-list summary::-webkit-details-marker{ display: none; }
-  .faq-list summary :global(svg){ width: 1.2rem; height: 1.2rem; color: var(--teal-700); transition: transform .2s ease; }
-  .faq-list details[open] summary :global(svg){ transform: rotate(45deg); }
-  .faq-list details p{ max-width: 60ch; padding: 0 3rem var(--space-5) 0; color: var(--slate-600); }
 
 
   @media (max-width: 1080px) {
@@ -389,10 +367,6 @@ const galleryCopy = [
 
     .faq-intro h2{ max-width: 25ch; margin-top: var(--space-3); }
     .faq-intro > p:last-child{ margin-top: var(--space-4); }
-    .faq-groups{ gap: var(--space-6); }
-    .faq-list summary{ min-height: 4.5rem; padding: var(--space-4) 0; font-size: 1rem; }
-    .faq-list summary :global(svg){ width: 2rem; height: 2rem; padding: .4rem; border: 1px solid var(--icon-medallion-border); border-radius: 50%; background: var(--sky-100); }
-    .faq-list details p{ padding: 0 0 var(--space-5); }
 
   }
 
