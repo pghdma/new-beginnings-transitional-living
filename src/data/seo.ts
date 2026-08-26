@@ -103,7 +103,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
     pageName: 'Admissions',
     pageType: 'WebPage',
     image: '/images/social/admissions.jpg',
-    imageAlt: 'A welcoming teal front door at a residential home',
+    imageAlt: 'A sunlit living room sofa beside open windows',
     breadcrumbs: [home, { name: 'Admissions', path: '/admissions/' }],
   },
   '/referrals/': {

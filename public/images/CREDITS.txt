@@ -1,7 +1,6 @@
 Photography is licensed from Pexels and used as general editorial imagery. People shown are models or members of the public and are not identified as New Beginnings residents.
 
-og-default.jpg is a screenshot of the New Beginnings homepage using the licensed
-house-living-room.webp photography credited below.
+og-default.jpg is generated from the New Beginnings logo (client-provided vector) and site type; it contains no photography.
 
 The files in images/social/ are 1200 × 630 social-preview crops derived from the
 client-provided or licensed source photographs credited in this file. No generated
@@ -81,3 +80,5 @@ Leandro Peixoto: https://unsplash.com/photos/empty-dining-room-with-opened-frenc
 
 pittsburgh-rowhouses.webp
 Zhen Yao: https://unsplash.com/photos/a-row-of-multi-colored-houses-in-a-neighborhood-0bApZ0Yag0I
+
+admissions-hero.webp and social/admissions.jpg: "Inviting living room featuring a comfortable sofa with throw" by Ksu&Eli Studio, Pexels, https://www.pexels.com/photo/sofa-with-throw-pillows-near-glass-window-9116530/ (Pexels license).
