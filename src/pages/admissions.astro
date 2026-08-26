@@ -25,8 +25,8 @@ const nextSteps = [
         </div>
         <div class="aside-card aside-card--call">
           <p class="eyebrow">Rather just talk?</p>
+          <p>You don’t need to fill anything out first. Susan or staff will answer your questions and tell you what’s open.</p>
           <a class="button button--light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
-          <p>You don’t need to fill anything out first.</p>
         </div>
         <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
       </aside>
@@ -46,10 +46,10 @@ const nextSteps = [
   .apply__aside :global(.steps--circle h3) { font-size: .95rem; }
   .aside-note { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--slate-200); color: var(--slate-600); font-size: .9rem; line-height: 1.45; }
   .aside-card--call { color: var(--white); background: var(--navy-950); border-color: var(--navy-950); }
-  .aside-card--call .eyebrow { color: var(--accent-on-dark); }
-  .aside-card--call .button { width: fit-content; min-height: 2.75rem; padding: .6rem 1rem; gap: var(--button-gap); font-size: .95rem; }
+  .aside-card--call .eyebrow { margin-bottom: var(--space-2); color: var(--accent-on-dark); }
+  .aside-card--call .button { width: 100%; min-height: 2.75rem; margin-top: var(--space-4); padding: .6rem 1rem; gap: var(--button-gap); font-size: .95rem; }
   .aside-card--call .button :global(svg) { width: 1rem; height: 1rem; }
-  .aside-card--call p:last-child { margin-top: var(--space-2); color: var(--sky-200); font-size: .9rem; }
+  .aside-card--call p:not(.eyebrow) { color: var(--sky-100); font-size: .9rem; line-height: 1.5; }
   .privacy-note { max-width: 60ch; color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
   .privacy-note a { color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; }
 
@@ -59,7 +59,7 @@ const nextSteps = [
   }
 
   @media (max-width: 900px) {
-    .aside-note, .aside-card--call p:last-child, .privacy-note, .apply__aside :global(.steps--circle p) { font-size: 1rem; }
+    .aside-note, .aside-card--call p:not(.eyebrow), .privacy-note, .apply__aside :global(.steps--circle p) { font-size: 1rem; }
   }
 
   @media (max-width: 760px) {
