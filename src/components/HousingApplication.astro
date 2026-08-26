@@ -19,7 +19,7 @@ const nextSteps = [
     </header>
 
     <div class="application-layout">
-      <form data-housing-application novalidate>
+      <form class="form" data-housing-application novalidate>
         <nav class="form-progress" aria-label="Application progress">
           <ol>
             <li class="is-current" data-progress-step="1" aria-current="step"><span>1</span><strong>Primary Contact</strong></li>
@@ -355,54 +355,10 @@ const nextSteps = [
   .step-label{ color: var(--teal-700); font-size: .8rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
   .form-section > legend strong{ font-family: var(--font-display); font-size: var(--type-section-sm); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.15; }
   .section-intro{ max-width: 58ch; margin-top: calc(var(--space-4) * -1); color: var(--slate-600); }
-  .req{ color: var(--error); font-weight: var(--weight-bold); }
-  .visually-hidden{ position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; border: 0; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  /* Fields */
   .form-grid{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
   .form-grid > label{ align-content: start; }
   .applicant-fields[hidden]{ display: none; }
-  label, .choice-group > legend{ color: var(--navy-900); font-size: var(--form-label-size); font-weight: var(--weight-semibold); }
-  label{ display: grid; gap: var(--space-2); }
-  .field-label small, label > small{ color: var(--slate-600); font-size: .92em; font-weight: var(--weight-regular); }
-  input:not([type="radio"]):not([type="checkbox"]), select, textarea{ width: 100%; min-height: var(--control-min-height); padding: .78rem .9rem; border: var(--control-border); border-radius: var(--control-radius); background: var(--white); color: var(--navy-900); }
-  input:not([type="radio"]):not([type="checkbox"]):hover, select:hover, textarea:hover{ border-color: var(--slate-700); }
-  input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus{ border-color: var(--teal-700); outline: 0; box-shadow: var(--focus-ring); }
-  select{ appearance: none; padding-right: 2.6rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23364c56' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .9rem center; background-size: 1.1rem; }
-  textarea{ min-height: 9rem; resize: vertical; }
-  [aria-invalid="true"]:not([type="radio"]):not([type="checkbox"]){ border-color: var(--error); box-shadow: inset 0 0 0 1px var(--error); }
-  /* Error messages are created by script, so they need :global to pick up scoped styles. */
-  form :global(.field-error){ display: flex; margin: 0; align-items: flex-start; gap: .45rem; color: var(--error); font-size: var(--form-help-size); font-weight: var(--weight-semibold); line-height: 1.4; }
-  form :global(.field-error svg){ width: 1.05rem; height: 1.05rem; margin-top: .1rem; flex: 0 0 auto; }
-  .choice-group.has-error{ padding-left: var(--space-4); border-left: 3px solid var(--error); }
-
-  /* Choice cards */
-  .choice-group{ display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-3); }
-  .choice-group > legend{ padding: 0; }
-  .choice-grid{ display: grid; gap: var(--space-3); }
-  .choice-grid--three{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .choice-grid--two{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .choice{ position: relative; display: flex; min-height: 5.25rem; padding: var(--space-4); border: var(--control-border); border-radius: var(--radius); background: var(--white); cursor: pointer; align-items: flex-start; gap: var(--space-3); transition: border-color .12s ease, background .12s ease, box-shadow .12s ease; }
-  .choice:hover{ border-color: var(--teal-700); }
-  .choice:focus-within{ border-color: var(--teal-700); box-shadow: var(--focus-ring); }
-  .choice:has(input:checked){ border-color: var(--teal-700); background: var(--sky-100); box-shadow: inset 0 0 0 1px var(--teal-700); }
-  .choice:has(input:checked) strong{ color: var(--teal-800); }
-  .choice input{ width: 1.2rem; height: 1.2rem; margin: .1rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
-  .choice input:focus-visible{ outline: 0; }
-  .choice span{ display: grid; gap: var(--space-1); }
-  .choice strong{ color: var(--navy-900); font-size: 1rem; font-weight: var(--weight-semibold); line-height: 1.25; }
-  .choice small{ color: var(--slate-600); font-size: .92rem; font-weight: var(--weight-regular); line-height: 1.4; }
-  .compact-choices{ max-width: 31rem; }
-  .compact-choices .choice{ min-height: 0; align-items: center; }
-  .field-guidance{ max-width: 60ch; margin-top: calc(var(--space-4) * -1); color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
-  .check-list{ display: grid; gap: var(--space-3); }
-  .check-choice{ display: flex; padding: var(--space-4); border: var(--control-border); border-radius: var(--radius); background: var(--white); align-items: flex-start; gap: var(--space-3); cursor: pointer; }
-  .check-choice:has(input:checked){ border-color: var(--teal-700); background: var(--sky-100); }
-  .check-choice input{ width: 1.2rem; height: 1.2rem; margin: .15rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
-  .check-choice > span{ min-width: 0; color: var(--navy-900); font-weight: var(--weight-medium); line-height: 1.45; flex: 1 1 0; }
-  .check-choice.has-error{ border-color: var(--error); }
-  .check-choice :global(.field-error){ width: 100%; margin-top: var(--space-2); flex-basis: 100%; }
-  .check-choice{ flex-wrap: wrap; }
 
   /* Actions */
   .step-actions{ display: flex; padding-top: var(--space-6); border-top: 1px solid var(--slate-200); align-items: center; gap: var(--space-3); }
@@ -411,15 +367,7 @@ const nextSteps = [
   .button-secondary{ border: 1px solid var(--navy-900); background: transparent; color: var(--navy-900); }
   .button-secondary:hover{ background: var(--sky-100); color: var(--navy-900); }
   .submission-area{ display: grid; gap: var(--space-5); }
-  .verification{ display: grid; min-width: 0; }
-  .cf-turnstile{ width: 100%; max-width: 20rem; min-height: 65px; }
   .step-actions--submit{ flex-wrap: wrap; }
-  button:disabled{ cursor: wait; opacity: .72; }
-  .trap{ position: absolute; left: -9999px; }
-  .status{ max-width: 40rem; min-height: 1.5em; margin: 0; color: var(--navy-800); font-size: var(--form-status-size); font-weight: var(--weight-heading); }
-  .status:empty{ display: none; }
-  .status[data-state="error"]{ color: var(--error); }
-  .status[data-state="success"]{ color: var(--success); }
 
   /* Side rail */
   .application-aside{ position: sticky; top: var(--sticky-offset-compact); display: grid; gap: var(--space-5); }
@@ -431,8 +379,6 @@ const nextSteps = [
   .aside-card--call .button{ width: 100%; gap: var(--button-gap); }
   .aside-card--call .button :global(svg){ width: 1rem; height: 1rem; }
   .aside-card--call p:last-child{ margin-top: var(--space-3); color: var(--sky-200); font-size: .95rem; }
-  .privacy-note{ max-width: 60ch; color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
-  .privacy-note a{ color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; }
 
   @media (max-width: 1080px) {
     .application-layout{ grid-template-columns: 1fr; }
@@ -448,7 +394,6 @@ const nextSteps = [
     .form-progress li:not(:last-child)::after{ display: none; }
     .form-progress li strong{ padding-right: 0; font-size: .85rem; }
     .form-section{ padding: var(--space-6); gap: var(--space-5); }
-    .choice-grid--three{ grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -457,10 +402,8 @@ const nextSteps = [
     .form-section{ padding: var(--space-5); }
     .form-section > legend{ padding-top: var(--space-5); }
     .form-grid, .choice-grid--two{ grid-template-columns: 1fr; }
-    .choice{ min-height: 0; }
     .step-actions{ display: grid; grid-template-columns: 1fr; }
     .step-actions .button{ width: 100%; }
-    .cf-turnstile{ max-width: none; }
     .aside-card{ padding: var(--space-5); }
   }
   @media (max-width: 900px) {

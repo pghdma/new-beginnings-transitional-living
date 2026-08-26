@@ -18,7 +18,7 @@ const buttonLabel = 'Send Message';
     <p class="form-required-note">All fields are required unless marked optional.</p>
   </header>
 
-  <form data-contact-form data-context="contact" novalidate>
+  <form class="form" data-contact-form data-context="contact" novalidate>
     <label>
       Full Name
       <input required autocomplete="name" name="name" maxlength="200" />
@@ -182,67 +182,12 @@ const buttonLabel = 'Send Message';
     gap: var(--space-4);
   }
 
-  label{
-    display: grid;
-    gap: var(--space-2);
-    color: var(--navy-900);
-    font-size: var(--form-label-size);
-    font-weight: var(--weight-semibold);
-  }
-
-  .field-label{
-    color: inherit;
-    font: inherit;
-  }
-
-  .field-label small{
-    color: var(--slate-500);
-    font-size: .84rem;
-    font-weight: var(--weight-medium);
-  }
-
-  input,
-  select,
-  textarea{
-    width: 100%;
-    min-height: var(--control-min-height);
-    padding: .78rem .9rem;
-    border: var(--control-border);
-    border-radius: var(--control-radius);
-    background: var(--white);
-    color: var(--slate-700);
-  }
-
-  textarea{
-    min-height: 9rem;
-    resize: vertical;
-  }
-
   input:focus,
   select:focus,
   textarea:focus{
     border-color: var(--teal-700);
     box-shadow: var(--focus-ring-soft);
     outline: 0;
-  }
-
-  .privacy-note{
-    max-width: 62ch;
-    color: var(--slate-600);
-    font-size: var(--form-help-size);
-    line-height: 1.5;
-  }
-
-  .privacy-note a{
-    color: var(--blue-700);
-    font-weight: var(--weight-semibold);
-    text-decoration: underline;
-  }
-
-  .verification{
-    display: grid;
-    min-width: 0;
-    gap: var(--space-2);
   }
 
   .verification > p{
@@ -259,31 +204,6 @@ const buttonLabel = 'Send Message';
   button{
     width: fit-content;
     min-width: 10.5rem;
-  }
-
-  button:disabled{
-    cursor: wait;
-    opacity: .72;
-  }
-
-  .trap{
-    position: absolute;
-    left: -9999px;
-  }
-
-  .status{
-    min-height: 1.5em;
-    color: var(--navy-800);
-    font-size: var(--form-status-size);
-    font-weight: var(--weight-heading);
-  }
-
-  .status[data-state="error"]{
-    color: var(--error);
-  }
-
-  .status[data-state="success"]{
-    color: var(--success);
   }
 
   @media (max-width: 480px) {

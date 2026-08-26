@@ -1,5 +1,6 @@
 @import '@fontsource-variable/source-sans-3';
 @import '@fontsource-variable/libre-franklin';
+@import './forms.css';
 
 :root {
   --font-body: 'Source Sans 3 Variable', 'Open Sans', Arial, sans-serif;
