@@ -37,16 +37,19 @@ const nextSteps = [
 <style>
   /* The page is the form: the card plus a sticky rail, sized to sit within a laptop screen below the header. */
   .apply { display: grid; min-height: calc(100svh - var(--header-total-height)); padding-block: var(--space-4) var(--space-7); align-content: center; background: var(--sky-50); }
-  .apply__layout { display: grid; grid-template-columns: minmax(0, 1fr) 19rem; gap: clamp(var(--space-5), 3vw, var(--space-7)); align-items: start; }
-  .apply__aside { position: sticky; top: calc(var(--header-total-height) + var(--space-4)); display: grid; gap: var(--space-4); }
-  .aside-card { padding: var(--space-5) var(--space-6); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); }
-  .aside-card .eyebrow { margin-bottom: var(--space-4); }
-  .aside-note { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--slate-200); color: var(--slate-600); font-size: .95rem; line-height: 1.5; }
+  .apply__layout { display: grid; grid-template-columns: minmax(0, 1fr) 21rem; gap: clamp(var(--space-5), 3vw, var(--space-7)); align-items: stretch; }
+  .apply__aside { position: sticky; align-self: start; top: calc(var(--header-total-height) + var(--space-4)); display: grid; gap: var(--space-4); }
+  .aside-card { padding: var(--space-5); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); }
+  .aside-card .eyebrow { margin-bottom: var(--space-3); }
+  .apply__aside :global(.steps--circle) { gap: var(--space-3); }
+  .apply__aside :global(.steps--circle p) { margin-top: .1rem; font-size: .9rem; line-height: 1.45; }
+  .apply__aside :global(.steps--circle h3) { font-size: .95rem; }
+  .aside-note { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--slate-200); color: var(--slate-600); font-size: .9rem; line-height: 1.45; }
   .aside-card--call { color: var(--white); background: var(--navy-950); border-color: var(--navy-950); }
   .aside-card--call .eyebrow { color: var(--accent-on-dark); }
   .aside-card--call .button { width: 100%; gap: var(--button-gap); }
   .aside-card--call .button :global(svg) { width: 1rem; height: 1rem; }
-  .aside-card--call p:last-child { margin-top: var(--space-3); color: var(--sky-200); font-size: .95rem; }
+  .aside-card--call p:last-child { margin-top: var(--space-2); color: var(--sky-200); font-size: .9rem; }
   .privacy-note { max-width: 60ch; color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
   .privacy-note a { color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; }
 
@@ -56,7 +59,7 @@ const nextSteps = [
   }
 
   @media (max-width: 900px) {
-    .aside-note, .aside-card--call p:last-child, .privacy-note { font-size: 1rem; }
+    .aside-note, .aside-card--call p:last-child, .privacy-note, .apply__aside :global(.steps--circle p) { font-size: 1rem; }
   }
 
   @media (max-width: 760px) {
