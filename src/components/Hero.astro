@@ -1,0 +1,201 @@
+---
+/**
+ * Hero — the one hero for the whole site.
+ *
+ * variant="image"     full-bleed photo behind the copy (Home, About, Credentials, Contact)
+ * variant="split"     copy on the left, photo (or `aside` slot) on the right; photo goes
+ *                     behind the copy on phones (housing pages, Professionals, Admissions, Support)
+ * variant="centered"  centered copy with a contained `media` slot below (Board)
+ *
+ * Slots: default (meta lines under the lead), actions, aside (split), media (centered).
+ * Size, height, and tone are the only knobs; everything else comes from tokens.
+ */
+interface HeroImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  position?: string;
+  positionMobile?: string;
+}
+
+interface Props {
+  variant?: 'image' | 'split' | 'centered';
+  eyebrow: string;
+  title: string;
+  titleId?: string;
+  lead?: string;
+  image?: HeroImage;
+  size?: 'xl' | 'lg' | 'md' | 'sm';
+  height?: 'viewport' | 'tall' | 'medium' | 'short' | 'auto';
+  align?: 'left' | 'center';
+  tone?: 'navy' | 'paper';
+  labelledBy?: boolean;
+}
+
+const {
+  variant = 'image',
+  eyebrow,
+  title,
+  titleId,
+  lead,
+  image,
+  size = variant === 'split' ? 'sm' : 'lg',
+  height = variant === 'split' ? 'auto' : 'medium',
+  align = 'left',
+  tone = 'navy',
+} = Astro.props;
+
+const hasAside = Astro.slots.has('aside');
+const style = [
+  image?.position ? `--hero-image-position: ${image.position}` : '',
+  image?.positionMobile ? `--hero-image-position-mobile: ${image.positionMobile}` : '',
+].filter(Boolean).join('; ') || undefined;
+---
+
+<section
+  class:list={['hero', `hero--${variant}`, `hero--${size}`, `hero--${height}`, `hero--${align}`, `hero--${tone}`, { 'hero--has-aside': hasAside }]}
+  aria-labelledby={titleId}
+  style={style}
+>
+  {variant === 'image' && image && (
+    <>
+      <img class="hero__image" src={image.src} alt={image.alt} width={image.width} height={image.height} fetchpriority="high" />
+      <div class="hero__shade" aria-hidden="true"></div>
+    </>
+  )}
+
+  <div class:list={['container', variant === 'split' ? 'hero__grid' : 'hero__inner']}>
+    <div class="hero__copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 id={titleId}>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      {Astro.slots.has('actions') && <div class="actions hero__actions"><slot name="actions" /></div>}
+      {Astro.slots.has('default') && <div class="hero__meta"><slot /></div>}
+    </div>
+
+    {variant === 'split' && hasAside && <div class="hero__aside"><slot name="aside" /></div>}
+    {variant === 'split' && !hasAside && image && (
+      <figure class="hero__photo">
+        <img src={image.src} alt={image.alt} width={image.width} height={image.height} fetchpriority="high" />
+      </figure>
+    )}
+    {variant === 'centered' && Astro.slots.has('media') && <figure class="hero__media"><slot name="media" /></figure>}
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; color: var(--white); background: var(--navy-950); }
+  .hero .eyebrow { color: var(--accent-on-image); }
+  .hero h1 { max-width: 26ch; margin-top: var(--space-4); color: var(--white); }
+  .hero--xl h1 { font-size: var(--type-display-xl); }
+  .hero--lg h1 { font-size: var(--type-display-lg); }
+  .hero--md h1 { font-size: var(--type-display-md); }
+  .hero--sm h1 { font-size: var(--type-display-sm); }
+  .hero .lead { max-width: 39rem; margin-top: var(--space-5); color: var(--text-on-dark); }
+  .hero__actions { margin-top: var(--space-6); }
+  .hero__actions :global(.button) { gap: var(--button-gap); }
+  .hero__actions :global(.button svg) { width: 1.05rem; height: 1.05rem; }
+  .hero__actions :global(.button--outline) { border-color: var(--outline-on-dark); color: var(--white); background: rgba(var(--ink-rgb), .24); }
+  .hero__actions :global(.button--outline:hover) { border-color: var(--white); color: var(--navy-950); background: var(--white); }
+  .hero__meta { margin-top: var(--space-6); }
+  .hero__meta > :global(p) { display: flex; max-width: 38rem; align-items: flex-start; gap: var(--button-gap); color: var(--text-muted-on-dark); font-size: 1rem; line-height: 1.5; }
+  .hero__meta > :global(p svg) { width: 1.1rem; height: 1.1rem; margin-top: .15rem; color: var(--accent-on-image); flex: 0 0 auto; stroke-width: 1.7; }
+
+  /* Image family */
+  .hero--image { display: grid; overflow: hidden; align-items: center; isolation: isolate; }
+  .hero__image, .hero__shade { position: absolute; width: 100%; height: 100%; inset: 0; }
+  .hero__image { z-index: 0; object-fit: cover; object-position: var(--hero-image-position, center); filter: var(--photo-filter); }
+  .hero__shade { z-index: 1; background: var(--hero-shade-side); pointer-events: none; }
+  .hero--center .hero__shade { background: var(--hero-shade-center); }
+  .hero--image .hero__inner { position: relative; z-index: 2; padding-block: var(--section-hero); }
+  .hero--image .hero__copy { max-width: 43rem; }
+  .hero--image.hero--xl .hero__copy { max-width: 48rem; }
+  .hero--image.hero--viewport { min-height: clamp(42rem, calc(100svh - var(--header-total-height)), 50rem); }
+  .hero--image.hero--tall { min-height: clamp(35rem, 72vh, 48rem); }
+  .hero--image.hero--medium { min-height: clamp(29rem, 48vw, 34rem); }
+  .hero--image.hero--short { min-height: clamp(25rem, 31vw, 29rem); }
+  .hero--center .hero__copy { display: grid; max-width: 52rem; margin-inline: auto; justify-items: center; gap: var(--space-4); text-align: center; }
+  .hero--center h1, .hero--center .lead { margin-top: 0; margin-inline: auto; }
+  .hero--center .lead { max-width: 45rem; }
+  .hero--center .hero__actions, .hero--center .hero__meta { margin-top: var(--space-2); justify-content: center; }
+
+  /* Split family */
+  .hero--split .hero__grid { display: grid; min-height: clamp(35rem, 51vw, 43rem); grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: stretch; }
+  .hero--split.hero--viewport .hero__grid { min-height: clamp(34rem, calc(100svh - var(--header-total-height)), 48rem); }
+  .hero--split .hero__copy { display: flex; padding: var(--section-hero) clamp(2.5rem, 6vw, 5rem) var(--section-hero) 0; flex-direction: column; justify-content: center; }
+  .hero--split .lead { max-width: 36rem; }
+  .hero__photo { position: relative; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
+  .hero__photo img { position: absolute; width: 100%; height: 100%; inset: 0; object-fit: cover; object-position: var(--hero-image-position, center); filter: var(--photo-filter); }
+  .hero--has-aside { padding-block: var(--section-hero); }
+  .hero--has-aside .hero__grid { min-height: 0; grid-template-columns: minmax(0, .82fr) minmax(32rem, 1.18fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
+  .hero--has-aside .hero__copy { padding: 0; }
+  .hero__aside { min-width: 0; }
+  .hero--paper { color: var(--navy-900); background: var(--paper); border-bottom: 1px solid var(--slate-200); }
+  .hero--paper .eyebrow { color: var(--teal-700); }
+  .hero--paper h1 { color: var(--navy-900); }
+  .hero--paper .lead { color: var(--slate-800); }
+  .hero--paper .hero__meta > :global(p) { color: var(--slate-600); }
+  .hero--paper .hero__meta > :global(p svg) { color: var(--teal-700); }
+  .hero--paper .hero__actions :global(.button--outline) { border-color: var(--navy-950); color: var(--navy-950); background: transparent; }
+  .hero--paper .hero__actions :global(.button--outline:hover) { color: var(--white); background: var(--navy-950); }
+
+  /* Centered family */
+  .hero--centered { overflow: hidden; padding-block: clamp(4.75rem, 8vw, 7.5rem) 0; background: linear-gradient(to bottom, var(--navy-950) 0 78%, var(--canvas) 78% 100%); }
+  .hero--centered .hero__inner { display: grid; gap: clamp(3rem, 6vw, 5.5rem); }
+  .hero--centered .hero__copy { display: grid; max-width: 47rem; margin-inline: auto; justify-items: center; gap: var(--space-5); text-align: center; }
+  .hero--centered .eyebrow { color: var(--accent-on-dark); }
+  .hero--centered h1 { margin-top: 0; line-height: 1.02; }
+  .hero--centered .lead { margin-top: 0; color: var(--sky-100); }
+  .hero--centered .hero__actions { margin-top: var(--space-2); justify-content: center; }
+  .hero__media { position: relative; min-height: clamp(20rem, 38vw, 31rem); margin: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--slate-200); box-shadow: var(--shadow-deep); }
+  .hero__media :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: var(--hero-image-position, center 62%); }
+
+  @media (max-width: 1080px) {
+    .hero--image.hero--viewport { min-height: 43rem; }
+    .hero__shade { background: var(--hero-shade-side-narrow); }
+    .hero--center .hero__shade { background: var(--hero-shade-center); }
+    .hero--has-aside .hero__grid { max-width: 47rem; grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 900px) {
+    .hero--split { overflow: hidden; color: var(--white); background: var(--navy-950); border-bottom: 0; }
+    .hero--split .eyebrow { color: var(--accent-on-image); }
+    .hero--split h1 { color: var(--white); }
+    .hero--split .lead { color: var(--text-on-dark); }
+    .hero--split .hero__meta > :global(p) { color: var(--text-muted-on-dark); }
+    .hero--split .hero__meta > :global(p svg) { color: var(--accent-on-image); }
+    .hero--split .hero__grid { display: block; min-height: 0; }
+    .hero__photo { position: absolute; z-index: 0; margin: 0; inset: 0; }
+    .hero__photo img { object-position: var(--hero-image-position-mobile, center 40%); }
+    .hero__photo::after { position: absolute; background: var(--hero-shade-bottom); content: ''; inset: 0; }
+    .hero--split:not(.hero--has-aside) .hero__copy { position: relative; z-index: 1; min-height: clamp(30rem, 82svh, 38rem); padding: 4rem 0 2.75rem; justify-content: flex-end; }
+    .hero--split.hero--viewport:not(.hero--has-aside) .hero__copy { min-height: clamp(34rem, calc(100svh - var(--header-total-height)), 44rem); }
+    .hero--split .hero__actions :global(.button--outline) { border-color: var(--outline-on-dark); color: var(--white); background: rgba(var(--ink-rgb), .24); }
+    .hero--has-aside .hero__aside { margin-top: var(--space-7); }
+  }
+
+  @media (max-width: 760px) {
+    .hero h1 { font-size: clamp(2.75rem, 11.5vw, 3.45rem); }
+    .hero--sm h1 { font-size: clamp(2.5rem, 9vw, 3.1rem); }
+    .hero__actions { display: grid; }
+    .hero__actions :global(.button) { width: 100%; }
+    .hero--image { align-items: end; }
+    .hero--image .hero__inner { padding-block: var(--space-8); }
+    .hero__image { object-position: var(--hero-image-position-mobile, 62% center); }
+    .hero__shade { background: var(--hero-shade-bottom); }
+    .hero--image.hero--viewport { min-height: clamp(38rem, calc(100svh - 5rem), 44rem); }
+    .hero--image.hero--tall, .hero--image.hero--medium { min-height: 32rem; }
+    .hero--image.hero--short { min-height: 25rem; }
+    .hero--center { align-items: center; }
+    .hero--center .hero__shade { background: var(--hero-shade-center-narrow); }
+    .hero--center .hero__inner { padding-block: 3.5rem; }
+    .hero--has-aside { padding-block: var(--space-8); }
+    .hero--centered { padding-top: var(--space-8); background: linear-gradient(to bottom, var(--navy-950) 0 84%, var(--canvas) 84% 100%); }
+    .hero--centered .hero__inner { gap: var(--space-8); }
+    .hero--centered .hero__copy { justify-items: start; text-align: left; }
+    .hero--centered .hero__actions { justify-content: flex-start; }
+    .hero__media { min-height: 0; aspect-ratio: 4 / 3; }
+    .hero__media :global(img) { object-position: var(--hero-image-position-mobile, 52% center); }
+  }
+</style>

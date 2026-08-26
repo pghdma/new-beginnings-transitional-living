@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Hero from '../../../components/Hero.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { currentBoardMembers } from '../../../data/leadership';
 
@@ -34,32 +35,18 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   title="Board of Directors"
   description="Meet the board responsible for New Beginnings Transitional Living Foundation, a Pittsburgh nonprofit that runs licensed recovery housing for men and women."
 >
-  <section class="board-hero">
-    <div class="container board-hero__inner">
-      <div class="board-hero__copy">
-        <p class="eyebrow">Board of Directors</p>
-        <h1>The People Responsible for New Beginnings</h1>
-        <p class="lead">
-          New Beginnings is a public charity, which means it answers to a board, files with
-          the IRS, and keeps its standing public. These are the people who hold that responsibility.
-        </p>
-        <a class="button button--light" href="#meet-the-board">
-          Meet the Board
-          <Icon name="lucide:arrow-down" aria-hidden="true" />
-        </a>
-      </div>
-
-      <figure class="board-hero__media">
-        <img
-          src="/images/community-table.jpg"
-          alt="An empty meeting table and chairs ready for a working conversation"
-          width="1880"
-          height="1253"
-          fetchpriority="high"
-        />
-      </figure>
-    </div>
-  </section>
+  <Hero
+    variant="centered"
+    size="lg"
+    eyebrow="Board of Directors"
+    title="The People Responsible for New Beginnings"
+    lead="New Beginnings is a public charity, which means it answers to a board, files with the IRS, and keeps its standing public. These are the people who hold that responsibility."
+  >
+    <Fragment slot="actions">
+      <a class="button button--light" href="#meet-the-board">Meet the Board<Icon name="lucide:arrow-down" aria-hidden="true" /></a>
+    </Fragment>
+    <img slot="media" src="/images/community-table.jpg" alt="An empty meeting table and chairs ready for a working conversation" width="1880" height="1253" fetchpriority="high" />
+  </Hero>
 
   <section class="board-role" aria-labelledby="board-role-title">
     <div class="container">
@@ -192,69 +179,20 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   </section>
 </MainLayout>
 <style>
-  .board-hero{
-    overflow: hidden;
-    padding-block: clamp(4.75rem, 8vw, 7.5rem) 0;
-    color: var(--white);
-    background: linear-gradient(to bottom, var(--navy-950) 0 78%, var(--canvas) 78% 100%);
-  }
 
-  .board-hero__inner{
-    display: grid;
-    gap: clamp(3rem, 6vw, 5.5rem);
-  }
 
-  .board-hero__copy{
-    display: grid;
-    max-width: 47rem;
-    margin-inline: auto;
-    justify-items: center;
-    gap: var(--space-5);
-    text-align: center;
-  }
 
-  .board-hero .eyebrow{ color: var(--accent-on-dark); }
 
-  .board-hero h1{
-    max-width: 26ch;
-    color: var(--white);
-    font-size: var(--type-display-lg);
-    line-height: 1.02;
-  }
 
-  .board-hero .lead{
-    max-width: 39rem;
-    color: var(--sky-100);
-  }
 
-  .board-hero .button{
-    width: fit-content;
-    margin-top: var(--space-2);
-    gap: var(--space-2);
-  }
 
-  .board-hero .button :global(svg),
   .member .button :global(svg),
   .public-record .button :global(svg){
     width: 1rem;
     height: 1rem;
   }
 
-  .board-hero__media{ border-radius: var(--radius-md);
-    position: relative;
-    min-height: clamp(20rem, 38vw, 31rem);
-    margin: 0;
-    overflow: hidden;
-    background: var(--slate-200);
-    box-shadow: var(--shadow-deep);
-  }
 
-  .board-hero__media img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 62%;
-  }
 
   .board-role{
     padding-block: var(--section-standard);
@@ -646,16 +584,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   }
 
   @media (max-width: 760px) {
-    .board-hero{
-      padding-top: var(--space-8);
-      background: linear-gradient(to bottom, var(--navy-950) 0 84%, var(--canvas) 84% 100%);
-    }
 
-    .board-hero__inner{ gap: var(--space-8); }
-    .board-hero__copy{ justify-items: start; text-align: left; }
-    .board-hero h1{ font-size: clamp(2.75rem, 12vw, 4.2rem); }
-    .board-hero__media{ min-height: 0; aspect-ratio: 4 / 3; }
-    .board-hero__media img{ object-position: 52% center; }
 
     .board-directory__grid,
     .board-directory__grid--two{
@@ -663,7 +592,6 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
       grid-template-columns: 1fr;
     }
 
-    .board-hero .button,
     .member__toggle,
     .public-record .button{
       width: 100%;

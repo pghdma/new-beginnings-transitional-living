@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Hero from '../components/Hero.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { currentBoardMembers, susanRua } from '../data/leadership';
 
@@ -68,32 +69,17 @@ const accountabilityProof = [
   title="About"
   description="New Beginnings is a Pittsburgh 501(c)(3) founded in 2016 by counselor Susan Rua to run safe, licensed recovery housing for men and women."
 >
-  <section class="about-hero">
-    <img
-      class="about-hero__image"
-      src="/images/pittsburgh-rowhouses.webp"
-      alt=""
-      width="1800"
-      height="1204"
-      fetchpriority="high"
-    />
-    <div class="about-hero__shade" aria-hidden="true"></div>
-    <div class="container about-hero__inner">
-      <div class="about-hero__copy">
-        <p class="eyebrow">About New Beginnings</p>
-        <h1>A Pittsburgh Nonprofit Running Sober Houses Since 2016</h1>
-        <p class="lead">
-          New Beginnings Transitional Living Foundation gives adults in recovery a safe,
-          substance-free home and the structure to stay that way. Licensed, inspected,
-          and run by people who know the work.
-        </p>
-        <p class="about-hero__origin">
-          <Icon name="lucide:map-pin" aria-hidden="true" />
-          Founded in Pittsburgh in 2016
-        </p>
-      </div>
-    </div>
-  </section>
+  <Hero
+    variant="image"
+    size="md"
+    height="medium"
+    eyebrow="About New Beginnings"
+    title="A Pittsburgh Nonprofit Running Sober Houses Since 2016"
+    lead="New Beginnings Transitional Living Foundation gives adults in recovery a safe, substance-free home and the structure to stay that way. Licensed, inspected, and run by people who know the work."
+    image={{ src: '/images/pittsburgh-rowhouses.webp', alt: '', width: 1800, height: 1204, position: 'center 54%', positionMobile: '58% center' }}
+  >
+    <p><Icon name="lucide:map-pin" aria-hidden="true" />Founded in Pittsburgh in 2016</p>
+  </Hero>
 
   <section class="purpose-section">
     <div class="container purpose-section__intro">
@@ -304,17 +290,6 @@ const accountabilityProof = [
   </section>
 </MainLayout>
 <style>
-  .about-hero{ position: relative; display: grid; min-height: clamp(29rem, 48vw, 34rem); overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
-  .about-hero__image, .about-hero__shade{ position: absolute; width: 100%; height: 100%; inset: 0; }
-  .about-hero__image{ object-fit: cover; object-position: center 54%; filter: var(--photo-filter); }
-  .about-hero__shade{ background: var(--hero-shade-bottom); }
-  .about-hero__inner{ position: relative; z-index: 1; padding-block: clamp(4.5rem, 7vw, 6.5rem); }
-  .about-hero__copy{ max-width: 43rem; }
-  .about-hero .eyebrow{ color: var(--accent-on-image); }
-  .about-hero h1{ max-width: 26ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-md); font-weight: var(--weight-heading); }
-  .about-hero .lead{ max-width: 38rem; margin-top: var(--space-5); color: var(--text-on-dark); }
-  .about-hero__origin{ display: flex; margin-top: var(--space-6); align-items: center; gap: var(--button-gap); color: var(--text-muted-on-dark); font-size: .93rem; }
-  .about-hero__origin :global(svg){ width: 1.1rem; height: 1.1rem; color: var(--accent-on-image); stroke-width: 1.7; }
 
   .purpose-section{ padding-block: var(--section-standard); background: var(--canvas); }
   .purpose-section__intro{ display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(var(--space-7), 8vw, 8rem); align-items: start; }
@@ -404,8 +379,6 @@ const accountabilityProof = [
   .board-preview .button :global(svg), .records-preview .button :global(svg){ width: 1rem; height: 1rem; }
 
   @media (max-width: 900px) {
-    .about-hero{ min-height: 31rem; }
-    .about-hero__shade{ background: var(--hero-shade-bottom); }
     .purpose-section__intro, .governance-section__intro{ grid-template-columns: 1fr; gap: var(--space-7); }
     .purpose-section__copy{ max-width: 44rem; }
     .purpose-gallery{ height: 20rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -424,11 +397,6 @@ const accountabilityProof = [
   }
 
   @media (max-width: 760px) {
-    .about-hero{ min-height: 32rem; align-items: end; }
-    .about-hero__image{ object-position: 58% center; }
-    .about-hero__shade{ background: var(--hero-shade-bottom); }
-    .about-hero__inner{ padding-block: var(--space-8); }
-    .about-hero h1{ font-size: clamp(2.75rem, 12vw, 3.55rem); }
     .purpose-gallery{ height: auto; grid-template-columns: 1fr; grid-template-rows: none; gap: var(--space-4); }
     .purpose-gallery__scene, .purpose-gallery__scene--primary{ aspect-ratio: 16 / 10; grid-row: auto; }
     .principles-band__visual{ aspect-ratio: 4 / 3; }
@@ -463,7 +431,7 @@ const accountabilityProof = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .about-hero__origin, .purpose-section__details p, .founder-profile__highlights li{ font-size: 1rem; line-height: 1.55; }
+    .purpose-section__details p, .founder-profile__highlights li { font-size: 1rem; line-height: 1.55; }
     .purpose-gallery__scene figcaption p{ font-size: 1rem; }
   }
 </style>

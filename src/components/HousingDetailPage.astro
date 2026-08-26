@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Hero from './Hero.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from './CtaBand.astro';
 import { site } from '../data/site';
@@ -102,27 +103,23 @@ const galleryCopy = [
 ---
 
 <MainLayout title={title} description={description} faq={faqSchema}>
-  <section class="housing-hero">
-    <div class="container housing-hero__grid">
-      <div class="housing-hero__copy">
-        <p class="eyebrow">Sober Living for {audienceTitle === 'Men’s' ? 'Men' : 'Women'} in Pittsburgh</p>
-        <h1>{heroTitle}</h1>
-        <p class="lead">{heroLead}</p>
-        <div class="actions housing-hero__actions">
-          <a class="button button--light" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button button--outline-light" href="#frequently-asked-questions">Read the FAQ</a>
-        </div>
-        <div class="housing-hero__facts" aria-label="Housing overview">
-          <span><Icon name="lucide:users-round" aria-hidden="true" />Adult {audienceLabel}</span>
-          <span><Icon name="lucide:house-heart" aria-hidden="true" />Substance-free shared house</span>
-          <span><Icon name="lucide:map-pin" aria-hidden="true" />Pittsburgh</span>
-        </div>
-      </div>
-      <figure class="housing-hero__media">
-        <img src={heroImage.src} alt={heroImage.alt} width={heroImage.width} height={heroImage.height} fetchpriority="high" />
-      </figure>
+  <Hero
+    variant="split"
+    eyebrow={`Sober Living for ${audienceTitle === 'Men’s' ? 'Men' : 'Women'} in Pittsburgh`}
+    title={heroTitle}
+    lead={heroLead}
+    image={heroImage}
+  >
+    <Fragment slot="actions">
+      <a class="button button--light" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      <a class="button button--outline-light" href="#frequently-asked-questions">Read the FAQ</a>
+    </Fragment>
+    <div class="housing-hero__facts" aria-label="Housing overview">
+      <span><Icon name="lucide:users-round" aria-hidden="true" />Adult {audienceLabel}</span>
+      <span><Icon name="lucide:house-heart" aria-hidden="true" />Substance-free shared house</span>
+      <span><Icon name="lucide:map-pin" aria-hidden="true" />Pittsburgh</span>
     </div>
-  </section>
+  </Hero>
 
   <section class="household-section">
     <div class="container">
@@ -259,19 +256,9 @@ const galleryCopy = [
 </MainLayout>
 <style>
   .housing-hero{ color: var(--white); background: var(--navy-950); }
-  .housing-hero__grid{ display: grid; min-height: clamp(35rem, 51vw, 43rem); grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: stretch; }
-  .housing-hero__copy{ display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2.5rem, 6vw, 5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
-  .housing-hero .eyebrow{ color: var(--accent-on-dark); }
-  .housing-hero h1{ max-width: 26ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-sm); }
-  .housing-hero .lead{ max-width: 35rem; margin-top: var(--space-5); color: var(--sky-100); }
-  .housing-hero__actions{ margin-top: var(--space-6); }
-  .housing-hero__actions .button{ gap: var(--button-gap); }
-  .housing-hero__actions :global(svg){ width: 1rem; height: 1rem; }
   .housing-hero__facts{ display: flex; margin-top: var(--space-7); flex-wrap: wrap; gap: var(--space-3) var(--space-5); color: var(--sky-100); font-size: .92rem; font-weight: var(--weight-heading); }
   .housing-hero__facts span{ display: inline-flex; align-items: center; gap: .55rem; }
   .housing-hero__facts :global(svg){ width: 1.1rem; height: 1.1rem; color: var(--accent-on-dark); stroke-width: 1.65; }
-  .housing-hero__media{ margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
-  .housing-hero__media img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
 
   .household-section{ padding-block: var(--section-standard); background: var(--canvas); }
   .household-intro{ margin-bottom: var(--space-7); }
@@ -345,7 +332,6 @@ const galleryCopy = [
 
 
   @media (max-width: 1080px) {
-    .housing-hero__grid{ grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
     .household-stage{ grid-template-columns: minmax(15rem, .62fr) minmax(0, 1.38fr); }
     .decision-intro, .faq-intro{ position: static; }
     .decision-layout, .faq-layout{ grid-template-columns: 1fr; }
@@ -353,7 +339,6 @@ const galleryCopy = [
   }
 
   @media (max-width: 760px) {
-    .housing-hero__grid, .household-stage{ min-height: 0; grid-template-columns: 1fr; }
     .household-stage{ grid-template-areas: 'copy' 'photo'; }
     .household-section,
     .decision-section,
@@ -362,16 +347,6 @@ const galleryCopy = [
     .faq-section,
 
     .housing-hero{ position: relative; overflow: hidden; }
-    .housing-hero__grid{ display: block; }
-    .housing-hero__media{ position: absolute; z-index: 0; margin: 0; inset: 0; }
-    .housing-hero__media img{ object-position: center 40%; }
-    .housing-hero__media::after{ position: absolute; background: var(--hero-shade-bottom); content: ''; inset: 0; }
-    .housing-hero__copy{ position: relative; z-index: 1; min-height: clamp(30rem, 82svh, 38rem); padding-block: 4rem 2.75rem; justify-content: flex-end; }
-    .housing-hero h1{ max-width: 26ch; margin-top: var(--space-3); font-size: clamp(2.5rem, 7vw, 3.25rem); line-height: 1.04; }
-    .housing-hero .lead{ margin-top: var(--space-4); font-size: 1.05rem; line-height: 1.5; }
-    .housing-hero__actions{ margin-top: var(--space-5); }
-    .housing-hero__actions{ display: grid; }
-    .housing-hero__actions .button{ width: 100%; }
     .housing-hero__facts{ display: grid; margin-top: var(--space-5); grid-template-columns: 1fr; gap: var(--space-2); font-size: .9rem; }
 
     .household-intro{ margin-bottom: var(--space-6); }

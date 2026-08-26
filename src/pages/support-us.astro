@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Hero from '../components/Hero.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -38,18 +39,16 @@ const impactLevels = [
 ---
 
 <MainLayout title="Donate" description="Help keep a sober house open in Pittsburgh. Give once or monthly to New Beginnings, a 501(c)(3) that runs licensed recovery housing for men and women.">
-  <section class="donate-hero" aria-labelledby="donate-title">
-    <div class="container donate-hero__grid">
-      <div class="donate-hero__copy">
-        <p class="eyebrow">Support New Beginnings</p>
-        <h1 id="donate-title">Help Keep a Sober House Open in Pittsburgh</h1>
-        <p class="lead">Rent covers some of it. Donations cover the rest: repairs, furniture, and a made-up bed for someone who arrives with nothing. Give once or monthly.</p>
-        <p class="donate-hero__reassurance">
-          <Icon name="lucide:badge-check" aria-hidden="true" />
-          New Beginnings is a 501(c)(3) public charity. Gifts are tax deductible as allowed by law.
-        </p>
-      </div>
-
+  <Hero
+    variant="split"
+    size="md"
+    titleId="donate-title"
+    eyebrow="Support New Beginnings"
+    title="Help Keep a Sober House Open in Pittsburgh"
+    lead="Rent covers some of it. Donations cover the rest: repairs, furniture, and a made-up bed for someone who arrives with nothing. Give once or monthly."
+  >
+    <p><Icon name="lucide:badge-check" aria-hidden="true" />New Beginnings is a 501(c)(3) public charity. Gifts are tax deductible as allowed by law.</p>
+    <Fragment slot="aside">
       <form
         class="donation-planner"
         id="donation-planner"
@@ -116,8 +115,8 @@ const impactLevels = [
             : 'Online giving is being set up. Until then, send us a note or call and we’ll arrange a one-time or monthly gift with you directly.'}
         </p>
       </form>
-    </div>
-  </section>
+    </Fragment>
+  </Hero>
 
   <section class="gift-impact" aria-labelledby="impact-title">
     <div class="container">
@@ -188,48 +187,12 @@ const impactLevels = [
   </section>
 </MainLayout>
 <style>
-  .donate-hero{
-    padding-block: var(--section-hero);
-    color: var(--white);
-    background: var(--navy-950);
-  }
 
-  .donate-hero__grid{
-    display: grid;
-    grid-template-columns: minmax(0, .82fr) minmax(32rem, 1.18fr);
-    gap: clamp(3rem, 8vw, 7rem);
-    align-items: center;
-  }
 
-  .donate-hero .eyebrow{ color: var(--accent-on-dark); }
 
-  .donate-hero h1{
-    max-width: 26ch;
-    margin-top: var(--space-4);
-    color: var(--white);
-    font-size: var(--type-display-md);
-  }
 
-  .donate-hero .lead{
-    max-width: 34rem;
-    margin-top: var(--space-5);
-    color: var(--sky-100);
-  }
 
-  .donate-hero__reassurance{
-    display: flex;
-    margin-top: var(--space-6);
-    align-items: center;
-    gap: var(--space-3);
-    color: var(--sky-200);
-    font-weight: var(--weight-heading);
-  }
 
-  .donate-hero__reassurance :global(svg){
-    width: 1.55rem;
-    height: 1.55rem;
-    color: var(--accent-on-dark);
-  }
 
   .donation-planner{
     display: grid;
@@ -530,18 +493,12 @@ const impactLevels = [
   .donation-trust__phone:hover{ color: var(--navy-950); background: var(--white); }
 
   @media (max-width: 1080px) {
-    .donate-hero__grid,
     .donation-trust__grid{ grid-template-columns: 1fr; }
-    .donate-hero__grid{ max-width: 47rem; }
-    .donate-hero__copy{ max-width: 40rem; }
     .donation-trust__grid{ gap: var(--space-7); }
     .donation-trust__heading h2{ max-width: 25ch; }
   }
 
   @media (max-width: 760px) {
-    .donate-hero{ padding-block: var(--space-8); }
-    .donate-hero__grid{ gap: var(--space-7); }
-    .donate-hero h1{ font-size: clamp(2.65rem, 12.2vw, 3.55rem); }
     .donation-planner{ padding: var(--space-5); gap: var(--space-5); }
     .amount-options{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .amount-options__other{ grid-column: 1 / -1; }

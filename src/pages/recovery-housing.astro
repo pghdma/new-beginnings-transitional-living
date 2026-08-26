@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Hero from '../components/Hero.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
@@ -33,23 +34,20 @@ const dailyRhythm = [
 ---
 
 <MainLayout title="Recovery Housing" description="What a sober living house is, how New Beginnings’ Pittsburgh recovery houses run, and what every resident can expect.">
-  <section class="housing-hero">
-    <div class="container housing-hero__grid">
-      <div class="housing-hero__copy">
-        <p class="eyebrow">Recovery Housing in Pittsburgh</p>
-        <h1>What a Sober Living House Actually Is</h1>
-        <p class="lead">Recovery housing, also called sober living or a recovery house, is a substance-free home where adults in recovery live together, follow house rules, and back each other up while getting on with life. Here’s how ours work.</p>
-        <div class="actions housing-hero__actions">
-          <a class="button" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button button--outline" href="/referrals/">For Professionals</a>
-        </div>
-        <p class="housing-hero__scope"><Icon name="lucide:house" aria-hidden="true" />Men’s houses in four neighborhoods and one women’s house</p>
-      </div>
-      <figure class="housing-hero__photo">
-        <img src="/images/house-living-room.webp" alt="A bright living room with shared seating" width="2200" height="1467" fetchpriority="high" />
-      </figure>
-    </div>
-  </section>
+  <Hero
+    variant="split"
+    tone="paper"
+    eyebrow="Recovery Housing in Pittsburgh"
+    title="What a Sober Living House Actually Is"
+    lead="Recovery housing, also called sober living or a recovery house, is a substance-free home where adults in recovery live together, follow house rules, and back each other up while getting on with life. Here’s how ours work."
+    image={{ src: '/images/house-living-room.webp', alt: 'A bright living room with shared seating', width: 2200, height: 1467 }}
+  >
+    <Fragment slot="actions">
+      <a class="button" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      <a class="button button--outline" href="/referrals/">For Professionals</a>
+    </Fragment>
+    <p class="housing-hero__scope"><Icon name="lucide:house" aria-hidden="true" />Men’s houses in four neighborhoods and one women’s house</p>
+  </Hero>
 
   <section class="definition-section">
     <div class="container definition-layout">
@@ -138,17 +136,8 @@ const dailyRhythm = [
 </MainLayout>
 <style>
   .housing-hero{ border-bottom: 1px solid var(--slate-200); background: var(--paper); }
-  .housing-hero__grid{ display: grid; min-height: clamp(35rem, 53vw, 44rem); grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr); align-items: stretch; }
-  .housing-hero__copy{ display: flex; padding: clamp(4.5rem, 8vw, 7rem) clamp(2rem, 5vw, 4.5rem) clamp(4.5rem, 8vw, 7rem) 0; flex-direction: column; justify-content: center; }
-  .housing-hero h1{ max-width: 26ch; margin-top: var(--space-4); font-size: var(--type-display-sm); }
-  .housing-hero .lead{ max-width: 35rem; margin-top: var(--space-5); }
-  .housing-hero__actions{ margin-top: var(--space-6); }
-  .housing-hero__actions .button{ gap: var(--button-gap); }
-  .housing-hero__actions :global(svg){ width: 1rem; height: 1rem; }
   .housing-hero__scope{ display: flex; width: fit-content; max-width: 32rem; margin-top: var(--space-7); padding: .8rem 1rem; align-items: center; gap: .7rem; color: var(--slate-600); background: var(--sky-50); font-size: .92rem; }
   .housing-hero__scope :global(svg){ width: 1.2rem; height: 1.2rem; color: var(--teal-700); stroke-width: 1.6; }
-  .housing-hero__photo{ margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--slate-200); }
-  .housing-hero__photo img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
 
   .definition-section{ padding-block: var(--section-standard); background: var(--canvas); }
   .definition-layout{ display: grid; grid-template-areas: 'photo copy'; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
@@ -207,16 +196,6 @@ const dailyRhythm = [
   @media (max-width: 900px) {
     .definition-layout, .pathways-layout{ grid-template-columns: 1fr; }
     .housing-hero{ position: relative; overflow: hidden; border-bottom: 0; color: var(--white); background: var(--navy-950); }
-    .housing-hero__grid{ display: block; min-height: 0; }
-    .housing-hero__photo{ position: absolute; z-index: 0; margin: 0; inset: 0; }
-    .housing-hero__photo img{ object-position: center 40%; filter: var(--photo-filter); }
-    .housing-hero__photo::after{ position: absolute; background: var(--hero-shade-bottom); content: ''; inset: 0; }
-    .housing-hero__copy{ position: relative; z-index: 1; min-height: clamp(30rem, 82svh, 38rem); padding: 4rem 0 2.75rem; justify-content: flex-end; }
-    .housing-hero .eyebrow{ color: var(--accent-on-dark); }
-    .housing-hero h1{ color: var(--white); }
-    .housing-hero .lead{ color: var(--sky-100); }
-    .housing-hero__actions .button--outline{ border-color: var(--outline-on-dark); color: var(--white); background: rgba(var(--ink-rgb), .24); }
-    .housing-hero__actions .button--outline:hover{ border-color: var(--white); color: var(--navy-950); background: var(--white); }
     .housing-hero__scope{ color: var(--sky-100); background: var(--surface-on-dark); }
     .housing-hero__scope :global(svg){ color: var(--accent-on-dark); }
     .definition-layout{ grid-template-areas: 'copy' 'photo'; gap: var(--space-7); }
@@ -229,9 +208,6 @@ const dailyRhythm = [
   }
 
   @media (max-width: 760px) {
-    .housing-hero h1{ font-size: clamp(2.7rem, 12vw, 3.55rem); }
-    .housing-hero__actions{ display: grid; }
-    .housing-hero__actions .button{ width: 100%; }
     .housing-hero__scope{ width: 100%; }
     .definition-layout{ gap: var(--space-6); }
     .definition-photo{ aspect-ratio: 4 / 3; }

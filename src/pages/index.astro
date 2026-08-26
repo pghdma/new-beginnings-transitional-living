@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Hero from '../components/Hero.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -45,22 +46,21 @@ const trustPoints = [
   title={site.shortName}
   description={site.description}
 >
-  <section class="home-hero">
-    <img class="home-hero__image" src="/images/house-living-room.webp" alt="" width="2200" height="1467" fetchpriority="high" />
-    <div class="home-hero__shade" aria-hidden="true"></div>
-    <div class="container home-hero__inner">
-      <div class="home-hero__copy">
-        <p class="eyebrow">Nonprofit Sober Living in Pittsburgh</p>
-        <h1>Recovery Housing in Pittsburgh for Men and Women</h1>
-        <p class="lead">Safe, substance-free homes where staying sober is the normal thing to do. Licensed by Pennsylvania, run by a counselor who has done this since 1999. You don’t need to have it all figured out to call.</p>
-        <div class="actions home-hero__actions">
-          <a class="button" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-          <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
-        </div>
-        <p class="home-hero__location"><Icon name="lucide:map-pin" aria-hidden="true" />Houses in Sheraden, Observatory Hill, Brighton Heights, McKees Rocks, and Bellevue. Office in Mt. Washington.</p>
-      </div>
-    </div>
-  </section>
+  <Hero
+    variant="image"
+    size="xl"
+    height="viewport"
+    eyebrow="Nonprofit Sober Living in Pittsburgh"
+    title="Recovery Housing in Pittsburgh for Men and Women"
+    lead="Safe, substance-free homes where staying sober is the normal thing to do. Licensed by Pennsylvania, run by a counselor who has done this since 1999. You don’t need to have it all figured out to call."
+    image={{ src: '/images/house-living-room.webp', alt: '', width: 2200, height: 1467, position: '54% 62%', positionMobile: '65% center' }}
+  >
+    <Fragment slot="actions">
+      <a class="button" href="/admissions/">Ask About a Bed<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
+    </Fragment>
+    <p><Icon name="lucide:map-pin" aria-hidden="true" />Houses in Sheraden, Observatory Hill, Brighton Heights, McKees Rocks, and Bellevue. Office in Mt. Washington.</p>
+  </Hero>
 
   <section class="purpose-section" id="purpose">
     <div class="container purpose-layout">
@@ -229,22 +229,6 @@ const trustPoints = [
   </section>
 </MainLayout>
 <style>
-  .home-hero{ position: relative; display: grid; min-height: clamp(42rem,calc(100svh - var(--header-total-height)),50rem); overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
-  .home-hero__image, .home-hero__shade{ position: absolute; width: 100%; height: 100%; inset: 0; }
-  .home-hero__image{ object-fit: cover; object-position: 54% 62%; }
-  .home-hero__shade{ background: var(--hero-shade-bottom); }
-  .home-hero__inner{ position: relative; z-index: 1; padding-block: clamp(5rem,9vw,8rem); }
-  .home-hero__copy{ max-width: 48rem; }
-  .home-hero .eyebrow{ color: var(--accent-on-image); }
-  .home-hero h1{ max-width: 26ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-xl); font-weight: var(--weight-heading); }
-  .home-hero .lead{ max-width: 39rem; margin-top: var(--space-5); color: var(--text-on-dark); }
-  .home-hero__actions{ margin-top: var(--space-6); }
-  .home-hero__actions .button{ gap: var(--button-gap); }
-  .home-hero__actions :global(svg){ width: 1.05rem; height: 1.05rem; }
-  .home-hero__actions .button--outline{ border-color: var(--outline-on-dark); color: var(--white); background: rgba(var(--ink-rgb), .24); }
-  .home-hero__actions .button--outline:hover{ color: var(--navy-950); background: var(--white); }
-  .home-hero__location{ display: flex; max-width: 34rem; margin-top: var(--space-7); align-items: flex-start; gap: var(--button-gap); color: var(--text-muted-on-dark); font-size: .93rem; line-height: 1.45; }
-  .home-hero__location :global(svg){ width: 1.15rem; height: 1.15rem; margin-top: .1rem; color: var(--accent-on-image); flex: 0 0 auto; }
 
   .purpose-section{ padding-block: var(--section-standard); background: var(--canvas); }
   .purpose-layout{ display: grid; grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr); gap: clamp(3rem,8vw,8rem); align-items: start; }
@@ -346,8 +330,6 @@ const trustPoints = [
   .conversation-secondary a:hover{ color: var(--accent-on-dark-soft); }
 
   @media (max-width: 1080px) {
-    .home-hero{ min-height: 43rem; }
-    .home-hero__shade{ background: var(--hero-shade-bottom); }
   }
 
   @media (max-width: 900px) {
@@ -365,8 +347,6 @@ const trustPoints = [
     .purpose-content{ margin-top: var(--space-6); order: 3; }
     .purpose-photo{ order: 4; }
     .conversation-layout{ grid-template-areas: 'content' 'photo'; }
-    .home-hero__image{ object-position: 62% center; }
-    .home-hero__shade{ background: var(--hero-shade-bottom); }
     .purpose-heading{ position: static; }
     .housing-heading{ align-items: start; gap: var(--space-5); }
     .housing-facts{ grid-template-columns: 1fr; }
@@ -378,14 +358,6 @@ const trustPoints = [
   }
 
   @media (max-width: 760px) {
-    .home-hero{ min-height: clamp(38rem,calc(100svh - 5rem),44rem); align-items: end; }
-    .home-hero__image{ object-position: 65% center; }
-    .home-hero__shade{ background: var(--hero-shade-bottom); }
-    .home-hero__inner{ padding-block: var(--space-8); }
-    .home-hero h1{ font-size: clamp(2.75rem,11.5vw,3.45rem); }
-    .home-hero__actions{ display: grid; }
-    .home-hero__actions .button{ width: 100%; }
-    .home-hero__location{ margin-top: var(--space-6); }
     .purpose-heading h2 span{ display: inline; }
     .foundation-list{ gap: var(--space-5); }
     .housing-paths{ grid-template-columns: 1fr; }
@@ -408,6 +380,6 @@ const trustPoints = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .home-hero__location, .housing-fact p, .daily-scope, .conversation-steps p, .conversation-secondary{ font-size: 1rem; line-height: 1.55; }
+    .housing-fact p, .daily-scope, .conversation-steps p, .conversation-secondary { font-size: 1rem; line-height: 1.55; }
   }
 </style>
