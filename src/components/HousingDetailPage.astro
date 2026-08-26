@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import Hero from './Hero.astro';
 import FaqAccordion from './FaqAccordion.astro';
+import FeatureList from './FeatureList.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from './CtaBand.astro';
 import { site } from '../data/site';
@@ -137,14 +138,7 @@ const galleryCopy = [
           <p class="eyebrow">Inside the House</p>
           <h2>Structure, Privacy, and a Household You Are Part Of</h2>
           <p class="household-copy__lead">{householdLead}</p>
-          <div class="household-features" role="list">
-            {householdFeatures.map((feature) => (
-              <article role="listitem">
-                <span class="icon-medallion icon-medallion--dark"><Icon name={`lucide:${feature.icon}`} aria-hidden="true" /></span>
-                <div><h3>{feature.title}</h3><p>{feature.copy}</p></div>
-              </article>
-            ))}
-          </div>
+          <div class="household-features"><FeatureList items={householdFeatures} icon="medallion" iconSize="md" tone="dark" columns={2} /></div>
         </div>
         <figure class="household-photo">
           <img src={householdImage.src} alt={householdImage.alt} width={householdImage.width} height={householdImage.height} loading="lazy" />
@@ -186,15 +180,7 @@ const galleryCopy = [
         <h2>What You Bring to It</h2>
         <p class="lead">We give you a safe place to live and rules you can count on. The meetings, the sponsor, the job, and your own counselor or doctor are on you.</p>
       </header>
-      <div class="supports-grid" role="list">
-        {supportFeatures.map((feature) => (
-          <article role="listitem">
-            <span class="icon-medallion icon-medallion--lg icon-medallion--dark"><Icon name={`lucide:${feature.icon}`} aria-hidden="true" /></span>
-            <h3>{feature.title}</h3>
-            <p>{feature.copy}</p>
-          </article>
-        ))}
-      </div>
+      <div class="supports-grid"><FeatureList items={supportFeatures} layout="columns" icon="medallion" iconSize="lg" tone="dark" columns={4} /></div>
     </div>
   </section>
 
@@ -257,10 +243,7 @@ const galleryCopy = [
   .household-copy .eyebrow{ color: var(--accent-on-dark); }
   .household-copy h2{ max-width: 27ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-section-lg); }
   .household-copy__lead{ max-width: 43rem; margin-top: var(--space-5); color: var(--sky-100); font-size: 1.12rem; line-height: 1.55; }
-  .household-features{ display: grid; margin-top: clamp(2.5rem, 5vw, 4rem); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 3rem); }
-  .household-features article{ display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .household-features h3{ color: var(--white); font-size: 1.15rem; }
-  .household-features p{ margin-top: .45rem; color: var(--sky-200); font-size: .94rem; line-height: 1.5; }
+  .household-features { margin-top: clamp(2.5rem, 5vw, 4rem); }
 
   .decision-section{ padding-block: var(--section-standard); background: var(--sky-50); }
   .decision-layout{ display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: var(--gap-columns); align-items: start; }
@@ -283,10 +266,7 @@ const galleryCopy = [
   .supports-heading .eyebrow{ color: var(--accent-on-dark); }
   .supports-heading h2{ margin-top: var(--space-4); color: var(--white); }
   .supports-heading .lead{ margin: var(--space-5) auto 0; color: var(--sky-100); }
-  .supports-grid{ display: grid; margin-top: var(--space-8); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.75rem, 4vw, 3rem); text-align: center; }
-  .supports-grid article{ display: flex; align-items: center; flex-direction: column; }
-  .supports-grid h3{ margin-top: var(--space-5); color: var(--white); font-size: 1.18rem; }
-  .supports-grid p{ max-width: 17rem; margin-top: var(--space-3); color: var(--sky-200); font-size: .94rem; line-height: 1.5; }
+  .supports-grid { margin-top: var(--space-8); }
 
   .questions-section{ padding-block: var(--section-standard); background: var(--paper); }
   .questions-heading{ margin-bottom: var(--space-7); }
@@ -317,7 +297,7 @@ const galleryCopy = [
   }
 
   @media (max-width: 760px) {
-    .household-stage{ grid-template-areas: 'copy' 'photo'; }
+    .household-stage { min-height: 0; grid-template-columns: 1fr; grid-template-areas: 'copy' 'photo'; }
     .household-section,
     .decision-section,
     .supports-section,
@@ -334,9 +314,7 @@ const galleryCopy = [
     .household-copy{ padding: 2.5rem var(--space-6); }
     .household-copy h2{ margin-top: var(--space-3); font-size: 2rem; }
     .household-copy__lead{ margin-top: var(--space-4); font-size: 1rem; }
-    .household-features{ margin-top: var(--space-6); grid-template-columns: 1fr; gap: var(--space-6); }
-    .household-features h3{ font-size: 1.1rem; }
-    .household-features p{ font-size: .92rem; }
+    .household-features { margin-top: clamp(2.5rem, 5vw, 4rem); }
 
     .decision-intro h2{ max-width: 25ch; margin-top: var(--space-3); }
     .decision-intro .lead{ margin-top: var(--space-4); }
@@ -353,11 +331,7 @@ const galleryCopy = [
     .supports-heading .lead{ margin-top: var(--space-4); }
     .supports-heading{ margin-inline: 0; text-align: left; }
     .supports-heading .lead{ margin-inline: 0; }
-    .supports-grid{ margin-top: var(--space-7); grid-template-columns: 1fr; gap: var(--space-6); text-align: left; }
-    .supports-grid article{ display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); row-gap: .3rem; align-items: start; }
-    .supports-grid .icon-medallion--lg{ width: var(--icon-medallion-size-md); height: var(--icon-medallion-size-md); }
-    .supports-grid h3{ margin-top: .4rem; font-size: 1.1rem; }
-    .supports-grid p{ max-width: none; margin-top: 0; grid-column: 2; font-size: .92rem; }
+    .supports-grid { margin-top: var(--space-8); }
 
     .questions-heading{ margin-bottom: var(--space-6); }
     .question-gallery{ grid-template-columns: 1fr; gap: var(--space-4); }
@@ -373,7 +347,7 @@ const galleryCopy = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .household-features p, .decision-grid p, .supports-grid p, .question-panel p{ font-size: 1rem; line-height: 1.55; }
+    .decision-grid p, .question-panel p { font-size: 1rem; line-height: 1.55; }
     .written-information p{ font-size: 1rem; }
   }
 </style>

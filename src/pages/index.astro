@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
 import TrustPoints from '../components/TrustPoints.astro';
 import StepList from '../components/StepList.astro';
+import FeatureList from '../components/FeatureList.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -71,14 +72,7 @@ const firstConversation = [
       <div class="purpose-content">
         <p class="lead">Treatment ends. Then you need somewhere to live where staying clean is the normal thing to do. That’s what a recovery house is for.</p>
         <p>New Beginnings runs sober living homes for adults in Pittsburgh who are done using and want a real shot at keeping it that way. The houses are AA and NA based. You live with other people doing the same work, you go to meetings, you keep a job or go to school, and you come home to a house where nobody is using.</p>
-        <ul class="foundation-list">
-          {foundations.map((item) => (
-            <li>
-              <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
-              <div><h3>{item.title}</h3><p>{item.copy}</p></div>
-            </li>
-          ))}
-        </ul>
+        <div class="foundation-list"><FeatureList items={foundations} icon="bare" iconSize="md" /></div>
         <a class="button button--outline purpose-action" href="/recovery-housing/">How Our Houses Work<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
       </div>
     </div>
@@ -153,11 +147,7 @@ const firstConversation = [
           <p class="eyebrow">A Normal Week</p>
           <h2>Most of Recovery Is Just a Normal Week</h2>
           <p class="lead">The house gives you a place to come back to. The rest of the day is yours: work, school, meetings, court dates, family, and everything else that goes into a normal week.</p>
-          <ul class="daily-list">
-            {dailyLife.map((item) => (
-              <li><Icon name={`lucide:${item.icon}`} aria-hidden="true" /><span>{item.title}</span></li>
-            ))}
-          </ul>
+          <div class="daily-list"><FeatureList items={dailyLife} layout="chips" boxed columns={2} /></div>
           <p class="daily-scope">New Beginnings is housing, not treatment. If you’re in counseling, on medication, or seeing a doctor, you keep doing that with your own providers. We make sure you have a stable place to live while you do.</p>
         </div>
       </div>
@@ -222,11 +212,7 @@ const firstConversation = [
   .purpose-photo img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
   .purpose-content{ max-width: 46rem; }
   .purpose-content > p + p{ margin-top: var(--space-5); }
-  .foundation-list{ display: grid; margin: var(--space-7) 0 0; padding: 0; gap: var(--space-6); list-style: none; }
-  .foundation-list li{ display: grid; grid-template-columns: 2.35rem minmax(0,1fr); gap: var(--space-4); align-items: start; }
-  .foundation-list > li > :global(svg){ width: 2rem; height: 2rem; color: var(--teal-700); stroke-width: 1.55; }
-  .foundation-list h3{ font-size: 1.25rem; }
-  .foundation-list p{ max-width: 39rem; margin-top: .45rem; color: var(--slate-600); line-height: 1.5; }
+  .foundation-list { margin-top: var(--space-7); }
   .purpose-action{ margin-top: var(--space-7); gap: var(--button-gap); }
   .purpose-action :global(svg){ width: 1.05rem; height: 1.05rem; }
 
@@ -269,9 +255,7 @@ const firstConversation = [
   .daily-content .lead{ max-width: 34rem; margin-top: var(--space-6); font-size: clamp(1.08rem,1.6vw,1.25rem); line-height: 1.52; }
   .daily-photo{ min-height: 42rem; margin: 0; overflow: hidden; }
   .daily-photo img{ display: block; width: 100%; height: 100%; object-fit: cover; object-position: 54% center; filter: var(--photo-filter); }
-  .daily-list{ border-radius: var(--radius-md); display: grid; margin: var(--space-6) 0 0; padding: var(--space-5); grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-5) var(--space-6); background: var(--sky-50); list-style: none; }
-  .daily-list li{ display: grid; grid-template-columns: auto 1fr; gap: .7rem; align-items: center; color: var(--navy-900); font-size: .96rem; font-weight: var(--weight-heading); line-height: 1.35; }
-  .daily-list :global(svg){ width: 1.45rem; height: 1.45rem; color: var(--teal-700); stroke-width: 1.6; }
+  .daily-list { margin-top: var(--space-6); }
   .daily-scope{ max-width: 34rem; margin-top: var(--space-5); color: var(--slate-600); font-size: .95rem; line-height: 1.6; }
 
   .trust-section{ padding-block: var(--section-standard); background: var(--sky-50); }
@@ -332,14 +316,12 @@ const firstConversation = [
 
   @media (max-width: 760px) {
     .purpose-heading h2 span{ display: inline; }
-    .foundation-list{ gap: var(--space-5); }
+    .foundation-list { margin-top: var(--space-7); }
     .housing-paths{ grid-template-columns: 1fr; }
     .housing-path{ min-height: 28rem; }
     .housing-path__content > h3{ font-size: 2.15rem; }
     .daily-photo{ height: 78vw; min-height: 20rem; max-height: 26rem; }
-    .daily-list{ padding: var(--space-4); gap: var(--space-4); }
-    .daily-list li{ align-items: start; font-size: .9rem; }
-    .daily-list :global(svg){ width: 1.35rem; height: 1.35rem; }
+    .daily-list { margin-top: var(--space-6); }
     .trust-panorama{ aspect-ratio: 2.25 / 1; margin-top: var(--space-7); }
     .trust-section__actions{ display: grid; }
     .trust-section__actions .button{ width: 100%; }

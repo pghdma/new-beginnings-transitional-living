@@ -1,0 +1,111 @@
+---
+/**
+ * FeatureList — icon + title + copy, the site's most repeated pattern.
+ *
+ * layout="rows"     icon left, text right (single column by default; set `columns` for a grid)
+ * layout="columns"  centered stacks in a row; becomes left-aligned rows on phones
+ * layout="chips"    compact icon + label only (no copy)
+ *
+ * icon="bare"|"medallion", iconSize="sm|md|lg|xl", tone="light|dark",
+ * columns 1–4, divided (hairlines between columns), boxed (tinted background).
+ */
+import { Icon } from 'astro-icon/components';
+
+interface Item { icon: string; title: string; copy?: string }
+interface Props {
+  items: Item[];
+  layout?: 'rows' | 'columns' | 'chips';
+  icon?: 'bare' | 'medallion';
+  iconSize?: 'sm' | 'md' | 'lg' | 'xl';
+  tone?: 'light' | 'dark';
+  columns?: 1 | 2 | 3 | 4;
+  divided?: boolean;
+  boxed?: boolean;
+  label?: string;
+  class?: string;
+}
+const {
+  items, layout = 'rows', icon = 'bare', iconSize = 'md', tone = 'light',
+  columns = layout === 'rows' ? 1 : layout === 'chips' ? 2 : Math.min(items.length, 4) as 1 | 2 | 3 | 4,
+  divided = false, boxed = false, label, class: className,
+} = Astro.props;
+const medallion = icon === 'medallion';
+const name = (i: string) => (i.includes(':') ? i : `lucide:${i}`);
+---
+
+<ul
+  class:list={['features', `features--${layout}`, `features--${tone}`, `features--icon-${icon}`, `features--${iconSize}`, { 'features--divided': divided, 'features--boxed': boxed }, className]}
+  style={`--cols: ${columns}`}
+  aria-label={label}
+>
+  {items.map((item) => (
+    <li>
+      {medallion ? (
+        <span class:list={['icon-medallion', `icon-medallion--${iconSize}`, { 'icon-medallion--dark': tone === 'dark' }]} aria-hidden="true"><Icon name={name(item.icon)} /></span>
+      ) : (
+        <Icon class="features__icon" name={name(item.icon)} aria-hidden="true" />
+      )}
+      {layout === 'chips' ? (
+        <span class="features__label">{item.title}</span>
+      ) : (
+        <div class="features__text"><h3>{item.title}</h3>{item.copy && <p>{item.copy}</p>}</div>
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .features { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: var(--space-6); list-style: none; }
+  .features li { display: grid; min-width: 0; align-items: start; }
+  .features h3 { color: var(--navy-900); font-size: 1.2rem; line-height: 1.25; }
+  .features p { max-width: 39rem; margin-top: .45rem; color: var(--slate-600); font-size: .96rem; line-height: 1.5; }
+  .features--dark h3 { color: var(--white); }
+  .features--dark p { color: var(--sky-200); }
+  .features__icon { color: var(--teal-700); stroke-width: 1.55; flex: 0 0 auto; }
+  .features--dark .features__icon { color: var(--accent-on-dark); }
+  .features--sm .features__icon { width: 1.4rem; height: 1.4rem; }
+  .features--md .features__icon { width: 2rem; height: 2rem; }
+  .features--lg .features__icon, .features--xl .features__icon { width: 2.4rem; height: 2.4rem; }
+  .features--icon-medallion .icon-medallion { background: var(--paper); box-shadow: var(--shadow-soft); }
+  .features--icon-medallion.features--dark .icon-medallion { background: var(--surface-on-dark); box-shadow: none; }
+
+  /* rows */
+  .features--rows li { grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); }
+
+  /* columns */
+  .features--columns { gap: clamp(1.75rem, 4vw, 3rem); }
+  .features--columns li { justify-items: center; text-align: center; }
+  .features--columns .features__text { margin-top: var(--space-5); }
+  .features--columns p { max-width: 20rem; }
+  .features--columns.features--xl h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+  .features--columns.features--xl p { max-width: 23rem; line-height: 1.65; }
+  .features--divided { gap: 0; }
+  .features--divided li { padding-inline: clamp(var(--space-5), 3vw, var(--space-8)); }
+  .features--divided li + li { border-left: 1px solid var(--slate-200); }
+
+  /* chips */
+  .features--chips { gap: var(--space-4) var(--space-6); }
+  .features--chips li { grid-template-columns: auto minmax(0, 1fr); gap: .7rem; align-items: center; color: var(--navy-900); font-size: .96rem; font-weight: var(--weight-heading); line-height: 1.35; }
+  .features--chips .features__icon { width: 1.45rem; height: 1.45rem; stroke-width: 1.6; }
+  .features--boxed { padding: var(--space-5); border-radius: var(--radius-md); background: var(--sky-50); }
+
+  @media (max-width: 900px) {
+    .features p, .features--chips li { font-size: 1rem; line-height: 1.55; }
+    .features--columns { grid-template-columns: repeat(min(var(--cols), 2), minmax(0, 1fr)); }
+    .features--columns li { justify-items: start; text-align: left; }
+    .features--columns p { max-width: none; }
+    .features--divided { gap: var(--space-7); grid-template-columns: 1fr; }
+    .features--divided li { max-width: 35rem; margin-inline: auto; padding-inline: 0; justify-items: start; text-align: left; }
+    .features--divided li + li { padding-top: var(--space-7); border-top: 1px solid var(--slate-200); border-left: 0; }
+  }
+
+  @media (max-width: 760px) {
+    .features { grid-template-columns: 1fr; gap: var(--space-5); }
+    .features--columns li { grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); justify-items: start; text-align: left; }
+    .features--columns .features__text { margin-top: .35rem; }
+    .features--columns p { max-width: none; }
+    .features--columns .icon-medallion--lg, .features--columns .icon-medallion--xl { width: var(--icon-medallion-size-md); height: var(--icon-medallion-size-md); }
+    .features--chips { grid-template-columns: repeat(min(var(--cols), 2), minmax(0, 1fr)); padding: var(--space-4); gap: var(--space-4); }
+    .features--chips li { align-items: start; }
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import FeatureList from '../../../components/FeatureList.astro';
 import Hero from '../../../components/Hero.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { site } from '../../../data/site';
@@ -9,6 +10,11 @@ const standing = [
   { icon: 'calendar-check', label: 'IRS ruling', value: 'Tax exempt since February 2019' },
   { icon: 'badge-check', label: 'Pennsylvania oversight', value: 'DDAP-licensed recovery houses' },
   { icon: 'shield-check', label: 'Independent inspection', value: 'WestPARR certified member' },
+];
+
+const meanings = [
+  { icon: 'clipboard-check', title: 'DDAP License', copy: 'The Commonwealth reviewed our houses and our written policies on drug screens, medication, fees, and discharge. Licensed houses are the only ones state agencies and courts can refer to first.' },
+  { icon: 'house-heart', title: 'WestPARR Certification', copy: 'An independent Pittsburgh alliance of recovery residences inspected our homes against recognized recovery housing standards and lists us as a certified member.' },
 ];
 
 const publicSources = [
@@ -110,14 +116,7 @@ const publicSources = [
         <p class="eyebrow">In Plain Language</p>
         <h2>What the Credentials Mean</h2>
       </div>
-      <div class="meaning-item">
-        <Icon name="lucide:clipboard-check" aria-hidden="true" />
-        <div><h3>DDAP License</h3><p>The Commonwealth reviewed our houses and our written policies on drug screens, medication, fees, and discharge. Licensed houses are the only ones state agencies and courts can refer to first.</p></div>
-      </div>
-      <div class="meaning-item">
-        <Icon name="lucide:house-heart" aria-hidden="true" />
-        <div><h3>WestPARR Certification</h3><p>An independent Pittsburgh alliance of recovery residences inspected our homes against recognized recovery housing standards and lists us as a certified member.</p></div>
-      </div>
+      <FeatureList items={meanings} icon="bare" iconSize="md" tone="dark" columns={2} />
     </div>
   </section>
 
@@ -172,13 +171,9 @@ const publicSources = [
   .record-entry__content > p:last-child{ max-width: 42rem; margin-top: .55rem; font-size: .98rem; line-height: 1.5; }
   .record-entry__action{ min-width: 12rem; gap: .6rem; white-space: nowrap; }
   .record-entry__action :global(svg){ width: 1rem; height: 1rem; }
-  .meaning-strip{ display: grid; margin-top: var(--space-8); padding-top: var(--space-7); border-top: 1px solid var(--border-on-dark); grid-template-columns: .8fr 1fr 1fr; gap: clamp(2rem,5vw,4rem); }
+  .meaning-strip{ display: grid; margin-top: var(--space-8); padding-top: var(--space-7); border-top: 1px solid var(--border-on-dark); grid-template-columns: .8fr 2fr; gap: clamp(2rem,5vw,4rem); }
   .meaning-heading .eyebrow{ color: var(--accent-on-dark); }
   .meaning-heading h2{ max-width: 24ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(1.8rem,3vw,2.55rem); }
-  .meaning-item{ display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); }
-  .meaning-item > :global(svg){ width: 2rem; height: 2rem; color: var(--accent-on-dark); stroke-width: 1.55; }
-  .meaning-item h3{ color: var(--white); font-size: 1.25rem; }
-  .meaning-item p{ margin-top: .55rem; color: var(--sky-100); font-size: .96rem; line-height: 1.55; }
 
   .records-cta{ position: relative; display: grid; min-height: 26rem; overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
   .records-cta__image, .records-cta__shade{ position: absolute; width: 100%; height: 100%; inset: 0; }
@@ -224,7 +219,6 @@ const publicSources = [
     .record-entry__action{ width: 100%; min-width: 0; grid-column: 1; }
     .meaning-strip{ grid-template-columns: 1fr; }
     .meaning-heading{ grid-column: auto; }
-    .meaning-item{ padding-top: var(--space-5); border-top: 1px solid var(--border-on-dark); }
     .records-cta{ min-height: 33rem; }
     .records-cta__shade{ background: rgba(var(--ink-rgb), .84); }
     .records-cta__inner{ min-height: 33rem; align-content: center; }
@@ -233,7 +227,7 @@ const publicSources = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .record-entry__content p, .meaning-item p{ font-size: 1rem; line-height: 1.55; }
+    .record-entry__content p{ font-size: 1rem; line-height: 1.55; }
     .record-entry__content > p:not(.record-entry__category){ font-size: 1rem; line-height: 1.55; }
   }
 </style>

@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import FeatureList from '../../../components/FeatureList.astro';
 import Hero from '../../../components/Hero.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { currentBoardMembers } from '../../../data/leadership';
@@ -59,17 +60,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
         </p>
       </header>
 
-      <ul class="board-role__features">
-        {responsibilities.map((item) => (
-          <li>
-            <span class="board-role__icon icon-medallion icon-medallion--xl" aria-hidden="true">
-              <Icon name={`lucide:${item.icon}`} />
-            </span>
-            <h3>{item.title}</h3>
-            <p>{item.copy}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="board-role__features"><FeatureList items={responsibilities} layout="columns" icon="medallion" iconSize="xl" columns={3} divided /></div>
     </div>
   </section>
 
@@ -221,50 +212,13 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     line-height: 1.7;
   }
 
-  .board-role__features{
-    display: grid;
-    margin: clamp(3.5rem, 7vw, 5.5rem) 0 0;
-    padding: 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    list-style: none;
-  }
+  .board-role__features { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
 
-  .board-role__features li{
-    display: grid;
-    min-width: 0;
-    padding-inline: clamp(var(--space-5), 3vw, var(--space-8));
-    justify-items: center;
-    align-content: start;
-    text-align: center;
-  }
 
-  .board-role__features li + li{
-    border-left: 1px solid var(--slate-200);
-  }
 
-  .board-role__icon{
-    margin-bottom: var(--space-5);
-    background: var(--paper);
-    box-shadow: var(--shadow-soft);
-  }
 
-  .board-role__icon :global(svg){
-    width: 2rem;
-    height: 2rem;
-    stroke-width: 1.65;
-  }
 
-  .board-role__features h3{
-    margin-bottom: var(--space-3);
-    color: var(--navy-900);
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-  }
 
-  .board-role__features p{
-    max-width: 23rem;
-    color: var(--slate-600);
-    line-height: 1.65;
-  }
 
   .board-directory{
     padding-block: var(--section-standard);
@@ -551,21 +505,9 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   }
 
   @media (max-width: 900px) {
-    .board-role__features{
-      grid-template-columns: 1fr;
-      gap: var(--space-7);
-    }
+    .board-role__features { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
 
-    .board-role__features li{
-      max-width: 35rem;
-      margin-inline: auto;
-    }
 
-    .board-role__features li + li{
-      padding-top: var(--space-7);
-      border-top: 1px solid var(--slate-200);
-      border-left: 0;
-    }
 
     .public-record{
       min-height: 0;
@@ -597,7 +539,6 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
       width: 100%;
     }
 
-    .board-role__features li{ padding-inline: 0; }
     .member__content{ padding: var(--space-6); }
     .member__stage{ min-height: 29rem; }
     .public-record__media{ aspect-ratio: 4 / 3; }
@@ -622,6 +563,5 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   @media (max-width: 900px) {
     .board-role__intro, .board-directory__intro{ margin-inline: 0; justify-items: start; text-align: left; }
     .member__content, .member__face--back{ justify-items: start; text-align: left; }
-    .board-role__features li{ justify-items: start; text-align: left; }
   }
 </style>

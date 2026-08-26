@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
 import TrustPoints from '../components/TrustPoints.astro';
+import FeatureList from '../components/FeatureList.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { currentBoardMembers, susanRua } from '../data/leadership';
 
@@ -142,19 +143,7 @@ const founderHighlights = [
           on, and who is responsible for what.
         </p>
       </header>
-      <ul>
-        {commitments.map((commitment) => (
-          <li>
-            <span class="principles-band__icon icon-medallion icon-medallion--dark">
-              <Icon name={`lucide:${commitment.icon}`} aria-hidden="true" />
-            </span>
-            <div>
-              <h3>{commitment.title}</h3>
-              <p>{commitment.copy}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div class="principles-band__list"><FeatureList items={commitments} icon="medallion" iconSize="md" tone="dark" /></div>
     </div>
     <figure class="principles-band__visual">
       <img
@@ -189,14 +178,7 @@ const founderHighlights = [
             my counseling practice in Mt. Washington. It’s a separate organization, and living
             at New Beginnings doesn’t require seeing me or anyone in particular for counseling.
           </p>
-          <ul class="founder-profile__highlights" aria-label="Susan Rua’s professional background">
-            {founderHighlights.map((item) => (
-              <li>
-                <Icon name={`lucide:${item.icon}`} aria-hidden="true" />
-                <span>{item.label}</span>
-              </li>
-            ))}
-          </ul>
+          <div class="founder-profile__highlights"><FeatureList items={founderHighlights.map((h) => ({ icon: h.icon, title: h.label }))} layout="chips" columns={3} iconSize="sm" label="Susan Rua’s professional background" /></div>
           <a class="button" href="/about/board/#susan-rua">
             More About Susan
             <Icon name="lucide:arrow-right" aria-hidden="true" />
@@ -313,12 +295,6 @@ const founderHighlights = [
   .principles-band .eyebrow{ color: var(--accent-on-dark); }
   .principles-band h2{ max-width: 24ch; color: var(--white); }
   .principles-band__content header > p:last-child{ color: var(--sky-100); font-size: 1.08rem; line-height: 1.6; }
-  .principles-band ul{ display: grid; max-width: 40rem; margin: var(--space-8) 0 0; padding: 0; gap: var(--space-6); list-style: none; }
-  .principles-band li{ display: grid; grid-template-columns: 3.3rem minmax(0, 1fr); gap: var(--space-4); align-items: start; }
-  .principles-band__icon{ width: 3.3rem; height: 3.3rem; }
-  .principles-band__icon :global(svg){ width: 1.5rem; height: 1.5rem; stroke-width: 1.65; }
-  .principles-band h3{ margin-bottom: var(--space-2); color: var(--white); }
-  .principles-band li p{ max-width: 33rem; color: var(--sky-200); line-height: 1.55; }
 
   .founder-profile{ padding-block: var(--section-standard); overflow: hidden; background: var(--paper); }
   .founder-profile__grid{ display: grid; grid-template-areas: 'portrait content'; grid-template-columns: minmax(17rem, 22rem) minmax(0, 1fr); gap: clamp(var(--space-8), 9vw, 9rem); align-items: center; }
@@ -328,9 +304,7 @@ const founderHighlights = [
   .founder-profile__content{ display: grid; max-width: 43rem; grid-area: content; gap: var(--space-5); }
   .founder-profile__content h2{ max-width: 24ch; }
   .founder-profile__content > p:not(.eyebrow, .lead){ max-width: 40rem; }
-  .founder-profile__highlights{ display: grid; margin: var(--space-2) 0 0; padding: var(--space-5) 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); list-style: none; }
-  .founder-profile__highlights li{ display: grid; min-width: 0; grid-template-columns: 1.6rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .94rem; font-weight: var(--weight-heading); line-height: 1.4; }
-  .founder-profile__highlights :global(svg){ width: 1.4rem; height: 1.4rem; margin-top: .05rem; color: var(--teal-700); stroke-width: 1.65; }
+  .founder-profile__highlights { margin-top: var(--space-2); padding-block: var(--space-5); }
   .founder-profile .button{ width: fit-content; margin-top: var(--space-2); gap: var(--button-gap); }
   .founder-profile .button :global(svg){ width: 1rem; height: 1rem; }
 
@@ -369,11 +343,9 @@ const founderHighlights = [
     .principles-band{ min-height: 0; grid-template-areas: 'content' 'visual'; grid-template-columns: 1fr; }
     .principles-band__visual{ min-height: 0; aspect-ratio: 16 / 9; }
     .principles-band__content{ padding: var(--section-standard) var(--gutter); }
-    .principles-band ul{ grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; gap: var(--space-6); }
-    .principles-band li{ grid-template-columns: 1fr; }
     .founder-profile__grid{ grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr); gap: clamp(var(--space-7), 7vw, var(--space-9)); }
     .founder-profile__portrait::before{ inset: 1.5rem -1.5rem -1.5rem 1.5rem; }
-    .founder-profile__highlights{ grid-template-columns: 1fr; gap: var(--space-4); }
+    .founder-profile__highlights { margin-top: var(--space-2); padding-block: var(--space-5); }
     .board-preview{ min-height: 31rem; }
     .records-preview__content{ grid-template-columns: 1fr; }
     .records-preview__content header{ max-width: 31rem; }
@@ -384,8 +356,6 @@ const founderHighlights = [
     .purpose-gallery{ height: auto; grid-template-columns: 1fr; grid-template-rows: none; gap: var(--space-4); }
     .purpose-gallery__scene, .purpose-gallery__scene--primary{ aspect-ratio: 16 / 10; grid-row: auto; }
     .principles-band__visual{ aspect-ratio: 4 / 3; }
-    .principles-band ul{ grid-template-columns: 1fr; }
-    .principles-band li{ grid-template-columns: 3.3rem minmax(0, 1fr); }
     .founder-profile__grid{ grid-template-areas: 'content' 'portrait'; grid-template-columns: 1fr; }
     .founder-profile__portrait{ width: calc(100% - var(--space-5)); max-width: 19rem; margin-top: var(--space-6); margin-inline: auto; }
     .founder-profile__portrait::before{ inset: 1.25rem -1.25rem -1.25rem 1.25rem; }
@@ -414,7 +384,7 @@ const founderHighlights = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
-    .purpose-section__details p, .founder-profile__highlights li { font-size: 1rem; line-height: 1.55; }
+    .purpose-section__details p { font-size: 1rem; line-height: 1.55; }
     .purpose-gallery__scene figcaption p{ font-size: 1rem; }
   }
 </style>
