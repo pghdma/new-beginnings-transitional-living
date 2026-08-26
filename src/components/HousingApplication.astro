@@ -1,5 +1,12 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { site } from '../data/site';
+
+const nextSteps = [
+  { title: 'We call you back', copy: 'At the number you give us, to ask a few questions and answer yours.' },
+  { title: 'We talk through the fit', copy: 'What is open, what it costs, and what the house expects.' },
+  { title: 'You move in', copy: 'If it is a fit and a bed is open, you get the address, the move-in list, and a date.' },
+];
 ---
 
 <section class="application" id="inquiry" aria-labelledby="application-title">
@@ -7,125 +14,132 @@ import { site } from '../data/site';
     <header class="application-heading">
       <p class="eyebrow">Housing Application</p>
       <h2 id="application-title">Tell Us a Little About What You Need</h2>
-      <p>
-        Three short steps. General answers are fine. We ask the detailed questions on the
-        phone, not on a public website. This is the first step, not a guarantee of a bed.
-        Openings change week to week, so the sooner we talk, the better.
-      </p>
-      <p class="call-option">Rather just talk? <a class="inline-link" href={site.phoneHref}>Call {site.phone}.</a></p>
-      <p class="form-required-note">All fields are required unless marked optional.</p>
+      <p>Three short steps. General answers are fine. We ask the detailed questions on the phone, not on a public website.</p>
     </header>
 
-    <form data-housing-application novalidate>
-      <nav class="form-progress" aria-label="Application Progress">
-        <p class="progress-summary" data-progress-summary aria-live="polite">Step 1 of 3: Primary Contact</p>
-        <ol>
-          <li class="is-current" data-progress-step="1" aria-current="step"><span>1</span><strong>Primary Contact</strong></li>
-          <li data-progress-step="2"><span>2</span><strong>Applicant and Housing</strong></li>
-          <li data-progress-step="3"><span>3</span><strong>Final Details</strong></li>
-        </ol>
-      </nav>
+    <div class="application-layout">
+      <form data-housing-application novalidate>
+        <nav class="form-progress" aria-label="Application progress">
+          <ol>
+            <li class="is-current" data-progress-step="1" aria-current="step"><span>1</span><strong>Primary Contact</strong></li>
+            <li data-progress-step="2"><span>2</span><strong>Applicant and Housing</strong></li>
+            <li data-progress-step="3"><span>3</span><strong>Final Details</strong></li>
+          </ol>
+        </nav>
 
-      <fieldset class="form-section" data-form-step="1">
-        <legend tabindex="-1"><strong>Primary Contact</strong></legend>
-        <p class="section-intro">Who should we call back?</p>
-        <div class="form-grid">
-          <label>First Name<input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
-          <label>Last Name<input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
-          <label>Email<input required type="email" autocomplete="email" name="email" maxlength="254" /></label>
-          <label>Phone<input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
-        </div>
-        <fieldset class="choice-group">
-          <legend>Who Is Completing This Application?</legend>
-          <div class="choice-grid choice-grid--three">
-            <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applicant</strong><small>I’m applying for myself.</small></span></label>
-            <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or Friend</strong><small>I’m helping someone I care about apply.</small></span></label>
-            <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional</strong><small>I’m a counselor, case manager, PO, or other professional.</small></span></label>
+        <fieldset class="form-section" data-form-step="1">
+          <legend tabindex="-1"><span class="step-label">Step 1 of 3</span><strong>Primary Contact</strong></legend>
+          <p class="section-intro">Who should we call back? Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+          <div class="form-grid">
+            <label><span class="field-label">First name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
+            <label><span class="field-label">Last name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
+            <label><span class="field-label">Email <span class="req" aria-hidden="true">*</span></span><input required type="email" autocomplete="email" name="email" maxlength="254" /></label>
+            <label><span class="field-label">Phone <span class="req" aria-hidden="true">*</span></span><input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
           </div>
-        </fieldset>
-        <fieldset class="choice-group">
-          <legend>Preferred Contact Method</legend>
-          <div class="choice-grid choice-grid--two compact-choices">
-            <label class="choice"><input required type="radio" name="preferredContact" value="Phone" /><span><strong>Phone</strong></span></label>
-            <label class="choice"><input required type="radio" name="preferredContact" value="Email" /><span><strong>Email</strong></span></label>
-          </div>
-        </fieldset>
-        <label class="select-field">Best Time to Reach You <small>(optional)</small><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
-        <div class="step-actions step-actions--forward">
-          <button class="button" type="button" data-next-step>Continue to Applicant and Housing</button>
-        </div>
-      </fieldset>
-
-      <fieldset class="form-section" data-form-step="2" hidden>
-        <legend tabindex="-1"><strong>Applicant and Housing</strong></legend>
-        <p class="section-intro">General answers are enough. Keep medical, legal, and treatment details off this form.</p>
-        <div class="form-grid applicant-fields" data-applicant-fields hidden>
-          <label>Applicant First Name<input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
-          <label>Applicant Last Name<input name="applicantLastName" maxlength="100" data-applicant-required /></label>
-        </div>
-        <fieldset class="choice-group">
-          <legend>Housing Requested</legend>
-          <div class="choice-grid choice-grid--two">
-            <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men's Recovery Housing</strong><small>Houses in four neighborhoods, including one for men on parole.</small></span></label>
-            <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women's Recovery Housing</strong><small>One house for women.</small></span></label>
-          </div>
-        </fieldset>
-        <fieldset class="choice-group">
-          <legend>Is the Applicant 18 or Older?</legend>
-          <div class="choice-grid choice-grid--two compact-choices">
-            <label class="choice"><input required type="radio" name="adultStatus" value="Yes" /><span><strong>Yes</strong></span></label>
-            <label class="choice"><input required type="radio" name="adultStatus" value="No" /><span><strong>No</strong></span></label>
-          </div>
-        </fieldset>
-        <label class="select-field">Desired Move Timing<select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
-        <fieldset class="choice-group">
-          <legend>Has the Applicant Lived With New Beginnings Before?</legend>
-          <div class="choice-grid choice-grid--two compact-choices">
-            <label class="choice"><input required type="radio" name="previousResident" value="Yes" /><span><strong>Yes</strong></span></label>
-            <label class="choice"><input required type="radio" name="previousResident" value="No" /><span><strong>No</strong></span></label>
-          </div>
-        </fieldset>
-        <fieldset class="choice-group">
-          <legend>Is the Applicant Willing to Live Substance Free and Follow the House Rules?</legend>
-          <div class="choice-grid choice-grid--two compact-choices">
-            <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span><strong>Yes</strong></span></label>
-            <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="No" /><span><strong>No</strong></span></label>
-          </div>
-        </fieldset>
-        <div class="step-actions">
-          <button class="button button-secondary" type="button" data-previous-step>Back</button>
-          <button class="button" type="button" data-next-step>Continue to Final Details</button>
-        </div>
-      </fieldset>
-
-      <fieldset class="form-section" data-form-step="3" hidden>
-        <legend tabindex="-1"><strong>Final Details</strong></legend>
-        <p class="section-intro">Anything else that would help us prepare for the call.</p>
-        <label class="select-field">Primary Referral Source <small>(optional)</small><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
-        <label>Anything You Want Us to Know <small>(optional)</small><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
-        <p class="field-guidance" id="message-guidance">Please leave out diagnoses, medications, treatment records, legal records, and Social Security numbers. We’ll ask for what we need by phone.</p>
-        <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I would like to discuss accessibility or accommodation needs privately.</span></label>
-        <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand this application starts a conversation and doesn’t guarantee a bed.</span></label>
-        <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
-        <input type="hidden" name="startedAt" value="" />
-        <div class="submission-area">
-          <div>
-            <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
-            <div class="verification">
-              <p>Security Check</p>
-              <div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div>
+          <fieldset class="choice-group">
+            <legend>Who is completing this application? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choice-grid choice-grid--three">
+              <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applicant</strong><small>I’m applying for myself.</small></span></label>
+              <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or friend</strong><small>I’m helping someone I care about apply.</small></span></label>
+              <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional</strong><small>I’m a counselor, case manager, PO, or other professional.</small></span></label>
             </div>
+          </fieldset>
+          <fieldset class="choice-group">
+            <legend>Preferred contact method <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choice-grid choice-grid--two compact-choices">
+              <label class="choice"><input required type="radio" name="preferredContact" value="Phone" /><span><strong>Phone</strong></span></label>
+              <label class="choice"><input required type="radio" name="preferredContact" value="Email" /><span><strong>Email</strong></span></label>
+            </div>
+          </fieldset>
+          <label class="select-field"><span class="field-label">Best time to reach you <small>(optional)</small></span><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
+          <div class="step-actions">
+            <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
           </div>
-          <div class="submit-block">
-            <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application</button>
+        </fieldset>
+
+        <fieldset class="form-section" data-form-step="2" hidden>
+          <legend tabindex="-1"><span class="step-label">Step 2 of 3</span><strong>Applicant and Housing</strong></legend>
+          <p class="section-intro">General answers are enough. Keep medical, legal, and treatment details off this form.</p>
+          <div class="form-grid applicant-fields" data-applicant-fields hidden>
+            <label><span class="field-label">Applicant first name <span class="req" aria-hidden="true">*</span></span><input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
+            <label><span class="field-label">Applicant last name <span class="req" aria-hidden="true">*</span></span><input name="applicantLastName" maxlength="100" data-applicant-required /></label>
+          </div>
+          <fieldset class="choice-group">
+            <legend>Housing requested <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choice-grid choice-grid--two">
+              <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men’s recovery housing</strong><small>Houses in four neighborhoods, including one for men on parole.</small></span></label>
+              <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women’s recovery housing</strong><small>One house for women.</small></span></label>
+            </div>
+          </fieldset>
+          <fieldset class="choice-group">
+            <legend>Is the applicant 18 or older? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choice-grid choice-grid--two compact-choices">
+              <label class="choice"><input required type="radio" name="adultStatus" value="Yes" /><span><strong>Yes</strong></span></label>
+              <label class="choice"><input required type="radio" name="adultStatus" value="No" /><span><strong>No</strong></span></label>
+            </div>
+          </fieldset>
+          <label class="select-field"><span class="field-label">Desired move timing <span class="req" aria-hidden="true">*</span></span><select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
+          <fieldset class="choice-group">
+            <legend>Has the applicant lived with New Beginnings before? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choice-grid choice-grid--two compact-choices">
+              <label class="choice"><input required type="radio" name="previousResident" value="Yes" /><span><strong>Yes</strong></span></label>
+              <label class="choice"><input required type="radio" name="previousResident" value="No" /><span><strong>No</strong></span></label>
+            </div>
+          </fieldset>
+          <fieldset class="choice-group">
+            <legend>Is the applicant willing to live substance free and follow the house rules? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choice-grid choice-grid--two compact-choices">
+              <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span><strong>Yes</strong></span></label>
+              <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="No" /><span><strong>No</strong></span></label>
+            </div>
+          </fieldset>
+          <div class="step-actions">
+            <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
+            <button class="button button-secondary" type="button" data-previous-step>Back</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section" data-form-step="3" hidden>
+          <legend tabindex="-1"><span class="step-label">Step 3 of 3</span><strong>Final Details</strong></legend>
+          <p class="section-intro">Anything else that would help us prepare for the call.</p>
+          <label class="select-field"><span class="field-label">How did you hear about us? <small>(optional)</small></span><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
+          <label><span class="field-label">Anything you want us to know <small>(optional)</small></span><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
+          <p class="field-guidance" id="message-guidance">Please leave out diagnoses, medications, treatment records, legal records, and Social Security numbers. We’ll ask for what we need by phone.</p>
+          <div class="check-list">
+            <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I’d like to discuss accessibility or accommodation needs privately.</span></label>
+            <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand this application starts a conversation and doesn’t guarantee a bed. <span class="req" aria-hidden="true">*</span></span></label>
+          </div>
+          <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+          <input type="hidden" name="startedAt" value="" />
+          <div class="submission-area">
+            <div class="verification"><div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div></div>
+            <div class="step-actions step-actions--submit">
+              <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application<Icon name="lucide:send" aria-hidden="true" /></button>
+              <button class="button button-secondary" type="button" data-previous-step>Back</button>
+            </div>
             <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
           </div>
+        </fieldset>
+      </form>
+
+      <aside class="application-aside" aria-label="What happens next">
+        <div class="aside-card">
+          <p class="eyebrow">What happens next</p>
+          <ol class="next-steps">
+            {nextSteps.map((step, index) => (
+              <li><span>{index + 1}</span><div><strong>{step.title}</strong><p>{step.copy}</p></div></li>
+            ))}
+          </ol>
+          <p class="aside-note">This is the first step, not a guarantee of a bed. Openings change week to week, so the sooner we talk, the better.</p>
         </div>
-        <div class="step-actions step-actions--back-only">
-          <button class="button button-secondary" type="button" data-previous-step>Back</button>
+        <div class="aside-card aside-card--call">
+          <p class="eyebrow">Rather just talk?</p>
+          <a class="button button--light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
+          <p>You don’t need to fill anything out first.</p>
         </div>
-      </fieldset>
-    </form>
+        <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -144,30 +158,78 @@ import { site } from '../data/site';
   };
 </script>
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onNbtsApplicationTurnstileReady&render=explicit" async defer></script>
+
 <script>
   const APPLICATION_ENDPOINT = 'https://nbts-contact.pghdma.workers.dev/api/contact';
+  const ERROR_TEXT: Record<string, string> = {
+    firstName: 'Enter your first name.',
+    lastName: 'Enter your last name.',
+    email: 'Enter an email address we can reply to.',
+    phone: 'Enter a phone number we can call.',
+    applicantFirstName: 'Enter the applicant’s first name.',
+    applicantLastName: 'Enter the applicant’s last name.',
+    contactType: 'Choose who is completing this application.',
+    preferredContact: 'Choose how you’d like us to reach you.',
+    housingType: 'Choose men’s or women’s housing.',
+    adultStatus: 'Tell us whether the applicant is 18 or older.',
+    moveTiming: 'Select when the applicant would like to move.',
+    previousResident: 'Tell us whether the applicant has lived here before.',
+    sharedLivingAgreement: 'Answer whether the applicant is willing to follow the house rules.',
+    applicationAcknowledgement: 'Check this box to continue.',
+  };
+  type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
   document.querySelectorAll<HTMLFormElement>('[data-housing-application]').forEach((form) => {
     const sections = Array.from(form.querySelectorAll<HTMLElement>('[data-form-step]'));
     const progressItems = Array.from(form.querySelectorAll<HTMLElement>('[data-progress-step]'));
-    const progressSummary = form.querySelector<HTMLElement>('[data-progress-summary]');
     const started = form.querySelector<HTMLInputElement>('[name="startedAt"]');
     const status = form.querySelector<HTMLElement>('.status');
     const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
     const contactChoices = form.querySelectorAll<HTMLInputElement>('[data-contact-type]');
     const applicantFields = form.querySelector<HTMLElement>('[data-applicant-fields]');
     const applicantRequired = form.querySelectorAll<HTMLInputElement>('[data-applicant-required]');
-    const stepNames = ['Primary Contact', 'Applicant and Housing', 'Final Details'];
     let currentStep = 1;
+
     const restartTimer = () => { if (started) started.value = String(Date.now()); };
+
+    // Inline errors: a message beside the field (or below a radio group), aria-invalid on the control.
+    const errorHost = (control: Control) => control.type === 'radio' || control.type === 'checkbox'
+      ? (control.closest('.choice-group') || control.closest('.check-choice')) as HTMLElement | null
+      : (control.closest('label') as HTMLElement | null);
+    const clearError = (control: Control) => {
+      const host = errorHost(control);
+      host?.querySelector('.field-error')?.remove();
+      host?.classList.remove('has-error');
+      const group = control.type === 'radio' ? form.querySelectorAll<HTMLInputElement>(`[name="${control.name}"]`) : [control];
+      group.forEach((c) => c.removeAttribute('aria-invalid'));
+    };
+    const showError = (control: Control) => {
+      const host = errorHost(control);
+      if (!host) return;
+      clearError(control);
+      const message = document.createElement('p');
+      message.className = 'field-error';
+      message.id = `error-${control.name}`;
+      message.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span>`;
+      message.querySelector('span')!.textContent = ERROR_TEXT[control.name] || control.validationMessage || 'Please complete this field.';
+      host.appendChild(message);
+      host.classList.add('has-error');
+      const group = control.type === 'radio' ? form.querySelectorAll<HTMLInputElement>(`[name="${control.name}"]`) : [control];
+      group.forEach((c) => { c.setAttribute('aria-invalid', 'true'); c.setAttribute('aria-describedby', message.id); });
+    };
+    form.addEventListener('input', (event) => { const t = event.target as Control; if (t?.name && t.checkValidity()) clearError(t); });
+    form.addEventListener('change', (event) => { const t = event.target as Control; if (t?.name && t.checkValidity()) clearError(t); });
+
     const updateApplicantFields = () => {
       const selected = form.querySelector<HTMLInputElement>('[data-contact-type]:checked');
       const needsApplicantName = Boolean(selected && selected.value !== 'Applicant');
       if (applicantFields) applicantFields.hidden = !needsApplicantName;
       applicantRequired.forEach((field) => {
         field.required = needsApplicantName;
-        if (!needsApplicantName) field.value = '';
+        if (!needsApplicantName) { field.value = ''; clearError(field); }
       });
     };
+
     const showStep = (step: number, moveFocus = true) => {
       currentStep = Math.min(Math.max(step, 1), sections.length);
       sections.forEach((section, index) => { section.hidden = index + 1 !== currentStep; });
@@ -178,20 +240,33 @@ import { site } from '../data/site';
         if (itemStep === currentStep) item.setAttribute('aria-current', 'step');
         else item.removeAttribute('aria-current');
       });
-      if (progressSummary) progressSummary.textContent = `Step ${currentStep} of ${sections.length}: ${stepNames[currentStep - 1]}`;
       if (moveFocus) {
         sections[currentStep - 1]?.querySelector<HTMLElement>(':scope > legend')?.focus({ preventScroll: true });
         form.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       }
     };
-    const validateCurrentStep = () => {
+
+    const validateStep = (section: HTMLElement) => {
       updateApplicantFields();
-      const invalid = sections[currentStep - 1]?.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(':invalid');
-      if (!invalid) return true;
-      invalid.reportValidity();
-      invalid.focus();
-      return false;
+      const controls = Array.from(section.querySelectorAll<Control>('input, select, textarea')).filter((c) => !c.closest('[hidden]') || c.closest('[hidden]') === section);
+      const seen = new Set<string>();
+      let first: Control | null = null;
+      controls.forEach((control) => {
+        if (control.type === 'radio' && seen.has(control.name)) return;
+        seen.add(control.name);
+        if (control.checkValidity()) { clearError(control); return; }
+        showError(control);
+        if (!first) first = control;
+      });
+      if (first) {
+        const target = first as Control;
+        (target.type === 'radio' ? (errorHost(target) || target) : target).scrollIntoView({ block: 'center', behavior: 'smooth' });
+        target.focus({ preventScroll: true });
+        return false;
+      }
+      return true;
     };
+
     const resetVerification = () => {
       const widget = form.querySelector<HTMLElement>('.cf-turnstile');
       const widgetId = widget?.dataset.widgetId;
@@ -203,19 +278,22 @@ import { site } from '../data/site';
       status.textContent = message;
       status.dataset.state = type;
     };
-    form.querySelectorAll<HTMLButtonElement>('[data-next-step]').forEach((next) => next.addEventListener('click', () => { if (validateCurrentStep()) showStep(currentStep + 1); }));
+
+    form.querySelectorAll<HTMLButtonElement>('[data-next-step]').forEach((next) => next.addEventListener('click', () => { if (validateStep(sections[currentStep - 1])) showStep(currentStep + 1); }));
     form.querySelectorAll<HTMLButtonElement>('[data-previous-step]').forEach((previous) => previous.addEventListener('click', () => showStep(currentStep - 1)));
     contactChoices.forEach((choice) => choice.addEventListener('change', updateApplicantFields));
     updateApplicantFields();
     showStep(1, false);
     restartTimer();
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      updateApplicantFields();
-      if (!form.reportValidity()) return;
+      for (let i = 0; i < sections.length; i += 1) {
+        if (!validateStep(sections[i])) { if (currentStep !== i + 1) showStep(i + 1); return; }
+      }
       const formData = new FormData(form);
       if (!formData.get('cf-turnstile-response')) {
-        setStatus('Please complete the security check before submitting the application.', 'error');
+        setStatus('Please complete the security check before sending.', 'error');
         return;
       }
       const payload = Object.fromEntries(formData.entries()) as Record<string, FormDataEntryValue>;
@@ -225,25 +303,25 @@ import { site } from '../data/site';
       if (button) {
         button.disabled = true;
         button.setAttribute('aria-busy', 'true');
-        button.textContent = 'Submitting';
+        button.textContent = 'Sending';
       }
-      setStatus('Submitting your application.');
+      setStatus('Sending your application.');
       try {
         const response = await fetch(APPLICATION_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         const result = await response.json().catch(() => null) as { success?: boolean; message?: string } | null;
-        if (!response.ok || !result?.success) throw new Error(result?.message || 'We could not submit the application right now. Please call 412 628 0403.');
+        if (!response.ok || !result?.success) throw new Error(result?.message || 'We could not send the application right now. Please call 412-628-0403.');
         form.reset();
         updateApplicantFields();
-        setStatus(result.message || 'Thank you. Your application has been received by the website administrator for New Beginnings.', 'success');
+        setStatus(result.message || 'Thank you. Your application has been received. We’ll call you back.', 'success');
       } catch (error) {
-        setStatus(error instanceof Error ? error.message : 'We could not submit the application right now. Please call 412 628 0403.', 'error');
+        setStatus(error instanceof Error ? error.message : 'We could not send the application right now. Please call 412-628-0403.', 'error');
       } finally {
         restartTimer();
         resetVerification();
         if (button) {
           button.disabled = false;
           button.removeAttribute('aria-busy');
-          button.textContent = button.dataset.defaultLabel || 'Submit Application';
+          button.textContent = button.dataset.defaultLabel || 'Send Application';
         }
       }
     });
@@ -252,105 +330,142 @@ import { site } from '../data/site';
 
 <style>
   .application { padding-block: var(--section-standard); background: var(--sky-50); }
-  .application-shell { max-width: var(--max-form); }
-  .application-heading { display: grid; max-width: 48rem; margin: 0 auto var(--space-7); justify-items: center; gap: var(--space-3); text-align: center; }
-  .application-heading h2 { max-width: 30ch; }
-  .application-heading > p:not(.eyebrow):not(.form-required-note) { max-width: 62ch; font-size: 1.08rem; }
-  .application-heading .form-required-note { font-size: var(--form-help-size); }
-  .application-heading .call-option { font-size: .96rem; }
-  .application-heading a { font-weight: var(--weight-semibold); }
+  .application-shell { display: grid; gap: var(--space-7); }
+  .application-heading { display: grid; max-width: 44rem; gap: var(--space-3); }
+  .application-heading h2 { max-width: 24ch; }
+  .application-heading > p:not(.eyebrow) { max-width: 60ch; color: var(--slate-600); font-size: 1.08rem; }
+  .application-layout { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(var(--space-6), 4vw, var(--space-8)); align-items: start; }
+
+  /* Form card */
   form { overflow: hidden; border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); scroll-margin-top: 7rem; }
-  .form-progress { padding: var(--space-6) clamp(var(--space-6), 5vw, var(--space-8)); border-bottom: 1px solid var(--slate-200); background: var(--white); }
+  .form-progress { padding: var(--space-5) clamp(var(--space-6), 5vw, var(--space-8)); border-bottom: 1px solid var(--slate-200); background: var(--white); }
   .form-progress ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
-  .form-progress li { position: relative; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); color: var(--slate-500); align-items: center; gap: var(--space-3); }
-  .form-progress li:not(:last-child)::after { position: absolute; top: 50%; right: var(--space-4); left: calc(2.25rem + var(--space-4)); height: 1px; background: var(--slate-200); content: ''; }
-  .form-progress li span { display: grid; width: 2.25rem; height: 2.25rem; border: 1px solid var(--slate-300); border-radius: 50%; background: var(--white); font-weight: var(--weight-semibold); place-items: center; }
-  .form-progress li strong { position: relative; z-index: 1; width: fit-content; padding-right: var(--space-3); background: var(--white); font-size: .92rem; font-weight: var(--weight-heading); }
+  .form-progress li { position: relative; display: grid; grid-template-columns: 2rem minmax(0, 1fr); color: var(--slate-500); align-items: center; gap: var(--space-3); }
+  .form-progress li:not(:last-child)::after { position: absolute; top: 50%; right: var(--space-4); left: calc(2rem + var(--space-4)); height: 1px; background: var(--slate-300); content: ''; }
+  .form-progress li span { display: grid; width: 2rem; height: 2rem; border: 1px solid var(--slate-400); border-radius: 50%; background: var(--white); font-size: .9rem; font-weight: var(--weight-semibold); place-items: center; }
+  .form-progress li strong { position: relative; z-index: 1; width: fit-content; padding-right: var(--space-3); background: var(--white); font-size: .9rem; font-weight: var(--weight-heading); }
   .form-progress li.is-current { color: var(--navy-900); }
   .form-progress li.is-current span { border-color: var(--teal-700); background: var(--teal-700); color: var(--white); }
-  .form-progress li.is-complete { color: var(--teal-700); }
+  .form-progress li.is-complete { color: var(--teal-800); }
   .form-progress li.is-complete span { border-color: var(--teal-700); color: var(--teal-700); }
-  .progress-summary { display: none; }
-  .form-section { display: grid; min-width: 0; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); border: 0; gap: var(--space-5); }
+
+  /* Step */
+  .form-section { display: grid; min-width: 0; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); border: 0; gap: var(--space-6); }
   .form-section[hidden] { display: none; }
   /* A fieldset's top padding does not apply above its legend, so the legend carries its own. */
-  .form-section > legend { display: grid; width: 100%; padding: clamp(var(--space-6), 5vw, var(--space-8)) 0 0; color: var(--navy-900); }
-  .form-section > legend strong { font-size: var(--type-section-compact); font-weight: var(--weight-heading); line-height: 1.15; }
-  .section-intro { max-width: 58ch; margin-top: calc(var(--space-3) * -1); color: var(--slate-600); }
-  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+  .form-section > legend { display: grid; width: 100%; padding: clamp(var(--space-6), 5vw, var(--space-8)) 0 0; gap: var(--space-2); color: var(--navy-900); }
+  .form-section > legend:focus { outline: 0; }
+  .step-label { color: var(--teal-700); font-size: .8rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
+  .form-section > legend strong { font-family: var(--font-display); font-size: var(--type-section-compact); font-weight: var(--weight-display); letter-spacing: -.015em; line-height: 1.15; }
+  .section-intro { max-width: 58ch; margin-top: calc(var(--space-4) * -1); color: var(--slate-600); }
+  .req { color: var(--error); font-weight: var(--weight-bold); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; border: 0; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Fields */
+  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
+  .form-grid > label { align-content: start; }
   .applicant-fields[hidden] { display: none; }
   label, .choice-group > legend { color: var(--navy-900); font-size: var(--form-label-size); font-weight: var(--weight-semibold); }
   label { display: grid; gap: var(--space-2); }
-  label small { color: var(--slate-500); font-size: var(--form-help-size); font-weight: var(--weight-medium); }
-  input:not([type="radio"]):not([type="checkbox"]), select, textarea { width: 100%; min-height: var(--control-min-height); padding: .78rem .9rem; border: var(--control-border); border-radius: var(--control-radius); background: var(--white); color: var(--slate-700); }
-  input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus { border-color: var(--teal-700); outline: 0; box-shadow: var(--focus-ring-soft); }
+  .field-label small, label > small { color: var(--slate-600); font-size: .92em; font-weight: var(--weight-regular); }
+  input:not([type="radio"]):not([type="checkbox"]), select, textarea { width: 100%; min-height: var(--control-min-height); padding: .78rem .9rem; border: var(--control-border); border-radius: var(--control-radius); background: var(--white); color: var(--navy-900); }
+  input:not([type="radio"]):not([type="checkbox"]):hover, select:hover, textarea:hover { border-color: var(--slate-700); }
+  input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus { border-color: var(--teal-700); outline: 0; box-shadow: 0 0 0 3px rgba(20, 116, 111, .22); }
+  select { appearance: none; padding-right: 2.6rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23364c56' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .9rem center; background-size: 1.1rem; }
   textarea { min-height: 9rem; resize: vertical; }
+  [aria-invalid="true"]:not([type="radio"]):not([type="checkbox"]) { border-color: var(--error); box-shadow: inset 0 0 0 1px var(--error); }
+  /* Error messages are created by script, so they need :global to pick up scoped styles. */
+  form :global(.field-error) { display: flex; margin: 0; align-items: flex-start; gap: .45rem; color: var(--error); font-size: var(--form-help-size); font-weight: var(--weight-semibold); line-height: 1.4; }
+  form :global(.field-error svg) { width: 1.05rem; height: 1.05rem; margin-top: .1rem; flex: 0 0 auto; }
+  .choice-group.has-error { padding-left: var(--space-4); border-left: 3px solid var(--error); }
+
+  /* Choice cards */
   .choice-group { display: grid; min-width: 0; margin: 0; padding: 0; border: 0; gap: var(--space-3); }
   .choice-group > legend { padding: 0; }
   .choice-grid { display: grid; gap: var(--space-3); }
   .choice-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .choice-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .choice { position: relative; display: flex; min-height: 5.5rem; padding: var(--space-4); border: 1px solid var(--slate-300); border-radius: var(--radius); background: var(--white); cursor: pointer; align-items: flex-start; gap: var(--space-3); }
+  .choice { position: relative; display: flex; min-height: 5.25rem; padding: var(--space-4); border: var(--control-border); border-radius: var(--radius); background: var(--white); cursor: pointer; align-items: flex-start; gap: var(--space-3); transition: border-color .12s ease, background .12s ease, box-shadow .12s ease; }
   .choice:hover { border-color: var(--teal-700); }
+  .choice:focus-within { border-color: var(--teal-700); box-shadow: 0 0 0 3px rgba(20, 116, 111, .22); }
   .choice:has(input:checked) { border-color: var(--teal-700); background: var(--sky-100); box-shadow: inset 0 0 0 1px var(--teal-700); }
-  .choice input { width: 1.1rem; height: 1.1rem; margin: .14rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
+  .choice:has(input:checked) strong { color: var(--teal-800); }
+  .choice input { width: 1.2rem; height: 1.2rem; margin: .1rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
+  .choice input:focus-visible { outline: 0; }
   .choice span { display: grid; gap: var(--space-1); }
   .choice strong { color: var(--navy-900); font-size: 1rem; font-weight: var(--weight-semibold); line-height: 1.25; }
-  .choice small { color: var(--slate-600); font-size: .86rem; font-weight: var(--weight-regular); line-height: 1.4; }
+  .choice small { color: var(--slate-600); font-size: .92rem; font-weight: var(--weight-regular); line-height: 1.4; }
   .compact-choices { max-width: 31rem; }
   .compact-choices .choice { min-height: 0; align-items: center; }
-  .field-guidance { margin-top: calc(var(--space-3) * -1); color: var(--slate-600); font-size: .87rem; line-height: 1.45; }
-  .check-choice { display: flex; padding: var(--space-4); border: 1px solid var(--slate-300); border-radius: var(--radius); background: var(--sky-50); align-items: flex-start; gap: var(--space-3); cursor: pointer; }
-  .check-choice input { width: 1.15rem; height: 1.15rem; margin: .15rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
-  .check-choice span { color: var(--slate-700); font-weight: var(--weight-medium); }
-  .step-actions { display: flex; padding-top: var(--space-5); border-top: 1px solid var(--slate-200); justify-content: space-between; gap: var(--space-3); }
-  .step-actions--forward { justify-content: flex-end; }
-  .step-actions--back-only { padding-top: 0; border-top: 0; justify-content: flex-start; }
+  .field-guidance { max-width: 60ch; margin-top: calc(var(--space-4) * -1); color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
+  .check-list { display: grid; gap: var(--space-3); }
+  .check-choice { display: flex; padding: var(--space-4); border: var(--control-border); border-radius: var(--radius); background: var(--white); align-items: flex-start; gap: var(--space-3); cursor: pointer; }
+  .check-choice:has(input:checked) { border-color: var(--teal-700); background: var(--sky-100); }
+  .check-choice input { width: 1.2rem; height: 1.2rem; margin: .15rem 0 0; padding: 0; accent-color: var(--teal-700); flex: 0 0 auto; }
+  .check-choice > span { min-width: 0; color: var(--navy-900); font-weight: var(--weight-medium); line-height: 1.45; flex: 1 1 0; }
+  .check-choice.has-error { border-color: var(--error); }
+  .check-choice :global(.field-error) { width: 100%; margin-top: var(--space-2); flex-basis: 100%; }
+  .check-choice { flex-wrap: wrap; }
+
+  /* Actions */
+  .step-actions { display: flex; padding-top: var(--space-6); border-top: 1px solid var(--slate-200); align-items: center; gap: var(--space-3); }
+  .step-actions .button { gap: var(--button-gap); }
+  .step-actions .button :global(svg) { width: 1rem; height: 1rem; }
   .button-secondary { border: 1px solid var(--navy-900); background: transparent; color: var(--navy-900); }
-  .submission-area { display: grid; grid-template-columns: minmax(0, 1fr) auto; padding-top: var(--space-5); border-top: 1px solid var(--slate-200); gap: var(--space-6); align-items: end; }
-  .privacy-note { max-width: 60ch; color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
-  .privacy-note a { color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; }
-  .verification { display: grid; min-width: 0; margin-top: var(--space-4); gap: var(--space-2); }
-  .verification > p { color: var(--slate-700); font-size: .9rem; font-weight: var(--weight-semibold); }
-  .cf-turnstile { width: 100%; min-height: 65px; }
-  .submit-block { display: grid; justify-items: stretch; gap: var(--space-3); }
-  .submit-block .button { min-width: 13rem; }
+  .button-secondary:hover { background: var(--sky-100); color: var(--navy-900); }
+  .submission-area { display: grid; gap: var(--space-5); }
+  .verification { display: grid; min-width: 0; }
+  .cf-turnstile { width: 100%; max-width: 20rem; min-height: 65px; }
+  .step-actions--submit { flex-wrap: wrap; }
   button:disabled { cursor: wait; opacity: .72; }
   .trap { position: absolute; left: -9999px; }
-  .status { max-width: 24rem; min-height: 1.5em; color: var(--navy-800); font-size: var(--form-status-size); font-weight: var(--weight-heading); }
+  .status { max-width: 40rem; min-height: 1.5em; margin: 0; color: var(--navy-800); font-size: var(--form-status-size); font-weight: var(--weight-heading); }
+  .status:empty { display: none; }
   .status[data-state="error"] { color: var(--error); }
   .status[data-state="success"] { color: var(--success); }
+
+  /* Side rail */
+  .application-aside { position: sticky; top: var(--sticky-offset-compact); display: grid; gap: var(--space-5); }
+  .aside-card { padding: var(--space-6); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); }
+  .aside-card .eyebrow { margin-bottom: var(--space-4); }
+  .next-steps { display: grid; margin: 0; padding: 0; gap: var(--space-4); list-style: none; }
+  .next-steps li { display: grid; grid-template-columns: 1.85rem minmax(0, 1fr); gap: var(--space-3); align-items: start; }
+  .next-steps li > span { display: grid; width: 1.85rem; height: 1.85rem; border-radius: 50%; color: var(--white); background: var(--teal-700); font-size: .85rem; font-weight: var(--weight-semibold); place-items: center; }
+  .next-steps strong { display: block; color: var(--navy-900); font-size: 1rem; font-weight: var(--weight-semibold); line-height: 1.3; }
+  .next-steps p { margin-top: .25rem; color: var(--slate-600); font-size: .95rem; line-height: 1.5; }
+  .aside-note { margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--slate-200); color: var(--slate-600); font-size: .95rem; line-height: 1.5; }
+  .aside-card--call { color: var(--white); background: var(--navy-950); border-color: var(--navy-950); }
+  .aside-card--call .eyebrow { color: var(--accent-on-dark); }
+  .aside-card--call .button { width: 100%; gap: var(--button-gap); }
+  .aside-card--call .button :global(svg) { width: 1rem; height: 1rem; }
+  .aside-card--call p:last-child { margin-top: var(--space-3); color: var(--sky-200); font-size: .95rem; }
+  .privacy-note { max-width: 60ch; color: var(--slate-600); font-size: var(--form-help-size); line-height: 1.5; }
+  .privacy-note a { color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; }
+
+  @media (max-width: 960px) {
+    .application-layout { grid-template-columns: 1fr; }
+    .application-aside { position: static; }
+  }
+
   @media (max-width: 760px) {
-    .application-heading { margin-bottom: var(--space-6); }
     .form-progress { padding: var(--space-5) var(--space-6); }
     .form-progress ol { gap: var(--space-2); }
-    .form-progress li { grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-2); }
-    .form-progress li span { width: 2rem; height: 2rem; }
     .form-progress li:not(:last-child)::after { display: none; }
-    .form-progress li strong { padding-right: 0; font-size: .82rem; }
-    .form-section { padding: var(--space-6); }
+    .form-progress li strong { padding-right: 0; font-size: .85rem; }
+    .form-section { padding: var(--space-6); gap: var(--space-5); }
     .choice-grid--three { grid-template-columns: 1fr; }
-    .submission-area { grid-template-columns: 1fr; align-items: start; }
-    .submit-block { justify-items: start; }
   }
+
   @media (max-width: 560px) {
     .application { padding-block: var(--space-7); }
-    .form-progress ol { display: none; }
-    .progress-summary { display: block; color: var(--navy-900); font-size: .92rem; font-weight: var(--weight-semibold); }
+    .form-progress { display: none; }
     .form-section { padding: var(--space-5); }
     .form-section > legend { padding-top: var(--space-5); }
     .form-grid, .choice-grid--two { grid-template-columns: 1fr; }
     .choice { min-height: 0; }
     .step-actions { display: grid; grid-template-columns: 1fr; }
     .step-actions .button { width: 100%; }
-    .step-actions .button-secondary { order: 2; }
-    .submit-block, .submit-block .button { width: 100%; }
-    .cf-turnstile { width: 150px; min-height: 140px; }
-  }
-
-  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
-  @media (max-width: 900px) {
-    .application-heading { margin-inline: 0; justify-items: start; text-align: left; }
-    .progress-summary { font-size: 1rem; }
+    .cf-turnstile { max-width: none; }
+    .aside-card { padding: var(--space-5); }
   }
 </style>
