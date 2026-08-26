@@ -327,7 +327,7 @@ const accountabilityProof = [
   .purpose-section__details span { display: block; margin-bottom: var(--space-3); color: var(--teal-700); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .11em; text-transform: uppercase; }
   .purpose-section__details p { color: var(--slate-600); line-height: 1.65; }
   .purpose-gallery { display: grid; height: clamp(23rem, 31vw, 29rem); margin-top: clamp(var(--space-8), 7vw, var(--space-10)); grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
-  .purpose-gallery__scene { position: relative; min-width: 0; margin: 0; overflow: hidden; background: var(--slate-200); box-shadow: 0 .8rem 2rem rgba(23,55,70,.08); transition: box-shadow .35s ease, transform .35s ease; }
+  .purpose-gallery__scene { border-radius: var(--radius-md); position: relative; min-width: 0; margin: 0; overflow: hidden; background: var(--slate-200); box-shadow: 0 .8rem 2rem rgba(23,55,70,.08); transition: box-shadow .35s ease, transform .35s ease; }
   .purpose-gallery__scene img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.77) contrast(.99); transition: filter .45s ease, transform .55s ease; }
   .purpose-gallery__scene--primary img { object-position: 54% center; }
   .purpose-gallery__scene:nth-child(2) img { object-position: 46% center; }
@@ -359,8 +359,8 @@ const accountabilityProof = [
   .founder-profile { padding-block: var(--section-standard); overflow: hidden; background: var(--paper); }
   .founder-profile__grid { display: grid; grid-template-areas: 'portrait content'; grid-template-columns: minmax(17rem, 22rem) minmax(0, 1fr); gap: clamp(var(--space-8), 9vw, 9rem); align-items: center; }
   .founder-profile__portrait { position: relative; z-index: 0; width: 100%; max-width: 22rem; aspect-ratio: 1 / 1; margin: 0; grid-area: portrait; }
-  .founder-profile__portrait::before { position: absolute; z-index: -1; background: var(--teal-700); content: ''; inset: 2.25rem -2.25rem -2.25rem 2.25rem; }
-  .founder-profile__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; box-shadow: 0 1.15rem 2.75rem rgba(23,55,70,.16); }
+  .founder-profile__portrait::before { border-radius: var(--radius-md); position: absolute; z-index: -1; background: var(--teal-700); content: ''; inset: 2.25rem -2.25rem -2.25rem 2.25rem; }
+  .founder-profile__portrait img { border-radius: var(--radius-md); display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; box-shadow: 0 1.15rem 2.75rem rgba(23,55,70,.16); }
   .founder-profile__content { display: grid; max-width: 43rem; grid-area: content; gap: var(--space-5); }
   .founder-profile__content h2 { max-width: 24ch; }
   .founder-profile__content > p:not(.eyebrow, .lead) { max-width: 40rem; }
@@ -376,7 +376,7 @@ const accountabilityProof = [
   .governance-section__intro h2 { max-width: 25ch; }
   .governance-section__intro .lead { max-width: 42rem; }
   .governance-section__stage { display: grid; margin-top: clamp(var(--space-8), 7vw, var(--space-10)); gap: clamp(var(--space-6), 4vw, var(--space-8)); }
-  .board-preview { display: grid; min-height: 32rem; overflow: hidden; grid-template-areas: 'visual content'; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); color: var(--white); background: var(--navy-900); box-shadow: 0 1.25rem 3.25rem rgba(23,55,70,.14); }
+  .board-preview { border-radius: var(--radius-lg); display: grid; min-height: 32rem; overflow: hidden; grid-template-areas: 'visual content'; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); color: var(--white); background: var(--navy-900); box-shadow: 0 1.25rem 3.25rem rgba(23,55,70,.14); }
   .board-preview__content { display: flex; min-width: 0; padding: clamp(var(--space-7), 5vw, var(--space-9)); grid-area: content; flex-direction: column; align-items: flex-start; justify-content: center; }
   .board-preview .eyebrow { color: var(--accent-on-image); }
   .board-preview h3, .records-preview h3 { max-width: 24ch; margin-top: var(--space-3); font-size: var(--type-section-medium); font-weight: var(--weight-heading); letter-spacing: -.02em; line-height: 1.08; }
@@ -391,7 +391,7 @@ const accountabilityProof = [
   .board-preview__visual::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.82), rgba(9,34,45,.03) 58%); content: ''; inset: 0; }
   .board-preview__visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.99); }
   .board-preview__visual figcaption { position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); color: var(--text-muted-on-dark); font-size: .8rem; font-weight: var(--weight-heading); letter-spacing: .08em; text-transform: uppercase; }
-  .records-preview { min-width: 0; background: var(--paper); box-shadow: 0 1.15rem 3rem rgba(23,55,70,.1); }
+  .records-preview { border-radius: var(--radius-lg); overflow: hidden; min-width: 0; background: var(--paper); box-shadow: 0 1.15rem 3rem rgba(23,55,70,.1); }
   .records-preview__content { display: grid; padding: clamp(var(--space-6), 4vw, var(--space-8)); grid-template-columns: minmax(13rem, .82fr) minmax(0, 1.55fr) auto; gap: clamp(var(--space-6), 4vw, var(--space-8)); align-items: center; }
   .records-preview__content header { display: grid; gap: var(--space-3); }
   .records-preview h3 { color: var(--navy-900); }

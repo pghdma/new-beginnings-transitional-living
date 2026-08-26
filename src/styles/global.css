@@ -49,8 +49,10 @@
   --weight-bold: 700;
   --max: 76rem;
   --max-form: 70rem;
-  --radius: .4rem;
-  --radius-lg: .75rem;
+  --radius-sm: .4rem;   /* controls, chips, small buttons */
+  --radius-md: .75rem;  /* cards, contained photos, tiles */
+  --radius-lg: 1rem;    /* large composed panels */
+  --radius: var(--radius-sm);
   --shadow: 0 12px 30px rgba(23, 55, 70, .075);
   --shadow-raised: 0 2px 4px rgba(23, 55, 70, .04), 0 18px 42px rgba(23, 55, 70, .09);
   --focus-ring-soft: 0 0 0 3px rgba(20, 116, 111, .14);

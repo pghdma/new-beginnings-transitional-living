@@ -11,7 +11,7 @@ This section is the source of truth for the current New Beginnings site. The bro
 - Palette: institutional navy and teal, pale sky, paper, and off white surfaces. Brand ink for the logo is `--brand-ink`.
 - Use the shared tokens in `src/styles/global.css` for color, weight, type roles, spacing, controls, header geometry, medallions, focus, and common depth.
 - Use `--shadow` for a subtle surface and `--shadow-raised` for a meaningful raised panel. Unique image and interaction shadows may remain scoped when they communicate a deliberate depth level.
-- Use modest radii. Circles are reserved for medallions and real portraits.
+- Radii: `--radius-sm` (6px) for controls and chips, `--radius-md` (12px) for cards, contained photos, notes, and tiles, `--radius-lg` (16px) for large composed panels. Heroes, full-bleed bands, section backgrounds, and edge-bleed photos stay square. Circles are reserved for medallions and real portraits.
 - Use Lucide icons only. Icons are foreground information aids, never background decoration.
 - Prefer licensed home, interior, household detail, and Pittsburgh photography over generic people.
 - Never use AI generated photography.

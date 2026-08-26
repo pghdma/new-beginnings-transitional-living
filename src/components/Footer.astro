@@ -102,7 +102,7 @@ const trustItems = [
 <style>
   footer { flex: 0 0 auto; color: var(--white); background: var(--navy-950); }
   .footer-service { display: grid; padding-block: var(--section-standard); grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr); gap: clamp(3rem,7vw,7rem); align-items: stretch; }
-  .footer-map { display: grid; background: var(--navy-900); grid-template-rows: minmax(20rem,1fr) auto; }
+  .footer-map { border-radius: var(--radius-md); overflow: hidden; display: grid; background: var(--navy-900); grid-template-rows: minmax(20rem,1fr) auto; }
   .footer-map iframe { display: block; width: 100%; min-height: 22rem; border: 0; filter: saturate(.65) contrast(.95); }
   .map-caption { display: grid; padding: var(--space-5); grid-template-columns: auto 1fr; gap: var(--space-4); align-items: start; }
   .map-caption > :global(svg) { width: 2rem; height: 2rem; color: var(--accent-on-dark); stroke-width: 1.55; }

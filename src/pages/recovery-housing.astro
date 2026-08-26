@@ -152,13 +152,13 @@ const dailyRhythm = [
 
   .definition-section { padding-block: var(--section-standard); background: var(--canvas); }
   .definition-layout { display: grid; grid-template-areas: 'photo copy'; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
-  .definition-photo { height: 35rem; margin: 0; overflow: hidden; grid-area: photo; box-shadow: var(--shadow-raised); }
+  .definition-photo { border-radius: var(--radius-md); height: 35rem; margin: 0; overflow: hidden; grid-area: photo; box-shadow: var(--shadow-raised); }
   .definition-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(.97); }
   .definition-copy { max-width: 42rem; grid-area: copy; }
   .definition-copy h2 { max-width: 24ch; margin-top: var(--space-4); }
   .definition-copy > .lead { margin-top: var(--space-6); }
   .definition-copy > p:not(.eyebrow):not(.lead) { margin-top: var(--space-4); }
-  .scope-note { display: grid; margin-top: var(--space-7); padding: clamp(1.35rem, 2.5vw, 1.8rem); grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; background: var(--sky-50); }
+  .scope-note { border-radius: var(--radius-md); display: grid; margin-top: var(--space-7); padding: clamp(1.35rem, 2.5vw, 1.8rem); grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); align-items: start; background: var(--sky-50); }
   .scope-note__icon :global(svg) { width: 1.55rem; height: 1.55rem; }
   .scope-note__label { color: var(--teal-700); font-size: .72rem; font-weight: var(--weight-bold); letter-spacing: .12em; line-height: 1.2; text-transform: uppercase; }
   .scope-note h3 { margin-top: .35rem; font-size: 1.18rem; }
@@ -167,7 +167,7 @@ const dailyRhythm = [
   .rhythm-section { padding-block: var(--section-standard); background: var(--sky-50); }
   .rhythm-heading__title h2 { margin-top: var(--space-4); }
   .rhythm-heading > p:last-child { max-width: 37rem; color: var(--slate-600); font-size: 1.1rem; line-height: 1.65; }
-  .rhythm-composition { display: grid; margin-top: clamp(2.75rem, 6vw, 4.5rem); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); box-shadow: var(--shadow-raised); }
+  .rhythm-composition { border-radius: var(--radius-lg); overflow: hidden; display: grid; margin-top: clamp(2.75rem, 6vw, 4.5rem); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); box-shadow: var(--shadow-raised); }
   .rhythm-photo { min-height: 43rem; margin: 0; overflow: hidden; background: var(--slate-200); }
   .rhythm-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.96); }
   .rhythm-field { display: flex; padding: clamp(2.5rem, 5.5vw, 4.5rem); flex-direction: column; justify-content: center; color: var(--white); background: var(--navy-900); }
@@ -178,12 +178,12 @@ const dailyRhythm = [
   .rhythm-list__marker span { font-size: .75rem; font-weight: var(--weight-bold); letter-spacing: .12em; }
   .rhythm-list h3 { max-width: 15rem; color: var(--white); font-size: 1.3rem; line-height: 1.2; }
   .rhythm-list p { max-width: 19rem; margin-top: .65rem; color: var(--sky-100); font-size: .96rem; line-height: 1.58; }
-  .crisis-note { display: grid; margin-top: clamp(2.75rem, 5vw, 4rem); padding: var(--space-5); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--sky-100); background: rgba(255,255,255,.07); font-size: .9rem; line-height: 1.5; }
+  .crisis-note { border-radius: var(--radius-md); display: grid; margin-top: clamp(2.75rem, 5vw, 4rem); padding: var(--space-5); grid-template-columns: 1.5rem minmax(0, 1fr); gap: var(--space-3); color: var(--sky-100); background: rgba(255,255,255,.07); font-size: .9rem; line-height: 1.5; }
   .crisis-note :global(svg) { width: 1.2rem; height: 1.2rem; margin-top: .15rem; color: var(--accent-on-dark); stroke-width: 1.6; }
   .crisis-note strong { color: var(--white); font-weight: var(--weight-semibold); }
 
   .pathways-section { padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .pathways-layout { display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .pathways-layout { border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
   .pathways-photo { min-height: 38rem; margin: 0; overflow: hidden; grid-area: photo; }
   .pathways-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.72) contrast(.96); }
   .pathways-content { display: flex; padding: clamp(2.5rem, 6vw, 5rem); background: var(--navy-900); flex-direction: column; justify-content: center; grid-area: content; }
@@ -191,7 +191,7 @@ const dailyRhythm = [
   .pathways-content h2 { max-width: 24ch; margin-top: var(--space-4); color: var(--white); }
   .pathways-content > p:not(.eyebrow):not(.pathways-location) { max-width: 34rem; margin-top: var(--space-5); color: var(--sky-100); }
   .pathway-links { display: grid; margin-top: var(--space-6); gap: .8rem; }
-  .pathway-links a { display: grid; padding: 1.15rem 1.25rem; grid-template-columns: 2.65rem minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--white); background: var(--teal-700); box-shadow: 0 12px 30px rgba(5, 25, 35, .2); transition: transform .2s ease, background-color .2s ease; }
+  .pathway-links a { border-radius: var(--radius-sm); overflow: hidden; display: grid; padding: 1.15rem 1.25rem; grid-template-columns: 2.65rem minmax(0, 1fr) auto; gap: var(--space-4); align-items: center; color: var(--white); background: var(--teal-700); box-shadow: 0 12px 30px rgba(5, 25, 35, .2); transition: transform .2s ease, background-color .2s ease; }
   .pathway-links a:nth-child(2) { color: var(--navy-950); background: var(--paper); }
   .pathway-links a:hover { color: var(--white); background: var(--teal-800); transform: translateY(-2px); }
   .pathway-links a:nth-child(2):hover { color: var(--navy-950); background: var(--sky-100); }

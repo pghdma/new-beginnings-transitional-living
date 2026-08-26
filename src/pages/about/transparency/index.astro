@@ -154,7 +154,7 @@ const publicSources = [
 
   .identity-section { padding-block: var(--section-standard); background: var(--canvas); }
   .identity-layout { display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,.88fr) minmax(0,1.12fr); align-items: stretch; }
-  .identity-photo { min-height: 44rem; margin: 0; overflow: hidden; grid-area: photo; }
+  .identity-photo { border-radius: var(--radius-md); min-height: 44rem; margin: 0; overflow: hidden; grid-area: photo; }
   .identity-photo img { width: 100%; height: 100%; object-fit: cover; }
   .identity-content { display: flex; padding: clamp(3rem,6vw,5.5rem); grid-area: content; background: var(--paper); flex-direction: column; justify-content: center; }
   .identity-content h2 { max-width: 24ch; margin-top: var(--space-4); }
@@ -174,7 +174,7 @@ const publicSources = [
   .records-intro .eyebrow { color: var(--accent-on-dark); }
   .records-intro h2 { max-width: 24ch; margin-top: var(--space-4); color: var(--white); }
   .records-intro > h2 + p { max-width: 31rem; margin-top: var(--space-5); color: var(--sky-100); }
-  .record-directory { background: var(--paper); color: var(--slate-700); }
+  .record-directory { border-radius: var(--radius-lg); overflow: hidden; background: var(--paper); color: var(--slate-700); }
   .record-entry { display: grid; grid-template-columns: auto minmax(0,1fr) auto; padding: clamp(1.8rem,4vw,2.7rem); gap: var(--space-5); align-items: center; }
   .record-entry + .record-entry { border-top: 1px solid var(--slate-200); }
   .record-entry__icon { display: grid; width: 2.5rem; height: 2.5rem; color: var(--teal-700); place-items: center; }

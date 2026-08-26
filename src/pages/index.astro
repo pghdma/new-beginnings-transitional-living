@@ -251,7 +251,7 @@ const trustPoints = [
   .purpose-heading { position: sticky; top: var(--sticky-offset); }
   .purpose-heading h2 { max-width: 24ch; margin-top: var(--space-4); }
   .purpose-heading h2 span { display: block; color: var(--teal-700); }
-  .purpose-photo { position: relative; aspect-ratio: 4 / 3; margin: var(--space-7) 0 0; overflow: hidden; background: var(--slate-200); box-shadow: 0 1.4rem 3.5rem rgba(23,55,70,.16); }
+  .purpose-photo { border-radius: var(--radius-md); position: relative; aspect-ratio: 4 / 3; margin: var(--space-7) 0 0; overflow: hidden; background: var(--slate-200); box-shadow: 0 1.4rem 3.5rem rgba(23,55,70,.16); }
   .purpose-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.86) contrast(.97); }
   .purpose-content { max-width: 46rem; }
   .purpose-content > p + p { margin-top: var(--space-5); }
@@ -269,7 +269,7 @@ const trustPoints = [
   .housing-heading h2 { max-width: 36ch; margin-top: var(--space-4); color: var(--white); }
   .housing-heading > p { max-width: 34rem; color: var(--sky-100); font-size: 1.15rem; }
   .housing-paths { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-5); }
-  .housing-path { position: relative; min-height: 34rem; overflow: hidden; color: var(--white); background: var(--navy-900); box-shadow: 0 1.5rem 3.5rem rgba(4,24,32,.28); }
+  .housing-path { border-radius: var(--radius-lg); position: relative; min-height: 34rem; overflow: hidden; color: var(--white); background: var(--navy-900); box-shadow: 0 1.5rem 3.5rem rgba(4,24,32,.28); }
   .housing-path:hover { color: var(--white); }
   .housing-path > img, .housing-path__shade { position: absolute; width: 100%; height: 100%; inset: 0; }
   .housing-path > img { object-fit: cover; transition: transform .4s ease; }
@@ -281,7 +281,7 @@ const trustPoints = [
   .housing-path__label { color: var(--accent-on-image); font-size: .76rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
   .housing-path__content > h3 { min-height: 2.1em; max-width: 30ch; margin-top: .45rem; color: var(--white); font-size: clamp(2rem,3.5vw,3rem); font-weight: var(--weight-heading); line-height: 1.05; }
   .housing-path__copy { min-height: 3em; max-width: 32rem; margin-top: var(--space-3); color: var(--sky-100); font-size: 1.05rem; line-height: 1.45; }
-  .housing-path__action { display: inline-flex; min-height: 3.15rem; margin-top: var(--space-5); padding: .75rem 1rem; align-items: center; gap: var(--button-gap); color: var(--navy-950); background: var(--white); font-weight: var(--weight-semibold); line-height: 1; }
+  .housing-path__action { border-radius: var(--radius-sm); display: inline-flex; min-height: 3.15rem; margin-top: var(--space-5); padding: .75rem 1rem; align-items: center; gap: var(--button-gap); color: var(--navy-950); background: var(--white); font-weight: var(--weight-semibold); line-height: 1; }
   .housing-path__action :global(svg) { width: 1rem; height: 1rem; }
   .housing-facts { display: grid; margin-top: var(--space-7); padding-top: var(--space-6); border-top: 1px solid rgba(255,255,255,.2); grid-template-columns: repeat(3,minmax(0,1fr)); }
   .housing-fact { display: grid; padding-inline: clamp(1.25rem,2.5vw,2.25rem); grid-template-columns: 2.8rem minmax(0,1fr); gap: var(--space-4); align-items: start; }
@@ -302,7 +302,7 @@ const trustPoints = [
   .daily-content .lead { max-width: 34rem; margin-top: var(--space-6); font-size: clamp(1.08rem,1.6vw,1.25rem); line-height: 1.52; }
   .daily-photo { min-height: 42rem; margin: 0; overflow: hidden; }
   .daily-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 54% center; filter: saturate(.88) contrast(.96); }
-  .daily-list { display: grid; margin: var(--space-6) 0 0; padding: var(--space-5); grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-5) var(--space-6); background: var(--sky-50); list-style: none; }
+  .daily-list { border-radius: var(--radius-md); display: grid; margin: var(--space-6) 0 0; padding: var(--space-5); grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-5) var(--space-6); background: var(--sky-50); list-style: none; }
   .daily-list li { display: grid; grid-template-columns: auto 1fr; gap: .7rem; align-items: center; color: var(--navy-900); font-size: .96rem; font-weight: var(--weight-heading); line-height: 1.35; }
   .daily-list :global(svg) { width: 1.45rem; height: 1.45rem; color: var(--teal-700); stroke-width: 1.6; }
   .daily-scope { max-width: 34rem; margin-top: var(--space-5); color: var(--slate-600); font-size: .95rem; line-height: 1.6; }
@@ -316,7 +316,7 @@ const trustPoints = [
   .trust-section__actions { margin-top: var(--space-6); }
   .trust-section__actions .button { gap: var(--button-gap); }
   .trust-section__actions :global(svg) { width: 1.05rem; height: 1.05rem; }
-  .trust-panorama { aspect-ratio: 60 / 17; margin: var(--space-8) 0 0; overflow: hidden; background: var(--slate-200); }
+  .trust-panorama { border-radius: var(--radius-md); aspect-ratio: 60 / 17; margin: var(--space-8) 0 0; overflow: hidden; background: var(--slate-200); }
   .trust-panorama img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(.98); }
   .trust-points { display: grid; margin: 0; padding: var(--space-6) 0; border-block: 1px solid var(--slate-300); grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(1.25rem,3vw,2.5rem); list-style: none; }
   .trust-points li { display: flex; justify-content: center; align-items: center; gap: .8rem; }
@@ -326,7 +326,7 @@ const trustPoints = [
   .trust-points small { margin-top: .2rem; color: var(--slate-600); font-size: .84rem; line-height: 1.3; }
 
   .conversation-section { padding-block: var(--section-standard); background: var(--canvas); }
-  .conversation-layout { display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); align-items: stretch; box-shadow: var(--shadow-raised); }
+  .conversation-layout { border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); align-items: stretch; box-shadow: var(--shadow-raised); }
   .conversation-photo { min-height: 43rem; margin: 0; overflow: hidden; grid-area: photo; }
   .conversation-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .conversation-content { display: flex; padding: clamp(2.7rem,6vw,5rem); color: var(--white); background: var(--teal-800); flex-direction: column; justify-content: center; grid-area: content; }
