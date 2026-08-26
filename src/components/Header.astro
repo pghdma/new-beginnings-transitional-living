@@ -141,12 +141,12 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
   nav { display: flex; align-items: center; gap: clamp(1rem, 1.8vw, 1.75rem); }
   .nav-list { display: flex; margin: 0; padding: 0; align-items: center; gap: clamp(.9rem, 1.5vw, 1.5rem); list-style: none; }
   .nav-list > li { display: flex; align-items: center; }
-  .nav-list > li > a, .nav-group > a { position: relative; display: inline-flex; padding: .45rem 0; align-items: center; color: var(--navy-950); font-family: var(--font-display); font-size: .7rem; font-weight: 650; letter-spacing: .1em; line-height: 1; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+  .nav-list > li > a, .nav-group > a { position: relative; display: inline-flex; padding: .65rem 0 .25rem; align-items: center; color: var(--navy-950); font-family: var(--font-display); font-size: .7rem; font-weight: 650; letter-spacing: .1em; line-height: 1; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
   .nav-list > li > a::after, .nav-group > a::after { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--teal-700); content: ''; transform: scaleX(0); transform-origin: left; transition: transform .15s ease; }
   .nav-list > li > a:hover::after, .nav-group:hover > a::after, .nav-list > li > a[aria-current='page']::after, .nav-group.is-current > a::after { transform: scaleX(1); }
   .nav-list > li > a[aria-current='page'], .nav-group.is-current > a { color: var(--teal-800); }
   .nav-group { position: relative; gap: .15rem; }
-  .submenu-toggle { display: grid; width: 1.5rem; height: 1.75rem; padding: 0; place-items: center; border: 0; background: transparent; color: var(--navy-950); cursor: pointer; }
+  .submenu-toggle { display: grid; width: 1.5rem; height: 1.75rem; margin-top: .4rem; padding: 0; place-items: center; border: 0; background: transparent; color: var(--navy-950); cursor: pointer; }
   .submenu-toggle :global(svg) { width: .95rem; height: .95rem; stroke-width: 2.2; transition: transform .15s ease; }
   .nav-group.is-open .submenu-toggle :global(svg), .nav-group:hover .submenu-toggle :global(svg) { transform: rotate(180deg); }
 
@@ -189,6 +189,7 @@ const isCurrent = (href: string) => current === href || (href !== '/' && current
     .nav-list { display: block; }
     .nav-list > li { display: block; border-bottom: 1px solid var(--slate-200); }
     .nav-list > li > a, .nav-group > a { width: 100%; min-height: 3.25rem; padding: 1rem .25rem; font-size: .78rem; }
+    .submenu-toggle { margin-top: 0; }
     .nav-list > li > a::after, .nav-group > a::after { display: none; }
     .nav-list > li.nav-group { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0; align-items: center; }
     .submenu-toggle { width: 3rem; height: 3rem; }
