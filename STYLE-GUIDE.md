@@ -16,6 +16,33 @@ This section is the source of truth for the current New Beginnings site. The bro
 - Prefer licensed home, interior, household detail, and Pittsburgh photography over generic people.
 - Never use AI generated photography.
 
+### Components (reach for these before writing a new section)
+
+Every repeated section is a component in `src/components/`. Pages compose them and keep only genuinely one-off layout in their own `<style>`.
+
+| Component | What it is | Knobs |
+| --- | --- | --- |
+| `Hero` | The only hero. `variant="image"` (photo behind copy), `"split"` (copy left, photo or `aside` slot right; photo goes behind copy on phones), `"centered"` (centered copy with a `media` slot). | `size` xl/lg/md/sm, `height` viewport/tall/medium/short, `align`, `tone` navy/paper, slots `actions`, default (meta lines), `aside`, `media` |
+| `SplitPanel` | Photo beside content. `tone` navy/teal/paper make a rounded, shadowed panel; `plain` is a rounded photo with open content. Content first on phones. | `photoFraction`, `contentFraction`, `minHeight`, `padding` md/lg/xl/none, `shade`, `caption`, `hidePhotoMobile` |
+| `FeatureList` | Icon + title + copy. `layout` rows/columns/chips. | `icon` bare/medallion, `iconSize`, `tone`, `columns` 1–4, `divided`, `boxed` |
+| `StepList` | Numbered steps. `variant="inline"` (01/02/03 or circles) or `"cards"` (three cards with buttons). | `numbers` text/circle, `tone` |
+| `FaqAccordion` | The only accordion. Flat `items` or titled `groups`. | `variant` list/card, `single`, `openFirst` |
+| `TrustPoints` | The 501(c)(3) / DDAP / WestPARR row, from `src/data/credentials.ts`. | `variant` band/columns/panel/compact |
+| `CtaBand` | Closing call-to-action band. | `eyebrow`, `title`, `text`, `href`, `label`, `phone` |
+| `HousingDetailPage` | The men's / women's page template, fed by `src/data/housing.ts`. | — |
+| `HousingApplication`, `InquiryForm` | The two forms. Field styling comes from `src/styles/forms.css` via the `.form` class. | — |
+
+Tokens that these components (and any new section) must use, all in `src/styles/global.css`:
+
+- Color: the palette plus `--ink-rgb` for overlays (`rgba(var(--ink-rgb), .5)`), `--outline-on-dark`, `--border-on-dark`, `--surface-on-dark`, `--accent-border-on-dark`.
+- Shades: `--hero-shade-side`, `--hero-shade-side-narrow`, `--hero-shade-bottom`, `--hero-shade-center`, `--hero-shade-center-narrow`, `--card-shade`, `--card-shade-hover`, `--card-shade-soft`.
+- Depth and photos: `--shadow`, `--shadow-raised`, `--shadow-soft`, `--shadow-photo`, `--shadow-deep`, `--photo-filter`, `--photo-filter-hover`.
+- Type roles: `--type-display-xl/lg/md/sm` for h1s, `--type-section-lg/md/sm` for h2s. Do not add a per-page display size.
+- Radii: `--radius-sm/md/lg`. Spacing: `--space-1` … `--space-10`, `--section-standard/compact/hero`.
+- Breakpoints are exactly four: 1080 (navigation and very wide grids), 900 (wide editorial layouts), 760 (phones), 480 (compact phones). Do not introduce another.
+
+Verification before any deploy: `npm run predeploy-check`, then `npm run mobile-audit` (14/14 at 390 and 768), and `node scripts/visual-baseline.mjs <dir>` + `scripts/visual-diff.sh <before> <after>` when changing shared CSS.
+
 ### Type and Copy
 
 - Marketing headings and buttons use Title Case.
@@ -27,7 +54,7 @@ This section is the source of truth for the current New Beginnings site. The bro
 
 ### Layout Families
 
-The approved hero families are intentionally different. Do not flatten them into one generic component.
+Hero families are the three `Hero` variants above; pick a variant and size, do not write a new hero.
 
 - Home uses a full background image with left aligned copy.
 - About uses a shorter full background image with left aligned copy.
