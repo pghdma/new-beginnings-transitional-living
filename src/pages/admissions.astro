@@ -1,15 +1,26 @@
 ---
+import { Icon } from 'astro-icon/components';
 import MainLayout from '../layouts/MainLayout.astro';
 import HousingApplication from '../components/HousingApplication.astro';
+import { site } from '../data/site';
 ---
 
 <MainLayout title="Admissions" description="Apply for a bed in a New Beginnings sober living house for men or women in Pittsburgh, or call 412-628-0403.">
-  <section class="admissions-masthead">
-    <div class="container masthead-inner">
-      <p class="eyebrow">Admissions</p>
-      <h1>Apply for Recovery Housing</h1>
-      <p class="lead">Fill this out and we’ll call you back. Or skip it and call 412-628-0403. Either way works, and you don’t need a referral.</p>
-      <p class="masthead-note">This is the first step, not a guarantee of a bed. Openings change week to week, so the sooner we talk, the better.</p>
+  <section class="admissions-hero" aria-labelledby="admissions-title">
+    <div class="container admissions-hero__grid">
+      <div class="admissions-hero__copy">
+        <p class="eyebrow">Admissions</p>
+        <h1 id="admissions-title">Apply for Recovery Housing</h1>
+        <p class="lead">Fill this out and we’ll call you back. Or skip it and call. Either way works, and you don’t need a referral.</p>
+        <div class="actions admissions-hero__actions">
+          <a class="button button--light" href="#inquiry">Start the Application<Icon name="lucide:arrow-down" aria-hidden="true" /></a>
+          <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
+        </div>
+        <p class="admissions-hero__note"><Icon name="lucide:info" aria-hidden="true" />This is the first step, not a guarantee of a bed. Openings change week to week, so the sooner we talk, the better.</p>
+      </div>
+      <figure class="admissions-hero__photo">
+        <img src="/images/front-door.webp" alt="A bright teal front door on a whitewashed brick house" width="2200" height="3481" fetchpriority="high" />
+      </figure>
     </div>
   </section>
 
@@ -17,19 +28,32 @@ import HousingApplication from '../components/HousingApplication.astro';
 </MainLayout>
 
 <style>
-  .admissions-masthead { padding-block: clamp(3rem, 5vw, 4.5rem); color: var(--white); background: var(--navy-950); }
-  .masthead-inner { display: grid; max-width: 70rem; gap: var(--space-4); }
-  .admissions-masthead .eyebrow { color: var(--accent-on-dark); }
-  .admissions-masthead h1 { max-width: 26ch; color: var(--white); font-size: var(--type-display-compact); }
-  .admissions-masthead .lead { max-width: 45rem; color: var(--sky-100); }
-  .masthead-note { max-width: 45rem; color: var(--sky-200); font-size: .98rem; }
+  .admissions-hero { color: var(--white); background: var(--navy-950); }
+  .admissions-hero__grid { display: grid; min-height: clamp(28rem, 42vw, 36rem); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  .admissions-hero__copy { display: flex; padding: var(--section-hero) clamp(2.5rem, 6vw, 5rem) var(--section-hero) 0; flex-direction: column; justify-content: center; }
+  .admissions-hero .eyebrow { color: var(--accent-on-image); }
+  .admissions-hero h1 { max-width: 24ch; margin-top: var(--space-4); color: var(--white); font-size: var(--type-display-split); }
+  .admissions-hero .lead { max-width: 36rem; margin-top: var(--space-5); color: var(--sky-100); }
+  .admissions-hero__actions { margin-top: var(--space-6); }
+  .admissions-hero__actions .button { gap: var(--button-gap); }
+  .admissions-hero__actions :global(svg) { width: 1rem; height: 1rem; }
+  .admissions-hero__note { display: flex; max-width: 38rem; margin-top: var(--space-6); align-items: flex-start; gap: .7rem; color: var(--sky-200); font-size: 1rem; line-height: 1.5; }
+  .admissions-hero__note :global(svg) { width: 1.1rem; height: 1.1rem; margin-top: .2rem; color: var(--accent-on-image); flex: 0 0 auto; }
+  .admissions-hero__photo { position: relative; margin: 0 calc((100vw - min(100vw - (var(--gutter) * 2), var(--max))) / -2) 0 0; overflow: hidden; background: var(--navy-900); }
+  .admissions-hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; filter: saturate(.85) contrast(.98); }
 
-  @media (max-width: 520px) {
-    .admissions-masthead { padding-block: 2.75rem; }
+  @media (max-width: 900px) {
+    .admissions-hero { position: relative; overflow: hidden; }
+    .admissions-hero__grid { display: block; min-height: 0; }
+    .admissions-hero__photo { position: absolute; z-index: 0; margin: 0; inset: 0; }
+    .admissions-hero__photo img { object-position: center 35%; }
+    .admissions-hero__photo::after { position: absolute; background: linear-gradient(0deg, rgba(9,34,45,.97) 0%, rgba(9,34,45,.84) 55%, rgba(9,34,45,.5) 100%); content: ''; inset: 0; }
+    .admissions-hero__copy { position: relative; z-index: 1; min-height: clamp(28rem, 78svh, 36rem); padding: 4rem 0 2.75rem; justify-content: flex-end; }
   }
 
-  /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
-  @media (max-width: 900px) {
-    .masthead-note { font-size: 1rem; }
+  @media (max-width: 760px) {
+    .admissions-hero h1 { font-size: clamp(2.5rem, 9vw, 3.1rem); }
+    .admissions-hero__actions { display: grid; }
+    .admissions-hero__actions .button { width: 100%; }
   }
 </style>

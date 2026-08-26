@@ -272,7 +272,8 @@ import { site } from '../data/site';
   .progress-summary { display: none; }
   .form-section { display: grid; min-width: 0; margin: 0; padding: clamp(var(--space-6), 5vw, var(--space-8)); border: 0; gap: var(--space-5); }
   .form-section[hidden] { display: none; }
-  .form-section > legend { display: grid; width: 100%; padding: 0; color: var(--navy-900); }
+  /* A fieldset's top padding does not apply above its legend, so the legend carries its own. */
+  .form-section > legend { display: grid; width: 100%; padding: clamp(var(--space-6), 5vw, var(--space-8)) 0 0; color: var(--navy-900); }
   .form-section > legend strong { font-size: var(--type-section-compact); font-weight: var(--weight-heading); line-height: 1.15; }
   .section-intro { max-width: 58ch; margin-top: calc(var(--space-3) * -1); color: var(--slate-600); }
   .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
@@ -336,6 +337,7 @@ import { site } from '../data/site';
     .form-progress ol { display: none; }
     .progress-summary { display: block; color: var(--navy-900); font-size: .92rem; font-weight: var(--weight-semibold); }
     .form-section { padding: var(--space-5); }
+    .form-section > legend { padding-top: var(--space-5); }
     .form-grid, .choice-grid--two { grid-template-columns: 1fr; }
     .choice { min-height: 0; }
     .step-actions { display: grid; grid-template-columns: 1fr; }
