@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
+import SplitPanel from '../components/SplitPanel.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
@@ -81,9 +82,7 @@ const dailyRhythm = [
         <p>The rules are the same in every New Beginnings house. They’re simple and they’re not negotiable, because they keep the house safe for everyone living in it.</p>
       </header>
       <div class="rhythm-composition">
-        <figure class="rhythm-photo">
-          <img src="/images/household-linens.webp" alt="Neatly folded household linens in a shared home" width="2200" height="1236" loading="lazy" />
-        </figure>
+        <SplitPanel tone="navy" photo={{ src: '/images/household-linens.webp', alt: 'Neatly folded household linens in a shared home', width: 2200, height: 1236 }} photoFraction={0.72} contentFraction={1.28}>
         <div class="rhythm-field">
           <ol class="rhythm-list">
             {dailyRhythm.map((item) => (
@@ -101,12 +100,14 @@ const dailyRhythm = [
             <p><strong>Need help right now?</strong> New Beginnings isn’t an emergency shelter or crisis line. Call 911 for an emergency, or call or text 988 for crisis support.</p>
           </aside>
         </div>
+        </SplitPanel>
       </div>
     </div>
   </section>
 
   <section class="pathways-section">
-    <div class="container pathways-layout">
+    <div class="container">
+      <SplitPanel tone="navy" padding="lg" photo={{ src: '/images/pittsburgh.jpg', alt: 'The Pittsburgh skyline viewed across the rivers', width: 1880, height: 1253 }} photoFraction={1.05} contentFraction={0.95} minHeight="38rem">
       <div class="pathways-content">
         <p class="eyebrow">Our Houses</p>
         <h2>Separate Houses for Men and Women</h2>
@@ -125,9 +126,7 @@ const dailyRhythm = [
         </nav>
         <p class="pathways-location"><Icon name="lucide:map-pin" aria-hidden="true" />Houses in {site.neighborhoods.join(', ')}. Administrative office in Mt. Washington.</p>
       </div>
-      <figure class="pathways-photo">
-        <img src="/images/pittsburgh.jpg" alt="The Pittsburgh skyline viewed across the rivers" width="1880" height="1253" loading="lazy" />
-      </figure>
+      </SplitPanel>
     </div>
   </section>
 
@@ -156,10 +155,8 @@ const dailyRhythm = [
   .rhythm-section{ padding-block: var(--section-standard); background: var(--sky-50); }
   .rhythm-heading__title h2{ margin-top: var(--space-4); }
   .rhythm-heading > p:last-child{ max-width: 37rem; color: var(--slate-600); font-size: 1.1rem; line-height: 1.65; }
-  .rhythm-composition{ border-radius: var(--radius-lg); overflow: hidden; display: grid; margin-top: clamp(2.75rem, 6vw, 4.5rem); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); box-shadow: var(--shadow-raised); }
-  .rhythm-photo{ min-height: 43rem; margin: 0; overflow: hidden; background: var(--slate-200); }
-  .rhythm-photo img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
-  .rhythm-field{ display: flex; padding: clamp(2.5rem, 5.5vw, 4.5rem); flex-direction: column; justify-content: center; color: var(--white); background: var(--navy-900); }
+  .rhythm-composition { margin-top: clamp(2.75rem, 6vw, 4.5rem); }
+  .rhythm-field { color: var(--white); }
   .rhythm-list{ display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem); list-style: none; }
   .rhythm-list li{ min-width: 0; }
   .rhythm-list__marker{ display: flex; margin-bottom: var(--space-4); align-items: center; gap: .7rem; color: var(--accent-on-dark); }
@@ -172,10 +169,7 @@ const dailyRhythm = [
   .crisis-note strong{ color: var(--white); font-weight: var(--weight-semibold); }
 
   .pathways-section{ padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
-  .pathways-layout{ border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
-  .pathways-photo{ min-height: 38rem; margin: 0; overflow: hidden; grid-area: photo; }
-  .pathways-photo img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
-  .pathways-content{ display: flex; padding: clamp(2.5rem, 6vw, 5rem); background: var(--navy-900); flex-direction: column; justify-content: center; grid-area: content; }
+  .pathways-content { color: var(--white); }
   .pathways-content .eyebrow{ color: var(--accent-on-dark); }
   .pathways-content h2{ max-width: 24ch; margin-top: var(--space-4); color: var(--white); }
   .pathways-content > p:not(.eyebrow):not(.pathways-location){ max-width: 34rem; margin-top: var(--space-5); color: var(--sky-100); }
@@ -194,7 +188,7 @@ const dailyRhythm = [
   .pathways-location :global(svg){ width: 1rem; height: 1rem; margin-top: .2rem; flex: 0 0 auto; }
 
   @media (max-width: 900px) {
-    .definition-layout, .pathways-layout{ grid-template-columns: 1fr; }
+    .definition-layout{ grid-template-columns: 1fr; }
     .housing-hero{ position: relative; overflow: hidden; border-bottom: 0; color: var(--white); background: var(--navy-950); }
     .housing-hero__scope{ color: var(--sky-100); background: var(--surface-on-dark); }
     .housing-hero__scope :global(svg){ color: var(--accent-on-dark); }
@@ -202,9 +196,6 @@ const dailyRhythm = [
     .definition-photo{ height: auto; aspect-ratio: 16 / 10; }
     .rhythm-composition{ grid-template-columns: 1fr; }
     .rhythm-heading > p:last-child{ max-width: 40rem; }
-    .rhythm-photo{ min-height: 0; aspect-ratio: 16 / 8.5; }
-    .pathways-layout{ grid-template-areas: 'content' 'photo'; box-shadow: var(--shadow-raised); }
-    .pathways-photo{ height: clamp(18rem, 48vw, 26rem); min-height: 0; }
   }
 
   @media (max-width: 760px) {
@@ -212,7 +203,6 @@ const dailyRhythm = [
     .definition-layout{ gap: var(--space-6); }
     .definition-photo{ aspect-ratio: 4 / 3; }
     .scope-note{ grid-template-columns: 2.75rem minmax(0, 1fr); gap: var(--space-3); }
-    .rhythm-photo{ aspect-ratio: 4 / 3; }
     .rhythm-field{ padding: var(--space-7) var(--space-5); }
     .rhythm-list{ grid-template-columns: 1fr; gap: var(--space-7); }
     .rhythm-list h3, .rhythm-list p{ max-width: none; }

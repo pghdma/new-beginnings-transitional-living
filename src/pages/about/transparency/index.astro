@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import FeatureList from '../../../components/FeatureList.astro';
 import Hero from '../../../components/Hero.astro';
+import SplitPanel from '../../../components/SplitPanel.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { site } from '../../../data/site';
 
@@ -64,7 +65,8 @@ const publicSources = [
   </Hero>
 
   <section class="identity-section">
-    <div class="container identity-layout">
+    <div class="container">
+      <SplitPanel tone="paper" padding="xl" photo={{ src: '/images/pittsburgh.jpg', alt: 'Downtown Pittsburgh and its rivers', width: 1880, height: 1253 }} photoFraction={0.88} contentFraction={1.12} minHeight="44rem">
       <div class="identity-content">
         <p class="eyebrow">Who We Are</p>
         <h2>A Pittsburgh Nonprofit You Can Look Up</h2>
@@ -82,9 +84,7 @@ const publicSources = [
           <strong>{site.ein}</strong>
         </div>
       </div>
-      <figure class="identity-photo">
-        <img src="/images/pittsburgh.jpg" alt="Downtown Pittsburgh and its rivers" width="1880" height="1253" loading="lazy" />
-      </figure>
+      </SplitPanel>
     </div>
   </section>
 
@@ -140,10 +140,7 @@ const publicSources = [
 <style>
 
   .identity-section{ padding-block: var(--section-standard); background: var(--canvas); }
-  .identity-layout{ display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,.88fr) minmax(0,1.12fr); align-items: stretch; }
-  .identity-photo{ border-radius: var(--radius-md); min-height: 44rem; margin: 0; overflow: hidden; grid-area: photo; }
-  .identity-photo img{ width: 100%; height: 100%; object-fit: cover; }
-  .identity-content{ display: flex; padding: clamp(3rem,6vw,5.5rem); grid-area: content; background: var(--paper); flex-direction: column; justify-content: center; }
+  .identity-content { min-width: 0; }
   .identity-content h2{ max-width: 24ch; margin-top: var(--space-4); }
   .identity-lede{ max-width: 40rem; margin-top: var(--space-5); color: var(--slate-800); font-size: clamp(1.15rem,1.7vw,1.35rem); line-height: 1.55; }
   .standing-list{ display: grid; margin: var(--space-7) 0 0; grid-template-columns: 1fr 1fr; gap: var(--space-6) var(--space-7); }
@@ -190,7 +187,6 @@ const publicSources = [
   .button--cta-outline:hover{ color: var(--navy-950); background: var(--white); }
 
   @media (max-width: 1080px) {
-    .identity-layout{ grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); }
     .identity-content{ padding: 3rem; }
     .standing-list{ grid-template-columns: 1fr; gap: var(--space-5); }
     .record-entry{ grid-template-columns: auto minmax(0,1fr); }
@@ -200,9 +196,6 @@ const publicSources = [
   }
 
   @media (max-width: 900px) {
-    .identity-layout, .records-layout{ grid-template-columns: 1fr; }
-    .identity-layout{ grid-template-areas: 'content' 'photo'; }
-    .identity-photo{ min-height: 26rem; }
     .identity-content{ padding: var(--section-standard) var(--gutter); }
     .standing-list{ grid-template-columns: 1fr 1fr; }
     .records-intro{ position: static; }
@@ -212,7 +205,6 @@ const publicSources = [
   }
 
   @media (max-width: 760px) {
-    .identity-photo{ min-height: 21rem; }
     .standing-list{ grid-template-columns: 1fr; gap: var(--space-5); }
     .identity-meta{ align-items: flex-start; flex-direction: column; gap: .35rem; }
     .record-entry{ grid-template-columns: 1fr; gap: var(--space-4); }

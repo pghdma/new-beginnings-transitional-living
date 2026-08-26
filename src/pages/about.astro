@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
 import TrustPoints from '../components/TrustPoints.astro';
 import FeatureList from '../components/FeatureList.astro';
+import SplitPanel from '../components/SplitPanel.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { currentBoardMembers, susanRua } from '../data/leadership';
 
@@ -212,6 +213,7 @@ const founderHighlights = [
 
     <div class="container governance-section__stage">
       <article class="board-preview">
+        <SplitPanel tone="navy" padding="xl" shade caption="Volunteer Board" photo={{ src: '/images/community-table.jpg', alt: 'An empty meeting room prepared for organizational work', width: 1880, height: 1253 }} photoFraction={1.06} contentFraction={0.94} minHeight="32rem">
         <div class="board-preview__content">
           <p class="eyebrow">Leadership</p>
           <h3>The People Responsible for the Mission</h3>
@@ -232,16 +234,7 @@ const founderHighlights = [
             <Icon name="lucide:arrow-right" aria-hidden="true" />
           </a>
         </div>
-        <figure class="board-preview__visual">
-          <img
-            src="/images/community-table.jpg"
-            alt="An empty meeting room prepared for organizational work"
-            width="1880"
-            height="1253"
-            loading="lazy"
-          />
-          <figcaption>Volunteer Board</figcaption>
-        </figure>
+        </SplitPanel>
       </article>
 
       <article class="records-preview">
@@ -314,8 +307,8 @@ const founderHighlights = [
   .governance-section__intro h2{ max-width: 25ch; }
   .governance-section__intro .lead{ max-width: 42rem; }
   .governance-section__stage{ display: grid; margin-top: clamp(var(--space-8), 7vw, var(--space-10)); gap: clamp(var(--space-6), 4vw, var(--space-8)); }
-  .board-preview{ border-radius: var(--radius-lg); display: grid; min-height: 32rem; overflow: hidden; grid-template-areas: 'visual content'; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); color: var(--white); background: var(--navy-900); box-shadow: var(--shadow-photo); }
-  .board-preview__content{ display: flex; min-width: 0; padding: clamp(var(--space-7), 5vw, var(--space-9)); grid-area: content; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .board-preview { color: var(--white); }
+  .board-preview__content { min-width: 0; align-items: flex-start; }
   .board-preview .eyebrow{ color: var(--accent-on-image); }
   .board-preview h3, .records-preview h3{ max-width: 24ch; margin-top: var(--space-3); font-size: var(--type-section-md); font-weight: var(--weight-heading); letter-spacing: -.02em; line-height: 1.08; }
   .board-preview h3{ color: var(--white); }
@@ -325,10 +318,6 @@ const founderHighlights = [
   .board-preview__roster strong{ color: var(--white); font-size: 1.04rem; font-weight: var(--weight-heading); }
   .board-preview__roster span{ color: var(--text-muted-on-dark); font-size: .9rem; line-height: 1.35; }
   .board-preview .button{ margin-top: var(--space-7); gap: var(--button-gap); }
-  .board-preview__visual{ position: relative; min-height: 100%; margin: 0; overflow: hidden; grid-area: visual; background: var(--navy-950); }
-  .board-preview__visual::after{ position: absolute; background: var(--card-shade-soft); content: ''; inset: 0; }
-  .board-preview__visual img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
-  .board-preview__visual figcaption{ position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); color: var(--text-muted-on-dark); font-size: .8rem; font-weight: var(--weight-heading); letter-spacing: .08em; text-transform: uppercase; }
   .records-preview{ border-radius: var(--radius-lg); overflow: hidden; min-width: 0; background: var(--paper); box-shadow: var(--shadow-soft); }
   .records-preview__content{ display: grid; padding: clamp(var(--space-6), 4vw, var(--space-8)); grid-template-columns: minmax(13rem, .82fr) minmax(0, 1.55fr) auto; gap: clamp(var(--space-6), 4vw, var(--space-8)); align-items: center; }
   .records-preview__content header{ display: grid; gap: var(--space-3); }
@@ -360,7 +349,6 @@ const founderHighlights = [
     .founder-profile__portrait{ width: calc(100% - var(--space-5)); max-width: 19rem; margin-top: var(--space-6); margin-inline: auto; }
     .founder-profile__portrait::before{ inset: 1.25rem -1.25rem -1.25rem 1.25rem; }
     .board-preview{ min-height: 0; grid-template-areas: 'content' 'visual'; grid-template-columns: 1fr; }
-    .board-preview__visual{ min-height: 0; aspect-ratio: 16 / 10; }
     .purpose-section__details{ grid-template-columns: 1fr; gap: var(--space-5); }
     .purpose-section__details > div + div{ padding-top: var(--space-5); border-top: 1px solid var(--slate-300); }
     .purpose-gallery__scene, .purpose-gallery__scene--primary{ aspect-ratio: 4 / 3; }

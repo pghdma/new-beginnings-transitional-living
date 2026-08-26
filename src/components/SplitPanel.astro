@@ -1,0 +1,86 @@
+---
+/**
+ * SplitPanel — a photo beside a block of content.
+ *
+ * tone="navy"|"teal"|"paper"  a rounded, shadowed panel whose content side carries that background
+ * tone="plain"                no panel: a rounded photo and unpadded content with a gap between them
+ *
+ * photoFraction / contentFraction set the desktop column ratio; minHeight the panel height;
+ * padding sets the content inset (md, lg, xl, none); shade darkens the photo's lower half for a
+ * caption; hidePhotoMobile drops the photo below 900px. Content goes in the default slot.
+ * On phones the content always comes first.
+ */
+interface Photo { src: string; alt: string; width: number; height: number; position?: string }
+interface Props {
+  photo: Photo;
+  tone?: 'navy' | 'teal' | 'paper' | 'plain';
+  side?: 'left' | 'right';
+  photoFraction?: number;
+  contentFraction?: number;
+  minHeight?: string;
+  photoHeight?: string;
+  padding?: 'md' | 'lg' | 'xl' | 'none';
+  shade?: boolean;
+  caption?: string;
+  hidePhotoMobile?: boolean;
+  class?: string;
+}
+const {
+  photo, tone = 'navy', side = 'left', photoFraction = 0.92, contentFraction = 1.08,
+  minHeight, photoHeight, padding = 'md', shade = false, caption, hidePhotoMobile = false, class: className,
+} = Astro.props;
+const style = [
+  `--photo-col: minmax(0, ${photoFraction}fr)`,
+  `--content-col: minmax(0, ${contentFraction}fr)`,
+  minHeight ? `--panel-min-height: ${minHeight}` : '',
+  photoHeight ? `--panel-photo-height: ${photoHeight}` : '',
+  photo.position ? `--photo-position: ${photo.position}` : '',
+].filter(Boolean).join('; ');
+---
+
+<div
+  class:list={['panel', `panel--${tone}`, `panel--${side}`, `panel--pad-${padding}`, { 'panel--toned': tone !== 'plain', 'panel--shade': shade, 'panel--hide-photo-mobile': hidePhotoMobile }, className]}
+  style={style}
+>
+  <figure class="panel__photo">
+    <img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" />
+    {caption && <figcaption class="panel__caption">{caption}</figcaption>}
+  </figure>
+  <div class="panel__content"><slot /></div>
+</div>
+
+<style>
+  .panel { display: grid; min-height: var(--panel-min-height, auto); grid-template-areas: 'photo content'; grid-template-columns: var(--photo-col) var(--content-col); align-items: stretch; }
+  .panel--right { grid-template-areas: 'content photo'; grid-template-columns: var(--content-col) var(--photo-col); }
+  .panel--toned { overflow: hidden; border-radius: var(--radius-lg); box-shadow: var(--shadow-raised); }
+  .panel__photo { position: relative; min-width: 0; margin: 0; overflow: hidden; grid-area: photo; background: var(--slate-200); }
+  .panel__photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--photo-position, center); filter: var(--photo-filter); }
+  .panel--shade .panel__photo::after { position: absolute; background: var(--card-shade-soft); content: ''; inset: 0; }
+  .panel__caption { position: absolute; z-index: 1; right: var(--space-5); bottom: var(--space-5); left: var(--space-5); max-width: 22rem; color: var(--white); font-size: .8rem; font-weight: var(--weight-heading); letter-spacing: .08em; text-transform: uppercase; }
+  .panel__content { display: flex; min-width: 0; grid-area: content; flex-direction: column; justify-content: center; }
+  .panel--pad-md .panel__content { padding: clamp(2.5rem, 5.5vw, 4.5rem); }
+  .panel--pad-lg .panel__content { padding: clamp(2.7rem, 6vw, 5rem); }
+  .panel--pad-xl .panel__content { padding: clamp(var(--space-7), 5vw, var(--space-9)); }
+  .panel--navy .panel__content { color: var(--white); background: var(--navy-900); }
+  .panel--teal .panel__content { color: var(--white); background: var(--teal-800); }
+  .panel--paper .panel__content { background: var(--paper); }
+  .panel--navy .panel__photo, .panel--teal .panel__photo { background: var(--navy-950); }
+
+  /* plain: rounded photo, open content */
+  .panel--plain { gap: clamp(3rem, 8vw, 7rem); align-items: center; }
+  .panel--plain .panel__photo { height: var(--panel-photo-height, 39rem); border-radius: var(--radius-md); box-shadow: var(--shadow-raised); }
+  .panel--plain .panel__content { padding: 0; }
+
+  @media (max-width: 900px) {
+    .panel, .panel--right { grid-template-areas: 'content' 'photo'; grid-template-columns: 1fr; min-height: 0; }
+    .panel__photo { height: auto; min-height: 0; aspect-ratio: 16 / 10; }
+    .panel--plain .panel__photo { height: auto; }
+    .panel--plain { gap: var(--space-7); }
+    .panel--hide-photo-mobile .panel__photo { display: none; }
+  }
+
+  @media (max-width: 760px) {
+    .panel__photo { aspect-ratio: 4 / 3; }
+    .panel--toned .panel__content { padding: var(--space-7) var(--space-5); }
+  }
+</style>

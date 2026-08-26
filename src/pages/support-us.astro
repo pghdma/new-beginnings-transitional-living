@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
+import SplitPanel from '../components/SplitPanel.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -126,11 +127,7 @@ const impactLevels = [
         <p class="lead">New Beginnings is small. There’s no marketing budget and no big staff. Money goes into the houses and the people living in them.</p>
       </header>
 
-      <div class="gift-impact__composition">
-        <figure class="gift-impact__media">
-          <img src="/images/household-linens.webp" alt="Freshly folded household linens" width="2200" height="1236" loading="lazy" />
-          <figcaption>The ordinary things that make a house a home.</figcaption>
-        </figure>
+      <SplitPanel tone="paper" padding="none" shade caption="The ordinary things that make a house a home." photo={{ src: '/images/household-linens.webp', alt: 'Freshly folded household linens', width: 2200, height: 1236, position: '51% center' }} photoFraction={0.8} contentFraction={1.2} minHeight="36rem">
 
         <div class="impact-directory" aria-label="Giving levels">
           {impactLevels.map((level) => (
@@ -147,7 +144,7 @@ const impactLevels = [
             </button>
           ))}
         </div>
-      </div>
+      </SplitPanel>
 
       <p class="impact-disclaimer">These examples show the kinds of costs gifts help cover. They aren’t the price of a specific item or a promise of a specific result. Real needs and costs vary.</p>
     </div>
@@ -338,46 +335,10 @@ const impactLevels = [
   .gift-impact .section-head h2{ max-width: 30ch; margin-inline: auto; }
   .gift-impact .section-head .lead{ margin-inline: auto; }
 
-  .gift-impact__composition{ border-radius: var(--radius-lg); overflow: hidden;
-    display: grid;
-    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-    align-items: stretch;
-    background: var(--paper);
-    box-shadow: var(--shadow-raised);
-  }
 
-  .gift-impact__media{
-    position: relative;
-    min-height: 36rem;
-    margin: 0;
-    overflow: hidden;
-  }
 
-  .gift-impact__media::after{
-    position: absolute;
-    background: linear-gradient(180deg, transparent 45%, rgba(var(--ink-rgb), .82));
-    content: '';
-    inset: 0;
-  }
 
-  .gift-impact__media img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 51% center;
-  }
 
-  .gift-impact__media figcaption{
-    position: absolute;
-    z-index: 1;
-    right: var(--space-6);
-    bottom: var(--space-6);
-    left: var(--space-6);
-    max-width: 22rem;
-    color: var(--white);
-    font-size: 1.15rem;
-    font-weight: var(--weight-heading);
-  }
 
   .impact-directory{ display: grid; align-content: stretch; }
 
@@ -502,12 +463,6 @@ const impactLevels = [
     .donation-planner{ padding: var(--space-5); gap: var(--space-5); }
     .amount-options{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .amount-options__other{ grid-column: 1 / -1; }
-    .gift-impact__composition{ grid-template-columns: 1fr; }
-    .gift-impact__media{
-      min-width: 0;
-      min-height: 0;
-      aspect-ratio: 4 / 3;
-    }
 
     .impact-level{
       min-height: auto;

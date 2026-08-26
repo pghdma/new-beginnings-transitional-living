@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import TrustPoints from '../components/TrustPoints.astro';
 import StepList from '../components/StepList.astro';
 import FeatureList from '../components/FeatureList.astro';
+import SplitPanel from '../components/SplitPanel.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -183,7 +184,8 @@ const firstConversation = [
   </section>
 
   <section class="conversation-section" id="start-a-conversation">
-    <div class="container conversation-layout">
+    <div class="container">
+      <SplitPanel tone="teal" padding="lg" photo={{ src: '/images/admissions.jpg', alt: 'Notebooks and coffee arranged around a shared table', width: 1880, height: 1245 }} minHeight="43rem">
       <div class="conversation-content">
         <p class="eyebrow">Getting In</p>
         <h2>Start With a Phone Call</h2>
@@ -195,9 +197,7 @@ const firstConversation = [
         </div>
         <p class="conversation-secondary">Referring a client? <a class="inline-link" href="/referrals/">See the professionals page</a>. Want to help? <a class="inline-link" href="/support-us/">Support the houses</a>.</p>
       </div>
-      <figure class="conversation-photo">
-        <img src="/images/admissions.jpg" alt="Notebooks and coffee arranged around a shared table" width="1880" height="1245" loading="lazy" />
-      </figure>
+      </SplitPanel>
     </div>
   </section>
 </MainLayout>
@@ -271,10 +271,7 @@ const firstConversation = [
   .trust-panorama img{ display: block; width: 100%; height: 100%; object-fit: cover; filter: var(--photo-filter); }
 
   .conversation-section{ padding-block: var(--section-standard); background: var(--canvas); }
-  .conversation-layout{ border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-areas: 'photo content'; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); align-items: stretch; box-shadow: var(--shadow-raised); }
-  .conversation-photo{ min-height: 43rem; margin: 0; overflow: hidden; grid-area: photo; }
-  .conversation-photo img{ width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .conversation-content{ display: flex; padding: clamp(2.7rem,6vw,5rem); color: var(--white); background: var(--teal-800); flex-direction: column; justify-content: center; grid-area: content; }
+  .conversation-content { color: var(--white); }
   .conversation-content .eyebrow{ color: var(--accent-on-dark-soft); }
   .conversation-content h2{ max-width: 24ch; margin-top: var(--space-4); color: var(--white); }
   .conversation-content > p:not(.eyebrow):not(.conversation-secondary){ max-width: 37rem; margin-top: var(--space-4); color: var(--text-on-dark); }
@@ -296,14 +293,13 @@ const firstConversation = [
   }
 
   @media (max-width: 900px) {
-    .purpose-layout, .housing-heading, .conversation-layout, .trust-intro{ grid-template-columns: 1fr; }
+    .purpose-layout, .housing-heading, .trust-intro{ grid-template-columns: 1fr; }
     .purpose-layout{ gap: 0; }
     .purpose-heading{ display: contents; }
     .purpose-heading .eyebrow{ order: 1; }
     .purpose-heading h2{ order: 2; }
     .purpose-content{ margin-top: var(--space-6); order: 3; }
     .purpose-photo{ order: 4; }
-    .conversation-layout{ grid-template-areas: 'content' 'photo'; }
     .purpose-heading{ position: static; }
     .housing-heading{ align-items: start; gap: var(--space-5); }
     .housing-facts{ grid-template-columns: 1fr; }
@@ -311,7 +307,6 @@ const firstConversation = [
     .housing-fact:first-child{ padding-top: 0; }
     .housing-fact + .housing-fact{ border-top: 1px solid var(--border-on-dark); border-left: 0; }
     .trust-intro__copy{ padding-top: 0; }
-    .conversation-photo{ min-height: 28rem; }
   }
 
   @media (max-width: 760px) {
@@ -325,7 +320,6 @@ const firstConversation = [
     .trust-panorama{ aspect-ratio: 2.25 / 1; margin-top: var(--space-7); }
     .trust-section__actions{ display: grid; }
     .trust-section__actions .button{ width: 100%; }
-    .conversation-photo{ min-height: 21rem; }
     .conversation-content{ padding: var(--space-8) var(--space-5); }
     .conversation-actions{ display: grid; }
     .conversation-actions .button{ width: 100%; }

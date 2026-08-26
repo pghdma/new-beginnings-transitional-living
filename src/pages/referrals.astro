@@ -5,6 +5,7 @@ import TrustPoints from '../components/TrustPoints.astro';
 import StepList from '../components/StepList.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import FeatureList from '../components/FeatureList.astro';
+import SplitPanel from '../components/SplitPanel.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
@@ -64,7 +65,8 @@ const questions = [
   </section>
 
   <section class="role-section" aria-labelledby="role-title">
-    <div class="container role-layout">
+    <div class="container">
+      <SplitPanel tone="plain" photo={{ src: '/images/rustic-dining-room.webp', alt: 'An empty dining room with a shared table and natural light', width: 1600, height: 2133 }} photoFraction={0.86} contentFraction={1.14} photoHeight="39rem">
       <div class="role-copy">
         <p class="eyebrow">Scope</p>
         <h2 id="role-title">What We Are and What We Aren’t</h2>
@@ -75,7 +77,7 @@ const questions = [
           <article><Icon name="lucide:stethoscope" aria-hidden="true" /><h3>Your Client Keeps</h3><p>Counseling, medical care, medication, supervision, and treatment with their existing providers.</p></article>
         </div>
       </div>
-      <figure class="role-photo"><img src="/images/rustic-dining-room.webp" alt="An empty dining room with a shared table and natural light" width="1600" height="2133" loading="lazy" /></figure>
+      </SplitPanel>
     </div>
   </section>
 
@@ -123,10 +125,7 @@ const questions = [
   .audience-section .section-head{ max-width: 48rem; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
 
   .role-section{ padding-block: var(--section-standard); background: var(--sky-50); }
-  .role-layout{ display: grid; grid-template-areas: 'photo copy'; grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); gap: clamp(3rem, 8vw, 7rem); align-items: center; }
-  .role-photo{ border-radius: var(--radius-md); height: 39rem; margin: 0; overflow: hidden; box-shadow: var(--shadow-raised); grid-area: photo; }
-  .role-photo img{ width: 100%; height: 100%; object-fit: cover; object-position: center; filter: var(--photo-filter); }
-  .role-copy{ grid-area: copy; }
+  .role-copy { min-width: 0; }
   .role-copy h2{ max-width: 24ch; margin-top: var(--space-4); }
   .role-copy > .lead{ margin-top: var(--space-5); }
   .role-copy > p:not(.eyebrow):not(.lead){ max-width: 38rem; margin-top: var(--space-4); }
@@ -164,14 +163,10 @@ const questions = [
   .faq-heading a{ font-weight: var(--weight-semibold); }
 
   @media (max-width: 900px) {
-    .role-layout, .verification-layout, .faq-layout{ grid-template-columns: 1fr; }
-    .role-layout{ grid-template-areas: 'copy' 'photo'; gap: var(--space-7); }
-    .role-photo{ height: auto; aspect-ratio: 16 / 10; }
     .verification-layout{ gap: var(--space-7); }
   }
 
   @media (max-width: 760px) {
-    .role-photo{ aspect-ratio: 4 / 3; }
     .scope-comparison article{ padding: var(--space-5); }
     .coordination-steps { margin-top: clamp(3rem, 6vw, 4.5rem); }
   }
@@ -179,6 +174,7 @@ const questions = [
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
+    .verification-layout, .faq-layout { grid-template-columns: 1fr; }
     .scope-comparison p { font-size: 1rem; line-height: 1.55; }
   }
 </style>

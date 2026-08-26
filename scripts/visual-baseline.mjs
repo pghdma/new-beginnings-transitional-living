@@ -13,7 +13,8 @@ for (const route of routes) {
     await page.setViewport({ width, height: 900, isMobile: mobile, hasTouch: mobile });
     await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
     await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation: none !important; } iframe { visibility: hidden !important; }' });
-    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => { document.querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; }); return document.fonts.ready; });
+    await page.evaluate(() => Promise.all([...document.images].filter((i) => !i.complete).map((i) => new Promise((r) => { i.onload = i.onerror = r; }))));
     const name = (route === '/' ? 'home' : route.replace(/^\/|\/$/g, '').replace(/\//g, '-'));
     await page.screenshot({ path: `${out}/${name}-${tag}.png`, fullPage: true });
     await page.close();
