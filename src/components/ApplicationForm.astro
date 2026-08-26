@@ -1,144 +1,115 @@
 ---
+/**
+ * ApplicationForm — the three-step housing application card. Posts to the contact worker.
+ * Drop it into a Hero `aside` slot or any container; it carries its own styles and script.
+ */
 import { Icon } from 'astro-icon/components';
-import StepList from './StepList.astro';
 import { site } from '../data/site';
-
-const nextSteps = [
-  { title: 'We call you back', copy: 'At the number you give us, to ask a few questions and answer yours.' },
-  { title: 'We talk through the fit', copy: 'What is open, what it costs, and what the house expects.' },
-  { title: 'You move in', copy: 'If it is a fit and a bed is open, you get the address, the move-in list, and a date.' },
-];
 ---
 
-<section class="application" id="inquiry" aria-labelledby="application-title">
-  <div class="container application-shell">
-    <header class="application-heading">
-      <p class="eyebrow">Housing Application</p>
-      <h2 id="application-title">Tell Us a Little About What You Need</h2>
-      <p>Three short steps. General answers are fine. We ask the detailed questions on the phone, not on a public website.</p>
-    </header>
+<form class="form" id="inquiry" data-housing-application novalidate>
+  <nav class="form-progress" aria-label="Application progress">
+    <ol>
+      <li class="is-current" data-progress-step="1" aria-current="step"><span>1</span><strong>Primary Contact</strong></li>
+      <li data-progress-step="2"><span>2</span><strong>Applicant and Housing</strong></li>
+      <li data-progress-step="3"><span>3</span><strong>Final Details</strong></li>
+    </ol>
+  </nav>
 
-    <div class="application-layout">
-      <form class="form" data-housing-application novalidate>
-        <nav class="form-progress" aria-label="Application progress">
-          <ol>
-            <li class="is-current" data-progress-step="1" aria-current="step"><span>1</span><strong>Primary Contact</strong></li>
-            <li data-progress-step="2"><span>2</span><strong>Applicant and Housing</strong></li>
-            <li data-progress-step="3"><span>3</span><strong>Final Details</strong></li>
-          </ol>
-        </nav>
-
-        <fieldset class="form-section" data-form-step="1">
-          <legend tabindex="-1"><span class="step-label">Step 1 of 3</span><strong>Primary Contact</strong></legend>
-          <p class="section-intro">Who should we call back? Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
-          <div class="form-grid">
-            <label><span class="field-label">First name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
-            <label><span class="field-label">Last name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
-            <label><span class="field-label">Email <span class="req" aria-hidden="true">*</span></span><input required type="email" autocomplete="email" name="email" maxlength="254" /></label>
-            <label><span class="field-label">Phone <span class="req" aria-hidden="true">*</span></span><input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
-          </div>
-          <fieldset class="choice-group">
-            <legend>Who is completing this application? <span class="req" aria-hidden="true">*</span></legend>
-            <div class="choice-grid choice-grid--three">
-              <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applicant</strong><small>I’m applying for myself.</small></span></label>
-              <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or friend</strong><small>I’m helping someone I care about apply.</small></span></label>
-              <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional</strong><small>I’m a counselor, case manager, PO, or other professional.</small></span></label>
-            </div>
-          </fieldset>
-          <fieldset class="choice-group">
-            <legend>Preferred contact method <span class="req" aria-hidden="true">*</span></legend>
-            <div class="choice-grid choice-grid--two compact-choices">
-              <label class="choice"><input required type="radio" name="preferredContact" value="Phone" /><span><strong>Phone</strong></span></label>
-              <label class="choice"><input required type="radio" name="preferredContact" value="Email" /><span><strong>Email</strong></span></label>
-            </div>
-          </fieldset>
-          <label class="select-field"><span class="field-label">Best time to reach you <small>(optional)</small></span><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
-          <div class="step-actions">
-            <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-section" data-form-step="2" hidden>
-          <legend tabindex="-1"><span class="step-label">Step 2 of 3</span><strong>Applicant and Housing</strong></legend>
-          <p class="section-intro">General answers are enough. Keep medical, legal, and treatment details off this form.</p>
-          <div class="form-grid applicant-fields" data-applicant-fields hidden>
-            <label><span class="field-label">Applicant first name <span class="req" aria-hidden="true">*</span></span><input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
-            <label><span class="field-label">Applicant last name <span class="req" aria-hidden="true">*</span></span><input name="applicantLastName" maxlength="100" data-applicant-required /></label>
-          </div>
-          <fieldset class="choice-group">
-            <legend>Housing requested <span class="req" aria-hidden="true">*</span></legend>
-            <div class="choice-grid choice-grid--two">
-              <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men’s recovery housing</strong><small>Houses in four neighborhoods, including one for men on parole.</small></span></label>
-              <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women’s recovery housing</strong><small>One house for women.</small></span></label>
-            </div>
-          </fieldset>
-          <fieldset class="choice-group">
-            <legend>Is the applicant 18 or older? <span class="req" aria-hidden="true">*</span></legend>
-            <div class="choice-grid choice-grid--two compact-choices">
-              <label class="choice"><input required type="radio" name="adultStatus" value="Yes" /><span><strong>Yes</strong></span></label>
-              <label class="choice"><input required type="radio" name="adultStatus" value="No" /><span><strong>No</strong></span></label>
-            </div>
-          </fieldset>
-          <label class="select-field"><span class="field-label">Desired move timing <span class="req" aria-hidden="true">*</span></span><select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
-          <fieldset class="choice-group">
-            <legend>Has the applicant lived with New Beginnings before? <span class="req" aria-hidden="true">*</span></legend>
-            <div class="choice-grid choice-grid--two compact-choices">
-              <label class="choice"><input required type="radio" name="previousResident" value="Yes" /><span><strong>Yes</strong></span></label>
-              <label class="choice"><input required type="radio" name="previousResident" value="No" /><span><strong>No</strong></span></label>
-            </div>
-          </fieldset>
-          <fieldset class="choice-group">
-            <legend>Is the applicant willing to live substance free and follow the house rules? <span class="req" aria-hidden="true">*</span></legend>
-            <div class="choice-grid choice-grid--two compact-choices">
-              <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span><strong>Yes</strong></span></label>
-              <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="No" /><span><strong>No</strong></span></label>
-            </div>
-          </fieldset>
-          <div class="step-actions">
-            <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
-            <button class="button button-secondary" type="button" data-previous-step>Back</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-section" data-form-step="3" hidden>
-          <legend tabindex="-1"><span class="step-label">Step 3 of 3</span><strong>Final Details</strong></legend>
-          <p class="section-intro">Anything else that would help us prepare for the call.</p>
-          <label class="select-field"><span class="field-label">How did you hear about us? <small>(optional)</small></span><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
-          <label><span class="field-label">Anything you want us to know <small>(optional)</small></span><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
-          <p class="field-guidance" id="message-guidance">Please leave out diagnoses, medications, treatment records, legal records, and Social Security numbers. We’ll ask for what we need by phone.</p>
-          <div class="check-list">
-            <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I’d like to discuss accessibility or accommodation needs privately.</span></label>
-            <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand this application starts a conversation and doesn’t guarantee a bed. <span class="req" aria-hidden="true">*</span></span></label>
-          </div>
-          <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
-          <input type="hidden" name="startedAt" value="" />
-          <div class="submission-area">
-            <div class="verification"><div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div></div>
-            <div class="step-actions step-actions--submit">
-              <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application<Icon name="lucide:send" aria-hidden="true" /></button>
-              <button class="button button-secondary" type="button" data-previous-step>Back</button>
-            </div>
-            <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
-          </div>
-        </fieldset>
-      </form>
-
-      <aside class="application-aside" aria-label="What happens next">
-        <div class="aside-card">
-          <p class="eyebrow">What happens next</p>
-          <StepList items={nextSteps} numbers="circle" />
-          <p class="aside-note">This is the first step, not a guarantee of a bed. Openings change week to week, so the sooner we talk, the better.</p>
-        </div>
-        <div class="aside-card aside-card--call">
-          <p class="eyebrow">Rather just talk?</p>
-          <a class="button button--light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
-          <p>You don’t need to fill anything out first.</p>
-        </div>
-        <p class="privacy-note">This is a public web form, not a secure place for medical, treatment, financial, or legal records. <a href="/privacy/">Read the privacy policy.</a></p>
-      </aside>
+  <fieldset class="form-section" data-form-step="1">
+    <legend tabindex="-1"><span class="step-label">Step 1 of 3</span><strong>Primary Contact</strong></legend>
+    <p class="section-intro">Who should we call back? Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+    <div class="form-grid">
+      <label><span class="field-label">First name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="given-name" name="firstName" maxlength="100" /></label>
+      <label><span class="field-label">Last name <span class="req" aria-hidden="true">*</span></span><input required autocomplete="family-name" name="lastName" maxlength="100" /></label>
+      <label><span class="field-label">Email <span class="req" aria-hidden="true">*</span></span><input required type="email" autocomplete="email" name="email" maxlength="254" /></label>
+      <label><span class="field-label">Phone <span class="req" aria-hidden="true">*</span></span><input required type="tel" autocomplete="tel" name="phone" maxlength="20" /></label>
     </div>
-  </div>
-</section>
+    <fieldset class="choice-group">
+      <legend>Who is completing this application? <span class="req" aria-hidden="true">*</span></legend>
+      <div class="choice-grid choice-grid--three">
+        <label class="choice"><input required type="radio" name="contactType" value="Applicant" data-contact-type /><span><strong>Applicant</strong><small>I’m applying for myself.</small></span></label>
+        <label class="choice"><input required type="radio" name="contactType" value="Family or support person" data-contact-type /><span><strong>Family or friend</strong><small>I’m helping someone I care about apply.</small></span></label>
+        <label class="choice"><input required type="radio" name="contactType" value="Professional or referral partner" data-contact-type /><span><strong>Professional</strong><small>I’m a counselor, case manager, PO, or other professional.</small></span></label>
+      </div>
+    </fieldset>
+    <fieldset class="choice-group">
+      <legend>Preferred contact method <span class="req" aria-hidden="true">*</span></legend>
+      <div class="choice-grid choice-grid--two compact-choices">
+        <label class="choice"><input required type="radio" name="preferredContact" value="Phone" /><span><strong>Phone</strong></span></label>
+        <label class="choice"><input required type="radio" name="preferredContact" value="Email" /><span><strong>Email</strong></span></label>
+      </div>
+    </fieldset>
+    <label class="select-field"><span class="field-label">Best time to reach you <small>(optional)</small></span><select name="bestTime"><option value="">Any time</option><option value="Morning">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></select></label>
+    <div class="step-actions">
+      <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-section" data-form-step="2" hidden>
+    <legend tabindex="-1"><span class="step-label">Step 2 of 3</span><strong>Applicant and Housing</strong></legend>
+    <p class="section-intro">General answers are enough. Keep medical, legal, and treatment details off this form.</p>
+    <div class="form-grid applicant-fields" data-applicant-fields hidden>
+      <label><span class="field-label">Applicant first name <span class="req" aria-hidden="true">*</span></span><input name="applicantFirstName" maxlength="100" data-applicant-required /></label>
+      <label><span class="field-label">Applicant last name <span class="req" aria-hidden="true">*</span></span><input name="applicantLastName" maxlength="100" data-applicant-required /></label>
+    </div>
+    <fieldset class="choice-group">
+      <legend>Housing requested <span class="req" aria-hidden="true">*</span></legend>
+      <div class="choice-grid choice-grid--two">
+        <label class="choice"><input required type="radio" name="housingType" value="Men's recovery housing" /><span><strong>Men’s recovery housing</strong><small>Houses in four neighborhoods, including one for men on parole.</small></span></label>
+        <label class="choice"><input required type="radio" name="housingType" value="Women's recovery housing" /><span><strong>Women’s recovery housing</strong><small>One house for women.</small></span></label>
+      </div>
+    </fieldset>
+    <fieldset class="choice-group">
+      <legend>Is the applicant 18 or older? <span class="req" aria-hidden="true">*</span></legend>
+      <div class="choice-grid choice-grid--two compact-choices">
+        <label class="choice"><input required type="radio" name="adultStatus" value="Yes" /><span><strong>Yes</strong></span></label>
+        <label class="choice"><input required type="radio" name="adultStatus" value="No" /><span><strong>No</strong></span></label>
+      </div>
+    </fieldset>
+    <label class="select-field"><span class="field-label">Desired move timing <span class="req" aria-hidden="true">*</span></span><select name="moveTiming" required><option value="">Select one</option><option value="As soon as available">As soon as available</option><option value="Within two weeks">Within two weeks</option><option value="Within 30 days">Within 30 days</option><option value="Planning ahead">Planning ahead</option></select></label>
+    <fieldset class="choice-group">
+      <legend>Has the applicant lived with New Beginnings before? <span class="req" aria-hidden="true">*</span></legend>
+      <div class="choice-grid choice-grid--two compact-choices">
+        <label class="choice"><input required type="radio" name="previousResident" value="Yes" /><span><strong>Yes</strong></span></label>
+        <label class="choice"><input required type="radio" name="previousResident" value="No" /><span><strong>No</strong></span></label>
+      </div>
+    </fieldset>
+    <fieldset class="choice-group">
+      <legend>Is the applicant willing to live substance free and follow the house rules? <span class="req" aria-hidden="true">*</span></legend>
+      <div class="choice-grid choice-grid--two compact-choices">
+        <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="Yes" /><span><strong>Yes</strong></span></label>
+        <label class="choice"><input required type="radio" name="sharedLivingAgreement" value="No" /><span><strong>No</strong></span></label>
+      </div>
+    </fieldset>
+    <div class="step-actions">
+      <button class="button" type="button" data-next-step>Continue<Icon name="lucide:arrow-right" aria-hidden="true" /></button>
+      <button class="button button-secondary" type="button" data-previous-step>Back</button>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-section" data-form-step="3" hidden>
+    <legend tabindex="-1"><span class="step-label">Step 3 of 3</span><strong>Final Details</strong></legend>
+    <p class="section-intro">Anything else that would help us prepare for the call.</p>
+    <label class="select-field"><span class="field-label">How did you hear about us? <small>(optional)</small></span><select name="referralSource"><option value="">Select one</option><option value="Treatment provider">Treatment provider</option><option value="Court or justice partner">Court or justice partner</option><option value="Family or friend">Family or friend</option><option value="Community organization">Community organization</option><option value="Online search">Online search</option><option value="Other">Other</option></select></label>
+    <label><span class="field-label">Anything you want us to know <small>(optional)</small></span><textarea name="message" rows="5" maxlength="2000" aria-describedby="message-guidance"></textarea></label>
+    <p class="field-guidance" id="message-guidance">Please leave out diagnoses, medications, treatment records, legal records, and Social Security numbers. We’ll ask for what we need by phone.</p>
+    <div class="check-list">
+      <label class="check-choice"><input type="checkbox" name="accommodationDiscussion" value="Yes" /><span>I’d like to discuss accessibility or accommodation needs privately.</span></label>
+      <label class="check-choice"><input required type="checkbox" name="applicationAcknowledgement" value="Yes" /><span>I understand this application starts a conversation and doesn’t guarantee a bed. <span class="req" aria-hidden="true">*</span></span></label>
+    </div>
+    <label class="trap" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+    <input type="hidden" name="startedAt" value="" />
+    <div class="submission-area">
+      <div class="verification"><div class="cf-turnstile" data-turnstile-widget data-sitekey="0x4AAAAAADr9GhJthRcT4-R1"></div></div>
+      <div class="step-actions step-actions--submit">
+        <button class="button" type="submit" data-submit-button data-default-label="Send Application">Send Application<Icon name="lucide:send" aria-hidden="true" /></button>
+        <button class="button button-secondary" type="button" data-previous-step>Back</button>
+      </div>
+      <p class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  </fieldset>
+</form>
 
 <script is:inline>
   window.onNbtsApplicationTurnstileReady = function () {
@@ -155,7 +126,6 @@ const nextSteps = [
   };
 </script>
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onNbtsApplicationTurnstileReady&render=explicit" async defer></script>
-
 <script>
   const APPLICATION_ENDPOINT = 'https://nbts-contact.pghdma.workers.dev/api/contact';
   const ERROR_TEXT: Record<string, string> = {
@@ -326,12 +296,6 @@ const nextSteps = [
 </script>
 
 <style>
-  .application{ padding-block: var(--section-standard); background: var(--sky-50); }
-  .application-shell{ display: grid; gap: var(--space-7); }
-  .application-heading{ display: grid; max-width: 44rem; gap: var(--space-3); }
-  .application-heading h2{ max-width: 24ch; }
-  .application-heading > p:not(.eyebrow){ max-width: 60ch; color: var(--slate-600); font-size: 1.08rem; }
-  .application-layout{ display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(var(--space-6), 4vw, var(--space-8)); align-items: start; }
 
   /* Form card */
   form{ overflow: hidden; border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); scroll-margin-top: 7rem; }
@@ -369,24 +333,9 @@ const nextSteps = [
   .submission-area{ display: grid; gap: var(--space-5); }
   .step-actions--submit{ flex-wrap: wrap; }
 
-  /* Side rail */
-  .application-aside{ position: sticky; top: var(--sticky-offset-compact); display: grid; gap: var(--space-5); }
-  .aside-card{ padding: var(--space-6); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); }
-  .aside-card .eyebrow{ margin-bottom: var(--space-4); }
-  .aside-note{ margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--slate-200); color: var(--slate-600); font-size: .95rem; line-height: 1.5; }
-  .aside-card--call{ color: var(--white); background: var(--navy-950); border-color: var(--navy-950); }
-  .aside-card--call .eyebrow{ color: var(--accent-on-dark); }
-  .aside-card--call .button{ width: 100%; gap: var(--button-gap); }
-  .aside-card--call .button :global(svg){ width: 1rem; height: 1rem; }
-  .aside-card--call p:last-child{ margin-top: var(--space-3); color: var(--sky-200); font-size: .95rem; }
+  
 
-  @media (max-width: 1080px) {
-    .application-layout{ grid-template-columns: 1fr; }
-    .application-aside{ position: static; }
-  }
-
-  @media (max-width: 900px) {
-  }
+  
 
   @media (max-width: 760px) {
     .form-progress{ padding: var(--space-5) var(--space-6); }
@@ -397,16 +346,12 @@ const nextSteps = [
   }
 
   @media (max-width: 480px) {
-    .application{ padding-block: var(--space-7); }
     .form-progress{ display: none; }
     .form-section{ padding: var(--space-5); }
     .form-section > legend{ padding-top: var(--space-5); }
     .form-grid, .choice-grid--two{ grid-template-columns: 1fr; }
     .step-actions{ display: grid; grid-template-columns: 1fr; }
     .step-actions .button{ width: 100%; }
-    .aside-card{ padding: var(--space-5); }
   }
-  @media (max-width: 900px) {
-    .aside-note, .aside-card--call p:last-child, .choice small { font-size: 1rem; }
-  }
+  
 </style>

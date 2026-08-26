@@ -1,36 +1,42 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
+import ApplicationForm from '../components/ApplicationForm.astro';
+import StepList from '../components/StepList.astro';
 import MainLayout from '../layouts/MainLayout.astro';
-import HousingApplication from '../components/HousingApplication.astro';
 import { site } from '../data/site';
+
+const nextSteps = [
+  { title: 'We call you back', copy: 'At the number you give us, to ask a few questions and answer yours.' },
+  { title: 'We talk through the fit', copy: 'What’s open, what it costs, and what the house expects.' },
+  { title: 'You move in', copy: 'If it’s a fit and a bed is open, you get the address, the move-in list, and a date.' },
+];
 ---
 
 <MainLayout title="Admissions" description="Apply for a bed in a New Beginnings recovery house for men or women in Pittsburgh, or call 412-628-0403.">
   <Hero
     variant="split"
-    height="viewport"
+    size="sm"
+    compact
     titleId="admissions-title"
     eyebrow="Admissions"
     title="Apply for Recovery Housing"
     lead="Fill this out and we’ll call you back. Or skip it and call. Either way works, and you don’t need a referral."
-    image={{ src: '/images/admissions-hero.webp', alt: 'A sunlit living room sofa with cushions beside open windows', width: 1467, height: 2200, position: 'center 62%', positionMobile: 'center 35%' }}
   >
     <Fragment slot="actions">
-      <a class="button button--light" href="#inquiry">Start the Application<Icon name="lucide:arrow-down" aria-hidden="true" /></a>
       <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
     </Fragment>
+    <div class="admissions-next">
+      <p class="admissions-next__label">What happens next</p>
+      <StepList items={nextSteps} tone="dark" label="What happens after you send the application" />
+      <p class="admissions-next__note">This is the first step, not a guarantee of a bed. Openings change week to week, so the sooner we talk, the better.</p>
+    </div>
+    <ApplicationForm slot="aside" />
   </Hero>
-
-  <HousingApplication />
 </MainLayout>
 
 <style>
-  /* Absolute so the portrait photo's aspect ratio cannot set the hero height; the copy column does. */
-
-  @media (max-width: 900px) {
-  }
-
-  @media (max-width: 760px) {
-  }
+  .admissions-next { max-width: 34rem; margin-top: var(--space-2); }
+  .admissions-next__label { margin-bottom: var(--space-4); color: var(--accent-on-dark); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
+  .admissions-next__note { max-width: 32rem; margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--border-on-dark); color: var(--text-muted-on-dark); font-size: 1rem; line-height: 1.55; }
 </style>
