@@ -24,18 +24,18 @@ export const nav = [
     label: 'About',
     href: '/about/',
     children: [
-      { label: 'About New Beginnings', href: '/about/' },
-      { label: 'Board of Directors', href: '/about/board/' },
-      { label: 'Credentials & Licensing', href: '/about/transparency/' }
+      { label: 'About New Beginnings', href: '/about/', icon: 'info', description: 'Who we are and why the houses exist' },
+      { label: 'Board of Directors', href: '/about/board/', icon: 'landmark', description: 'The people responsible for the nonprofit' },
+      { label: 'Credentials & Licensing', href: '/about/transparency/', icon: 'badge-check', description: '501(c)(3), DDAP license, WestPARR, public records' }
     ]
   },
   {
     label: 'Recovery Housing',
     href: '/recovery-housing/',
     children: [
-      { label: 'How Our Houses Work', href: '/recovery-housing/' },
-      { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/' },
-      { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/' }
+      { label: 'How Our Houses Work', href: '/recovery-housing/', icon: 'house', description: 'What sober living is and what every resident can expect' },
+      { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/', icon: 'users-round', description: 'Houses in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden' },
+      { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/', icon: 'heart-handshake', description: 'One house in Bellevue, just north of the city' }
     ]
   },
   { label: 'Admissions', href: '/admissions/' },

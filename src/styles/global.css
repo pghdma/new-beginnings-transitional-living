@@ -107,11 +107,11 @@
   --form-label-size: .95rem;
   --form-help-size: .86rem;
   --form-status-size: .9rem;
-  --header-utility-height: 2.25rem;
+  --header-utility-height: 2.5rem;
   --header-nav-height: 5rem;
-  --header-total-height: 7.25rem;
-  --sticky-offset: 8.5rem;
-  --sticky-offset-compact: 8rem;
+  --header-total-height: 7.5rem;
+  --sticky-offset: 8.75rem;
+  --sticky-offset-compact: 8.25rem;
   --icon-medallion-size-sm: 2.65rem;
   --icon-medallion-size-md: 3.25rem;
   --icon-medallion-size-lg: 4.25rem;
