@@ -29,7 +29,7 @@ const housing = { name: 'Recovery Housing', path: '/recovery-housing/' };
 export const seoRoutes: Record<string, SeoRoute> = {
   '/': {
     documentTitle: 'Recovery Housing in Pittsburgh | New Beginnings Sober Living',
-    description: 'DDAP-licensed sober living homes for men and women in Pittsburgh. Nonprofit recovery housing in Sheraden, Brighton Heights, McKees Rocks, and Bellevue. Call 412-628-0403.',
+    description: 'DDAP-licensed recovery houses for men and women in Pittsburgh. Nonprofit recovery housing in Sheraden, Brighton Heights, McKees Rocks, and Bellevue. Call 412-628-0403.',
     pageName: 'New Beginnings Transitional Living Foundation',
     pageType: 'WebPage',
     image: '/images/og-default.jpg',

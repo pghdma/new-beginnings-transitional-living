@@ -16,7 +16,7 @@ export const site = {
   },
   ein: '81-2901849',
   neighborhoods: ['Sheraden', 'Observatory Hill', 'Brighton Heights', 'McKees Rocks', 'Bellevue'],
-  description: 'Nonprofit sober living homes for men and women in Pittsburgh. DDAP-licensed, WestPARR-certified recovery housing on Pittsburgh’s North Side and West End and in nearby McKees Rocks and Bellevue, run by a counselor who has done this work since 1999.'
+  description: 'Nonprofit recovery houses for men and women in Pittsburgh. DDAP-licensed, WestPARR-certified recovery housing on Pittsburgh’s North Side and West End and in nearby McKees Rocks and Bellevue, run by a counselor who has done this work since 1999.'
 };
 
 export const nav = [
