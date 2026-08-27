@@ -120,7 +120,7 @@ const publicSources = [
         <p class="eyebrow">In Plain Language</p>
         <h2 id="meaning-title">What the Credentials Mean</h2>
       </div>
-      <FeatureList items={meanings} icon="bare" iconSize="md" columns={2} />
+      <FeatureList items={meanings} icon="bare" iconSize="md" tone="dark" columns={2} />
     </div>
   </section>
 
@@ -131,7 +131,7 @@ const publicSources = [
     text="Want to see the house rules, the fee schedule, or a copy of our license? Call or email and we’ll send it."
     href="/contact/"
     label="Contact New Beginnings"
-    image={{ src: '/images/front-door.webp' }}
+    image={{ src: '/images/credentials.jpg', position: 'center 40%' }}
   />
 </MainLayout>
 <style>
@@ -149,7 +149,7 @@ const publicSources = [
   .identity-meta span{ color: var(--slate-600); font-size: .77rem; font-weight: var(--weight-semibold); letter-spacing: .1em; text-transform: uppercase; }
   .identity-meta strong{ color: var(--navy-900); font-size: 1.08rem; letter-spacing: .03em; }
 
-  .records-section{ padding-block: var(--section-standard); color: var(--white); background: var(--navy-950); }
+  .records-section{ padding-block: var(--section-standard) var(--space-8); color: var(--white); background: var(--navy-950); }
   .records-layout{ display: grid; grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr); gap: clamp(3rem,7vw,7rem); align-items: start; }
   .records-intro{ position: sticky; top: var(--sticky-offset); }
   .records-intro .eyebrow{ color: var(--accent-on-dark); }
@@ -165,9 +165,10 @@ const publicSources = [
   .record-entry__content > p:last-child{ max-width: 42rem; margin-top: .55rem; font-size: .98rem; line-height: 1.5; }
   .record-entry__action{ min-width: 12rem; gap: .6rem; white-space: nowrap; }
   .record-entry__action :global(svg){ width: 1rem; height: 1rem; }
-  .meaning-section{ padding-block: var(--section-compact); background: var(--canvas); }
-  .meaning-strip{ display: grid; grid-template-columns: .8fr 2fr; gap: clamp(2rem,5vw,4rem); }
-  .meaning-heading h2{ max-width: 24ch; margin-top: var(--space-3); color: var(--navy-900); font-size: clamp(1.8rem,3vw,2.55rem); }
+  .meaning-section{ padding-block: 0 var(--section-standard); color: var(--white); background: var(--navy-950); }
+  .meaning-strip{ display: grid; padding-top: var(--space-7); border-top: 1px solid var(--border-on-dark); grid-template-columns: .8fr 2fr; gap: clamp(2rem,5vw,4rem); }
+  .meaning-heading .eyebrow{ color: var(--accent-on-dark); }
+  .meaning-heading h2{ max-width: 24ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(1.8rem,3vw,2.55rem); }
 
   @media (max-width: 1080px) {
     .identity-content{ padding: 3rem; }
