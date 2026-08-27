@@ -27,9 +27,9 @@ export const organizationalLeadership: LeadershipProfile[] = [
     published: true,
     servesOnBoard: true,
     summary:
-      'Susan Rua is a licensed professional counselor who has worked in addiction treatment since 1999 and has owned and run sober living homes in Pittsburgh for more than a decade. She founded New Beginnings in 2016.',
+      'Susan Rua is a licensed professional counselor who has worked in addiction treatment since 1999 and has owned and run recovery houses in Pittsburgh for more than a decade. She founded New Beginnings in 2016.',
     biography: [
-      'Susan has worked in addiction counseling since 1999. Before counseling she was a nurse, and for more than ten years she has owned and directed sober living homes in Pittsburgh.',
+      'Susan has worked in addiction counseling since 1999. Before counseling she was a nurse, and for more than ten years she has owned and directed recovery houses in Pittsburgh.',
       'She started New Beginnings because too many people finish treatment and have nowhere safe to go. The houses are built on what she has seen work: a substance-free home, clear rules, a weekly house meeting, AA and NA, and housemates who are doing the same thing.',
       'Susan also runs Step By Step Support (stepbystepsupport.net), a licensed counseling practice in Mt. Washington. The two are separate organizations. Living at New Beginnings doesn’t require seeing Susan or any particular provider for counseling.',
     ],
@@ -40,7 +40,7 @@ export const organizationalLeadership: LeadershipProfile[] = [
     ],
     experience: [
       'Addiction counseling since 1999',
-      'More than ten years owning and directing sober living homes',
+      'More than ten years owning and directing recovery houses',
       'Licensed Professional Counselor and Certified Alcohol and Drug Counselor',
     ],
   },
