@@ -112,12 +112,15 @@ const publicSources = [
         ))}
       </div>
     </div>
+  </section>
+
+  <section class="meaning-section" aria-labelledby="meaning-title">
     <div class="container meaning-strip">
       <div class="meaning-heading">
         <p class="eyebrow">In Plain Language</p>
-        <h2>What the Credentials Mean</h2>
+        <h2 id="meaning-title">What the Credentials Mean</h2>
       </div>
-      <FeatureList items={meanings} icon="bare" iconSize="md" tone="dark" columns={2} />
+      <FeatureList items={meanings} icon="bare" iconSize="md" columns={2} />
     </div>
   </section>
 
@@ -161,9 +164,9 @@ const publicSources = [
   .record-entry__content > p:last-child{ max-width: 42rem; margin-top: .55rem; font-size: .98rem; line-height: 1.5; }
   .record-entry__action{ min-width: 12rem; gap: .6rem; white-space: nowrap; }
   .record-entry__action :global(svg){ width: 1rem; height: 1rem; }
-  .meaning-strip{ display: grid; margin-top: var(--space-8); padding-top: var(--space-7); border-top: 1px solid var(--border-on-dark); grid-template-columns: .8fr 2fr; gap: clamp(2rem,5vw,4rem); }
-  .meaning-heading .eyebrow{ color: var(--accent-on-dark); }
-  .meaning-heading h2{ max-width: 24ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(1.8rem,3vw,2.55rem); }
+  .meaning-section{ padding-block: var(--section-compact); background: var(--canvas); }
+  .meaning-strip{ display: grid; grid-template-columns: .8fr 2fr; gap: clamp(2rem,5vw,4rem); }
+  .meaning-heading h2{ max-width: 24ch; margin-top: var(--space-3); color: var(--navy-900); font-size: clamp(1.8rem,3vw,2.55rem); }
 
   @media (max-width: 1080px) {
     .identity-content{ padding: 3rem; }

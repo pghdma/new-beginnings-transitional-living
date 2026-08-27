@@ -26,14 +26,14 @@ const {
       <p>{text}</p>
     </div>
     <div class="actions">
-      <a class="button button--light" href={href}>{label}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-      {phone && <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
+      <a class="button" href={href}>{label}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      {phone && <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
     </div>
   </div>
 </section>
 <style>
   .cta-band{ position: relative; overflow: hidden; }
-  .cta-band .eyebrow{ margin-bottom: var(--space-3); color: var(--accent-on-dark); }
+  .cta-band .eyebrow{ margin-bottom: var(--space-3); }
   .cta-band__copy, .actions{ position: relative; z-index: 1; }
   @media (max-width: 760px) {
     .actions{ display: grid; align-items: stretch; }
