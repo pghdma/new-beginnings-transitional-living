@@ -9,7 +9,6 @@
  */
 import { Icon } from 'astro-icon/components';
 import { credentials } from '../data/credentials';
-import CredentialMark from './CredentialMark.astro';
 
 interface Props {
   variant?: 'band' | 'columns' | 'panel' | 'compact';
@@ -23,9 +22,9 @@ const text = (c: (typeof credentials)[number]) => (variant === 'columns' ? c.det
   {credentials.map((c) => (
     <li>
       {variant === 'panel' ? (
-        <span class="icon-medallion icon-medallion--dark"><CredentialMark credential={c} tone="dark" /></span>
+        <span class="icon-medallion icon-medallion--dark"><Icon name={`lucide:${c.icon}`} aria-hidden="true" /></span>
       ) : (
-        <CredentialMark credential={c} tone={variant === 'compact' ? 'dark' : 'light'} />
+        <Icon name={`lucide:${c.icon}`} aria-hidden="true" />
       )}
       {variant === 'compact' ? <a class="trust__text" href={c.href} rel="external"><strong>{c.compact}</strong></a> : <span class="trust__text"><strong>{c.title}</strong><small>{text(c)}</small></span>}
     </li>
@@ -42,20 +41,17 @@ const text = (c: (typeof credentials)[number]) => (variant === 'columns' ? c.det
   .trust--band { padding: var(--space-6) 0; border-block: 1px solid var(--slate-300); grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 2.5rem); }
   .trust--band li { display: flex; justify-content: center; align-items: center; gap: .8rem; }
   .trust--band > li > :global(svg) { width: 1.75rem; height: 1.75rem; color: var(--teal-700); stroke-width: 1.6; flex: 0 0 auto; }
-  .trust--band > li > :global(.cred-mark) { --cred-mark-size: 1.9rem; }
 
   /* columns */
   .trust--columns { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
   .trust--columns li { display: grid; min-width: 0; justify-items: center; gap: var(--space-3); text-align: center; }
   .trust--columns > li > :global(svg) { width: 1.45rem; height: 1.45rem; padding: .7rem; box-sizing: content-box; border-radius: 50%; color: var(--teal-700); background: var(--sky-100); stroke-width: 1.65; }
-  .trust--columns > li > :global(.cred-mark) { --cred-mark-size: 1.6rem; padding: .65rem; box-sizing: content-box; border-radius: 50%; background: var(--sky-100); }
   .trust--columns strong { font-size: .98rem; }
   .trust--columns small { font-size: .9rem; }
 
   /* panel */
   .trust--panel { padding: clamp(var(--space-6), 5vw, var(--space-8)); border-radius: var(--radius-lg); gap: var(--space-6); color: var(--white); background: var(--surface-on-dark); box-shadow: var(--shadow-photo); }
   .trust--panel li { display: grid; grid-template-columns: var(--icon-medallion-size-md) minmax(0, 1fr); gap: var(--space-4); align-items: center; }
-  .trust--panel .icon-medallion :global(.cred-mark) { --cred-mark-size: 2.1rem; }
   .trust--panel strong { color: var(--white); font-size: 1.1rem; }
   .trust--panel small { color: var(--sky-200); font-size: .9rem; }
 
@@ -63,7 +59,6 @@ const text = (c: (typeof credentials)[number]) => (variant === 'columns' ? c.det
   .trust--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
   .trust--compact li { display: grid; grid-template-columns: auto 1fr; gap: var(--button-gap); align-items: center; }
   .trust--compact > li > :global(svg) { width: 1.4rem; height: 1.4rem; color: var(--accent-on-dark); stroke-width: 1.7; }
-  .trust--compact > li > :global(.cred-mark) { --cred-mark-size: 1.5rem; }
   .trust--compact strong { color: var(--slate-300); font-size: .82rem; line-height: 1.3; }
   .trust--compact a { display: flex; min-height: 1.75rem; align-items: center; text-decoration: none; }
   .trust--compact a:hover strong { color: var(--white); text-decoration: underline; text-underline-offset: .2em; }

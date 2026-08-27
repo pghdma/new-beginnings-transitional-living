@@ -8,12 +8,10 @@ export interface Credential {
   detail: string;
   compact: string;
   href: string;
-  /** Official mark, sourced from the organization's own site. Omit to fall back to the Lucide icon. */
-  logo?: { src: string; width: number; height: number };
 }
 
 export const credentials: Credential[] = [
   { key: 'nonprofit', icon: 'landmark', title: '501(c)(3)', short: 'Pittsburgh public charity', detail: 'Public charity since 2019', compact: '501(c)(3) public charity', href: 'https://projects.propublica.org/nonprofits/organizations/812901849' },
-  { key: 'ddap', icon: 'badge-check', title: 'Pennsylvania DDAP', short: 'Licensed recovery houses', detail: 'Licensed recovery houses', compact: 'DDAP-licensed residences', href: 'https://www.pa.gov/services/ddap/locate-licensed-recovery-or-halfway-housing', logo: { src: '/images/credentials/ddap.svg', width: 48, height: 48 } },
-  { key: 'westparr', icon: 'shield-check', title: 'WestPARR', short: 'Certified member', detail: 'Certified member', compact: 'WestPARR certified', href: 'https://westparr.org/search-homes/', logo: { src: '/images/credentials/westparr.png', width: 136, height: 123 } },
+  { key: 'ddap', icon: 'badge-check', title: 'Pennsylvania DDAP', short: 'Licensed recovery houses', detail: 'Licensed recovery houses', compact: 'DDAP-licensed residences', href: 'https://www.pa.gov/services/ddap/locate-licensed-recovery-or-halfway-housing' },
+  { key: 'westparr', icon: 'shield-check', title: 'WestPARR', short: 'Certified member', detail: 'Certified member', compact: 'WestPARR certified', href: 'https://westparr.org/search-homes/' },
 ];
