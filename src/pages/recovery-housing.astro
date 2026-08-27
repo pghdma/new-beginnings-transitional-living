@@ -72,6 +72,30 @@ const dailyRhythm = [
     </div>
   </section>
 
+  <section class="pathways-section">
+    <div class="container">
+      <SplitPanel tone="navy" padding="lg" photo={{ src: '/images/pittsburgh.jpg', alt: 'The Pittsburgh skyline viewed across the rivers', width: 1880, height: 1253 }} photoFraction={1.05} contentFraction={0.95} minHeight="38rem">
+      <div class="pathways-content">
+        <p class="eyebrow">Our Houses</p>
+        <h2>Separate Houses for Men and Women</h2>
+        <p>New Beginnings runs men’s houses on Pittsburgh’s North Side and West End and a women’s house in Bellevue, just north of the city. They’re regular houses on regular streets, not facilities.</p>
+        <nav class="pathway-links" aria-label="Recovery housing options">
+          <a href="/recovery-housing/men/">
+            <span class="pathway-links__icon icon-medallion icon-medallion--sm"><Icon name="lucide:house" aria-hidden="true" /></span>
+            <span><small>McKees Rocks, Observatory Hill, Brighton Heights, Sheraden</small><strong>Men’s Recovery Housing</strong></span>
+            <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
+          </a>
+          <a href="/recovery-housing/women/">
+            <span class="pathway-links__icon icon-medallion icon-medallion--sm"><Icon name="lucide:house" aria-hidden="true" /></span>
+            <span><small>Bellevue</small><strong>Women’s Recovery Housing</strong></span>
+            <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
+          </a>
+        </nav>
+        <p class="pathways-location"><Icon name="lucide:map-pin" aria-hidden="true" />Houses in {site.neighborhoods.join(', ')}. Administrative office in Mt. Washington.</p>
+      </div>
+      </SplitPanel>
+    </div>
+  </section>
   <section class="rhythm-section" id="daily-rhythm">
     <div class="container rhythm-layout">
       <header class="rhythm-heading split-intro">
@@ -105,30 +129,6 @@ const dailyRhythm = [
     </div>
   </section>
 
-  <section class="pathways-section">
-    <div class="container">
-      <SplitPanel tone="navy" padding="lg" photo={{ src: '/images/pittsburgh.jpg', alt: 'The Pittsburgh skyline viewed across the rivers', width: 1880, height: 1253 }} photoFraction={1.05} contentFraction={0.95} minHeight="38rem">
-      <div class="pathways-content">
-        <p class="eyebrow">Our Houses</p>
-        <h2>Separate Houses for Men and Women</h2>
-        <p>New Beginnings runs men’s houses on Pittsburgh’s North Side and West End and a women’s house in Bellevue, just north of the city. They’re regular houses on regular streets, not facilities.</p>
-        <nav class="pathway-links" aria-label="Recovery housing options">
-          <a href="/recovery-housing/men/">
-            <span class="pathway-links__icon icon-medallion icon-medallion--sm"><Icon name="lucide:house" aria-hidden="true" /></span>
-            <span><small>McKees Rocks, Observatory Hill, Brighton Heights, Sheraden</small><strong>Men’s Recovery Housing</strong></span>
-            <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
-          </a>
-          <a href="/recovery-housing/women/">
-            <span class="pathway-links__icon icon-medallion icon-medallion--sm"><Icon name="lucide:house" aria-hidden="true" /></span>
-            <span><small>Bellevue</small><strong>Women’s Recovery Housing</strong></span>
-            <Icon class="pathway-links__arrow" name="lucide:arrow-up-right" aria-hidden="true" />
-          </a>
-        </nav>
-        <p class="pathways-location"><Icon name="lucide:map-pin" aria-hidden="true" />Houses in {site.neighborhoods.join(', ')}. Administrative office in Mt. Washington.</p>
-      </div>
-      </SplitPanel>
-    </div>
-  </section>
 
 
   <CtaBand text={`Call ${site.phone} or send the application. Tell us which house you’re asking about and we’ll tell you what’s open, what it costs, and what the house expects.`} />
