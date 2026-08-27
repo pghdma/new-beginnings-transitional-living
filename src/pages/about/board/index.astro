@@ -153,6 +153,42 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     phone={false}
   />
 </MainLayout>
+<script>
+  const memberCards = document.querySelectorAll<HTMLElement>('[data-member-card]');
+
+  memberCards.forEach((card) => {
+    const toggle = card.querySelector<HTMLButtonElement>('[data-member-toggle]');
+    const label = card.querySelector<HTMLElement>('[data-member-toggle-label]');
+    const front = card.querySelector<HTMLElement>('[data-member-front]');
+    const back = card.querySelector<HTMLElement>('[data-member-back]');
+
+    if (!toggle || !label || !front || !back) return;
+
+    const memberName = toggle.dataset.memberName ?? 'Board Member';
+    const memberFirstName = toggle.dataset.memberFirstName ?? memberName;
+
+    const setExpanded = (expanded: boolean) => {
+      toggle.setAttribute('aria-expanded', String(expanded));
+      front.setAttribute('aria-hidden', String(expanded));
+      back.setAttribute('aria-hidden', String(!expanded));
+      card.toggleAttribute('data-flipped', expanded);
+      label.textContent = expanded ? 'Show Front' : `About ${memberFirstName}`;
+      toggle.setAttribute('aria-label', expanded ? `Show the front of ${memberName}'s card` : `About ${memberName}`);
+    };
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      setExpanded(!expanded);
+    });
+
+    const memberId = card.closest('li')?.id;
+    const requestedMember = new URLSearchParams(window.location.search).get('member');
+    if (window.location.hash === `#${memberId}` || requestedMember === memberId) {
+      setExpanded(true);
+    }
+  });
+</script>
+
 <style>
 
 
