@@ -5,7 +5,6 @@ import CtaBand from '../../../components/CtaBand.astro';
 import Hero from '../../../components/Hero.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { currentBoardMembers } from '../../../data/leadership';
-import { site } from '../../../data/site';
 
 const responsibilities = [
   {
@@ -25,28 +24,28 @@ const responsibilities = [
   },
 ];
 
-type Member = (typeof currentBoardMembers)[number];
-
-const profileSummary = (person: Member) => {
+const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   if (person.slug === 'susan-rua') {
-    return 'Susan is a licensed professional counselor who has worked in addiction treatment since 1999. She started New Beginnings because too many people finish treatment with nowhere safe to go.';
+    return 'Susan founded New Beginnings in 2016 and serves as its president. She is a licensed professional counselor who has worked in addiction treatment since 1999 and has run recovery houses in Pittsburgh for more than a decade.';
   }
+
   return 'Theresa serves as a volunteer board member, helping oversee the nonprofit’s governance, finances, and accountability.';
 };
 
-// Short public facts per member: tenure, day job, and affiliations. Add rows here as they are cleared for publication.
-const memberFacts = (person: Member): { icon: string; text: string; href?: string; label?: string; after?: string }[] => {
-  if (person.slug === 'susan-rua') {
-    return [
-      { icon: 'calendar-check', text: 'President since founding New Beginnings in 2016' },
-      { icon: 'house-heart', text: 'Has run recovery houses in Pittsburgh for more than ten years' },
-      { icon: 'briefcase', text: 'Also owns ', label: 'Step By Step Support', href: 'https://stepbystepsupport.net', after: ', a counseling practice in Mt. Washington' },
-    ];
-  }
-  return [{ icon: 'users', text: 'Volunteer director, not on staff' }];
-};
+// One line for the front of the card, under the name.
+const tagline = (person: (typeof currentBoardMembers)[number]) =>
+  person.slug === 'susan-rua'
+    ? 'Licensed professional counselor. In addiction treatment since 1999.'
+    : 'Helps oversee the nonprofit’s governance, finances, and accountability.';
 
-const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).join('');
+// Short public facts for the front of the card. Add rows as they are cleared for publication.
+const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; text: string; href?: string; label?: string }[] =>
+  person.slug === 'susan-rua'
+    ? [
+        { icon: 'calendar-check', text: 'Founded New Beginnings in 2016' },
+        { icon: 'briefcase', text: 'Also owns ', label: 'Step By Step Support', href: 'https://stepbystepsupport.net' },
+      ]
+    : [{ icon: 'users', text: 'Volunteer director, not on staff' }];
 ---
 
 <MainLayout
@@ -96,40 +95,76 @@ const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).j
         <ul class:list={['board-directory__grid', { 'board-directory__grid--two': currentBoardMembers.length === 2 }]}>
           {currentBoardMembers.map((person) => (
             <li id={person.slug}>
-              <article class="member" aria-labelledby={`${person.slug}-name`}>
-                <div class="member__media">
-                  {person.slug === 'susan-rua' ? (
-                    <img src="/images/susan-rua.webp" alt="Susan Rua" width="900" height="1125" loading="lazy" />
-                  ) : (
-                    <div class="member__monogram" aria-hidden="true"><span>{initials(person.name)}</span></div>
-                  )}
+              <article class="member" data-member-card>
+                <div class="member__stage" data-member-stage>
+                  <div class="member__face member__face--front" data-member-front>
+                    <div class:list={['member__media', { 'member__media--portrait': person.slug === 'susan-rua' }]}>
+                      {person.slug === 'susan-rua' ? (
+                        <img
+                          src="/images/susan-rua.webp"
+                          alt="Susan Rua"
+                          width="900"
+                          height="1125"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="member__monogram" aria-hidden="true">
+                          <span>TRC</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div class="member__content">
+                      <p class="member__role">{person.role}</p>
+                      <h3 id={`${person.slug}-name`}>{person.name}</h3>
+                      {person.credentials && <ul class="member__credentials" aria-label="Credentials">{person.credentials.map((c) => <li>{c}</li>)}</ul>}
+                      <p class="member__tagline">{tagline(person)}</p>
+                      <ul class="member__facts" aria-label="Quick facts">
+                        {facts(person).map((fact) => (
+                          <li><Icon name={`lucide:${fact.icon}`} aria-hidden="true" /><span>{fact.text}{fact.href && <a href={fact.href} rel="external">{fact.label}</a>}</span></li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div
+                    class="member__face member__face--back"
+                    id={`${person.slug}-details`}
+                    data-member-back
+                    aria-hidden="true"
+                  >
+                    <div class="member__back-mark" aria-hidden="true">
+                      <Icon name={person.slug === 'susan-rua' ? 'lucide:house-heart' : 'lucide:landmark'} />
+                    </div>
+                    <p class="member__role">{person.role}</p>
+                    <h3>{person.name}</h3>
+                    <p>{profileSummary(person)}</p>
+                    {person.slug === 'susan-rua' && person.credentials && (
+                      <ul class="member__credentials" aria-label="Credentials">{person.credentials.map((c) => <li>{c}</li>)}</ul>
+                    )}
+                    {person.slug === 'susan-rua' && (
+                      <a class="member__link" href="/about/susan-rua/">Read Susan’s full bio<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+                    )}
+                  </div>
                 </div>
 
-                <div class="member__content">
-                  <p class="member__role">{person.role}</p>
-                  <h3 id={`${person.slug}-name`}>{person.name}</h3>
-                  {person.credentials && <p class="member__credentials">{person.credentials.join(' · ')}</p>}
-                  <p class="member__summary">{profileSummary(person)}</p>
-                  <ul class="member__meta" aria-label={`About ${person.name}`}>
-                    {memberFacts(person).map((fact) => (
-                      <li>
-                        <Icon name={`lucide:${fact.icon}`} aria-hidden="true" />
-                        <span>{fact.text}{fact.href && <a href={fact.href} rel="external">{fact.label}</a>}{fact.after}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {person.slug === 'susan-rua' && (
-                    <a class="member__link" href="/about/susan-rua/">Read Susan’s full bio<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-                  )}
-                </div>
+                <button
+                  class="member__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={`${person.slug}-details`}
+                  aria-label={`About ${person.name}`}
+                  data-member-name={person.name}
+                  data-member-first-name={person.name.split(' ')[0]}
+                  data-member-toggle
+                >
+                  <span data-member-toggle-label>About {person.name.split(' ')[0]}</span>
+                  <Icon name="lucide:refresh-cw" aria-hidden="true" />
+                </button>
               </article>
             </li>
           ))}
         </ul>
-
-        <p class="board-directory__note">
-          Have a question for the board, or interested in serving on it? Email <a href={site.emailHref}>{site.email}</a> and Susan will pass it along.
-        </p>
       </div>
     </section>
   )}
@@ -143,8 +178,57 @@ const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).j
     phone={false}
   />
 </MainLayout>
+<script>
+  const memberCards = document.querySelectorAll<HTMLElement>('[data-member-card]');
+
+  memberCards.forEach((card) => {
+    const toggle = card.querySelector<HTMLButtonElement>('[data-member-toggle]');
+    const label = card.querySelector<HTMLElement>('[data-member-toggle-label]');
+    const front = card.querySelector<HTMLElement>('[data-member-front]');
+    const back = card.querySelector<HTMLElement>('[data-member-back]');
+
+    if (!toggle || !label || !front || !back) return;
+
+    const memberName = toggle.dataset.memberName ?? 'Board Member';
+    const memberFirstName = toggle.dataset.memberFirstName ?? memberName;
+
+    const setExpanded = (expanded: boolean) => {
+      toggle.setAttribute('aria-expanded', String(expanded));
+      front.setAttribute('aria-hidden', String(expanded));
+      back.setAttribute('aria-hidden', String(!expanded));
+      card.toggleAttribute('data-flipped', expanded);
+      label.textContent = expanded ? 'Show Front' : `About ${memberFirstName}`;
+      toggle.setAttribute('aria-label', expanded ? `Show the front of ${memberName}'s card` : `About ${memberName}`);
+    };
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      setExpanded(!expanded);
+    });
+
+    const memberId = card.closest('li')?.id;
+    const requestedMember = new URLSearchParams(window.location.search).get('member');
+    if (window.location.hash === `#${memberId}` || requestedMember === memberId) {
+      setExpanded(true);
+    }
+  });
+</script>
 
 <style>
+
+
+
+
+
+
+
+  .member .button :global(svg){
+    width: 1rem;
+    height: 1rem;
+  }
+
+
+
   .board-role{
     padding-block: var(--section-standard);
     background: var(--canvas);
@@ -174,6 +258,12 @@ const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).j
 
   .board-role__features { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
 
+
+
+
+
+
+
   .board-directory{
     padding-block: var(--section-standard);
     background: var(--sky-100);
@@ -193,45 +283,276 @@ const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).j
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .member{ border-radius: var(--radius-lg);
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr auto;
+    background: var(--paper);
+    box-shadow: var(--shadow-photo);
+    perspective: 75rem;
+    transition: box-shadow 300ms ease;
+  }
+
+  .member:hover, .member:focus-within{ box-shadow: var(--shadow-raised); }
+  .member__media::after{ content: ''; position: absolute; inset: auto 0 0; height: 32%; background: linear-gradient(to top, rgba(var(--ink-rgb), .38), transparent); pointer-events: none; }
+  .member__role::before{ content: ''; display: inline-block; width: 1.4rem; height: 2px; margin-right: .6rem; vertical-align: middle; background: currentColor; }
+
+  .member__stage{
+    display: grid;
+    min-height: 31rem;
+    transform-style: preserve-3d;
+    transition: transform 520ms cubic-bezier(.2, .75, .25, 1);
+  }
+
+  .member[data-flipped] .member__stage{
+    transform: rotateY(180deg);
+  }
+
+  .member__face{ border-radius: var(--radius-lg); overflow: hidden;
+    display: grid;
+    min-width: 0;
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .member__face--front{
+    grid-template-rows: auto 1fr;
+  }
+
+  .member__face--back{
+    padding: clamp(var(--space-7), 4vw, var(--space-9));
+    align-content: center;
+    transform: rotateY(180deg);
+    color: var(--white);
+    background: radial-gradient(circle at 88% 12%, rgba(255, 255, 255, .09), transparent 42%), linear-gradient(145deg, var(--navy-950), var(--navy-800));
+  }
+
+  .member__face[aria-hidden="true"]{
+    visibility: hidden;
+    transition: visibility 0s linear 260ms;
+  }
+
+  .member__face[aria-hidden="false"]{
+    visibility: visible;
+    transition: visibility 0s linear 260ms;
+  }
+
+  .member__face--front[aria-hidden="false"]{
+    transition-delay: 0s;
+  }
+
+  .member__back-mark{
+    display: grid;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: var(--space-6);
+    color: var(--accent-on-dark);
+    border: 1px solid var(--accent-border-on-dark);
+    border-radius: 50%;
+    place-items: center;
+  }
+
+  .member__back-mark :global(svg){
+    width: 2rem;
+    height: 2rem;
+    stroke-width: 1.6;
+  }
+
+  .member__media{
+    position: relative;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    background: var(--navy-900);
+  }
+
+  .member__media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 29%;
+    transition: transform 400ms ease;
+  }
+
+  .member:not([data-flipped]):hover .member__media img,
+  .member:not([data-flipped]):focus-within .member__media img{
+    transform: scale(1.025);
+  }
+
+  .member__monogram{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    background: linear-gradient(135deg, rgba(25, 126, 120, .98), rgba(var(--ink-rgb), .98));
+    place-items: center;
+  }
+
+  .member__monogram span{
+    display: grid;
+    width: clamp(8rem, 17vw, 11rem);
+    aspect-ratio: 1;
+    color: var(--white);
+    border: 1px solid var(--outline-on-dark);
+    border-radius: 50%;
+    place-items: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--weight-heading);
+    letter-spacing: .04em;
+  }
+
+  .member__content{
+    display: flex;
+    padding: clamp(var(--space-6), 4vw, var(--space-8));
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .member__role{
+    margin-bottom: var(--space-3);
+    color: var(--teal-700);
+    font-size: .78rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .member h3{
+    color: var(--navy-900);
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    font-weight: var(--weight-heading);
+    line-height: 1.08;
+  }
+
+  .member__content > p:not(.member__role){
+    max-width: 35rem;
+    margin-top: var(--space-4);
+    color: var(--slate-600);
+    line-height: 1.65;
+  }
+
+  .member__face--back .member__role{
+    color: var(--accent-on-dark);
+  }
+
+  .member__face--back h3{
+    color: var(--white);
+  }
+
+  .member__face--back > p:not(.member__role, .member__credentials){
+    margin-top: var(--space-5);
+    color: var(--sky-100);
+    line-height: 1.7;
+  }
+
+  .member__credentials{ display: flex; flex-wrap: wrap; margin: var(--space-6) 0 0; padding: 0; gap: var(--space-2); list-style: none; }
+  .member__credentials li{ padding: .3rem .7rem; border: 1px solid var(--border-on-dark); border-radius: var(--radius-md); color: var(--white); background: var(--surface-on-dark); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .08em; line-height: 1.2; }
+
+  /* Front face: credentials under the name, one line, then the facts pinned to the bottom */
+  .member__face--front .member__credentials{ margin-top: var(--space-3); }
+  .member__face--front .member__credentials li{ border-color: var(--slate-200); color: var(--teal-700); background: var(--sky-100); }
+  .member__tagline{ max-width: 34ch; margin-top: var(--space-4); color: var(--slate-600); line-height: 1.6; }
+  .member__facts{ display: grid; width: 100%; margin: auto 0 0; padding: var(--space-4) 0 0; border-top: 1px solid var(--slate-200); gap: var(--space-2); list-style: none; }
+  .member__content .member__tagline + .member__facts{ margin-top: var(--space-5); }
+  .member__facts li{ display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .92rem; line-height: 1.5; }
+  .member__facts :global(svg){ width: 1.1rem; height: 1.1rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.8; }
+  .member__facts a{ display: inline-block; padding-block: .1rem; color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .15em; }
+  .member__link{ display: inline-flex; min-height: 2.75rem; margin-top: var(--space-4); align-items: center; gap: var(--button-gap); color: var(--accent-on-dark); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .2em; }
+  .member__link :global(svg){ width: 1rem; height: 1rem; }
+
+  .member__toggle{
+    display: flex;
+    width: 100%;
+    min-height: 4.5rem;
+    padding: var(--space-4) clamp(var(--space-6), 4vw, var(--space-8));
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    color: var(--navy-900);
+    border: 0;
+    border-top: 1px solid var(--slate-200);
+    background: var(--paper);
+    font: inherit;
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+  }
+
+  .member__toggle:hover{
+    color: var(--teal-700);
+    background: var(--sky-100);
+  }
+
+  .member__toggle:focus-visible{
+    position: relative;
+    z-index: 2;
+    outline: 3px solid var(--focus);
+    outline-offset: -3px;
+  }
+
+  .member__toggle :global(svg){
+    width: 1.05rem;
+    height: 1.05rem;
+    padding: .55rem;
+    box-sizing: content-box;
+    border: 1px solid var(--slate-300);
+    border-radius: 50%;
+    color: var(--teal-700);
+    transition: transform 520ms cubic-bezier(.2, .75, .25, 1), background-color 200ms ease;
+  }
+
+  .member__toggle:hover :global(svg){ background: var(--paper); }
+
+  .member__toggle[aria-expanded="true"] :global(svg){
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 1080px) {
+    .board-directory__grid,
+    .board-directory__grid--two{
+      max-width: 68rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 900px) {
     .board-role__features { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
+  }
+
+  @media (max-width: 760px) {
+
+
+    .board-directory__grid,
+    .board-directory__grid--two{
+      max-width: 34rem;
+      grid-template-columns: 1fr;
+    }
+
+    .member__toggle{
+      width: 100%;
+    }
+
+    .member__content{ padding: var(--space-6); }
+    .member__stage{ min-height: 29rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .member__media img,
+    .member__stage,
+    .member__toggle :global(svg){ transition: none; }
+  }
+
+  @media (hover: none) {
+    .member__stage,
+    .member[data-flipped] .member__stage{ transform: none; }
+    .member__face{ transform: none; }
+    .member__face[aria-hidden="true"]{ opacity: 0; }
+    .member__face[aria-hidden="false"]{ opacity: 1; }
   }
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */
   @media (max-width: 900px) {
     .board-role__intro, .board-directory__intro{ margin-inline: 0; justify-items: start; text-align: left; }
-  }
-
-  /* Board cards: one face, everything visible (image, title, a line or two, one action). Photo beside the copy. */
-  .board-directory__grid, .board-directory__grid--two{ max-width: 64rem; grid-template-columns: 1fr; }
-  .member{ display: grid; height: 100%; grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); overflow: hidden; border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-photo); }
-  .member__media{ position: relative; min-height: 18rem; background: var(--navy-900); }
-  .member__media img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
-  .member__monogram{ display: grid; height: 100%; color: var(--white); background: linear-gradient(135deg, rgba(25, 126, 120, .98), rgba(var(--ink-rgb), .98)); place-items: center; }
-  .member__monogram span{ display: grid; width: clamp(7rem, 12vw, 9rem); aspect-ratio: 1; border: 1px solid var(--outline-on-dark); border-radius: 50%; place-items: center; font-size: clamp(2.25rem, 4vw, 3rem); font-weight: var(--weight-heading); letter-spacing: .04em; }
-  .member__content{ display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(var(--space-6), 3.5vw, var(--space-8)); }
-  .member__role{ margin-bottom: var(--space-3); color: var(--teal-700); font-size: .78rem; font-weight: var(--weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
-  .member h3{ color: var(--navy-900); font-size: clamp(1.75rem, 2.6vw, 2.4rem); line-height: 1.08; }
-  .member__credentials{ margin-top: var(--space-2); color: var(--slate-600); font-size: .82rem; font-weight: var(--weight-semibold); letter-spacing: .1em; }
-  .member__summary{ max-width: 58ch; margin-top: var(--space-4); color: var(--slate-600); line-height: 1.65; }
-  .member__meta{ display: grid; width: 100%; margin: var(--space-5) 0 0; padding: var(--space-5) 0 0; border-top: 1px solid var(--slate-200); gap: var(--space-3); list-style: none; }
-  .member__meta li{ display: grid; grid-template-columns: 1.15rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .95rem; line-height: 1.5; }
-  .member__meta :global(svg){ width: 1.15rem; height: 1.15rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.8; }
-  .member__meta a, .board-directory__note a{ display: inline-block; padding-block: .1rem; color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .15em; }
-  .member__link{ display: inline-flex; min-height: 2.75rem; margin-top: var(--space-4); align-items: center; gap: var(--button-gap); color: var(--teal-700); font-weight: var(--weight-semibold); text-decoration: none; }
-  .member__link:hover{ text-decoration: underline; text-underline-offset: .2em; }
-  .member__link :global(svg){ width: 1rem; height: 1rem; }
-  .board-directory__note{ max-width: 64rem; margin: var(--space-6) auto 0; color: var(--slate-600); line-height: 1.6; text-align: center; }
-
-  @media (max-width: 760px) {
-    .member{ grid-template-columns: 1fr; }
-    .member__media{ aspect-ratio: 4 / 3; min-height: 0; }
-    .member__media img{ object-position: center 22%; }
-    .member__monogram{ min-height: 14rem; }
-  }
-
-  @media (max-width: 900px) {
-    .board-directory__note{ text-align: left; }
-    .member__meta li, .member__summary{ font-size: 1rem; }
+    .member__content, .member__face--back{ justify-items: start; text-align: left; }
+    .member__tagline, .member__facts li{ font-size: 1rem; }
   }
 </style>
