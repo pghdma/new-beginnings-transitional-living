@@ -8,6 +8,8 @@ interface Props {
   href?: string;
   label?: string;
   phone?: boolean;
+  /** Background photo behind the ink shade. Pick one the page doesn't already show. */
+  image?: { src: string; position?: string };
 }
 const {
   eyebrow = 'Take the Next Step',
@@ -16,9 +18,12 @@ const {
   href = '/admissions/',
   label = 'Apply for Housing',
   phone = true,
+  image = { src: '/images/front-door.webp' },
 } = Astro.props;
 ---
-<section class="cta-band">
+<section class="cta-band" style={image.position ? `--cta-image-position: ${image.position}` : undefined}>
+  <img class="cta-band__image" src={image.src} alt="" loading="lazy" decoding="async" />
+  <div class="cta-band__shade" aria-hidden="true"></div>
   <div class="container cta-band__inner">
     <div class="cta-band__copy">
       <p class="eyebrow">{eyebrow}</p>
@@ -26,15 +31,22 @@ const {
       <p>{text}</p>
     </div>
     <div class="actions">
-      <a class="button" href={href}>{label}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
-      {phone && <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
+      <a class="button button--light" href={href}>{label}<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+      {phone && <a class="button button--outline-light" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>}
     </div>
   </div>
 </section>
 <style>
-  .cta-band{ position: relative; overflow: hidden; }
+  .cta-band{ position: relative; overflow: hidden; isolation: isolate; }
+  .cta-band__image, .cta-band__shade{ position: absolute; inset: 0; width: 100%; height: 100%; }
+  .cta-band__image{ z-index: 0; object-fit: cover; object-position: var(--cta-image-position, center); filter: var(--photo-filter); }
+  .cta-band__shade{ z-index: 0; background: linear-gradient(90deg, rgba(var(--ink-rgb), .95) 0%, rgba(var(--ink-rgb), .9) 42%, rgba(var(--ink-rgb), .7) 100%); }
   .cta-band .eyebrow{ margin-bottom: var(--space-3); }
   .cta-band__copy, .actions{ position: relative; z-index: 1; }
+  @media (max-width: 900px) {
+    .cta-band__shade{ background: var(--hero-shade-center-narrow); }
+  }
+
   @media (max-width: 760px) {
     .actions{ display: grid; align-items: stretch; }
     .button{ width: 100%; }
