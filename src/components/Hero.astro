@@ -144,14 +144,14 @@ const style = [
   .hero--paper .hero__actions :global(.button--outline:hover) { color: var(--white); background: var(--navy-950); }
 
   /* Centered family */
-  .hero--centered { overflow: hidden; padding-block: clamp(4.75rem, 8vw, 7.5rem) 0; background: linear-gradient(to bottom, var(--navy-950) 0 78%, var(--canvas) 78% 100%); }
-  .hero--centered .hero__inner { display: grid; gap: clamp(3rem, 6vw, 5.5rem); }
+  .hero--centered { overflow: hidden; padding-block: clamp(3.5rem, 6vw, 5rem) 0; background: linear-gradient(to bottom, var(--navy-950) 0 78%, var(--canvas) 78% 100%); }
+  .hero--centered .hero__inner { display: grid; gap: clamp(2.5rem, 4vw, 3.5rem); }
   .hero--centered .hero__copy { display: grid; max-width: 47rem; margin-inline: auto; justify-items: center; gap: var(--space-5); text-align: center; }
   .hero--centered .eyebrow { color: var(--accent-on-dark); }
   .hero--centered h1 { margin-top: 0; line-height: 1.02; }
   .hero--centered .lead { margin-top: 0; color: var(--sky-100); }
   .hero--centered .hero__actions { margin-top: var(--space-2); justify-content: center; }
-  .hero__media { position: relative; min-height: clamp(20rem, 38vw, 31rem); margin: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--slate-200); box-shadow: var(--shadow-deep); }
+  .hero__media { position: relative; height: clamp(18rem, 30vw, 26rem); margin: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--slate-200); box-shadow: var(--shadow-deep); }
   .hero__media :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: var(--hero-image-position, center 62%); }
 
   @media (max-width: 1080px) {
@@ -198,7 +198,7 @@ const style = [
     .hero--centered .hero__inner { gap: var(--space-8); }
     .hero--centered .hero__copy { justify-items: start; text-align: left; }
     .hero--centered .hero__actions { justify-content: flex-start; }
-    .hero__media { min-height: 0; aspect-ratio: 4 / 3; }
+    .hero__media { height: auto; aspect-ratio: 4 / 3; }
     .hero__media :global(img) { object-position: var(--hero-image-position-mobile, 52% center); }
   }
 </style>
