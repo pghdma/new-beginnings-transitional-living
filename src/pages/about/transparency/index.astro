@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import FeatureList from '../../../components/FeatureList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
 import Hero from '../../../components/Hero.astro';
 import SplitPanel from '../../../components/SplitPanel.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
@@ -121,21 +122,13 @@ const publicSources = [
   </section>
 
 
-  <section class="records-cta">
-    <img class="records-cta__image" src="/images/admissions.jpg" alt="" width="1880" height="1245" loading="lazy" />
-    <div class="records-cta__shade"></div>
-    <div class="container records-cta__inner">
-      <div>
-        <p class="eyebrow">Questions?</p>
-        <h2>Ask Us for Any Policy or Record</h2>
-        <p>Want to see the house rules, the fee schedule, or a copy of our license? Call or email and we’ll send it.</p>
-      </div>
-      <div class="records-cta__actions">
-        <a class="button button--light" href="/contact/"><Icon name="lucide:mail" aria-hidden="true" />Contact New Beginnings</a>
-        <a class="button button--cta-outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Call {site.phone}</a>
-      </div>
-    </div>
-  </section>
+  <CtaBand
+    eyebrow="Questions?"
+    title="Ask Us for Any Policy or Record"
+    text="Want to see the house rules, the fee schedule, or a copy of our license? Call or email and we’ll send it."
+    href="/contact/"
+    label="Contact New Beginnings"
+  />
 </MainLayout>
 <style>
 
@@ -172,20 +165,6 @@ const publicSources = [
   .meaning-heading .eyebrow{ color: var(--accent-on-dark); }
   .meaning-heading h2{ max-width: 24ch; margin-top: var(--space-3); color: var(--white); font-size: clamp(1.8rem,3vw,2.55rem); }
 
-  .records-cta{ position: relative; display: grid; min-height: 26rem; overflow: hidden; align-items: center; color: var(--white); background: var(--navy-950); }
-  .records-cta__image, .records-cta__shade{ position: absolute; width: 100%; height: 100%; inset: 0; }
-  .records-cta__image{ object-fit: cover; object-position: center 48%; }
-  .records-cta__shade{ background: var(--hero-shade-bottom); }
-  .records-cta__inner{ position: relative; z-index: 1; display: grid; padding-block: var(--section-standard); grid-template-columns: minmax(0,1fr) auto; gap: var(--space-7); align-items: center; }
-  .records-cta .eyebrow{ color: var(--accent-on-image); }
-  .records-cta h2{ max-width: 25ch; margin-top: var(--space-3); color: var(--white); }
-  .records-cta p:not(.eyebrow){ max-width: 42rem; margin-top: var(--space-4); color: var(--text-on-dark); font-size: 1.1rem; }
-  .records-cta__actions{ display: grid; min-width: 15.5rem; gap: var(--space-3); }
-  .records-cta__actions .button{ gap: var(--button-gap); }
-  .records-cta__actions :global(svg){ width: 1.05rem; height: 1.05rem; }
-  .button--cta-outline{ border-color: var(--outline-on-dark); color: var(--white); background: rgba(var(--ink-rgb), .35); }
-  .button--cta-outline:hover{ color: var(--navy-950); background: var(--white); }
-
   @media (max-width: 1080px) {
     .identity-content{ padding: 3rem; }
     .standing-list{ grid-template-columns: 1fr; gap: var(--space-5); }
@@ -200,8 +179,6 @@ const publicSources = [
     .standing-list{ grid-template-columns: 1fr 1fr; }
     .records-intro{ position: static; }
     .record-directory{ margin-top: var(--space-2); }
-    .records-cta__inner{ grid-template-columns: 1fr; }
-    .records-cta__actions{ grid-template-columns: repeat(2,minmax(0,1fr)); justify-self: start; }
   }
 
   @media (max-width: 760px) {
@@ -211,10 +188,6 @@ const publicSources = [
     .record-entry__action{ width: 100%; min-width: 0; grid-column: 1; }
     .meaning-strip{ grid-template-columns: 1fr; }
     .meaning-heading{ grid-column: auto; }
-    .records-cta{ min-height: 33rem; }
-    .records-cta__shade{ background: rgba(var(--ink-rgb), .84); }
-    .records-cta__inner{ min-height: 33rem; align-content: center; }
-    .records-cta__actions{ width: 100%; min-width: 0; grid-template-columns: 1fr; }
   }
 
   /* Mobile floor: 16px copy, one alignment per section, 44px tap targets. Measured by scripts/mobile-audit.mjs */

@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import Hero from '../components/Hero.astro';
 import SplitPanel from '../components/SplitPanel.astro';
+import TrustPoints from '../components/TrustPoints.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 import { site } from '../data/site';
 
@@ -152,35 +153,20 @@ const impactLevels = [
     </div>
   </section>
 
-  <section class="donation-trust section--navy" aria-labelledby="trust-title">
+  <section class="donation-trust" aria-labelledby="trust-title">
     <div class="container donation-trust__grid">
       <div class="donation-trust__heading">
         <p class="eyebrow">Give With Confidence</p>
         <h2 id="trust-title">A Pittsburgh Public Charity</h2>
-      </div>
-
-      <div class="donation-trust__details">
-        <p>New Beginnings Transitional Living Foundation is a 501(c)(3) public charity, tax exempt since 2019. Contributions are deductible to the extent the law allows. Our IRS filings, state license, and WestPARR certification are all public.</p>
-        <div class="donation-trust__facts" aria-label="Nonprofit information">
-          <div>
-            <Icon name="lucide:badge-check" aria-hidden="true" />
-            <span><strong>Federal Status</strong>501(c)(3) Public Charity</span>
-          </div>
-          <div>
-            <Icon name="lucide:landmark" aria-hidden="true" />
-            <span><strong>Employer Identification Number</strong>{site.ein}</span>
-          </div>
-        </div>
+        <p>New Beginnings Transitional Living Foundation is a 501(c)(3) public charity, tax exempt since 2019. Contributions are deductible to the extent the law allows.</p>
         <div class="actions">
-          <a class="button button--light" href="/about/transparency/">
-            See Our Credentials
-            <Icon name="lucide:arrow-right" aria-hidden="true" />
-          </a>
-          <a class="button donation-trust__phone" href={site.phoneHref}>
-            <Icon name="lucide:phone" aria-hidden="true" />
-            Questions About Giving
-          </a>
+          <a class="button" href="/about/transparency/">See Our Credentials<Icon name="lucide:arrow-right" aria-hidden="true" /></a>
+          <a class="button button--outline" href={site.phoneHref}><Icon name="lucide:phone" aria-hidden="true" />Questions About Giving</a>
         </div>
+      </div>
+      <div class="donation-trust__card">
+        <TrustPoints variant="columns" label="Public standing" />
+        <p class="donation-trust__ein"><span>Employer Identification Number</span><strong>{site.ein}</strong></p>
       </div>
     </div>
   </section>
@@ -393,72 +379,7 @@ const impactLevels = [
     text-align: center;
   }
 
-  .donation-trust{ padding-block: var(--section-standard); }
-
-  .donation-trust__grid{
-    display: grid;
-    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
-    gap: clamp(3rem, 8vw, 7.5rem);
-    align-items: start;
-  }
-
-  .donation-trust__heading{ display: grid; gap: var(--space-4); }
-  .donation-trust__heading h2{ max-width: 24ch; color: var(--white); }
-
-  .donation-trust__details > p{
-    max-width: 44rem;
-    color: var(--sky-100);
-    font-size: 1.12rem;
-  }
-
-  .donation-trust__facts{
-    display: grid;
-    margin-top: var(--space-7);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-5);
-  }
-
-  .donation-trust__facts > div{
-    display: grid;
-    grid-template-columns: 2rem minmax(0, 1fr);
-    gap: var(--space-3);
-    align-items: start;
-    color: var(--sky-100);
-  }
-
-  .donation-trust__facts :global(svg){
-    width: 1.65rem;
-    height: 1.65rem;
-    color: var(--accent-on-dark);
-    stroke-width: 1.65;
-  }
-
-  .donation-trust__facts span{ display: grid; gap: var(--space-1); }
-
-  .donation-trust__facts strong{
-    color: var(--white);
-    font-size: .8rem;
-    font-weight: var(--weight-semibold);
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  .donation-trust__details .actions{ margin-top: var(--space-7); }
-  .donation-trust__details .button{ gap: var(--button-gap); }
-  .donation-trust__details .button :global(svg){ width: 1.05rem; height: 1.05rem; }
-
-  .donation-trust__phone{
-    border-color: var(--outline-on-dark);
-    color: var(--white);
-    background: transparent;
-  }
-
-  .donation-trust__phone:hover{ color: var(--navy-950); background: var(--white); }
-
   @media (max-width: 1080px) {
-    .donation-trust__grid{ grid-template-columns: 1fr; }
-    .donation-trust__grid{ gap: var(--space-7); }
-    .donation-trust__heading h2{ max-width: 25ch; }
   }
 
   @media (max-width: 760px) {
@@ -473,9 +394,6 @@ const impactLevels = [
 
     .impact-level__amount{ font-size: 1.3rem; }
     .impact-level__arrow{ display: none; }
-    .donation-trust__facts{ grid-template-columns: 1fr; }
-    .donation-trust__details .actions{ display: grid; }
-    .donation-trust__details .button{ width: 100%; }
   }
 
   @media (max-width: 480px) {
@@ -501,5 +419,27 @@ const impactLevels = [
     .gift-summary, .donation-planner__note{ text-align: left; }
     .donation-planner__note, .impact-disclaimer{ font-size: 1rem; line-height: 1.55; }
     .impact-disclaimer{ margin-inline: 0; text-align: left; }
+  }
+  .donation-trust { padding-block: var(--section-standard); background: var(--sky-50); }
+  .donation-trust__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(var(--space-7), 6vw, var(--space-9)); align-items: center; }
+  .donation-trust__heading h2 { max-width: 20ch; margin-top: var(--space-4); }
+  .donation-trust__heading > p:not(.eyebrow) { max-width: 38rem; margin-top: var(--space-5); color: var(--slate-600); }
+  .donation-trust__heading .actions { margin-top: var(--space-6); }
+  .donation-trust__heading .button { gap: var(--button-gap); }
+  .donation-trust__heading .button :global(svg) { width: 1rem; height: 1rem; }
+  .donation-trust__card { padding: clamp(var(--space-6), 4vw, var(--space-8)); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); background: var(--paper); box-shadow: var(--shadow-raised); }
+  .donation-trust__ein { display: grid; margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--slate-200); gap: .25rem; text-align: center; }
+  .donation-trust__ein span { color: var(--slate-600); font-size: .76rem; font-weight: var(--weight-semibold); letter-spacing: .1em; text-transform: uppercase; }
+  .donation-trust__ein strong { color: var(--navy-900); font-size: 1.1rem; }
+
+  @media (max-width: 900px) {
+    .donation-trust__grid { grid-template-columns: 1fr; gap: var(--space-7); }
+    .donation-trust__card :global(.trust--columns li) { justify-items: start; text-align: left; }
+    .donation-trust__ein { text-align: left; }
+  }
+
+  @media (max-width: 760px) {
+    .donation-trust__heading .actions { display: grid; }
+    .donation-trust__heading .button { width: 100%; }
   }
 </style>

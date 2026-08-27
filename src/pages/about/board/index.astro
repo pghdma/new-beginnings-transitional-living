@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import FeatureList from '../../../components/FeatureList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
 import Hero from '../../../components/Hero.astro';
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { currentBoardMembers } from '../../../data/leadership';
@@ -143,31 +144,14 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     </section>
   )}
 
-  <section class="public-record" aria-labelledby="public-record-title">
-    <div class="public-record__content">
-      <div class="public-record__inner">
-        <p class="eyebrow">Accountability</p>
-        <h2 id="public-record-title">Check Our Standing Yourself</h2>
-        <p>
-          Our nonprofit status, state license, and WestPARR certification are all public
-          record. We have put the links in one place.
-        </p>
-        <a class="button" href="/about/transparency/">
-          See Credentials and Records
-          <Icon name="lucide:arrow-right" aria-hidden="true" />
-        </a>
-      </div>
-    </div>
-    <div class="public-record__media">
-      <img
-        src="/images/admissions.jpg"
-        alt="Notebooks and coffee arranged on a shared work table"
-        width="1880"
-        height="1253"
-        loading="lazy"
-      />
-    </div>
-  </section>
+  <CtaBand
+    eyebrow="Accountability"
+    title="Check Our Standing Yourself"
+    text="Our nonprofit status, state license, and WestPARR certification are all public record. We have put the links in one place."
+    href="/about/transparency/"
+    label="See Credentials and Records"
+    phone={false}
+  />
 </MainLayout>
 <style>
 
@@ -177,8 +161,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
 
 
 
-  .member .button :global(svg),
-  .public-record .button :global(svg){
+  .member .button :global(svg){
     width: 1rem;
     height: 1rem;
   }
@@ -443,59 +426,6 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     transform: rotate(180deg);
   }
 
-  .public-record{
-    display: grid;
-    min-height: 37rem;
-    grid-template-areas: 'media content';
-    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-    color: var(--white);
-    background: var(--navy-950);
-  }
-
-  .public-record__media{
-    min-height: 37rem;
-    overflow: hidden;
-    grid-area: media;
-    background: var(--slate-200);
-  }
-
-  .public-record__media img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 56% center;
-    filter: var(--photo-filter);
-  }
-
-  .public-record__content{
-    display: grid;
-    padding: var(--section-standard) max(var(--gutter), calc((100vw - var(--max)) / 2)) var(--section-standard) clamp(3rem, 6vw, 6.5rem);
-    grid-area: content;
-    align-items: center;
-  }
-
-  .public-record__inner{ width: min(100%, 37rem); }
-  .public-record .eyebrow{ color: var(--accent-on-dark); }
-
-  .public-record h2{
-    max-width: 24ch;
-    margin-top: var(--space-4);
-    color: var(--white);
-  }
-
-  .public-record p:not(.eyebrow){
-    max-width: 35rem;
-    margin-top: var(--space-5);
-    color: var(--sky-100);
-    font-size: 1.08rem;
-    line-height: 1.7;
-  }
-
-  .public-record .button{
-    margin-top: var(--space-7);
-    gap: var(--space-2);
-  }
-
   @media (max-width: 1080px) {
     .board-directory__grid,
     .board-directory__grid--two{
@@ -506,23 +436,6 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
 
   @media (max-width: 900px) {
     .board-role__features { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
-
-
-
-    .public-record{
-      min-height: 0;
-      grid-template-areas: 'content' 'media';
-      grid-template-columns: 1fr;
-    }
-
-    .public-record__media{
-      min-height: 0;
-      aspect-ratio: 16 / 8;
-    }
-
-    .public-record__content{
-      padding: var(--section-standard) var(--gutter);
-    }
   }
 
   @media (max-width: 760px) {
@@ -534,15 +447,12 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
       grid-template-columns: 1fr;
     }
 
-    .member__toggle,
-    .public-record .button{
+    .member__toggle{
       width: 100%;
     }
 
     .member__content{ padding: var(--space-6); }
     .member__stage{ min-height: 29rem; }
-    .public-record__media{ aspect-ratio: 4 / 3; }
-    .public-record__content{ padding-block: var(--space-8); }
   }
 
   @media (prefers-reduced-motion: reduce) {
