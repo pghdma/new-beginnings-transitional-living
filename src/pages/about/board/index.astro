@@ -28,7 +28,7 @@ const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).j
 
 const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   if (person.slug === 'susan-rua') {
-    return 'Susan founded New Beginnings in 2016 and serves as its president. She is a licensed professional counselor who has worked in addiction treatment since 1999 and has run recovery houses in Pittsburgh for more than a decade.';
+    return 'Susan founded New Beginnings in 2016 and serves as its president. She has worked in addiction treatment since 1999 and has run recovery houses in Pittsburgh for more than ten years.';
   }
 
   return `${person.name.split(' ')[0]} serves as a volunteer board member, helping oversee the nonprofit’s governance, finances, and accountability.`;
@@ -94,7 +94,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
           </p>
         </header>
 
-        <ul class:list={['board-directory__grid', { 'board-directory__grid--two': currentBoardMembers.length % 2 === 0 }]}>
+        <ul class="board-directory__grid" style={`--board-columns: ${currentBoardMembers.length}`}>
           {currentBoardMembers.map((person) => (
             <li id={person.slug}>
               <article class="member" data-member-card>
@@ -272,18 +272,15 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   }
 
   .board-directory__grid{
+    --board-columns: 3;
     display: grid;
     margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
     padding: 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(var(--space-6), 3vw, var(--space-8));
+    grid-template-columns: repeat(var(--board-columns), minmax(0, 1fr));
+    gap: clamp(var(--space-5), 2vw, var(--space-6));
     list-style: none;
   }
 
-  .board-directory__grid--two{
-    max-width: 68rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
   .member{ border-radius: var(--radius-lg);
     display: grid;
@@ -301,7 +298,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member__stage{
     display: grid;
-    min-height: 26rem;
+    min-height: 0;
     transform-style: preserve-3d;
     transition: transform 520ms cubic-bezier(.2, .75, .25, 1);
   }
@@ -323,7 +320,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   }
 
   .member__face--back{
-    padding: clamp(var(--space-6), 3vw, var(--space-7));
+    padding: clamp(var(--space-5), 2.2vw, var(--space-6));
     align-content: center;
     transform: rotateY(180deg);
     color: var(--white);
@@ -346,9 +343,9 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member__back-mark{
     display: grid;
-    width: 4.5rem;
-    height: 4.5rem;
-    margin-bottom: var(--space-5);
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: var(--space-4);
     color: var(--accent-on-dark);
     border: 1px solid var(--accent-border-on-dark);
     border-radius: 50%;
@@ -356,14 +353,14 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   }
 
   .member__back-mark :global(svg){
-    width: 2rem;
-    height: 2rem;
+    width: 1.4rem;
+    height: 1.4rem;
     stroke-width: 1.6;
   }
 
   .member__media{
     position: relative;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1;
     overflow: hidden;
     background: var(--navy-900);
   }
@@ -442,12 +439,13 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   }
 
   .member__face--back > p:not(.member__role, .member__credentials){
-    margin-top: var(--space-5);
+    margin-top: var(--space-4);
     color: var(--sky-100);
-    line-height: 1.7;
+    font-size: .92rem;
+    line-height: 1.6;
   }
 
-  .member__credentials{ display: flex; flex-wrap: wrap; margin: var(--space-6) 0 0; padding: 0; gap: var(--space-2); list-style: none; }
+  .member__credentials{ display: flex; flex-wrap: wrap; margin: var(--space-4) 0 0; padding: 0; gap: var(--space-2); list-style: none; }
   .member__credentials li{ padding: .3rem .7rem; border: 1px solid var(--border-on-dark); border-radius: var(--radius-md); color: var(--white); background: var(--surface-on-dark); font-size: .74rem; font-weight: var(--weight-semibold); letter-spacing: .08em; line-height: 1.2; }
 
   /* Front face: credentials under the name, one line, then the facts pinned to the bottom */
@@ -455,7 +453,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   .member__face--front .member__credentials li{ border-color: var(--slate-200); color: var(--teal-700); background: var(--sky-100); }
   .member__tagline{ max-width: 34ch; margin-top: var(--space-3); color: var(--slate-600); line-height: 1.6; }
   .member__facts{ display: grid; width: 100%; margin: auto 0 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--slate-200); gap: var(--space-2); list-style: none; }
-  .member__content .member__tagline + .member__facts{ margin-top: var(--space-4); }
+  .member__content .member__tagline + .member__facts{ margin-top: auto; padding-top: var(--space-4); }
   .member__facts li{ display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .92rem; line-height: 1.5; }
   .member__facts :global(svg){ width: 1.1rem; height: 1.1rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.8; }
   .member__facts a{ display: inline-block; padding-block: .1rem; color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .15em; }
@@ -464,6 +462,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member__toggle{
     display: flex;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     width: 100%;
     min-height: 3.75rem;
     padding: var(--space-3) clamp(var(--space-5), 2.5vw, var(--space-6));
@@ -509,8 +508,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   }
 
   @media (max-width: 1080px) {
-    .board-directory__grid,
-    .board-directory__grid--two{
+    .board-directory__grid{
       max-width: 68rem;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -523,8 +521,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   @media (max-width: 760px) {
 
 
-    .board-directory__grid,
-    .board-directory__grid--two{
+    .board-directory__grid{
       max-width: 34rem;
       grid-template-columns: 1fr;
     }
