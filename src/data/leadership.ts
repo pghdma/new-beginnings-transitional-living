@@ -76,6 +76,8 @@ export const boardMembers: LeadershipProfile[] = [
     group: 'board',
     published: true,
     servesOnBoard: true,
+    // Credential as published on stepbystepsupport.net, where she is a counselor.
+    credentials: ['BA, Criminology'],
     image: { src: '/images/pamela-birr.webp', alt: 'Pamela Birr' },
   },
   {
