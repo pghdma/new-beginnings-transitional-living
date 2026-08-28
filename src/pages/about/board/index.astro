@@ -100,13 +100,12 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
               <article class="member" data-member-card>
                 <div class="member__stage" data-member-stage>
                   <div class="member__face member__face--front" data-member-front>
-                    <div class:list={['member__media', { 'member__media--portrait': person.slug === 'susan-rua' }]}>
-                      {person.slug === 'susan-rua' ? (
+                    <div class="member__media">
+                      {person.image ? (
                         <img
-                          src="/images/susan-rua.webp"
-                          alt="Susan Rua"
-                          width="900"
-                          height="1125"
+                          src={person.image.src}
+                          alt={person.image.alt}
+                          style={person.image.position ? `object-position: ${person.image.position}` : undefined}
                           loading="lazy"
                         />
                       ) : (

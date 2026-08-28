@@ -15,6 +15,8 @@ export interface LeadershipProfile {
   image?: {
     src: string;
     alt: string;
+    /** object-position for the board card crop; defaults to the shared value. */
+    position?: string;
   };
 }
 
@@ -34,6 +36,7 @@ export const organizationalLeadership: LeadershipProfile[] = [
       'Susan also runs Step By Step Support (stepbystepsupport.net), a licensed counseling practice in Mt. Washington. The two are separate organizations. Living at New Beginnings doesn’t require seeing Susan or any particular provider for counseling.',
     ],
     credentials: ['CADC', 'MSPC', 'LPC'],
+    image: { src: '/images/susan-rua.webp', alt: 'Susan Rua' },
     education: [
       "Master's in Professional Counseling, Carlow University",
       'Associate degree in nursing',
@@ -57,9 +60,33 @@ export const boardMembers: LeadershipProfile[] = [
     published: false,
     servesOnBoard: true,
   },
-  { slug: 'tara-morrow', name: 'Tara Morrow', role: 'Board Member', group: 'board', published: true, servesOnBoard: true },
-  { slug: 'pamela-birr', name: 'Pamela Birr', role: 'Board Member', group: 'board', published: true, servesOnBoard: true },
-  { slug: 'angela-bartley', name: 'Angela Bartley', role: 'Board Member', group: 'board', published: true, servesOnBoard: true },
+  {
+    slug: 'tara-morrow',
+    name: 'Tara Morrow',
+    role: 'Board Member',
+    group: 'board',
+    published: true,
+    servesOnBoard: true,
+    image: { src: '/images/tara-morrow.webp', alt: 'Tara Morrow', position: '57% 20%' },
+  },
+  {
+    slug: 'pamela-birr',
+    name: 'Pamela Birr',
+    role: 'Board Member',
+    group: 'board',
+    published: true,
+    servesOnBoard: true,
+    image: { src: '/images/pamela-birr.webp', alt: 'Pamela Birr' },
+  },
+  {
+    slug: 'angela-bartley',
+    name: 'Angela Bartley',
+    role: 'Board Member',
+    group: 'board',
+    published: true,
+    servesOnBoard: true,
+    image: { src: '/images/angela-bartley.webp', alt: 'Angela Bartley', position: '42% 30%' },
+  },
 ];
 
 export const publishedOrganizationalLeadership = organizationalLeadership.filter(
