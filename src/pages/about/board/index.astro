@@ -31,14 +31,14 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     return 'Susan founded New Beginnings in 2016 and serves as its president. She has worked in addiction treatment since 1999 and has run recovery houses in Pittsburgh for more than ten years.';
   }
 
-  return `${person.name.split(' ')[0]} serves as a volunteer board member, helping oversee the nonprofit’s governance, finances, and accountability.`;
+  return `${person.name.split(' ')[0]} is a volunteer director. The board oversees the nonprofit’s governance, finances, and accountability.`;
 };
 
 // One line for the front of the card, under the name.
 const tagline = (person: (typeof currentBoardMembers)[number]) =>
   person.slug === 'susan-rua'
     ? 'Licensed professional counselor. In addiction treatment since 1999.'
-    : 'Helps oversee the nonprofit’s governance, finances, and accountability.';
+    : 'Oversees governance, finances, and accountability.';
 
 // Short public facts for the front of the card. Add rows as they are cleared for publication.
 const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; text: string; href?: string; label?: string }[] =>
@@ -242,7 +242,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
     max-width: 46rem;
     margin-inline: auto;
     justify-items: center;
-    gap: var(--space-4);
+    gap: var(--space-3);
     text-align: center;
   }
 
@@ -267,14 +267,14 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
 
   .board-directory{
-    padding-block: var(--section-standard);
+    padding-block: clamp(2.25rem, 3.5vw, 3rem) var(--section-compact);
     background: var(--sky-100);
   }
 
   .board-directory__grid{
     --board-columns: 3;
     display: grid;
-    margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+    margin: clamp(1.75rem, 2.5vw, 2rem) auto 0;
     padding: 0;
     grid-template-columns: repeat(var(--board-columns), minmax(0, 1fr));
     gap: clamp(var(--space-5), 2vw, var(--space-6));
@@ -343,9 +343,9 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member__back-mark{
     display: grid;
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: var(--space-4);
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: var(--space-3);
     color: var(--accent-on-dark);
     border: 1px solid var(--accent-border-on-dark);
     border-radius: 50%;
@@ -360,7 +360,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member__media{
     position: relative;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background: var(--navy-900);
   }
@@ -402,7 +402,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member__content{
     display: flex;
-    padding: clamp(var(--space-5), 2.5vw, var(--space-6));
+    padding: var(--space-4) var(--space-5) var(--space-5);
     flex-direction: column;
     align-items: flex-start;
   }
@@ -418,9 +418,9 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
 
   .member h3{
     color: var(--navy-900);
-    font-size: clamp(1.75rem, 2.3vw, 2.1rem);
+    font-size: 1.45rem;
     font-weight: var(--weight-heading);
-    line-height: 1.08;
+    line-height: 1.12;
   }
 
   .member__content > p:not(.member__role){
@@ -439,10 +439,10 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   }
 
   .member__face--back > p:not(.member__role, .member__credentials){
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
     color: var(--sky-100);
-    font-size: .92rem;
-    line-height: 1.6;
+    font-size: .88rem;
+    line-height: 1.55;
   }
 
   .member__credentials{ display: flex; flex-wrap: wrap; margin: var(--space-4) 0 0; padding: 0; gap: var(--space-2); list-style: none; }
@@ -451,21 +451,21 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   /* Front face: credentials under the name, one line, then the facts pinned to the bottom */
   .member__face--front .member__credentials{ margin-top: var(--space-3); }
   .member__face--front .member__credentials li{ border-color: var(--slate-200); color: var(--teal-700); background: var(--sky-100); }
-  .member__tagline{ max-width: 34ch; margin-top: var(--space-3); color: var(--slate-600); line-height: 1.6; }
-  .member__facts{ display: grid; width: 100%; margin: auto 0 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--slate-200); gap: var(--space-2); list-style: none; }
+  .member__tagline{ max-width: 34ch; margin-top: var(--space-3); color: var(--slate-600); font-size: .92rem; line-height: 1.5; }
+  .member__facts{ display: grid; width: 100%; margin: auto 0 0; padding: var(--space-3) 0 0; gap: var(--space-2); border-top: 1px solid var(--slate-200); gap: var(--space-2); list-style: none; }
   .member__content .member__tagline + .member__facts{ margin-top: auto; padding-top: var(--space-4); }
-  .member__facts li{ display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .92rem; line-height: 1.5; }
+  .member__facts li{ display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: var(--space-3); align-items: start; color: var(--navy-900); font-size: .88rem; line-height: 1.45; }
   .member__facts :global(svg){ width: 1.1rem; height: 1.1rem; margin-top: .15rem; color: var(--teal-700); stroke-width: 1.8; }
   .member__facts a{ display: inline-block; padding-block: .1rem; color: var(--blue-700); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .15em; }
-  .member__link{ display: inline-flex; min-height: 2.75rem; margin-top: var(--space-4); align-items: center; gap: var(--button-gap); color: var(--accent-on-dark); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .2em; }
+  .member__link{ display: inline-flex; min-height: 2.75rem; margin-top: var(--space-3); font-size: .92rem; align-items: center; gap: var(--button-gap); color: var(--accent-on-dark); font-weight: var(--weight-semibold); text-decoration: underline; text-underline-offset: .2em; }
   .member__link :global(svg){ width: 1rem; height: 1rem; }
 
   .member__toggle{
     display: flex;
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     width: 100%;
-    min-height: 3.75rem;
-    padding: var(--space-3) clamp(var(--space-5), 2.5vw, var(--space-6));
+    min-height: 3.25rem;
+    padding: var(--space-3) var(--space-5);
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
@@ -552,6 +552,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
   @media (max-width: 900px) {
     .board-role__intro, .board-directory__intro{ margin-inline: 0; justify-items: start; text-align: left; }
     .member__content, .member__face--back{ justify-items: start; text-align: left; }
-    .member__tagline, .member__facts li{ font-size: 1rem; }
+    .member__tagline, .member__facts li, .member__face--back > p:not(.member__role, .member__credentials){ font-size: 1rem; }
+    .member h3{ font-size: 1.75rem; }
   }
 </style>
