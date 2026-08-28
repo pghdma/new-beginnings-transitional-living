@@ -48,14 +48,18 @@ export const organizationalLeadership: LeadershipProfile[] = [
 
 // Biographical details belong here only after they’re cleared for public use.
 export const boardMembers: LeadershipProfile[] = [
+  // Not on the roster Susan supplied on Aug 27 2026; kept unpublished in case she returns.
   {
     slug: 'theresa-rem-canofari',
     name: 'Theresa Rem-Canofari',
     role: 'Board Member',
     group: 'board',
-    published: true,
+    published: false,
     servesOnBoard: true,
   },
+  { slug: 'tara-morrow', name: 'Tara Morrow', role: 'Board Member', group: 'board', published: true, servesOnBoard: true },
+  { slug: 'pamela-birr', name: 'Pamela Birr', role: 'Board Member', group: 'board', published: true, servesOnBoard: true },
+  { slug: 'angela-bartley', name: 'Angela Bartley', role: 'Board Member', group: 'board', published: true, servesOnBoard: true },
 ];
 
 export const publishedOrganizationalLeadership = organizationalLeadership.filter(
@@ -64,8 +68,7 @@ export const publishedOrganizationalLeadership = organizationalLeadership.filter
 
 export const publishedBoardMembers = boardMembers.filter((person) => person.published);
 
-// Susan Rua and Theresa Rem-Canofari are the public roster supplied for this
-// website. A former member identified by the client is intentionally excluded.
+// Roster supplied by Susan on Aug 27 2026: Susan Rua, Tara Morrow, Pamela Birr, Angela Bartley.
 export const currentBoardMembers = [
   ...publishedOrganizationalLeadership,
   ...publishedBoardMembers,

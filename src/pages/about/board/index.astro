@@ -24,12 +24,14 @@ const responsibilities = [
   },
 ];
 
+const initials = (name: string) => name.split(/[\s-]+/).map((part) => part[0]).join('');
+
 const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
   if (person.slug === 'susan-rua') {
     return 'Susan founded New Beginnings in 2016 and serves as its president. She is a licensed professional counselor who has worked in addiction treatment since 1999 and has run recovery houses in Pittsburgh for more than a decade.';
   }
 
-  return 'Theresa serves as a volunteer board member, helping oversee the nonprofit’s governance, finances, and accountability.';
+  return `${person.name.split(' ')[0]} serves as a volunteer board member, helping oversee the nonprofit’s governance, finances, and accountability.`;
 };
 
 // One line for the front of the card, under the name.
@@ -92,7 +94,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
           </p>
         </header>
 
-        <ul class:list={['board-directory__grid', { 'board-directory__grid--two': currentBoardMembers.length === 2 }]}>
+        <ul class:list={['board-directory__grid', { 'board-directory__grid--two': currentBoardMembers.length % 2 === 0 }]}>
           {currentBoardMembers.map((person) => (
             <li id={person.slug}>
               <article class="member" data-member-card>
@@ -109,7 +111,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
                         />
                       ) : (
                         <div class="member__monogram" aria-hidden="true">
-                          <span>TRC</span>
+                          <span>{initials(person.name)}</span>
                         </div>
                       )}
                     </div>

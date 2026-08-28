@@ -29,7 +29,7 @@ const housing = { name: 'Recovery Housing', path: '/recovery-housing/' };
 export const seoRoutes: Record<string, SeoRoute> = {
   '/': {
     documentTitle: 'Recovery Housing in Pittsburgh | New Beginnings Sober Living',
-    description: 'DDAP-licensed recovery houses for men and women in Pittsburgh. Nonprofit recovery housing in Sheraden, Brighton Heights, McKees Rocks, and Bellevue. Call 412-628-0403.',
+    description: 'DDAP-licensed recovery houses for men and women in Pittsburgh. Nonprofit recovery housing on the North Side and in the West End, McKees Rocks, and Mount Oliver. Call 412-628-0403.',
     pageName: 'New Beginnings Transitional Living Foundation',
     pageType: 'WebPage',
     image: '/images/og-default.jpg',
@@ -79,7 +79,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/recovery-housing/men/': {
     documentTitle: 'Men’s Sober Living in Pittsburgh | New Beginnings',
-    description: 'DDAP-licensed recovery houses for men in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one for men on parole. Call 412-628-0403.',
+    description: 'DDAP-licensed recovery houses for men on Pittsburgh’s North Side and in the West End, McKees Rocks, and Mount Oliver, including one for men on parole. Call 412-628-0403.',
     pageName: 'Men’s Recovery Housing',
     pageType: 'FAQPage',
     image: '/images/social/mens-housing.jpg',
@@ -89,7 +89,7 @@ export const seoRoutes: Record<string, SeoRoute> = {
   },
   '/recovery-housing/women/': {
     documentTitle: 'Women’s Sober Living in Pittsburgh | New Beginnings',
-    description: 'A DDAP-licensed recovery house for women in Bellevue, just north of Pittsburgh, with privacy, structure, and housemates in recovery. AA and NA based. Call 412-628-0403.',
+    description: 'A DDAP-licensed recovery house for women on Pittsburgh’s North Side, with privacy, structure, and housemates in recovery. AA and NA based. Call 412-628-0403.',
     pageName: 'Women’s Recovery Housing',
     pageType: 'FAQPage',
     image: '/images/social/womens-housing.jpg',
@@ -182,11 +182,10 @@ const absolute = (path: string) => new URL(path, site.url).toString();
 
 const serviceArea = [
   { '@type': 'City', name: 'Pittsburgh', sameAs: 'https://en.wikipedia.org/wiki/Pittsburgh' },
-  { '@type': 'Place', name: 'Sheraden, Pittsburgh' },
-  { '@type': 'Place', name: 'Observatory Hill, Pittsburgh' },
-  { '@type': 'Place', name: 'Brighton Heights, Pittsburgh' },
+  { '@type': 'Place', name: 'North Side, Pittsburgh' },
+  { '@type': 'Place', name: 'West End, Pittsburgh' },
   { '@type': 'Place', name: 'McKees Rocks, Pennsylvania' },
-  { '@type': 'Place', name: 'Bellevue, Pennsylvania' },
+  { '@type': 'Place', name: 'Mount Oliver, Pennsylvania' },
   { '@type': 'AdministrativeArea', name: 'Allegheny County, Pennsylvania' },
 ];
 
@@ -309,7 +308,9 @@ export function buildStructuredData(route: SeoRoute, canonical: string, lastRevi
   if (route.entity === 'board') {
     const boardMembers = [
       { name: 'Susan Rua', url: `${canonical}#susan-rua`, role: 'President and Founder' },
-      { name: 'Theresa Rem-Canofari', url: `${canonical}#theresa-rem-canofari`, role: 'Board Member' },
+      { name: 'Tara Morrow', url: `${canonical}#tara-morrow`, role: 'Board Member' },
+      { name: 'Pamela Birr', url: `${canonical}#pamela-birr`, role: 'Board Member' },
+      { name: 'Angela Bartley', url: `${canonical}#angela-bartley`, role: 'Board Member' },
     ];
     const itemList = {
       '@type': 'ItemList',

@@ -15,8 +15,8 @@ export const site = {
     directionsHref: 'https://www.google.com/maps/dir/?api=1&destination=20%20Bailey%20Avenue%20Suite%20300%20Pittsburgh%20PA%2015211',
   },
   ein: '81-2901849',
-  neighborhoods: ['Sheraden', 'Observatory Hill', 'Brighton Heights', 'McKees Rocks', 'Bellevue'],
-  description: 'Nonprofit recovery houses for men and women in Pittsburgh. DDAP-licensed, WestPARR-certified recovery housing on Pittsburgh’s North Side and West End and in nearby McKees Rocks and Bellevue, run by a counselor who has done this work since 1999.'
+  neighborhoods: ['North Side', 'West End', 'McKees Rocks', 'Mount Oliver'],
+  description: 'Nonprofit recovery houses for men and women in Pittsburgh. DDAP-licensed, WestPARR-certified recovery housing on Pittsburgh’s North Side and in the West End, McKees Rocks, and Mount Oliver, run by a counselor who has done this work since 1999.'
 };
 
 export const nav = [
@@ -34,8 +34,8 @@ export const nav = [
     href: '/recovery-housing/',
     children: [
       { label: 'How Our Houses Work', href: '/recovery-housing/', icon: 'house', description: 'What sober living is and what every resident can expect' },
-      { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/', icon: 'users-round', description: 'Houses in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden' },
-      { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/', icon: 'heart-handshake', description: 'One house in Bellevue, just north of the city' }
+      { label: 'Men’s Recovery Housing', href: '/recovery-housing/men/', icon: 'users-round', description: 'Houses on the North Side and in the West End, McKees Rocks, and Mount Oliver' },
+      { label: 'Women’s Recovery Housing', href: '/recovery-housing/women/', icon: 'heart-handshake', description: 'One house on Pittsburgh’s North Side' }
     ]
   },
   {

@@ -198,9 +198,9 @@ function buildFaqs(audience: Audience): FaqGroup[] {
 export const mensHousing: HousingDetailConfig = {
   audience: 'men',
   title: 'Men’s Recovery Housing',
-  description: 'DDAP-licensed recovery houses for men in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one for men on parole. Call 412-628-0403.',
+  description: 'DDAP-licensed recovery houses for men on Pittsburgh’s North Side and in the West End, McKees Rocks, and Mount Oliver, including one for men on parole. Call 412-628-0403.',
   heroTitle: 'Men’s Recovery Housing in Pittsburgh',
-  heroLead: 'Substance-free recovery houses for men in McKees Rocks, Observatory Hill, Brighton Heights, and Sheraden, including one that works with men on parole. AA and NA based, licensed by Pennsylvania, and run by people who know the work.',
+  heroLead: 'Substance-free recovery houses for men on Pittsburgh’s North Side and in the West End, McKees Rocks, and Mount Oliver, including one that works with men on parole. AA and NA based, licensed by Pennsylvania, and run by people who know the work.',
   heroImage: {
     src: '/images/home-entry.webp',
     alt: 'A residential entry and shared living area',
@@ -227,9 +227,9 @@ export const mensHousing: HousingDetailConfig = {
 export const womensHousing: HousingDetailConfig = {
   audience: 'women',
   title: 'Women’s Recovery Housing',
-  description: 'A DDAP-licensed recovery house for women in Bellevue, just north of Pittsburgh, with privacy, structure, and housemates in recovery. AA and NA based. Call 412-628-0403.',
+  description: 'A DDAP-licensed recovery house for women on Pittsburgh’s North Side, with privacy, structure, and housemates in recovery. AA and NA based. Call 412-628-0403.',
   heroTitle: 'Women’s Recovery Housing in Pittsburgh',
-  heroLead: 'A substance-free recovery house for women in Bellevue, just north of Pittsburgh, with the privacy, structure, and support that make staying sober possible.',
+  heroLead: 'A substance-free recovery house for women on Pittsburgh’s North Side, with the privacy, structure, and support that make staying sober possible.',
   heroImage: {
     src: '/images/shared-bedroom.webp',
     alt: 'A bright shared bedroom with two beds',
