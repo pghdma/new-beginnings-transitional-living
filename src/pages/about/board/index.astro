@@ -31,7 +31,7 @@ const profileSummary = (person: (typeof currentBoardMembers)[number]) => {
     return 'Susan founded New Beginnings in 2016 and serves as its president. She has worked in addiction treatment since 1999 and has run recovery houses in Pittsburgh for more than ten years.';
   }
 
-  return `${person.name.split(' ')[0]} is a volunteer director. The board oversees the nonprofit’s governance, finances, and accountability.`;
+  return `${person.name.split(' ')[0]} serves on the board of directors. The board oversees the nonprofit’s governance, finances, and accountability.`;
 };
 
 // One line for the front of the card, under the name.
@@ -47,7 +47,7 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
         { icon: 'calendar-check', text: 'Founded New Beginnings in 2016' },
         { icon: 'briefcase', text: 'Also owns ', label: 'Step By Step Support', href: 'https://stepbystepsupport.net' },
       ]
-    : [{ icon: 'users', text: 'Volunteer director, not on staff' }];
+    : [];
 ---
 
 <MainLayout
@@ -120,11 +120,13 @@ const facts = (person: (typeof currentBoardMembers)[number]): { icon: string; te
                       <h3 id={`${person.slug}-name`}>{person.name}</h3>
                       {person.credentials && <ul class="member__credentials" aria-label="Credentials">{person.credentials.map((c) => <li>{c}</li>)}</ul>}
                       <p class="member__tagline">{tagline(person)}</p>
-                      <ul class="member__facts" aria-label="Quick facts">
-                        {facts(person).map((fact) => (
-                          <li><Icon name={`lucide:${fact.icon}`} aria-hidden="true" /><span>{fact.text}{fact.href && <a href={fact.href} rel="external">{fact.label}</a>}</span></li>
-                        ))}
-                      </ul>
+                      {facts(person).length > 0 && (
+                        <ul class="member__facts" aria-label="Quick facts">
+                          {facts(person).map((fact) => (
+                            <li><Icon name={`lucide:${fact.icon}`} aria-hidden="true" /><span>{fact.text}{fact.href && <a href={fact.href} rel="external">{fact.label}</a>}</span></li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </div>
 
